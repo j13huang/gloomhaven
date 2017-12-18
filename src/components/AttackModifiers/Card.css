@@ -1,0 +1,12 @@
+.Card {
+    border: 1px black solid;
+    margin: 4px;
+}
+
+.Card--MostRecent {
+    background-color: rgb(214, 163, 104);
+}
+
+.Card--Shuffle {
+    background-color: rgba(230, 88, 22, 0.726);
+}

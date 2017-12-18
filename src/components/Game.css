@@ -1,0 +1,12 @@
+.GameBar {
+    margin-bottom: 8px;;
+}
+
+.AttackModifierCards {
+    display: flex;
+}
+
+.RoundControls {
+    display: flex;
+    justify-content: flex-end;
+}
