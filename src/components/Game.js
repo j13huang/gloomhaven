@@ -85,8 +85,8 @@ export class Game extends React.Component {
                                 onAddMonsters={(monsters) => this.addMonsters(monsters)}
                                 selectedMonsters={this.state.monsters} 
                                 monsterList={cardData.MONSTER_LIST}
+                                onReset={() => this.resetMonsters()}
                             />
-                            <button onClick={() => this.resetMonsters()}>Reset</button>
                         </div>
                         <div className="Game--MonsterAbilityCards">
                             {this.state.monsters.map((name, i) => {

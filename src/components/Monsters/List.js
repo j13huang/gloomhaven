@@ -39,6 +39,7 @@ export class List extends React.Component {
                     >{name}</option>)}
                 </select>
                 <button onClick={() => this.props.onAddMonsters(this.state.selectedMonsters)}>Add Monster</button>
+                <button onClick={() => this.props.onReset()}>Reset</button>
             </div>
         );
     }
