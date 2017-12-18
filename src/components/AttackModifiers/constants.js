@@ -13,18 +13,18 @@ export const NUMBER_MODIFIERS = {
 const RESHUFFLE = "reshuffle";
 const DISCARD = "discard";
 const ROLLING = "rolling";
-export const ACTIONS = {
+export const END_ACTIONS = {
     RESHUFFLE, DISCARD, ROLLING,
 };
 
 export const CURSE = {
     modifier: NULL,
-    action: DISCARD,
+    postAction: DISCARD,
 };
 
 export const BLESS = {
     modifier: TIMES_TWO,
-    action: DISCARD,
+    postAction: DISCARD,
 };
 
 export const BASE_DECK = [
@@ -46,8 +46,8 @@ export const BASE_DECK = [
     { modifier: MINUS_ONE, },
     { modifier: PLUS_TWO, },
     { modifier: MINUS_TWO, },
-    { modifier: TIMES_TWO, action: RESHUFFLE, },
-    { modifier: NULL, action: RESHUFFLE, },
+    { modifier: TIMES_TWO, postAction: RESHUFFLE, },
+    { modifier: NULL, postAction: RESHUFFLE, },
 ];
 
 export function shuffleDeck(deck) {

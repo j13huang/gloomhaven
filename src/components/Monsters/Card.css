@@ -1,12 +1,12 @@
-.AttackModifiers--Card {
+.Monsters--Card {
     border: 1px black solid;
     margin: 4px;
 }
 
-.AttackModifiers--Card--MostRecent {
+.Monsters--Card--MostRecent {
     background-color: rgb(214, 163, 104);
 }
 
-.AttackModifiers--Card--Shuffle {
+.Monsters--Card--Shuffle {
     background-color: rgba(230, 88, 22, 0.726);
 }

@@ -1,12 +1,21 @@
-.GameBar {
+.Game--Controls {
+    margin: 20px;
+    margin--top: 0px;
+    padding: 12px;
+    border: 1px solid black;
+}
+
+.Game--Players {
     margin-bottom: 8px;;
 }
 
-.AttackModifierCards {
+.Game--AttackModifierCards {
     display: flex;
+    flex-wrap: wrap;
 }
 
-.RoundControls {
+.Game--Monsters {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    max-width: 100px;
 }

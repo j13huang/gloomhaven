@@ -1,13 +1,13 @@
-.AttackModifiers--Deck {
+.Monsters--Deck {
     text-align: center;
 }
 
-.AttackModifiers--Deck--CardBack {
+.Monsters--Deck--CardBack {
     width: 200px;
     margin: 12px;
 }
 
-.AttackModifiers--Deck--PlayedCards {
+.Monsters--Deck--PlayedCards {
     margin-top: 12px;
     display: flex;
     flex-direction: column;

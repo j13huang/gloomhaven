@@ -8,11 +8,12 @@ import "./Card.css";
 export function Card({card, mostRecent}) {
     return (
         <div className={classNames({
-            "AttackModifiers--Card": true,
-            "AttackModifiers--Card--Shuffle": !mostRecent && card.endAction === END_ACTIONS.RESHUFFLE,
-            "AttackModifiers--Card--MostRecent": mostRecent,
+            "Monsters--Card": true,
+            "Monsters--Card--Shuffle": !mostRecent && card.endAction === END_ACTIONS.RESHUFFLE,
+            "Monsters--Card--MostRecent": mostRecent,
         })}>
-            <div>{card.modifier}</div>
+            <div>{card.initiative}</div>
+            {card.actions.map((a) => <div>{a}</div>)}
             {card.endAction && <div>{card.endAction}</div>}
         </div>
     );
