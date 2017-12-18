@@ -1,7 +1,5 @@
 import React from 'react';
 
-import * as constants from "./constants";
-
 import "./List.css";
 
 export class List extends React.Component {
@@ -25,12 +23,13 @@ export class List extends React.Component {
     }
 
     render() {
-        const searchResults = constants.MONSTER_LIST.filter((name) => name.toLowerCase().includes(this.state.search));
+        const searchResults = this.props.monsterList.filter((name) => name.toLowerCase().includes(this.state.search));
         return (
             <div className="Monsters--List">
                 <input
                     value={this.state.search}
                     onChange={(e) => this.setState({search: e.target.value})}
+                    placeholder="search..."
                 />
                 <select size="10" onChange={(e) => this.handleMonsterSelection(e.target.options)} multiple value={this.state.selectedMonsters}>
                     {searchResults.map((name) => <option

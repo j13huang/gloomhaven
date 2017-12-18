@@ -17,17 +17,7 @@ export const END_ACTIONS = {
     RESHUFFLE, DISCARD, ROLLING,
 };
 
-export const CURSE = {
-    modifier: NULL,
-    postAction: DISCARD,
-};
-
-export const BLESS = {
-    modifier: TIMES_TWO,
-    postAction: DISCARD,
-};
-
-export const BASE_DECK = [
+export const ATTACK_MODIFIER_DECK = [
     { modifier: ZERO, },
     { modifier: ZERO, },
     { modifier: ZERO, },
@@ -46,10 +36,39 @@ export const BASE_DECK = [
     { modifier: MINUS_ONE, },
     { modifier: PLUS_TWO, },
     { modifier: MINUS_TWO, },
-    { modifier: TIMES_TWO, postAction: RESHUFFLE, },
-    { modifier: NULL, postAction: RESHUFFLE, },
+    { modifier: TIMES_TWO, endAction: RESHUFFLE, },
+    { modifier: NULL, endAction: RESHUFFLE, },
 ];
 
-export function shuffleDeck(deck) {
-    return deck.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
-}
+export const CURSE = {
+    modifier: NULL,
+    endAction: DISCARD,
+};
+
+export const BLESSING = {
+    modifier: TIMES_TWO,
+    endAction: DISCARD,
+};
+
+
+export const MONSTER_DECK = {
+    "Bandit Archer": [
+        {
+            initiative: 20,
+            actions: ["move + 0", "attack + 1, range + 1"],
+            endAction: RESHUFFLE,
+        },
+    ],
+    "Innox Shaman": [
+        {
+            initiative: 20,
+            actions: ["attack + 1, range + 1"],
+            endAction: RESHUFFLE,
+        },
+        {
+            initiative: 64,
+            actions: ["attack + 1", "heal 2, range 3"],
+        },
+    ],
+};
+export const MONSTER_LIST = Object.keys(MONSTER_DECK);

@@ -1,13 +1,13 @@
-.Monsters--Deck {
+.Deck {
     text-align: center;
 }
 
-.Monsters--Deck--CardBack {
+.Deck--CardBack {
     width: 200px;
     margin: 12px;
 }
 
-.Monsters--Deck--PlayedCards {
+.Deck--PlayedCards {
     margin-top: 12px;
     display: flex;
     flex-direction: column;

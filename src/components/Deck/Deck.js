@@ -1,16 +1,20 @@
 import React from 'react';
+import * as classNames from "classnames";
 
-import * as constants from "./constants";
-import cardBack from "./card_back.jpg";
-import {Card} from "./Card";
+import * as cardData from "./cardData";
 
-import './Deck.css';
+import "./Deck.css";
+
+// https://gist.github.com/guilhermepontes/17ae0cc71fa2b13ea8c20c94c5c35dc4#gistcomment-2271465
+function shuffleDeck(deck) {
+    return deck.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
+}
 
 export class Deck extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            deck: constants.shuffleDeck(constants.BASE_DECK),
+            deck: shuffleDeck(props.initialData),
             currentIndex: -1,
             playedCards: [],
         };
@@ -31,6 +35,7 @@ export class Deck extends React.Component {
         });
     }
 
+
     revealNextCard() {
         const {currentIndex, playedCards, deck} = this.state;
         const newState = {
@@ -39,11 +44,11 @@ export class Deck extends React.Component {
             playedCards,
         };
         const currentCard = playedCards[playedCards.length - 1];
-        if ((currentCard && currentCard.endAction === constants.END_ACTIONS.RESHUFFLE) || (
+        if ((currentCard && currentCard.endAction === cardData.END_ACTIONS.RESHUFFLE) || (
             newState.currentIndex >= deck.length)) {
             // remove played discards
-            const newDeck = deck.filter((c, i) => !((c.endAction === constants.END_ACTIONS.DISCARD) && (i <= currentIndex)));
-            newState.deck = constants.shuffleDeck(newDeck);
+            const newDeck = deck.filter((c, i) => !((c.endAction === cardData.END_ACTIONS.DISCARD) && (i <= currentIndex)));
+            newState.deck = shuffleDeck(newDeck);
             newState.currentIndex = 0;
         }
         this.setState({
@@ -54,7 +59,7 @@ export class Deck extends React.Component {
 
     clearPlayedCards() {
         // don't clear from the most recent card if it's a reshuffle
-        const firstReshuffleIndex = this.state.playedCards.findIndex((c, i) => (i > 0) && (c.endAction === constants.END_ACTIONS.RESHUFFLE));
+        const firstReshuffleIndex = this.state.playedCards.findIndex((c, i) => (i > 0) && (c.endAction === cardData.END_ACTIONS.RESHUFFLE));
         if (firstReshuffleIndex === -1) {
             return;
         }
@@ -65,20 +70,33 @@ export class Deck extends React.Component {
     }
 
     render() {
+        const {CardComponent} = this.props;
+
         return (
-            <div className="AttackModifiers--Deck">
-                <div>{this.props.owner}</div>
+            <div className="Deck">
+                <div>{this.props.name}</div>
                 <div>
-                    <button onClick={() => {this.addCard(constants.CURSE)}}>Add Curse</button>
-                    <button onClick={() => {this.addCard(constants.BLESS)}}>Add Blessing</button>
+                    {/* could make custom component to keep track of count here too*/}
+                    {this.props.extraButtons &&
+                        this.props.extraButtons.map((b, i) => <button key={i} onClick={() => {this.addCard(b.card)}}>Add {b.name}</button>)
+                    }
                 </div>
                 <div>
-                    <img src={cardBack} className="AttackModifiers--Deck--CardBack" onClick={() => {this.revealNextCard()}} alt="card back" />
+                    <img src={this.props.cardBack} className="Deck--CardBack" onClick={() => {this.revealNextCard()}} alt="card back" />
                 </div>
                 <button onClick={() => {this.clearPlayedCards()}}>Clear</button>
-                <div className="AttackModifiers--Deck--PlayedCards">
+                <div className="Deck--PlayedCards">
                     {this.state.playedCards && this.state.playedCards.map((card, i) => {
-                        return <Card card={card} mostRecent={i === 0} key={i} />
+                        return <CardComponent
+                            className={classNames({
+                                "Deck--Card": true,
+                                "Deck--Card--MostRecent": i === 0,
+                                "Deck--Card--Reshuffle": card.endAction === cardData.END_ACTIONS.RESHUFFLE,
+                                "Deck--Card--Discard": card.endAction === cardData.END_ACTIONS.DISCARD,
+                            })}
+                            key={i}
+                            card={card}
+                        />
                     })
                     }
                 </div>
