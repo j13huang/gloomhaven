@@ -68,7 +68,6 @@ export class Deck extends React.Component {
         return (
             <div className="Deck">
                 <div>{this.props.owner}</div>
-                <div>Current index: {this.state.currentIndex}</div>
                 <div>
                     <button onClick={() => {this.addCard(constants.CURSE)}}>Add Curse</button>
                     <button onClick={() => {this.addCard(constants.BLESS)}}>Add Blessing</button>
