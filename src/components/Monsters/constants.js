@@ -4,11 +4,11 @@ export const END_ACTIONS = {
     RESHUFFLE,
 };
 
-const MONSTERS = {
+export const MONSTERS = {
     "Bandit Archer": [
         {
             initiative: 20,
-            actions: ["attack + 1, range + 1"],
+            actions: ["move + 0", "attack + 1, range + 1"],
             endAction: RESHUFFLE,
         },
     ],
@@ -17,6 +17,10 @@ const MONSTERS = {
             initiative: 20,
             actions: ["attack + 1, range + 1"],
             endAction: RESHUFFLE,
+        },
+        {
+            initiative: 64,
+            actions: ["attack + 1", "heal 2, range 3"],
         },
     ],
 };

@@ -10,6 +10,7 @@ export class List extends React.Component {
 
         this.state = {
             search: "",
+            selectedMonsters: [],
         };
     }
 
@@ -26,13 +27,17 @@ export class List extends React.Component {
     render() {
         const searchResults = constants.MONSTER_LIST.filter((name) => name.toLowerCase().includes(this.state.search));
         return (
-            <div className="MonsterList">
+            <div className="Monsters--List">
                 <input
                     value={this.state.search}
                     onChange={(e) => this.setState({search: e.target.value})}
                 />
-                <select size="10" onChange={(e) => this.handleMonsterSelection(e.target.options)} multiple >
-                    {searchResults.map((name) => <option value={name} key={name} disabled={this.props.selectedMonsters.includes(name)}>{name}</option>)}
+                <select size="10" onChange={(e) => this.handleMonsterSelection(e.target.options)} multiple value={this.state.selectedMonsters}>
+                    {searchResults.map((name) => <option
+                        value={name}
+                        key={name}
+                        disabled={this.props.selectedMonsters.includes(name)}
+                    >{name}</option>)}
                 </select>
                 <button onClick={() => this.props.onAddMonsters(this.state.selectedMonsters)}>Add Monster</button>
             </div>

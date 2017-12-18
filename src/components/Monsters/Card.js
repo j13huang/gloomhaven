@@ -12,7 +12,7 @@ export function Card({card, mostRecent}) {
             "Monsters--Card--Shuffle": !mostRecent && card.endAction === END_ACTIONS.RESHUFFLE,
             "Monsters--Card--MostRecent": mostRecent,
         })}>
-            <div>{card.initiative}</div>
+            <div>^{card.initiative}</div>
             {card.actions.map((a) => <div>{a}</div>)}
             {card.endAction && <div>{card.endAction}</div>}
         </div>

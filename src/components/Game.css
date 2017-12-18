@@ -1,6 +1,6 @@
 .Game--Controls {
     margin: 20px;
-    margin--top: 0px;
+    margin-top: 0px;
     padding: 12px;
     border: 1px solid black;
 }
@@ -17,5 +17,13 @@
 .Game--Monsters {
     display: flex;
     flex-direction: column;
-    max-width: 100px;
+    max-width: 150px;
+}
+
+.Game--Monsters--Main {
+    display: flex;
+}
+
+.Game--MonsterAbilityCards {
+    display: flex;
 }

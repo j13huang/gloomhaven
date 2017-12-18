@@ -4,13 +4,13 @@ import * as constants from "./constants";
 import cardBack from "./card_back.jpg";
 import {Card} from "./Card";
 
-//import './Deck.css';
+import './Deck.css';
 
 export class Deck extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            deck: constants.shuffleDeck(constants.MONSTER_LIST),
+            deck: constants.shuffleDeck(constants.MONSTERS[props.name]),
             currentIndex: -1,
             playedCards: [],
         };
@@ -49,7 +49,7 @@ export class Deck extends React.Component {
 
     render() {
         return (
-            <div className="Monsters--">
+            <div className="Monsters--Deck">
                 <div>{this.props.name}</div>
                 <div>
                     <img src={cardBack} className="Monsters--Deck--CardBack" onClick={() => {this.revealNextCard()}} alt="card back" />

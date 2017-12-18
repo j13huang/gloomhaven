@@ -69,8 +69,8 @@ export class Game extends React.Component {
                     </div>
                 </div>
                 <div className="Game--Controls">
-                    <div>
-                        <h3>Monster Ability Cards</h3>
+                    <h3>Monster Ability Cards</h3>
+                    <div className="Game--Monsters--Main">
                         <div className="Game--Monsters">
                             <MonsterList onAddMonsters={(monsters) => this.addMonsters(monsters)} selectedMonsters={this.state.monsters} />
                             <button onClick={() => this.resetPlayers()}>Reset</button>
