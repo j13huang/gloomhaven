@@ -1,5 +1,5 @@
 .Deck--Card {
-    border: 1px solid black;
+    border: 2px solid black;
     margin: 4px;
 }
 
@@ -8,9 +8,9 @@
 }
 
 .Deck--Card--Reshuffle {
-    background-color: rgba(230, 88, 22, 0.726);
+    background-color: rgb(230, 88, 22);
 }
 
 .Deck--Card--Discard {
-    border: 1px solid rgba(170, 67, 211, 0.726);
+    border: 2px solid rgb(170, 67, 211);
 }

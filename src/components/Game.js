@@ -97,6 +97,7 @@ export class Game extends React.Component {
                                     initialData={cardData.MONSTER_DECK[name]}
                                     CardComponent={MonsterAbilityCard}
                                     cardBack={monsterCardBack}
+                                    autoShuffle
                                 />
                             })}
                         </div>
