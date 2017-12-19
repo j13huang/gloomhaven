@@ -1,5 +1,5 @@
 .Deck--Card {
-    border: 2px solid black;
+    border: 1px solid black;
     margin: 4px;
 }
 
@@ -12,5 +12,5 @@
 }
 
 .Deck--Card--Discard {
-    border: 2px solid rgb(170, 67, 211);
+    border: 4px solid rgb(170, 67, 211);
 }
