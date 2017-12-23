@@ -1,10 +1,8 @@
 import React from 'react';
 
-import "./Card.css";
+//import "./Card.css";
 
-export {default as cardBack} from "./monster_card_back.jpg";
-
-export function MonsterAbilityCard({className, card}) {
+export function Card({className, card}) {
     return (
         <div className={className}>
             <div>^{card.initiative}</div>

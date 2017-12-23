@@ -51,7 +51,7 @@ export const BLESSING = {
 };
 
 
-export const MONSTER_DECK = {
+export const MONSTER_DECKS = {
     "Bandit Archer": [
         {
             initiative: 20,
@@ -71,4 +71,4 @@ export const MONSTER_DECK = {
         },
     ],
 };
-export const MONSTER_LIST = Object.keys(MONSTER_DECK);
+export const MONSTER_LIST = Object.keys(MONSTER_DECKS);

@@ -1,3 +1,8 @@
+.Monsters {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .Monsters--List {
     display: flex;
     flex-direction: column;

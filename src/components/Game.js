@@ -1,10 +1,7 @@
 import React from 'react';
-import {Deck} from "./Deck/Deck"
-import {MonsterAbilityCard, cardBack as monsterCardBack} from "./Deck/MonsterAbilityCard"
-import {AttackModifierCard, cardBack as attackModifierCardBack} from "./Deck/AttackModifierCard"
-import {List as MonsterList} from "./Monsters/List"
+import {Deck as AttackModifierDeck} from "./AttackModifiers/Deck"
+import {Monsters} from "./Monsters/Monsters"
 
-import * as cardData from "./Deck/cardData"
 import "./Game.css";
 
 export class Game extends React.Component {
@@ -13,7 +10,6 @@ export class Game extends React.Component {
         this.state = {
             playerNameInput: "",
             players: [],
-            monsters: ["Innox Shaman"],
         };
     }
 
@@ -33,14 +29,6 @@ export class Game extends React.Component {
 
     resetPlayers() {
         this.setState({players: []})
-    }
-
-    addMonsters(monsters) {
-        this.setState({monsters: this.state.monsters.concat(monsters)});
-    }
-
-    resetMonsters() {
-        this.setState({monsters: []})
     }
 
     render() {
@@ -64,44 +52,18 @@ export class Game extends React.Component {
                         >Add Player</button>
                         <button onClick={() => this.resetPlayers()}>Reset</button>
                     </div>
-                    <div className="Game--AttackModifierCards">
+                    <div className="Game--AttackModifierDecks">
                         {["Monsters"].concat(this.state.players).map((name, i) => {
-                            return <Deck
+                            return <AttackModifierDeck
                                 name={name}
                                 key={i}
-                                initialData={cardData.ATTACK_MODIFIER_DECK}
-                                CardComponent={AttackModifierCard}
-                                cardBack={attackModifierCardBack}
-                                extraButtons={[{card: cardData.CURSE, name: "Curse"}, {card: cardData.BLESSING, name: "Blessing"}]}
                             />
                         })}
                     </div>
                 </div>
                 <div className="Game--Controls">
                     <h3>Monster Ability Cards</h3>
-                    <div className="Game--Monsters--Main">
-                        <div className="Game--Monsters">
-                            <MonsterList
-                                onAddMonsters={(monsters) => this.addMonsters(monsters)}
-                                selectedMonsters={this.state.monsters} 
-                                monsterList={cardData.MONSTER_LIST}
-                                onReset={() => this.resetMonsters()}
-                            />
-                        </div>
-                        <div className="Game--MonsterAbilityCards">
-                            {this.state.monsters.map((name, i) => {
-                                //return <MonsterAbilityDeck name={name} key={i} />
-                                return <Deck
-                                    name={name}
-                                    key={i}
-                                    initialData={cardData.MONSTER_DECK[name]}
-                                    CardComponent={MonsterAbilityCard}
-                                    cardBack={monsterCardBack}
-                                    autoShuffle
-                                />
-                            })}
-                        </div>
-                    </div>
+                    <Monsters />
                 </div>
             </div>
         );

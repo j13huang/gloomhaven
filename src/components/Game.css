@@ -9,21 +9,7 @@
     margin-bottom: 8px;;
 }
 
-.Game--AttackModifierCards {
+.Game--AttackModifierDecks {
     display: flex;
     flex-wrap: wrap;
-}
-
-.Game--Monsters {
-    display: flex;
-    flex-direction: column;
-    max-width: 150px;
-}
-
-.Game--Monsters--Main {
-    display: flex;
-}
-
-.Game--MonsterAbilityCards {
-    display: flex;
 }
