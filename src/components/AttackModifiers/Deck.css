@@ -1,5 +1,7 @@
 .Deck {
     text-align: center;
+    margin: 4px;
+    padding: 8px;
 }
 
 .Deck--NeedsShuffle {
@@ -25,8 +27,7 @@
  }
 
 .Deck--CardBack {
-    width: 200px;
-    margin: 12px;
+    max-width: 200px;
 }
 
 .Deck--PlayedCards {

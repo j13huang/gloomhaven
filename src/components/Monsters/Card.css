@@ -1,0 +1,54 @@
+.Card--Image {
+    width: 48px;
+    height: 48px;
+    padding-left: 8px;
+}
+
+.Card--ElementUsage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Card--Element {
+    width: 24px;
+    height: 24px;
+}
+
+.Card--Element--Icon {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.Card--Element--Used {
+    position: relative;
+    top: 0;
+    left: 0;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.Card--Element--UsedElement {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.Card--Element--UsedOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.Card--Element--Separator {
+    display: flex;
+    align-items: center;
+}
+
+.Card--Action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2px;
+    padding-right: 2px;
+}
