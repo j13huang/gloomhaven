@@ -5,9 +5,9 @@ import * as elements from "../../lib/elements";
 
 import "./Card.css";
 
-function Action({action}) {
-    return (<div className="Card--Action">
-        {action.action ? action.action : action}
+function Action({action, border}) {
+    return (<div className={classNames({"Card--Action": true, "Card--Action--Border": border})}>
+        {typeof(action) === "string" ? action : action.action}
         {action.image && <img className="Card--Image" src={action.image} alt="extra info for card"/>}
     </div>);
 }
@@ -20,10 +20,10 @@ export function Card({className, card}) {
                 if (a.type === "element") {
                     // use element
                     return (
-                        <div className="Card--ElementUsage" key={i}>
+                        <div className={classNames("Card--ElementUsage", "Card--Action--Border")} key={i}>
                             {a.use && <div className={classNames("Card--Element", "Card--Element--Used")}>
                                 <img className={classNames("Card--Element", "Card--Element--Icon", "Card--Element--UsedElement")} src={elements.iconForElement(a.use)} alt="use element"/>
-                                <img className={classNames("Card--Element", "Card--Element--Icon", "Card--Element--UsedOverlay")} src={elements.iconForElement(elements.ANY)} alt="use element"/>
+                                <img className={classNames("Card--Element", "Card--Element--Icon", "Card--Element--UsedOverlay")} src={elements.useElementIcon} alt="use element"/>
                             </div>}
                             {a.use && <div className="Card--Element--Separator">:</div>}
                             {(a.action || a.image) && <div><Action action={a} /></div>}
@@ -33,7 +33,7 @@ export function Card({className, card}) {
                         </div>
                     );
                 }
-                return (<Action key={i} action={a}/>);
+                return (<Action key={i} action={a} border/>);
             })}
             {card.endAction && <div><strong>{card.endAction}</strong></div>}
         </div>

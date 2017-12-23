@@ -1,3 +1,16 @@
+.Card--Action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.Card--Action--Border {
+    border: 1px dashed black;
+    margin-top: 2px;
+}
+
 .Card--Image {
     width: 48px;
     height: 48px;
@@ -11,7 +24,7 @@
 }
 
 .Card--Element {
-    width: 24px;
+    min-width: 24px;
     height: 24px;
 }
 
@@ -43,12 +56,4 @@
 .Card--Element--Separator {
     display: flex;
     align-items: center;
-}
-
-.Card--Action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 2px;
-    padding-right: 2px;
 }

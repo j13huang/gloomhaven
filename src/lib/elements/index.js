@@ -6,6 +6,8 @@ import fireIcon from "./fire.svg";
 import iceIcon from "./ice.svg";
 import lightIcon from "./light.svg";
 
+export {default as useElementIcon} from "./use_element.svg";
+
 export const ANY = "any";
 export const AIR = "air";
 export const DARK = "dark";
