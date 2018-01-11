@@ -55,11 +55,11 @@ export class Monsters extends React.Component {
     cleanupPlayedCards(deckNames) {
         const newMonsters = {...this.state.monsters};
         deckNames.forEach((name) => {
-            const {cards, playedCards} = this.state.monsters[name];
+            const {cards} = this.state.monsters[name];
             newMonsters[name] = {
                 cards: shuffleCards(cards),
                 currentIndex: -1,
-                playedCards: playedCards.slice(0, 1),
+                playedCards: [],
             };
         });
 

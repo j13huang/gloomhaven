@@ -2,6 +2,7 @@ import React from 'react';
 import {Deck as AttackModifierDeck} from "./AttackModifiers/Deck"
 import {Monsters} from "./Monsters/Monsters"
 
+import {CLASSES} from "../lib/classes";
 import "./Game.css";
 
 export class Game extends React.Component {
@@ -9,26 +10,39 @@ export class Game extends React.Component {
         super(props);
         this.state = {
             playerNameInput: "",
+            selectableClasses: CLASSES,
+            selectedClass: "",
             players: [],
         };
     }
 
-    canAddPlayer() {
-        return this.state.players.length < 4 && this.state.playerNameInput !== "";
+    selectClass(selectedClass) {
+        this.setState({
+            selectedClass,
+        });
     }
 
-    addPlayer(name) {
+    canAddPlayer() {
+        return this.state.selectedClass && this.state.players.length < 4 && this.state.playerNameInput !== "";
+    }
+
+    addPlayer(name, selectedClass) {
         if (!this.canAddPlayer()) {
             return;
         }
         this.setState({
             playerNameInput: "",
-            players: this.state.players.concat(name),
+            selectedClass: "",
+            selectableClasses: this.state.selectableClasses.filter((c) => c !== selectedClass),
+            players: this.state.players.concat({name, class: selectedClass}),
         });
     }
 
     resetPlayers() {
-        this.setState({players: []})
+        this.setState({
+            selectableClasses: CLASSES,
+            players: [],
+        });
     }
 
     render() {
@@ -42,20 +56,25 @@ export class Game extends React.Component {
                             onChange={(e) => this.setState({playerNameInput: e.target.value})}
                             onKeyPress={(e) => {
                                 if (e.key === 'Enter') {
-                                this.addPlayer(this.state.playerNameInput);
+                                    this.addPlayer(this.state.playerNameInput, this.state.selectedClass);
                                 }
                             }}
                         />
+                        <select value={this.state.selectedClass} onChange={(event) => this.selectClass(event.target.value)}>
+                            <option value="">Select a class...</option>
+                            {this.state.selectableClasses.map((c) => <option value={c} key={c}>{c}</option>)}
+                        </select>
                         <button
                             disabled={!this.canAddPlayer()}
-                            onClick={() => this.addPlayer(this.state.playerNameInput)}
+                            onClick={() => this.addPlayer(this.state.playerNameInput, this.state.selectedClass)}
                         >Add Player</button>
                         <button onClick={() => this.resetPlayers()}>Reset</button>
                     </div>
                     <div className="Game--AttackModifierDecks">
-                        {["Monsters"].concat(this.state.players).map((name, i) => {
+                        {[{class: "Monsters", name: ""}].concat(this.state.players).map((p, i) => {
                             return <AttackModifierDeck
-                                name={name}
+                                class={p.class}
+                                name={p.name}
                                 key={i}
                             />
                         })}

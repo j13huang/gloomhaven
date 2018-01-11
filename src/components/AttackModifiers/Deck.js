@@ -4,6 +4,7 @@ import * as classNames from "classnames";
 import {Card} from "./Card";
 import cardBack from "./attack_modifier_card_back.jpg";
 import * as cardData from "../../lib/cardData";
+import {newPerks} from "../../lib/classes";
 import {newDeck, shuffleCards} from "../../lib/deck";
 
 import "./Deck.css";
@@ -18,9 +19,44 @@ export class Deck extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...newDeck(cardData.ATTACK_MODIFIER_DECK),
+            ...newDeck(cardData.BASE_ATTACK_MODIFIER_CARDS),
             needsShuffle: false,
+            showPerks: false,
+            perks: newPerks(props.class) || [],
         };
+    }
+
+    togglePerkDisplay(showPerks) {
+        this.setState({showPerks});
+    }
+
+    togglePerk(i, j, value) {
+        this.setState({
+            perks: [
+                ...this.state.perks.slice(0, i),
+                {
+                    ...this.state.perks[i],
+                    used: [
+                        ...this.state.perks[i].used.slice(0, j),
+                        value,
+                        ...this.state.perks[i].used.slice(j + 1),
+                    ],
+                },
+                ...this.state.perks.slice(i + 1),
+            ],
+        });
+    }
+
+    resetDeck() {
+        let cards = cardData.BASE_ATTACK_MODIFIER_CARDS;
+        this.state.perks.forEach((p) => {
+            p.used.forEach((u) => {
+                if (u) {
+                    cards = p.filterCards(cards);
+                }
+            });
+        });
+        this.setState({...newDeck(cards)});
     }
 
     // insert card into random spot of remaining deck
@@ -73,7 +109,21 @@ export class Deck extends React.Component {
                 "Deck": true,
                 "Deck--NeedsShuffle": this.state.needsShuffle,
             })}>
-                <div>{this.props.name}</div>
+                <div>{this.props.class}</div>
+                {this.props.name && <div className="Deck--Name">{this.props.name}</div>}
+                {this.props.class !== "Monsters" && <div>
+                    <span>Perks</span>
+                    <button onClick={() => this.togglePerkDisplay(!this.state.showPerks)}>Hide/Show Perks</button>
+                </div>}
+                {this.state.showPerks && <div className="Deck--Perks">
+                    {this.state.perks.map((p, i) => (
+                        <div key={i} className="Deck--Perk">
+                            {p.used.map((u, j) => <input key={j} type="checkbox" checked={u} onChange={(event) => this.togglePerk(i, j, event.target.checked)} />)}
+                            <label className="Deck--Perk--Name">{p.description}</label>
+                        </div>)
+                    )}
+                    <button onClick={() => {this.resetDeck()}}>Set deck</button>
+                </div>}
                 <div>
                     <button onClick={() => {this.addCard(cardData.CURSE)}}>Add Curse</button>
                     <button onClick={() => {this.addCard(cardData.BLESSING)}}>Add Blessing</button>

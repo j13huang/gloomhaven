@@ -12,6 +12,7 @@ import * as elements from "./elements";
 
 const PLUS_ONE = "+1";
 const PLUS_TWO = "+2";
+const PLUS_THREE = "+3";
 const ZERO = "+0";
 const MINUS_ONE = "-1";
 const MINUS_TWO = "-2";
@@ -19,7 +20,7 @@ const NULL = "null";
 const TIMES_TWO = "x2";
 
 export const NUMBER_MODIFIERS = {
-    PLUS_ONE, PLUS_TWO, ZERO, MINUS_ONE, MINUS_TWO, NULL, TIMES_TWO,
+    PLUS_ONE, PLUS_TWO, PLUS_THREE, ZERO, MINUS_ONE, MINUS_TWO, NULL, TIMES_TWO,
 };
 
 const RESHUFFLE = "reshuffle";
@@ -29,7 +30,7 @@ export const END_ACTIONS = {
     RESHUFFLE, DISCARD, ROLLING,
 };
 
-export const ATTACK_MODIFIER_DECK = [
+export const BASE_ATTACK_MODIFIER_CARDS = [
     { modifier: ZERO, },
     { modifier: ZERO, },
     { modifier: ZERO, },

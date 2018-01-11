@@ -4,6 +4,25 @@
     padding: 8px;
 }
 
+.Deck--Name {
+    font-size: 0.75rem;
+    color: chocolate;
+}
+
+.Deck--Perks {
+    max-width: 200px;
+}
+
+.Deck--Perk {
+    display: flex;
+    justify-content: flex-start;
+    border: 1px dashed black;
+    margin-bottom: 4px;
+}
+.Deck--Perks {
+    text-align: left;
+}
+
 .Deck--NeedsShuffle {
     background-color: rgb(230, 88, 22);
 }
@@ -34,4 +53,5 @@
 .Deck--PlayedCards {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
