@@ -31,6 +31,14 @@ export class Monsters extends React.Component {
         });
     }
 
+    removeMonster(monster) {
+        const newMonsters = {...this.state.monsters};
+        delete newMonsters[monster];
+        this.setState({
+            monsters: newMonsters,
+        });
+    }
+
     resetMonsters() {
         this.setState({monsters: {}})
     }
@@ -102,7 +110,7 @@ export class Monsters extends React.Component {
                 {Object.keys(monsters).map((name, i) => {
                     const isBoss = name === "Boss";
                     return (<div key={i} className="Monsters--Monster">
-                        <h5 className="Monsters--Monster--Name">{name}</h5>
+                        <h5 className="Monsters--Monster--Name">{name}<button onClick={() => this.removeMonster(name)}>X</button></h5>
                         {isBoss ?
                             <BossMonsterTracker level={this.state.selectedLevel} numPlayers={this.props.numPlayers} /> :
                             <MonsterTracker name={name} level={this.state.selectedLevel} numPlayers={this.props.numPlayers} />

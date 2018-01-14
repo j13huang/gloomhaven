@@ -17,7 +17,8 @@ export class Monster extends React.Component {
     }
 
     setHP(hp) {
-        this.setState({hp: hp <= this.state.hp ? hp - 1 : hp});
+        //this.setState({hp: hp <= this.state.hp ? hp - 1 : hp});
+        this.setState({hp});
     }
 
     toggleCondition(condition) {
@@ -41,6 +42,7 @@ export class Monster extends React.Component {
                                 className={classNames({"Monster--HP": true, "Monster--HP--Active": hp <= this.state.hp})}
                                 onClick={() => this.setHP(hp)}
                             >
+                                {hp}
                             </div>);
                         })}
                     </div>

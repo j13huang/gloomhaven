@@ -23,6 +23,8 @@ export class Deck extends React.Component {
             needsShuffle: false,
             showPerks: false,
             perks: newPerks(props.class) || [],
+            curseCount: 0,
+            blessCount: 0,
         };
     }
 
@@ -56,11 +58,15 @@ export class Deck extends React.Component {
                 }
             });
         });
-        this.setState({...newDeck(cards)});
+        this.setState({...newDeck(cards), curseCount: 0, blessCount: 0});
     }
 
     // insert card into random spot of remaining deck
     addCard(card) {
+        if ((card === gameData.CURSE && this.state.curseCount === 10) ||
+            (card === gameData.BLESSING && this.state.blessCount === 10)) {
+            return;
+        }
         const {cards} = this.state;
         // in case of -1 index
         const currentIndex = Math.max(0, this.state.currentIndex);
@@ -71,6 +77,8 @@ export class Deck extends React.Component {
                 card,
                 ...cards.slice(randomIndex),
             ],
+            curseCount: card === gameData.CURSE ? (this.state.curseCount + 1) : this.state.curseCount,
+            blessCount: card === gameData.BLESSING ? (this.state.blessCount + 1) : this.state.blessCount,
         });
     }
 
@@ -89,6 +97,8 @@ export class Deck extends React.Component {
             currentIndex: nextIndex,
             playedCards: [nextCard].concat(playedCards),
             needsShuffle: needsShuffle || (nextCard.endAction === gameData.END_ACTIONS.RESHUFFLE),
+            curseCount: nextCard === gameData.CURSE ? (this.state.curseCount - 1) : this.state.curseCount,
+            blessCount: nextCard === gameData.BLESSING ? (this.state.blessCount - 1) : this.state.blessCount,
         });
     }
 
@@ -128,8 +138,8 @@ export class Deck extends React.Component {
                     <button onClick={() => {this.resetDeck()}}>Set deck</button>
                 </div>}
                 <div>
-                    <button onClick={() => {this.addCard(gameData.CURSE)}}>Add Curse</button>
-                    <button onClick={() => {this.addCard(gameData.BLESSING)}}>Add Blessing</button>
+                    <button onClick={() => {this.addCard(gameData.CURSE)}}>Add Curse ({this.state.curseCount})</button>
+                    <button onClick={() => {this.addCard(gameData.BLESSING)}}>Add Blessing({this.state.blessCount})</button>
                 </div>
                 <div>
                     <img src={cardBack} className="Deck--CardBack" onClick={() => {this.revealNextCard()}} alt="card back" />
