@@ -17,15 +17,19 @@ export const ICE = "ice";
 export const LIGHT = "light";
 
 const elementIcons = {
-    [ANY]: anyElementIcon,
-    [AIR]: airIcon,
-    [DARK]: darkIcon,
-    [EARTH]: earthIcon,
     [FIRE]: fireIcon,
     [ICE]: iceIcon,
+    [AIR]: airIcon,
+    [EARTH]: earthIcon,
     [LIGHT]: lightIcon,
+    [DARK]: darkIcon,
 };
 
+export const ELEMENTS_LIST = Object.keys(elementIcons);
+
 export function iconForElement(name) {
-    return elementIcons[name];
+    return {
+        ...elementIcons,
+        [ANY]: anyElementIcon,
+    }[name];
 }

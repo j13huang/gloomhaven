@@ -1,0 +1,24 @@
+.ElementTracker {
+    display: flex;
+    border: 1px solid black;
+}
+
+.ElementTracker--Column {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
+
+.ElementTracker--Column+.ElementTracker--Column {
+    border-left: 1px solid black;
+}
+
+.ElementTracker--Element {
+    min-width: 24px;
+    height: 24px;
+    opacity: 0.1;
+}
+
+.ElementTracker--Element--Active {
+    opacity: 1;
+}

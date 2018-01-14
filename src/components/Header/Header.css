@@ -1,0 +1,20 @@
+.Game--Header {
+    height: 36px;
+    width: 100%;
+    background-color: rgb(235, 159, 72);
+    position: fixed;
+    box-sizing: border-box;
+}
+
+.Game--Header--Content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Game--Header--EndTurn {
+    height: 36px;
+}
+
+.Game--Header--HeightOffset {
+    height: 36px;
+}

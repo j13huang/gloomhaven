@@ -1,4 +1,6 @@
 import React from 'react';
+
+import {Header} from "./Header/Header"
 import {Deck as AttackModifierDeck} from "./AttackModifiers/Deck"
 import {Monsters} from "./Monsters/Monsters"
 
@@ -48,14 +50,7 @@ export class Game extends React.Component {
     render() {
         return (
             <div>
-                {/*}
-                <div className="Game--Header">
-                    <div className="Game--Header--Content">
-                        <button className="Game--Header--EndTurn">End Turn</button>
-                    </div>
-                </div>
-                <div className="Game--Header--HeightOffset"></div>
-                */}
+                <Header />
                 <div className="Game--Section">
                     <h3>Attack Modifier Cards</h3>
                     <div className="Game--Players">

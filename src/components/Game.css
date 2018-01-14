@@ -1,24 +1,3 @@
-.Game--Header {
-    height: 36px;
-    background-color: rgb(235, 159, 72);
-    position: fixed;
-}
-
-.Game--Header--Content {
-    display: flex;
-    justify-content: flex-end;
-    padding: 4px;
-    width: 100%;
-}
-
-.Game--Header--EndTurn {
-    height: 32px;
-}
-
-.Game--Header--HeightOffset {
-    height: 36px;
-}
-
 .Game--Section {
     margin: 20px;
     padding: 12px;
