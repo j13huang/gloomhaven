@@ -17,7 +17,7 @@ export class Monster extends React.Component {
     }
 
     setHP(hp) {
-        this.setState({hp});
+        this.setState({hp: hp <= this.state.hp ? hp - 1 : hp});
     }
 
     toggleCondition(condition) {

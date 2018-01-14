@@ -6,7 +6,8 @@
 .ElementTracker--Column {
     display: flex;
     align-items: center;
-    padding: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 .ElementTracker--Column+.ElementTracker--Column {
@@ -16,9 +17,47 @@
 .ElementTracker--Element {
     min-width: 24px;
     height: 24px;
-    opacity: 0.1;
 }
 
-.ElementTracker--Element--Active {
+.ElementTracker--ElementContainer {
+    margin-left: 4px;
+}
+
+.ElementTracker--Element--Inactive {
+    opacity: 0;
+}
+
+.ElementTracker--Element--Border {
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 50%;
+}
+
+.ElementTracker--Element--BorderActive {
+    border: 1px solid lime;
+}
+
+.ElementTracker--Element--BorderInert {
+    border: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.ElementTracker--Element--BorderWaning {
+    /*border: 1px solid goldenrod;*/
+    border: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.ElementTracker--Element--BorderStrong {
+    /*border: 1px solid gold;*/
+    border: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.ElementTracker--Element--Inert {
+    opacity: 0.35;
+}
+
+.ElementTracker--Element--Waning {
+    opacity: 0.70;
+}
+
+.ElementTracker--Element--Strong {
     opacity: 1;
 }
