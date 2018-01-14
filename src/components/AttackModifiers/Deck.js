@@ -3,7 +3,7 @@ import * as classNames from "classnames";
 
 import {Card} from "./Card";
 import cardBack from "./attack_modifier_card_back.jpg";
-import * as cardData from "../../lib/cardData";
+import * as gameData from "../../lib/gameData";
 import {newPerks} from "../../lib/classes";
 import {newDeck, shuffleCards} from "../../lib/deck";
 
@@ -11,7 +11,7 @@ import "./Deck.css";
 
 function reshuffleCards(cards, currentIndex) {
     // remove played discards
-    const filteredCards = cards.filter((c, i) => !((c.endAction === cardData.END_ACTIONS.DISCARD) && (i <= currentIndex)));
+    const filteredCards = cards.filter((c, i) => !((c.endAction === gameData.END_ACTIONS.DISCARD) && (i <= currentIndex)));
     return shuffleCards(filteredCards);
 }
 
@@ -19,7 +19,7 @@ export class Deck extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...newDeck(cardData.BASE_ATTACK_MODIFIER_CARDS),
+            ...newDeck(gameData.BASE_ATTACK_MODIFIER_CARDS),
             needsShuffle: false,
             showPerks: false,
             perks: newPerks(props.class) || [],
@@ -48,7 +48,7 @@ export class Deck extends React.Component {
     }
 
     resetDeck() {
-        let cards = cardData.BASE_ATTACK_MODIFIER_CARDS;
+        let cards = gameData.BASE_ATTACK_MODIFIER_CARDS;
         this.state.perks.forEach((p) => {
             p.used.forEach((u) => {
                 if (u) {
@@ -88,7 +88,7 @@ export class Deck extends React.Component {
             cards: nextCards,
             currentIndex: nextIndex,
             playedCards: [nextCard].concat(playedCards),
-            needsShuffle: needsShuffle || (nextCard.endAction === cardData.END_ACTIONS.RESHUFFLE),
+            needsShuffle: needsShuffle || (nextCard.endAction === gameData.END_ACTIONS.RESHUFFLE),
         });
     }
 
@@ -109,11 +109,14 @@ export class Deck extends React.Component {
                 "Deck": true,
                 "Deck--NeedsShuffle": this.state.needsShuffle,
             })}>
-                <div>{this.props.class}</div>
-                {this.props.name && <div className="Deck--Name">{this.props.name}</div>}
-                {this.props.class !== "Monsters" && <div>
-                    <span>Perks</span>
-                    <button onClick={() => this.togglePerkDisplay(!this.state.showPerks)}>Hide/Show Perks</button>
+                <div className={classNames({"Deck--Name--Monsters": this.props.name === "Monsters"})}>
+                    {this.props.name}
+                </div>
+                {this.props.name && <div className="Deck--Class">
+                    {this.props.class}
+                    {this.props.class &&
+                        <button onClick={() => this.togglePerkDisplay(!this.state.showPerks)}>{`${this.state.showPerks ? "Hide" : "Show"} Perks`}</button>
+                    }
                 </div>}
                 {this.state.showPerks && <div className="Deck--Perks">
                     {this.state.perks.map((p, i) => (
@@ -125,8 +128,8 @@ export class Deck extends React.Component {
                     <button onClick={() => {this.resetDeck()}}>Set deck</button>
                 </div>}
                 <div>
-                    <button onClick={() => {this.addCard(cardData.CURSE)}}>Add Curse</button>
-                    <button onClick={() => {this.addCard(cardData.BLESSING)}}>Add Blessing</button>
+                    <button onClick={() => {this.addCard(gameData.CURSE)}}>Add Curse</button>
+                    <button onClick={() => {this.addCard(gameData.BLESSING)}}>Add Blessing</button>
                 </div>
                 <div>
                     <img src={cardBack} className="Deck--CardBack" onClick={() => {this.revealNextCard()}} alt="card back" />
@@ -147,8 +150,8 @@ export class Deck extends React.Component {
                             className={classNames({
                                 "Deck--Card": true,
                                 "Deck--Card--MostRecent": i === 0,
-                                "Deck--Card--Reshuffle": card.endAction === cardData.END_ACTIONS.RESHUFFLE,
-                                "Deck--Card--Discard": card.endAction === cardData.END_ACTIONS.DISCARD,
+                                "Deck--Card--Reshuffle": card.endAction === gameData.END_ACTIONS.RESHUFFLE,
+                                "Deck--Card--Discard": card.endAction === gameData.END_ACTIONS.DISCARD,
                             })}
                             key={i}
                             card={card}

@@ -16,14 +16,16 @@ export const FIRE = "fire";
 export const ICE = "ice";
 export const LIGHT = "light";
 
+const elementIcons = {
+    [ANY]: anyElementIcon,
+    [AIR]: airIcon,
+    [DARK]: darkIcon,
+    [EARTH]: earthIcon,
+    [FIRE]: fireIcon,
+    [ICE]: iceIcon,
+    [LIGHT]: lightIcon,
+};
+
 export function iconForElement(name) {
-    return {
-        [ANY]: anyElementIcon,
-        [AIR]: airIcon,
-        [DARK]: darkIcon,
-        [EARTH]: earthIcon,
-        [FIRE]: fireIcon,
-        [ICE]: iceIcon,
-        [LIGHT]: lightIcon,
-    }[name];
+    return elementIcons[name];
 }

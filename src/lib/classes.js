@@ -1,4 +1,4 @@
-import {NUMBER_MODIFIERS} from "./cardData";
+import {NUMBER_MODIFIERS} from "./gameData";
 import * as elements from "./elements";
 
 class CardsFilter {

@@ -4,13 +4,18 @@
     padding: 8px;
 }
 
-.Deck--Name {
+.Deck--Name--Monsters {
+    margin-bottom: 1rem;
+}
+
+.Deck--Class {
     font-size: 0.75rem;
-    color: chocolate;
+    color: purple;
 }
 
 .Deck--Perks {
-    max-width: 200px;
+    max-width: 250px;
+    margin-bottom: 4px;
 }
 
 .Deck--Perk {
@@ -18,13 +23,15 @@
     justify-content: flex-start;
     border: 1px dashed black;
     margin-bottom: 4px;
-}
-.Deck--Perks {
     text-align: left;
 }
 
 .Deck--NeedsShuffle {
     background-color: rgb(230, 88, 22);
+}
+
+.Deck--Button--Container {
+    text-align: center;
 }
 
 .Deck--Button {
@@ -47,7 +54,7 @@
  }
 
 .Deck--CardBack {
-    max-width: 200px;
+    max-width: 250px;
 }
 
 .Deck--PlayedCards {

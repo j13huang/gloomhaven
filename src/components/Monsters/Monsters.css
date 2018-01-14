@@ -3,8 +3,19 @@
     flex-wrap: wrap;
 }
 
-.Monsters--List {
+.Monsters--List--Container {
     display: flex;
     flex-direction: column;
     max-width: 150px;
+    margin-right: 20px;
+}
+
+.Monsters--Monster {
+    display: flex;
+    flex-direction: column;
+    margin: 12px;
+}
+
+.Monsters--Monster--Name {
+    text-align: center;
 }

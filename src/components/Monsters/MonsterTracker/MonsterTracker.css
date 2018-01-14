@@ -1,0 +1,17 @@
+.MonsterTracker {
+    margin-bottom: 8px;
+    border: 1px solid black;
+    max-width: 250px;
+    box-sizing: border-box;
+}
+
+.MonsterTracker--StatsContainer {
+    display: flex;
+    background: rgb(185, 130, 57);
+    color: white;
+}
+
+.MonsterTracker--Boss--StatsContainer {
+    background: rgb(148, 13, 13);
+    color: white;
+}

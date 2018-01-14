@@ -1,9 +1,11 @@
 .Deck--Card {
     border: 1px solid black;
-    width: 200px;
+    width: 250px;
     margin-top: 4px;
     margin-bottom: 4px;
     padding: 6px;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .Deck--Card--MostRecent {

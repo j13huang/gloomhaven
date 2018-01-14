@@ -48,7 +48,15 @@ export class Game extends React.Component {
     render() {
         return (
             <div>
-                <div className="Game--Controls">
+                {/*}
+                <div className="Game--Header">
+                    <div className="Game--Header--Content">
+                        <button className="Game--Header--EndTurn">End Turn</button>
+                    </div>
+                </div>
+                <div className="Game--Header--HeightOffset"></div>
+                */}
+                <div className="Game--Section">
                     <h3>Attack Modifier Cards</h3>
                     <div className="Game--Players">
                         <input
@@ -71,7 +79,7 @@ export class Game extends React.Component {
                         <button onClick={() => this.resetPlayers()}>Reset</button>
                     </div>
                     <div className="Game--AttackModifierDecks">
-                        {[{class: "Monsters", name: ""}].concat(this.state.players).map((p, i) => {
+                        {[{class: "", name: "Monsters"}].concat(this.state.players).map((p, i) => {
                             return <AttackModifierDeck
                                 class={p.class}
                                 name={p.name}
@@ -80,9 +88,9 @@ export class Game extends React.Component {
                         })}
                     </div>
                 </div>
-                <div className="Game--Controls">
-                    <h3>Monster Ability Cards</h3>
-                    <Monsters />
+                <div className="Game--Section">
+                    <h3>Monsters</h3>
+                    <Monsters numPlayers={this.state.players.length}/>
                 </div>
             </div>
         );
