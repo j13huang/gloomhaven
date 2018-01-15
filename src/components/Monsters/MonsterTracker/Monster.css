@@ -37,30 +37,30 @@
     color: white;
 }
 
-.Monster--Conditions {
+.Monster--StatusEffects {
     display: flex;
 }
 
-.Monster--Condition--Container {
+.Monster--StatusEffect--Container {
     height: 1.5rem;
     width: 1.5rem;
     margin-right: 0.25rem;
 }
 
-.Monster--Condition {
+.Monster--StatusEffect {
     height: 100%;
     width: 100%;
 }
 
-.Monster--Condition--Inactive {
+.Monster--StatusEffect--Inactive {
     opacity: 0.25;
 }
 
-.Monster--Condition--Immune {
+.Monster--StatusEffect--Immune {
     position: relative;
 }
 
-.Monster--Condition--Immune:after {
+.Monster--StatusEffect--Immune:after {
     content: "\A";
     position: absolute;
     width:100%; height:100%;
@@ -72,6 +72,6 @@
     -webkit-transition: all 0.5s;
 }
 
-.Monster--Condition--Immune:hover:after {
+.Monster--StatusEffect--Immune:hover:after {
     opacity:1;
 }

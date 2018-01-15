@@ -3,7 +3,7 @@ import React from "react";
 import {BOSS_LIST, BOSS_STATS} from "../../../lib/gameData";
 import {Monster} from "./Monster";
 import {MonsterStats} from "./MonsterStats";
-import {iconForCondition} from "../../../lib/conditions";
+import {iconForStatusEffect} from "../../../lib/statusEffects";
 
 import "./MonsterTracker.css";
 
@@ -31,10 +31,15 @@ export class BossMonsterTracker extends React.Component {
                 <div>
                     <MonsterStats stats={stats} />
                 </div>
-                <div className="MonsterTracker--Boss--Immunities">
+                <div className="MonsterTracker--Boss--ImmunitiesContainer">
                     <div>Immunities:</div>
-                    {stats.immunities && stats.immunities.map((c, i) =>
-                        <img key={i} className="MonsterTracker--Boss--Immunity" src={iconForCondition(c)} alt={`immune - ${c}`} />)}
+                    <div className="MonsterTracker--Boss--Immunities">
+                        {stats.immunities && stats.immunities.map((c, i) =>
+                            <div key={i} className="MonsterTracker--Boss--ImmunityContainer">
+                                <img className="MonsterTracker--Boss--Immunity" src={iconForStatusEffect(c)} alt={`immune - ${c}`} />
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
             <Monster maxHP={stats.maxHP} immunities={stats.immunities} />

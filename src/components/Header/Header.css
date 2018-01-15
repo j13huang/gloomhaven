@@ -4,6 +4,7 @@
     background-color: rgb(235, 159, 72);
     position: fixed;
     box-sizing: border-box;
+    z-index: 1000;
 }
 
 .Game--Header--Content {

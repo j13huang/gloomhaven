@@ -29,23 +29,21 @@ export class List extends React.Component {
 
     render() {
         const searchResults = this.props.monsterList.filter((name) => name.toLowerCase().includes(this.state.search));
-        return (
-            <div className="Monsters--List">
-                <input
-                    value={this.state.search}
-                    onChange={(e) => this.setState({search: e.target.value})}
-                    placeholder="search..."
-                />
-                <select size="10" onChange={(e) => this.handleMonsterSelection(e.target.options)} multiple value={this.state.selectedMonsters}>
-                    {searchResults.map((name) => <option
-                        value={name}
-                        key={name}
-                        disabled={this.props.monstersInPlay.includes(name)}
-                    >{name}</option>)}
-                </select>
-                <button onClick={() => this.addMonsters()}>Add Monster(s)</button>
-                <button onClick={() => this.props.onReset()}>Reset</button>
-            </div>
-        );
+        return (<div className="Monsters--List">
+            <input
+                value={this.state.search}
+                onChange={(e) => this.setState({search: e.target.value})}
+                placeholder="search..."
+            />
+            <select size="10" onChange={(e) => this.handleMonsterSelection(e.target.options)} multiple value={this.state.selectedMonsters}>
+                {searchResults.map((name) => <option
+                    value={name}
+                    key={name}
+                    disabled={this.props.monstersInPlay.includes(name)}
+                >{name}</option>)}
+            </select>
+            <button onClick={() => this.addMonsters()}>Add Monster(s)</button>
+            <button onClick={() => this.props.onReset()}>Reset</button>
+        </div>);
     }
 }

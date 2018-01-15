@@ -10,6 +10,10 @@
     margin-right: 20px;
 }
 
+.Monsters--List--ScenarioLevelLabel {
+    font-size: small;
+}
+
 .Monsters--Monster {
     display: flex;
     flex-direction: column;

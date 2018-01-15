@@ -16,21 +16,16 @@
     display: flex;
     flex-direction: column;
     width: 25%;
+    margin-right: 12px;
 }
 
 .MonsterTracker--Stats--MainLine {
     display: flex;
+    justify-content: flex-end;
 }
 
-.MonsterTracker--Stats--Special {
+.MonsterTracker--Stats--Extra {
     flex: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.MonsterTracker--Stats--SpecialLine {
-    display: flex;
-    justify-content: center;    
 }
 
 .MonsterTracker--StatIcon {
@@ -38,8 +33,18 @@
     height: 1rem;
 }
 
-.MonsterTracker--Boss--Immunities {
+.MonsterTracker--Boss--ImmunitiesContainer {
     padding: 4px;
+}
+
+.MonsterTracker--Boss--Immunities {
+    display: flex;
+}
+
+.MonsterTracker--Boss--ImmunityContainer {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.25rem;
 }
 
 .MonsterTracker--Boss--Immunity {

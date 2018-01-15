@@ -12,10 +12,27 @@
     background-color: rgb(214, 163, 104);
 }
 
-.Deck--Card--Reshuffle {
+.Deck--Card--Shuffle {
     background-color: rgb(230, 88, 22);
 }
 
 .Deck--Card--Discard {
     border: 4px solid rgb(170, 67, 211);
+}
+
+.Deck--Card--EndActionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+}
+
+.Deck--Card--EndAction {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.Deck--Card--EndActionShuffle {
+    background: black;
+    border-radius: 50%;
 }

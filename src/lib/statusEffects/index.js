@@ -9,6 +9,9 @@ import strengthenIcon from "./strengthen.svg";
 import stunIcon from "./stun.svg";
 import woundIcon from "./wound.svg";
 
+import pushIcon from "./push.svg";
+import pullIcon from "./pull.svg";
+
 export const BLESS = "bless";
 export const CURSE = "curse";
 export const DISARM = "disarm";
@@ -20,7 +23,10 @@ export const STRENGTHEN = "strengthen";
 export const STUN = "stun";
 export const WOUND = "wound";
 
-const conditionIcons = {
+export const PUSH = "push";
+export const PULL = "pull";
+
+const statusEffectIcons = {
     [POISON]: poisonIcon,
     [WOUND]: woundIcon,
     [IMMOBILIZE]: immobilizeIcon,
@@ -31,11 +37,13 @@ const conditionIcons = {
     [STRENGTHEN]: strengthenIcon,
 };
 
-export const CONDITIONS = Object.keys(conditionIcons);
+export const STATUS_EFFECTS = Object.keys(statusEffectIcons);
 
-export function iconForCondition(name) {
+export function iconForStatusEffect(name) {
     return {
-        ...conditionIcons,
+        ...statusEffectIcons,
+        [PUSH]: pushIcon,
+        [PULL]: pullIcon,
         [CURSE]: curseIcon,
         [BLESS]: blessIcon,
     }[name];

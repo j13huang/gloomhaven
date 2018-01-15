@@ -1,0 +1,84 @@
+import shuffleIcon from "./shuffle.svg";
+import rollingIcon from "./rolling.svg";
+
+const PLUS_ONE = "+1";
+const PLUS_TWO = "+2";
+const PLUS_THREE = "+3";
+const ZERO = "+0";
+const MINUS_ONE = "-1";
+const MINUS_TWO = "-2";
+const NULL = "null";
+const TIMES_TWO = "x2";
+
+export const NUMBER_MODIFIERS = {
+    PLUS_ONE, PLUS_TWO, PLUS_THREE, ZERO, MINUS_ONE, MINUS_TWO, NULL, TIMES_TWO,
+};
+
+const SHUFFLE = "shuffle";
+const DISCARD = "discard";
+const ROLLING = "rolling";
+export const END_ACTIONS = {
+    SHUFFLE, DISCARD, ROLLING,
+};
+
+const endActionIcons = {
+    [SHUFFLE]: shuffleIcon,
+    [ROLLING]: rollingIcon,
+};
+
+export function iconForEndAction(name) {
+    return endActionIcons[name];
+}
+
+
+export const BASE_ATTACK_MODIFIER_CARDS = [
+    { modifier: ZERO, },
+    { modifier: ZERO, },
+    { modifier: ZERO, },
+    { modifier: ZERO, },
+    { modifier: ZERO, },
+    { modifier: ZERO, },
+    { modifier: PLUS_ONE, },
+    { modifier: PLUS_ONE, },
+    { modifier: PLUS_ONE, },
+    { modifier: PLUS_ONE, },
+    { modifier: PLUS_ONE, },
+    { modifier: MINUS_ONE, },
+    { modifier: MINUS_ONE, },
+    { modifier: MINUS_ONE, },
+    { modifier: MINUS_ONE, },
+    { modifier: MINUS_ONE, },
+    { modifier: PLUS_TWO, },
+    { modifier: MINUS_TWO, },
+    { modifier: TIMES_TWO, endAction: SHUFFLE, },
+    { modifier: NULL, endAction: SHUFFLE, },
+];
+
+export const CURSE = {
+    modifier: NULL,
+    endAction: DISCARD,
+};
+
+export const BLESS = {
+    modifier: TIMES_TWO,
+    endAction: DISCARD,
+};
+
+// https://gist.github.com/guilhermepontes/17ae0cc71fa2b13ea8c20c94c5c35dc4#gistcomment-2271465
+export function shuffle(cards) {
+    return cards.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
+}
+
+export function newDeck(cards) {
+    return {
+        cards: shuffle(cards),
+        currentIndex: -1,
+        playedCards: [],
+    };
+}
+
+export function clearPlayedCards(playedCards) {
+    const firstShuffleIndex = playedCards.findIndex((c, i) => (i > 0) && (c.endAction === SHUFFLE));
+    // don't clear from the most recent card if the card is a reshuffle
+    return firstShuffleIndex === -1 ? playedCards : playedCards.filter((c, i) => i < firstShuffleIndex);
+}

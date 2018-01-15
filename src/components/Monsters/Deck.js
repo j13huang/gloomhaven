@@ -3,7 +3,7 @@ import * as classNames from "classnames";
 
 import {Card} from "./Card";
 import cardBack from "./monster_card_back.jpg";
-import * as gameData from "../../lib/gameData";
+import {END_ACTIONS} from "../../lib/cards";
 
 //import "./Deck.css";
 
@@ -33,7 +33,7 @@ export class Deck extends React.Component {
                             className={classNames({
                                 "Deck--Card": true,
                                 "Deck--Card--MostRecent": i === 0,
-                                "Deck--Card--Discard": card.endAction === gameData.END_ACTIONS.DISCARD,
+                                "Deck--Card--Discard": card.endAction === END_ACTIONS.DISCARD,
                             })}
                             key={i}
                             card={card}

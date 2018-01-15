@@ -3,23 +3,23 @@ import * as classNames from "classnames";
 
 import {Card} from "./Card";
 import cardBack from "./attack_modifier_card_back.jpg";
-import * as gameData from "../../lib/gameData";
+import {END_ACTIONS, BASE_ATTACK_MODIFIER_CARDS, CURSE, BLESS} from "../../lib/cards";
 import {newPerks} from "../../lib/classes";
-import {newDeck, shuffleCards} from "../../lib/deck";
+import {newDeck, shuffle} from "../../lib/cards";
 
 import "./Deck.css";
 
-function reshuffleCards(cards, currentIndex) {
+function shuffleCards(cards, currentIndex) {
     // remove played discards
-    const filteredCards = cards.filter((c, i) => !((c.endAction === gameData.END_ACTIONS.DISCARD) && (i <= currentIndex)));
-    return shuffleCards(filteredCards);
+    const filteredCards = cards.filter((c, i) => !((c.endAction === END_ACTIONS.DISCARD) && (i <= currentIndex)));
+    return shuffle(filteredCards);
 }
 
 export class Deck extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...newDeck(gameData.BASE_ATTACK_MODIFIER_CARDS),
+            ...newDeck(BASE_ATTACK_MODIFIER_CARDS),
             needsShuffle: false,
             showPerks: false,
             perks: newPerks(props.class) || [],
@@ -50,7 +50,7 @@ export class Deck extends React.Component {
     }
 
     resetDeck() {
-        let cards = gameData.BASE_ATTACK_MODIFIER_CARDS;
+        let cards = BASE_ATTACK_MODIFIER_CARDS;
         this.state.perks.forEach((p) => {
             p.used.forEach((u) => {
                 if (u) {
@@ -63,8 +63,8 @@ export class Deck extends React.Component {
 
     // insert card into random spot of remaining deck
     addCard(card) {
-        if ((card === gameData.CURSE && this.state.curseCount === 10) ||
-            (card === gameData.BLESSING && this.state.blessCount === 10)) {
+        if ((card === CURSE && this.state.curseCount === 10) ||
+            (card === BLESS && this.state.blessCount === 10)) {
             return;
         }
         const {cards} = this.state;
@@ -77,8 +77,8 @@ export class Deck extends React.Component {
                 card,
                 ...cards.slice(randomIndex),
             ],
-            curseCount: card === gameData.CURSE ? (this.state.curseCount + 1) : this.state.curseCount,
-            blessCount: card === gameData.BLESSING ? (this.state.blessCount + 1) : this.state.blessCount,
+            curseCount: card === CURSE ? (this.state.curseCount + 1) : this.state.curseCount,
+            blessCount: card === BLESS ? (this.state.blessCount + 1) : this.state.blessCount,
         });
     }
 
@@ -87,7 +87,7 @@ export class Deck extends React.Component {
         let nextCards = cards;
         let nextIndex = currentIndex + 1;
         if (nextIndex >= cards.length) {
-            nextCards = reshuffleCards(cards, currentIndex);
+            nextCards = shuffleCards(cards, currentIndex);
             nextIndex = 0;
         }
 
@@ -96,17 +96,17 @@ export class Deck extends React.Component {
             cards: nextCards,
             currentIndex: nextIndex,
             playedCards: [nextCard].concat(playedCards),
-            needsShuffle: needsShuffle || (nextCard.endAction === gameData.END_ACTIONS.RESHUFFLE),
-            curseCount: nextCard === gameData.CURSE ? (this.state.curseCount - 1) : this.state.curseCount,
-            blessCount: nextCard === gameData.BLESSING ? (this.state.blessCount - 1) : this.state.blessCount,
+            needsShuffle: needsShuffle || (nextCard.endAction === END_ACTIONS.SHUFFLE),
+            curseCount: nextCard === CURSE ? (this.state.curseCount - 1) : this.state.curseCount,
+            blessCount: nextCard === BLESS ? (this.state.blessCount - 1) : this.state.blessCount,
         });
     }
 
-    reshuffle() {
+    shuffleCards() {
         const {cards, currentIndex} = this.state;
 
         this.setState({
-            cards: reshuffleCards(cards, currentIndex),
+            cards: shuffleCards(cards, currentIndex),
             currentIndex: -1,
             playedCards: [],
             needsShuffle: false,
@@ -117,7 +117,7 @@ export class Deck extends React.Component {
         return (
             <div className={classNames({
                 "Deck": true,
-                "Deck--NeedsShuffle": this.state.needsShuffle,
+                //"Deck--NeedsShuffle": this.state.needsShuffle,
             })}>
                 <div className={classNames({"Deck--Name--Monsters": this.props.name === "Monsters"})}>
                     {this.props.name}
@@ -138,8 +138,8 @@ export class Deck extends React.Component {
                     <button onClick={() => {this.resetDeck()}}>Set deck</button>
                 </div>}
                 <div>
-                    <button onClick={() => {this.addCard(gameData.CURSE)}}>Add Curse ({this.state.curseCount})</button>
-                    <button onClick={() => {this.addCard(gameData.BLESSING)}}>Add Blessing({this.state.blessCount})</button>
+                    <button onClick={() => {this.addCard(CURSE)}}>Add Curse ({this.state.curseCount})</button>
+                    <button onClick={() => {this.addCard(BLESS)}}>Add Blessing({this.state.blessCount})</button>
                 </div>
                 <div>
                     <img src={cardBack} className="Deck--CardBack" onClick={() => {this.revealNextCard()}} alt="card back" />
@@ -149,7 +149,7 @@ export class Deck extends React.Component {
                         "Deck--Button": true,
                         "Deck--Button--NeedsShuffle": this.state.needsShuffle,
                     })}
-                    onClick={() => {this.reshuffle()}}
+                    onClick={() => {this.shuffleCards()}}
                     disabled={!this.state.needsShuffle}
                 >
                     Shuffle
@@ -160,8 +160,8 @@ export class Deck extends React.Component {
                             className={classNames({
                                 "Deck--Card": true,
                                 "Deck--Card--MostRecent": i === 0,
-                                "Deck--Card--Reshuffle": card.endAction === gameData.END_ACTIONS.RESHUFFLE,
-                                "Deck--Card--Discard": card.endAction === gameData.END_ACTIONS.DISCARD,
+                                "Deck--Card--Shuffle": card.endAction === END_ACTIONS.SHUFFLE,
+                                "Deck--Card--Discard": card.endAction === END_ACTIONS.DISCARD,
                             })}
                             key={i}
                             card={card}

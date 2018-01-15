@@ -1,4 +1,4 @@
-import {NUMBER_MODIFIERS} from "./gameData";
+import {NUMBER_MODIFIERS, END_ACTIONS} from "./cards";
 import * as elements from "./elements";
 
 class CardsFilter {
@@ -29,18 +29,101 @@ class CardsFilter {
 }
 
 const PERKS = {
+    "Brute": [
+        {
+            description: "Remove two -1 cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(2, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
+                .cards(),
+        },
+        {
+            description: "Replace one -1 card with one +1 card",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
+                .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                .cards(),
+        },
+        {
+            description: "Add two +1 cards",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                .cards(),
+        },
+        {
+            description: "Add one +3 card",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_THREE})
+                .cards(),
+        },
+        {
+            description: "Add three ROLLING PUSH 1 cards",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(3, {modifier: "push 1", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add two ROLLING PIERCE 3 cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(2, {modifier: "pierce 3", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add one ROLLING STUN card",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(1, {modifier: "stun", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add one ROLLING DISARM card and one ROLLING MUDDLE card",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(1, {modifier: "disarm", endAction: END_ACTIONS.ROLLING})
+                .addCards(1, {modifier: "muddle", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add one ROLLING ADD TARGET card",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(1, {modifier: "add target", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add one +1 shield 1, self card",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: "shield 1, self"})
+                .cards(),
+        },
+        {
+            description: "Ignore negative item effects and add one +1 card",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                .cards(),
+        },
+    ],
     "Cragheart": [
         {
             description: "Remove four +0 cards",
             used: [false],
-            filterCards: (cards) => new CardsFilter(cards).removeCards(4, NUMBER_MODIFIERS.ZERO).cards(),
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(4, {modifier: NUMBER_MODIFIERS.ZERO})
+                .cards(),
         },
         {
             description: "Replace one -1 card with one +1 card",
             used: [false, false, false],
             filterCards: (cards) =>
               new CardsFilter(cards)
-              .removeCards(1, NUMBER_MODIFIERS.MINUS_ONE)
+              .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
               .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
               .cards(),
         },
@@ -74,7 +157,7 @@ const PERKS = {
             used: [false],
             filterCards: (cards) =>
               new CardsFilter(cards)
-              .addCards(2, {modifier: "push 2", rolling: true})
+              .addCards(2, {modifier: "push 2", endAction: END_ACTIONS.ROLLING})
               .cards(),
         },
         {
@@ -82,7 +165,7 @@ const PERKS = {
             used: [false, false],
             filterCards: (cards) =>
               new CardsFilter(cards)
-              .addCards(2, {modifier: elements.EARTH, rolling: true})
+              .addCards(2, {modifier: elements.EARTH, endAction: END_ACTIONS.ROLLING})
               .cards(),
         },
         {
@@ -90,7 +173,7 @@ const PERKS = {
             used: [false],
             filterCards: (cards) =>
               new CardsFilter(cards)
-              .addCards(2, {modifier: elements.AIR, rolling: true})
+              .addCards(2, {modifier: elements.AIR, endAction: END_ACTIONS.ROLLING})
               .cards(),
         },
         {
@@ -104,18 +187,187 @@ const PERKS = {
             filterCards: (cards) => cards,
         },
     ],
+    "Mindthief": [
+        {
+            description: "Remove two -1 cards",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(2, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
+                .cards(),
+        },
+        {
+            description: "Remove four +0 cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(4, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                .cards(),
+        },
+        {
+            description: "Replace two +1 cards with two +2 cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_TWO})
+                .cards(),
+        },
+        {
+            description: "Replace one -2 card with one +0 cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_TWO})
+                .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                .cards(),
+        },
+        {
+            description: "Add one +2 ICE card",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO, extra: elements.ICE})
+                .cards(),
+        },
+        {
+            description: "Add two ROLLING +1 cards",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE, endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add three ROLLING PULL 1 cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(3, {modifier: "pull 1", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add three ROLLING MUDDLE cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(3, {modifier: "muddle", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add two ROLLING IMMOBILIZE cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(2, {modifier: "immobilize", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add one ROLLING STUN card",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(1, {modifier: "stun", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add one ROLLING DISARM card and one ROLLING MUDDLE card",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(1, {modifier: "disarm", endAction: END_ACTIONS.ROLLING})
+                .addCards(1, {modifier: "muddle", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Ignore negative scenario effects",
+            used: [false],
+            filterCards: (cards) => cards,
+        },
+    ],
+    "Scoundrel": [
+        {
+            description: "Remove two -1 cards",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(2, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
+                .cards(),
+        },
+        {
+            description: "Remove four +0 cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(4, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                .cards(),
+        },
+        {
+            description: "Replace one -2 card with one +0 card",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_TWO})
+                .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                .cards(),
+        },
+        {
+            description: "Replace one -1 card with one +1 card",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
+                .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                .cards(),
+        },
+        {
+            description: "Replace one +0 card with one +2 card",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_TWO})
+                .cards(),
+        },
+        {
+            description: "Add two ROLLING +1 cards",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE, endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add two ROLLING PIERCE 3 cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(2, {modifier: "pierce 3", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add two ROLLING POISON cards",
+            used: [false, false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(2, {modifier: "poison", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add two ROLLING MUDDLE cards",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(2, {modifier: "muddle", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Add one ROLLING INVISIBLE card",
+            used: [false],
+            filterCards: (cards) => new CardsFilter(cards)
+                .addCards(1, {modifier: "invisible", endAction: END_ACTIONS.ROLLING})
+                .cards(),
+        },
+        {
+            description: "Ignore negative scenario effects",
+            used: [false],
+            filterCards: (cards) => cards,
+        },
+    ],
     "Spellweaver": [
         {
             description: "Remove four +0 cards",
             used: [false],
-            filterCards: (cards) => new CardsFilter(cards).removeCards(4, NUMBER_MODIFIERS.ZERO).cards(),
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(4, {modifier: NUMBER_MODIFIERS.ZERO})
+                .cards(),
         },
         {
             description: "Replace one -1 card with one +1 card",
             used: [false, false],
             filterCards: (cards) =>
               new CardsFilter(cards)
-              .removeCards(1, NUMBER_MODIFIERS.MINUS_ONE)
+              .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
               .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
               .cards(),
         },
@@ -180,8 +432,8 @@ const PERKS = {
             used: [false],
             filterCards: (cards) =>
               new CardsFilter(cards)
-              .addCards(1, {modifier: elements.EARTH, rolling: true})
-              .addCards(1, {modifier: elements.AIR, rolling: true})
+              .addCards(1, {modifier: elements.EARTH, endAction: END_ACTIONS.ROLLING})
+              .addCards(1, {modifier: elements.AIR, endAction: END_ACTIONS.ROLLING})
               .cards(),
         },
         {
@@ -189,8 +441,8 @@ const PERKS = {
             used: [false],
             filterCards: (cards) =>
               new CardsFilter(cards)
-              .addCards(1, {modifier: elements.LIGHT, rolling: true})
-              .addCards(1, {modifier: elements.DARK, rolling: true})
+              .addCards(1, {modifier: elements.LIGHT, endAction: END_ACTIONS.ROLLING})
+              .addCards(1, {modifier: elements.DARK, endAction: END_ACTIONS.ROLLING})
               .cards(),
         },
     ],
@@ -198,14 +450,16 @@ const PERKS = {
         {
             description: "Remove two -1 cards",
             used: [false, false],
-            filterCards: (cards) => new CardsFilter(cards).removeCards(2, NUMBER_MODIFIERS.MINUS_ONE).cards(),
+            filterCards: (cards) => new CardsFilter(cards)
+                .removeCards(2, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
+                .cards(),
         },
         {
             description: "Replace one -2 card with one +0 card",
             used: [false],
             filterCards: (cards) =>
               new CardsFilter(cards)
-              .removeCards(1, NUMBER_MODIFIERS.MINUS_TWO)
+              .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_TWO})
               .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
               .cards(),
         },
@@ -230,7 +484,7 @@ const PERKS = {
             used: [false],
             filterCards: (cards) =>
               new CardsFilter(cards)
-              .addCards(2, {modifier: elements.FIRE, rolling: true})
+              .addCards(2, {modifier: elements.FIRE, endAction: END_ACTIONS.ROLLING})
               .cards(),
         },
         {
@@ -238,7 +492,7 @@ const PERKS = {
             used: [false],
             filterCards: (cards) =>
               new CardsFilter(cards)
-              .addCards(3, {modifier: "muddle", rolling: true})
+              .addCards(3, {modifier: "muddle", endAction: END_ACTIONS.ROLLING})
               .cards(),
         },
         {

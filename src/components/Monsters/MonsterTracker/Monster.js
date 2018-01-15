@@ -1,7 +1,7 @@
 import React from "react";
 import * as classNames from "classnames";
 
-import {CONDITIONS, iconForCondition} from "../../../lib/conditions";
+import {STATUS_EFFECTS, iconForStatusEffect} from "../../../lib/statusEffects";
 
 import "./Monster.css";
 
@@ -9,10 +9,10 @@ export class Monster extends React.Component {
     constructor(props) {
         super(props);
 
-        const conditions = CONDITIONS.reduce((acc, c) => {acc[c] = false; return acc;}, {});
+        const statusEffects = STATUS_EFFECTS.reduce((acc, s) => {acc[s] = false; return acc;}, {});
         this.state = {
             hp: props.maxHP,
-            conditions,
+            statusEffects,
         };
     }
 
@@ -21,11 +21,11 @@ export class Monster extends React.Component {
         this.setState({hp});
     }
 
-    toggleCondition(condition) {
+    toggleStatusEffect(statusEffect) {
         this.setState({
-            conditions: {
-                ...this.state.conditions,
-                [condition]: !this.state.conditions[condition],
+            statusEffects: {
+                ...this.state.statusEffects,
+                [statusEffect]: !this.state.statusEffects[statusEffect],
             },
         });
     }
@@ -35,28 +35,29 @@ export class Monster extends React.Component {
             <div className={classNames({"Monster": true, "Monster--Elite": this.props.elite})}>
                 <div className="Monster--HP--Container">
                     <div>HP:</div>
-                    <div className="Monster--HP--Bars">
-                        {new Array(this.props.maxHP).fill().map((_, i) => {
-                            const hp = i + 1;
-                            return (<div key={hp}
-                                className={classNames({"Monster--HP": true, "Monster--HP--Active": hp <= this.state.hp})}
-                                onClick={() => this.setHP(hp)}
-                            >
-                                {hp}
-                            </div>);
-                        })}
-                    </div>
+                    {this.props.maxHP &&
+                        <div className="Monster--HP--Bars">
+                            {new Array(this.props.maxHP).fill().map((_, i) => {
+                                const hp = i + 1;
+                                return (<div key={hp}
+                                    className={classNames({"Monster--HP": true, "Monster--HP--Active": hp <= this.state.hp})}
+                                    onClick={() => this.setHP(hp)}
+                                >
+                                    {hp}
+                                </div>);
+                            })}
+                        </div>}
                 </div>
-                <div className="Monster--Conditions">
-                    {Object.keys(this.state.conditions).map((c, i) => {
-                        const active = this.state.conditions[c];
-                        const immune = this.props.immunities && this.props.immunities.includes(c);
-                        return (<div key={i} className={classNames({"Monster--Condition--Container": true, "Monster--Condition--Immune": immune})}>
+                <div className="Monster--StatusEffects">
+                    {Object.keys(this.state.statusEffects).map((s, i) => {
+                        const active = this.state.statusEffects[s];
+                        const immune = this.props.immunities && this.props.immunities.includes(s);
+                        return (<div key={i} className={classNames({"Monster--StatusEffect--Container": true, "Monster--StatusEffect--Immune": immune})}>
                             <img
-                                src={iconForCondition(c)}
-                                className={classNames({"Monster--Condition": true, "Monster--Condition--Inactive": !active})}
-                                alt={`${c} - ${active ? "active" : "inactive"}`}
-                                onClick={() => !immune && this.toggleCondition(c)}
+                                src={iconForStatusEffect(s)}
+                                className={classNames({"Monster--StatusEffect": true, "Monster--StatusEffect--Inactive": !active})}
+                                alt={`${s} - ${active ? "active" : "inactive"}`}
+                                onClick={() => !immune && this.toggleStatusEffect(s)}
                             />
                         </div>);
                     })}

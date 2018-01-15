@@ -3,8 +3,9 @@ import React from 'react';
 import {List} from "./List";
 import {Deck} from "./Deck";
 import {BossMonsterTracker, MonsterTracker} from "./MonsterTracker";
-import {MONSTERS, MONSTER_LIST, END_ACTIONS} from "../../lib/gameData";
-import {shuffleCards, newDeck} from "../../lib/deck";
+import {MONSTERS, MONSTER_LIST} from "../../lib/gameData";
+import {END_ACTIONS} from "../../lib/cards";
+import {shuffle, newDeck} from "../../lib/cards";
 
 import "./Monsters.css";
 
@@ -50,9 +51,9 @@ export class Monsters extends React.Component {
             let nextCards = cards;
             let nextIndex = currentIndex + 1;
             const currentCard = playedCards[0];
-            if ((currentCard && currentCard.endAction === END_ACTIONS.RESHUFFLE) ||
+            if ((currentCard && currentCard.endAction === END_ACTIONS.SHUFFLE) ||
                 (nextIndex >= cards.length)) {
-                nextCards = shuffleCards(cards);
+                nextCards = shuffle(cards);
                 nextIndex = 0;
             }
             const nextCard = nextCards[nextIndex];
@@ -72,7 +73,7 @@ export class Monsters extends React.Component {
         deckNames.forEach((name) => {
             const {cards} = this.state.monsters[name];
             newMonsters[name] = {
-                cards: shuffleCards(cards),
+                cards: shuffle(cards),
                 currentIndex: -1,
                 playedCards: [],
             };
@@ -90,10 +91,10 @@ export class Monsters extends React.Component {
             <div className="Monsters">
                 <div className="Monsters--List--Container">
                     <div>
-                        <label htmlFor={levelSelectID}>Level: </label>
+                        <label className="Monsters--List--ScenarioLevelLabel" htmlFor={levelSelectID}>Scenario Level: </label>
                         <select id={levelSelectID} disabled={Object.keys(this.state.monsters).length > 0} value={this.state.selectedLevel} onChange={(event) => this.selectLevel(event.target.value)}>
-                            {new Array(10).fill().map((_, i) => {
-                                const level = i + 1;
+                            {new Array(8).fill().map((_, i) => {
+                                const level = i;
                                 return (<option key={level} value={level}>{level}</option>);
                             })}
                         </select>
