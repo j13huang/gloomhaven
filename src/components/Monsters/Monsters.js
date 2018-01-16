@@ -3,7 +3,7 @@ import React from 'react';
 import {List} from "./List";
 import {Deck} from "./Deck";
 import {BossMonsterTracker, MonsterTracker} from "./MonsterTracker";
-import {MONSTERS, MONSTER_LIST} from "../../lib/gameData";
+import {MONSTERS, MONSTER_LIST} from "../../lib/monsters";
 import {END_ACTIONS} from "../../lib/cards";
 import {shuffle, newDeck} from "../../lib/cards";
 

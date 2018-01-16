@@ -1,5 +1,5 @@
-import {NUMBER_MODIFIERS, END_ACTIONS} from "./cards";
-import * as elements from "./elements";
+import {NUMBER_MODIFIERS, END_ACTIONS} from "../cards";
+import * as elements from "../elements";
 
 class CardsFilter {
     constructor(cards) {

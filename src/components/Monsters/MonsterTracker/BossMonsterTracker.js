@@ -1,6 +1,6 @@
 import React from "react";
 
-import {BOSS_LIST, BOSS_STATS} from "../../../lib/gameData";
+import {BOSS_LIST, BOSS_STATS} from "../../../lib/monsters";
 import {Monster} from "./Monster";
 import {MonsterStats} from "./MonsterStats";
 import {iconForStatusEffect} from "../../../lib/statusEffects";

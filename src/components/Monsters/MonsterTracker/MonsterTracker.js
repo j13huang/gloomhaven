@@ -1,7 +1,7 @@
 import React from "react";
 import * as classNames from "classnames";
 
-import {MONSTERS} from "../../../lib/gameData";
+import {MONSTERS} from "../../../lib/monsters";
 import {Monster} from "./Monster";
 import {MonsterStats} from "./MonsterStats";
 

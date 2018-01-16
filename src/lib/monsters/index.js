@@ -13,9 +13,9 @@ import inoxBodyguardSpecial1Area from "./inoxBodyguardSpecial1Area.svg";
 import sightlessEyeSpecial1Area from "./sightlessEyeSpecial1Area.svg";
 import sightlessEyeSpecial2Area from "./sightlessEyeSpecial2Area.svg";
 
-import { END_ACTIONS } from "./cards";
-import * as elements from "./elements";
-import * as statusEffects from "./statusEffects"
+import { END_ACTIONS } from "../cards";
+import * as elements from "../elements";
+import * as statusEffects from "../statusEffects"
 
 const ARCHER_CARDS = [
     {
