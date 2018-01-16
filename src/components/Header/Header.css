@@ -1,4 +1,4 @@
-.Game--Header {
+.Header {
     height: 36px;
     width: 100%;
     background-color: rgb(235, 159, 72);
@@ -7,15 +7,20 @@
     z-index: 1000;
 }
 
-.Game--Header--Content {
+.Header--Content {
     display: flex;
     justify-content: space-between;
 }
 
-.Game--Header--EndTurn {
+.Header--EndTurn {
     height: 36px;
 }
 
-.Game--Header--HeightOffset {
+.Header--HeightOffset {
     height: 36px;
+}
+
+.Header--TurnTracker {
+    display: flex;
+    align-items: center;
 }

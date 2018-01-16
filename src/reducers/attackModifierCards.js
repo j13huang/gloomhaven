@@ -1,7 +1,7 @@
 import {newDeck, shuffle} from "../lib/cards";
 import {newPerks} from "../lib/classes";
 import {END_ACTIONS, BASE_ATTACK_MODIFIER_CARDS, CURSE, BLESS} from "../lib/cards";
-import {END_TURN} from "./index";
+import {END_TURN} from "./turn";
 
 function newAttackModifierDeck(cards, characterClass) {
     return {
@@ -99,7 +99,7 @@ const defaultState = {
 const RESET_PLAYERS = "attackModifierDeck/resetPlayers";
 const ADD_DECK = "attackModifierDeck/add";
 const RESET_DECK = "attackModifierDeck/reset";
-const REVEAL_CARD = "attackModifierDeck/nextCard";
+const REVEAL_CARD = "attackModifierDeck/cards/next";
 const ADD_CARD = "attackModifierDeck/cards/add";
 const TOGGLE_PERK = "attackModifierDeck/perks/toggle";
 

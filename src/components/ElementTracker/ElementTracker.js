@@ -1,13 +1,11 @@
 import React from "react";
+import {connect} from "react-redux";
 import * as classNames from "classnames";
 
-import {ELEMENTS_LIST, iconForElement} from "../../lib/elements";
+import {ELEMENTS_LIST, INERT, WANING, STRONG, iconForElement} from "../../lib/elements";
+import {setStatusAction} from "../../reducers/elements";
 
 import "./ElementTracker.css";
-
-const INERT = "inert";
-const WANING = "waning";
-const STRONG = "strong";
 
 const borderClassNameForStatus = {
     [INERT]: "ElementTracker--Element--BorderInert",
@@ -38,111 +36,101 @@ function Elements({className, elements, status, onClick}) {
 }
 */
 
-export class ElementTracker extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            elements: ELEMENTS_LIST.reduce((acc, e) => {acc[e] = INERT; return acc;}, {})
-        };
-    }
-
-    setElementStatus(element, status) {
-        this.setState({
-            elements: {
-                ...this.state.elements,
-                [element]: status,
-            },
-        });
-    }
-
-    render() {
-        return (<div className="ElementTracker">
-            {ELEMENTS_LIST.map((e, i) => {
-                const status = this.state.elements[e];
-                return (<div key={i} className="ElementTracker--Column">
-                    {/*e*/}
-                    {[INERT, WANING, STRONG].map((s) =>
-                        <div key={s} className={classNames({
-                            "ElementTracker--Element": true,
-                            "ElementTracker--ElementContainer": true,
-                            "ElementTracker--Element--Border": true,
-                            //"ElementTracker--Element--BorderActive": status === s,
-                            //"ElementTracker--Element--BorderActive": true,
-                            [borderClassNameForStatus[s]]: true,
-                        })}>
-                            <img
-                                className={classNames({
-                                    "ElementTracker--Element": true,
-                                    "ElementTracker--Element--Inactive": true,
-                                    [classNameForStatus[s]]: (status === s),
-                                })}
-                                src={iconForElement(e)}
-                                onClick={() => this.setElementStatus(e, s)}
-                                alt={`${e} - ${status}`}
-                            />
-                        </div>
-                    )}
-                </div>);
-            })}
-            {/*}
-            <div className="ElementTracker--Column">
-                <div>Elements:</div>
-                {ELEMENTS_LIST.map((e, i) => {
-                    const status = this.state.elements[e];
-                    let className;
-                    let nextStatus = "";
-                    switch (status) {
-                        case INERT:
-                            className = "ElementTracker--Element--Inert";
-                            nextStatus = STRONG;
-                            break;
-                        case WANING:
-                            className = "ElementTracker--Element--Waning";
-                            nextStatus = INERT;
-                            break;
-                        case STRONG:
-                            className = "ElementTracker--Element--Strong";
-                            nextStatus = WANING;
-                            break;
-                        default: return null;
-                    }
-                    return (<div key={i}
-                        className={classNames({
-                            "ElementTracker--Element": true,
-                            "ElementTracker--ElementContainer": true,
-                            "ElementTracker--Element--Border": status === INERT
-                        })}>
+function ElementTrackerComponent({elements, setElementStatus}) {
+    return (<div className="ElementTracker">
+        {ELEMENTS_LIST.map((e, i) => {
+            const status = elements[e];
+            return (<div key={i} className="ElementTracker--Column">
+                {/*e*/}
+                {[INERT, WANING, STRONG].map((s) =>
+                    <div key={s} className={classNames({
+                        "ElementTracker--Element": true,
+                        "ElementTracker--ElementContainer": true,
+                        "ElementTracker--Element--Border": true,
+                        //"ElementTracker--Element--BorderActive": status === s,
+                        //"ElementTracker--Element--BorderActive": true,
+                        [borderClassNameForStatus[s]]: true,
+                    })}>
                         <img
-                            className={classNames("ElementTracker--Element", className)}
+                            className={classNames({
+                                "ElementTracker--Element": true,
+                                "ElementTracker--Element--Inactive": true,
+                                [classNameForStatus[s]]: (status === s),
+                            })}
                             src={iconForElement(e)}
-                            onClick={() => this.setElementStatus(e, nextStatus)}
+                            onClick={() => setElementStatus(e, s)}
                             alt={`${e} - ${status}`}
                         />
-                    </div>)
-                })}
-            </div>
-            */}
-            {/*}
-            <Elements
-                className="ElementTracker--Column"
-                elements={this.state.elements}
-                status={INERT}
-                onClick={(e, status) => this.setElementStatus(e, status)}
-            />
-            <Elements
-                className="ElementTracker--Column"
-                elements={this.state.elements}
-                status={WANING}
-                onClick={(e, status) => this.setElementStatus(e, status)}
-            />
-            <Elements
-                className="ElementTracker--Column"
-                elements={this.state.elements}
-                status={STRONG}
-                onClick={(e, status) => this.setElementStatus(e, status)}
-            />
-            */}
-        </div>);
-    }
+                    </div>
+                )}
+            </div>);
+        })}
+        {/*}
+        <div className="ElementTracker--Column">
+            <div>Elements:</div>
+            {ELEMENTS_LIST.map((e, i) => {
+                const status = elements[e];
+                let className;
+                let nextStatus = "";
+                switch (status) {
+                    case INERT:
+                        className = "ElementTracker--Element--Inert";
+                        nextStatus = STRONG;
+                        break;
+                    case WANING:
+                        className = "ElementTracker--Element--Waning";
+                        nextStatus = INERT;
+                        break;
+                    case STRONG:
+                        className = "ElementTracker--Element--Strong";
+                        nextStatus = WANING;
+                        break;
+                    default: return null;
+                }
+                return (<div key={i}
+                    className={classNames({
+                        "ElementTracker--Element": true,
+                        "ElementTracker--ElementContainer": true,
+                        "ElementTracker--Element--Border": status === INERT
+                    })}>
+                    <img
+                        className={classNames("ElementTracker--Element", className)}
+                        src={iconForElement(e)}
+                        onClick={() => setElementStatus(e, nextStatus)}
+                        alt={`${e} - ${status}`}
+                    />
+                </div>)
+            })}
+        </div>
+        */}
+        {/*}
+        <Elements
+            className="ElementTracker--Column"
+            elements={elements}
+            status={INERT}
+            onClick={(e, status) => setElementStatus(e, status)}
+        />
+        <Elements
+            className="ElementTracker--Column"
+            elements={elements}
+            status={WANING}
+            onClick={(e, status) => setElementStatus(e, status)}
+        />
+        <Elements
+            className="ElementTracker--Column"
+            elements={elements}
+            status={STRONG}
+            onClick={(e, status) => setElementStatus(e, status)}
+        />
+        */}
+    </div>);
 }
+
+export const ElementTracker = connect(
+    (state, ownProps) => ({
+        elements: state.elements,
+    }),
+    (dispatch) => ({
+        setElementStatus: (element, status) => dispatch(setStatusAction(element, status)),
+    }),
+)(ElementTrackerComponent);

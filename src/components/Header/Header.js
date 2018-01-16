@@ -2,8 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 
 import {ElementTracker} from "../ElementTracker/ElementTracker"
-import {TurnTracker} from "./TurnTracker"
-import {END_TURN} from "../../reducers";
+import {endTurnAction} from "../../reducers/turn";
 
 import "./Header.css";
 
@@ -22,14 +21,14 @@ import "./Header.css";
 
     render() {
         return (<div>
-            <div className="Game--Header">
-                <div className="Game--Header--Content">
+            <div className="Header">
+                <div className="Header--Content">
                     <ElementTracker />
-                    <TurnTracker turn={this.state.turn} />
-                    <button className="Game--Header--EndTurn" onClick={() => this.endTurn()}>End Turn</button>
+                    <div className="Header--TurnTracker">Turn {this.state.turn}</div>
+                    <button className="Header--EndTurn" onClick={() => this.endTurn()}>End Turn</button>
                 </div>
             </div>
-            <div className="Game--Header--HeightOffset"></div>
+            <div className="Header--HeightOffset"></div>
         </div>);
     }
 }
@@ -37,6 +36,6 @@ import "./Header.css";
 export const Header = connect(
     () => ({}),
     (dispatch) => ({
-        endTurn: () => dispatch({type: END_TURN}),
+        endTurn: () => dispatch(endTurnAction()),
     }),
 )(HeaderComponent);

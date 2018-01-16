@@ -16,6 +16,10 @@ export const FIRE = "fire";
 export const ICE = "ice";
 export const LIGHT = "light";
 
+export const INERT = "inert";
+export const WANING = "waning";
+export const STRONG = "strong";
+
 const elementIcons = {
     [FIRE]: fireIcon,
     [ICE]: iceIcon,
