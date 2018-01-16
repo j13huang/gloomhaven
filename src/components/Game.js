@@ -1,20 +1,25 @@
 import React from 'react';
+import {connect} from "react-redux";
 
 import {Header} from "./Header/Header"
 import {Deck as AttackModifierDeck} from "./AttackModifiers/Deck"
 import {Monsters} from "./Monsters/Monsters"
-
 import {CLASSES} from "../lib/classes";
+import {
+    addDeckAction,
+    resetPlayersAction,
+    selectors as attackModifierCardsSelectors,
+} from "../reducers/attackModifierCards";
+
 import "./Game.css";
 
-export class Game extends React.Component {
+class GameComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             playerNameInput: "",
             selectableClasses: CLASSES,
             selectedClass: "",
-            players: [],
         };
     }
 
@@ -25,7 +30,8 @@ export class Game extends React.Component {
     }
 
     canAddPlayer() {
-        return this.state.selectedClass && this.state.players.length < 4 && this.state.playerNameInput !== "";
+        // 4 + monsters players
+        return this.state.selectedClass && this.props.players.length < 5 && this.state.playerNameInput !== "";
     }
 
     addPlayer(name, selectedClass) {
@@ -36,15 +42,15 @@ export class Game extends React.Component {
             playerNameInput: "",
             selectedClass: "",
             selectableClasses: this.state.selectableClasses.filter((c) => c !== selectedClass),
-            players: this.state.players.concat({name, class: selectedClass}),
         });
+        this.props.addPlayer(name, selectedClass);
     }
 
     resetPlayers() {
         this.setState({
             selectableClasses: CLASSES,
-            players: [],
         });
+        this.props.resetPlayers();
     }
 
     render() {
@@ -53,6 +59,8 @@ export class Game extends React.Component {
                 <Header />
                 <div className="Game--Section">
                     <h3>Attack Modifier Cards</h3>
+                    <div>Total Curse cards: {this.props.totalCurses}</div>
+                    <div>Total Blessing cards: {this.props.totalBlessings}</div>
                     <div className="Game--Players">
                         <input
                             value={this.state.playerNameInput}
@@ -74,20 +82,30 @@ export class Game extends React.Component {
                         <button onClick={() => this.resetPlayers()}>Reset</button>
                     </div>
                     <div className="Game--AttackModifierDecks">
-                        {[{class: "", name: "Monsters"}].concat(this.state.players).map((p, i) => {
-                            return <AttackModifierDeck
-                                class={p.class}
-                                name={p.name}
-                                key={i}
-                            />
+                        {this.props.players.map((name, i) => {
+                            return <AttackModifierDeck key={i} name={name} />
                         })}
                     </div>
                 </div>
                 <div className="Game--Section">
                     <h3>Monsters</h3>
-                    <Monsters numPlayers={this.state.players.length}/>
+                    <Monsters numPlayers={this.props.players.length}/>
                 </div>
             </div>
         );
     }
 }
+
+export const Game = connect(
+    (state, ownProps) => {
+        return {
+            players: Object.keys(state.attackModifierCards),
+            totalCurses: attackModifierCardsSelectors.totalCurses(state.attackModifierCards),
+            totalBlessings: attackModifierCardsSelectors.totalBlessings(state.attackModifierCards),
+        };
+    },
+    (dispatch, ownProps) => ({
+        addPlayer: (name, characterClass) => dispatch(addDeckAction(name, characterClass)),
+        resetPlayers: (card) => dispatch(resetPlayersAction()),
+    }),
+)(GameComponent);
