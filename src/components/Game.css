@@ -4,8 +4,12 @@
     border: 1px solid black;
 }
 
+.Game--DuplicatePlayerWarning {
+    color: red;
+    font-size: small;
+}
+
 .Game--Players {
-    margin-bottom: 8px;
 }
 
 .Game--AttackModifierDecks {

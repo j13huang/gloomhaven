@@ -16,12 +16,11 @@ export const reducer = (state = defaultState, action) => {
         }
         case END_TURN:
         {
-            const newState = {};
-            Object.keys(state).forEach((e) => {
+            return Object.keys(state).reduce((acc, e) => {
                 const status = state[e];
-                newState[e] = {[STRONG]: WANING, [WANING]: INERT, [INERT]: INERT}[status];
-            });
-            return newState;
+                acc[e] = {[STRONG]: WANING, [WANING]: INERT, [INERT]: INERT}[status];
+                return acc;
+            }, {});
         }
         default: return state
     }

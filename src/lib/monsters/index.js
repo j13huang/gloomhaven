@@ -5226,7 +5226,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.IMMOBILIZE, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 10 * numPlayers,
+            maxHP: 10 * numPlayers,
             move: 3,
             attack: 3,
             specialOne: ["Move to next door and reveal room"],
@@ -5234,7 +5234,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.IMMOBILIZE, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 12 * numPlayers,
+            maxHP: 12 * numPlayers,
             move: 4,
             attack: 3,
             specialOne: ["Move to next door and reveal room"],
@@ -5242,7 +5242,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.IMMOBILIZE, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 13 * numPlayers,
+            maxHP: 13 * numPlayers,
             move: 4,
             attack: 4,
             specialOne: ["Move to next door and reveal room"],
@@ -5250,7 +5250,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.IMMOBILIZE, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 15 * numPlayers,
+            maxHP: 15 * numPlayers,
             move: 4,
             attack: 4,
             specialOne: ["Move to next door and reveal room"],
@@ -5258,7 +5258,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.IMMOBILIZE, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 16 * numPlayers,
+            maxHP: 16 * numPlayers,
             move: 5,
             attack: 5,
             specialOne: ["Move to next door and reveal room"],
@@ -5266,7 +5266,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.IMMOBILIZE, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 19 * numPlayers,
+            maxHP: 19 * numPlayers,
             move: 5,
             attack: 5,
             specialOne: ["Move to next door and reveal room"],
@@ -5274,7 +5274,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.IMMOBILIZE, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 23 * numPlayers,
+            maxHP: 23 * numPlayers,
             move: 5,
             attack: 5,
             specialOne: ["Move to next door and reveal room"],
@@ -5284,7 +5284,7 @@ export const BOSS_STATS = {
     ],
     "The Betrayer": [
         (numPlayers) => ({
-            health: 10 * numPlayers,
+            maxHP: 10 * numPlayers,
             move: 3,
             attack: 4,
             range: 3,
@@ -5293,7 +5293,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 12 * numPlayers,
+            maxHP: 12 * numPlayers,
             move: 3,
             attack: 5,
             range: 3,
@@ -5302,7 +5302,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 14 * numPlayers,
+            maxHP: 14 * numPlayers,
             move: 3,
             attack: 6,
             range: 4,
@@ -5311,7 +5311,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 16 * numPlayers,
+            maxHP: 16 * numPlayers,
             move: 4,
             attack: 7,
             range: 4,
@@ -5320,7 +5320,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 18 * numPlayers,
+            maxHP: 18 * numPlayers,
             move: 4,
             attack: 8,
             range: 4,
@@ -5329,7 +5329,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 20 * numPlayers,
+            maxHP: 20 * numPlayers,
             move: 5,
             attack: 8,
             range: 5,
@@ -5338,7 +5338,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 23 * numPlayers,
+            maxHP: 23 * numPlayers,
             move: 5,
             attack: 9,
             range: 5,
@@ -5347,7 +5347,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 27 * numPlayers,
+            maxHP: 27 * numPlayers,
             move: 5,
             attack: 9,
             range: 5,
@@ -5358,7 +5358,7 @@ export const BOSS_STATS = {
     ],
     "Captain of the Guard": [
         (numPlayers) => ({
-            health: 7 * numPlayers,
+            maxHP: 7 * numPlayers,
             move: 2,
             attack: 3,
             specialOne: ["heal 2, affect self and all allies"],
@@ -5366,7 +5366,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 9 * numPlayers,
+            maxHP: 9 * numPlayers,
             move: 2,
             attack: 3,
             specialOne: ["heal 2, affect self and all allies"],
@@ -5374,7 +5374,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 11 * numPlayers,
+            maxHP: 11 * numPlayers,
             move: 2,
             attack: 4,
             specialOne: ["heal 2, affect self and all allies"],
@@ -5382,7 +5382,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 14 * numPlayers,
+            maxHP: 14 * numPlayers,
             move: 3,
             attack: 4,
             specialOne: ["heal 2, affect self and all allies"],
@@ -5390,7 +5390,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 16 * numPlayers,
+            maxHP: 16 * numPlayers,
             move: 3,
             attack: 5,
             specialOne: ["heal 2, affect self and all allies"],
@@ -5398,7 +5398,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 20 * numPlayers,
+            maxHP: 20 * numPlayers,
             move: 3,
             attack: 5,
             specialOne: ["heal 2, affect self and all allies"],
@@ -5406,7 +5406,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.DISARM, statusEffects.WOUND, statusEffects.MUDDLE, statusEffects.STUN],
         }),
         (numPlayers) => ({
-            health: 21 * numPlayers,
+            maxHP: 21 * numPlayers,
             move: 4,
             attack: 6,
             specialOne: ["heal 2, affect self and all allies"],
@@ -5414,7 +5414,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 25 * numPlayers,
+            maxHP: 25 * numPlayers,
             move: 4,
             attack: 6,
             specialOne: ["heal 2, affect self and all allies"],
@@ -5424,7 +5424,7 @@ export const BOSS_STATS = {
     ],
     "The Colorless": [
         (numPlayers) => ({
-            health: 9 * numPlayers,
+            maxHP: 9 * numPlayers,
             move: 3,
             attack: 2,
             specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, "invisible, self"],
@@ -5432,7 +5432,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 10 * numPlayers,
+            maxHP: 10 * numPlayers,
             move: 3,
             attack: 3,
             specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, "invisible, self"],
@@ -5440,7 +5440,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 11 * numPlayers,
+            maxHP: 11 * numPlayers,
             move: 4,
             attack: 3,
             specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, "invisible, self"],
@@ -5448,7 +5448,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 12 * numPlayers,
+            maxHP: 12 * numPlayers,
             move: 4,
             attack: 4,
             specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, "invisible, self"],
@@ -5456,7 +5456,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 14 * numPlayers,
+            maxHP: 14 * numPlayers,
             move: 4,
             attack: 4,
             specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, "invisible, self"],
@@ -5464,7 +5464,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 15 * numPlayers,
+            maxHP: 15 * numPlayers,
             move: 4,
             attack: 5,
             specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, "invisible, self"],
@@ -5472,7 +5472,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 17 * numPlayers,
+            maxHP: 17 * numPlayers,
             move: 4,
             attack: 6,
             specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, "invisible, self"],
@@ -5480,7 +5480,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 19 * numPlayers,
+            maxHP: 19 * numPlayers,
             move: 5,
             attack: 7,
             specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, "invisible, self"],
@@ -5490,7 +5490,7 @@ export const BOSS_STATS = {
     ],
     "Dark Rider": [
         (numPlayers) => ({
-            health: 9 * numPlayers,
+            maxHP: 9 * numPlayers,
             move: 2,
             attack: "3+X",
             specialOne: ["move +2, attack +0"],
@@ -5499,7 +5499,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN],
         }),
         (numPlayers) => ({
-            health: 10 * numPlayers,
+            maxHP: 10 * numPlayers,
             move: 3,
             attack: "3+X",
             specialOne: ["move +2, attack +0"],
@@ -5508,7 +5508,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN],
         }),
         (numPlayers) => ({
-            health: 12 * numPlayers,
+            maxHP: 12 * numPlayers,
             move: 3,
             attack: "3+X",
             specialOne: ["move +2, attack +0"],
@@ -5517,7 +5517,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN],
         }),
         (numPlayers) => ({
-            health: 13 * numPlayers,
+            maxHP: 13 * numPlayers,
             move: 3,
             attack: "4+X",
             specialOne: ["move +2, attack +0"],
@@ -5526,7 +5526,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN],
         }),
         (numPlayers) => ({
-            health: 15 * numPlayers,
+            maxHP: 15 * numPlayers,
             move: 3,
             attack: "4+X",
             specialOne: ["move +2, attack +0"],
@@ -5535,7 +5535,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN],
         }),
         (numPlayers) => ({
-            health: 16 * numPlayers,
+            maxHP: 16 * numPlayers,
             move: 3,
             attack: "5+X",
             specialOne: ["move +2, attack +0"],
@@ -5544,7 +5544,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN],
         }),
         (numPlayers) => ({
-            health: 16 * numPlayers,
+            maxHP: 16 * numPlayers,
             move: 4,
             attack: "5+X",
             specialOne: ["move +2, attack +0"],
@@ -5553,7 +5553,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN],
         }),
         (numPlayers) => ({
-            health: 18 * numPlayers,
+            maxHP: 18 * numPlayers,
             move: 4,
             attack: "6+X",
             specialOne: ["move +2, attack +0"],
@@ -5564,56 +5564,56 @@ export const BOSS_STATS = {
     ],
     "Elder Drake": [
         (numPlayers) => ({
-            health: 11 * numPlayers,
+            maxHP: 11 * numPlayers,
             attack: 3,
             specialOne: [{ action: "attack +0", image: elderDrakeSpecial1Area }],
             specialTwo: ["Move and summon 2 Zephyrs"],
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 12 * numPlayers,
+            maxHP: 12 * numPlayers,
             attack: 4,
             specialOne: [{ action: "attack +0", image: elderDrakeSpecial1Area }],
             specialTwo: ["Move and summon 2 Zephyrs"],
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 15 * numPlayers,
+            maxHP: 15 * numPlayers,
             attack: 4,
             specialOne: [{ action: "attack +0", image: elderDrakeSpecial1Area }],
             specialTwo: ["Move and summon 2 Zephyrs"],
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 16 * numPlayers,
+            maxHP: 16 * numPlayers,
             attack: 5,
             specialOne: [{ action: "attack +0", image: elderDrakeSpecial1Area }],
             specialTwo: ["Move and summon 2 Zephyrs"],
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 20 * numPlayers,
+            maxHP: 20 * numPlayers,
             attack: 5,
             specialOne: [{ action: "attack +0", image: elderDrakeSpecial1Area }],
             specialTwo: ["Move and summon 2 Zephyrs"],
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 22 * numPlayers,
+            maxHP: 22 * numPlayers,
             attack: 6,
             specialOne: [{ action: "attack +0", image: elderDrakeSpecial1Area }],
             specialTwo: ["Move and summon 2 Zephyrs"],
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 27 * numPlayers,
+            maxHP: 27 * numPlayers,
             attack: 6,
             specialOne: [{ action: "attack +0", image: elderDrakeSpecial1Area }],
             specialTwo: ["Move and summon 2 Zephyrs"],
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 29 * numPlayers,
+            maxHP: 29 * numPlayers,
             attack: 7,
             specialOne: [{ action: "attack +0", image: elderDrakeSpecial1Area }],
             specialTwo: ["Move and summon 2 Zephyrs"],
@@ -5622,7 +5622,7 @@ export const BOSS_STATS = {
     ],
     "The Gloom": [
         (numPlayers) => ({
-            health: 20 * numPlayers,
+            maxHP: 20 * numPlayers,
             move: 2,
             attack: 5,
             specialOne: ["move +9", "attack +9"],
@@ -5630,7 +5630,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 25 * numPlayers,
+            maxHP: 25 * numPlayers,
             move: 2,
             attack: 5,
             specialOne: ["move +9", "attack +9"],
@@ -5638,7 +5638,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 29 * numPlayers,
+            maxHP: 29 * numPlayers,
             move: 2,
             attack: 6,
             specialOne: ["move +9", "attack +9"],
@@ -5646,7 +5646,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 35 * numPlayers,
+            maxHP: 35 * numPlayers,
             move: 2,
             attack: 6,
             specialOne: ["move +9", "attack +9"],
@@ -5654,7 +5654,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 39 * numPlayers,
+            maxHP: 39 * numPlayers,
             move: 3,
             attack: 7,
             specialOne: ["move +9", "attack +9"],
@@ -5662,7 +5662,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 46 * numPlayers,
+            maxHP: 46 * numPlayers,
             move: 3,
             attack: 7,
             specialOne: ["move +9", "attack +9"],
@@ -5670,7 +5670,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 50 * numPlayers,
+            maxHP: 50 * numPlayers,
             move: 3,
             attack: 8,
             specialOne: ["move +9", "attack +9"],
@@ -5678,7 +5678,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 56 * numPlayers,
+            maxHP: 56 * numPlayers,
             move: 3,
             attack: 9,
             specialOne: ["move +9", "attack +9"],
@@ -5688,7 +5688,7 @@ export const BOSS_STATS = {
     ],
     "Inox Bodyguard": [
         (numPlayers) => ({
-            health: 6 * numPlayers,
+            maxHP: 6 * numPlayers,
             move: 2,
             attack: numPlayers,
             specialOne: ["move -1", { action: "attack -1", image: inoxBodyguardSpecial1Area }],
@@ -5696,7 +5696,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 7 * numPlayers,
+            maxHP: 7 * numPlayers,
             move: 2,
             attack: 1 + numPlayers,
             specialOne: ["move -1", { action: "attack -1", image: inoxBodyguardSpecial1Area }],
@@ -5704,7 +5704,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 9 * numPlayers,
+            maxHP: 9 * numPlayers,
             move: 2,
             attack: 1 + numPlayers,
             specialOne: ["move -1", { action: "attack -1", image: inoxBodyguardSpecial1Area }],
@@ -5712,7 +5712,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 10 * numPlayers,
+            maxHP: 10 * numPlayers,
             move: 3,
             attack: 2 + numPlayers,
             specialOne: ["move -1", { action: "attack -1", image: inoxBodyguardSpecial1Area }],
@@ -5720,7 +5720,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 11 * numPlayers,
+            maxHP: 11 * numPlayers,
             move: 3,
             attack: 2 + numPlayers,
             specialOne: ["move -1", { action: "attack -1", image: inoxBodyguardSpecial1Area }],
@@ -5728,7 +5728,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 13 * numPlayers,
+            maxHP: 13 * numPlayers,
             move: 3,
             attack: 3 + numPlayers,
             specialOne: ["move -1", { action: "attack -1", image: inoxBodyguardSpecial1Area }],
@@ -5736,7 +5736,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 15 * numPlayers,
+            maxHP: 15 * numPlayers,
             move: 4,
             attack: 3 + numPlayers,
             specialOne: ["move -1", { action: "attack -1", image: inoxBodyguardSpecial1Area }],
@@ -5744,7 +5744,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 17 * numPlayers,
+            maxHP: 17 * numPlayers,
             move: 4,
             attack: 4 + numPlayers,
             specialOne: ["move -1", { action: "attack -1", image: inoxBodyguardSpecial1Area }],
@@ -5754,7 +5754,7 @@ export const BOSS_STATS = {
     ],
     "Jekserah": [
         (numPlayers) => ({
-            health: 6 * numPlayers,
+            maxHP: 6 * numPlayers,
             move: 2,
             attack: 2,
             specialOne: ["Summon Living Bones", "attack -1, Target all adjacent enemies"],
@@ -5762,7 +5762,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 7 * numPlayers,
+            maxHP: 7 * numPlayers,
             move: 2,
             attack: 3,
             specialOne: ["Summon Living Bones", "attack -1, Target all adjacent enemies"],
@@ -5770,7 +5770,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 9 * numPlayers,
+            maxHP: 9 * numPlayers,
             move: 3,
             attack: 3,
             specialOne: ["Summon Living Bones", "attack -1, Target all adjacent enemies"],
@@ -5778,7 +5778,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 12 * numPlayers,
+            maxHP: 12 * numPlayers,
             move: 4,
             attack: 4,
             specialOne: ["Summon Living Bones", "attack -1, Target all adjacent enemies"],
@@ -5786,7 +5786,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 13 * numPlayers,
+            maxHP: 13 * numPlayers,
             move: 4,
             attack: 5,
             specialOne: ["Summon Living Bones", "attack -1, Target all adjacent enemies"],
@@ -5794,7 +5794,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 15 * numPlayers,
+            maxHP: 15 * numPlayers,
             move: 5,
             attack: 5,
             specialOne: ["Summon Living Bones", "attack -1, Target all adjacent enemies"],
@@ -5802,7 +5802,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 18 * numPlayers,
+            maxHP: 18 * numPlayers,
             move: 5,
             attack: 5,
             specialOne: ["Summon Living Bones", "attack -1, Target all adjacent enemies"],
@@ -5810,7 +5810,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.WOUND, statusEffects.DISARM, statusEffects.STUN, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 22 * numPlayers,
+            maxHP: 22 * numPlayers,
             move: 5,
             attack: 5,
             specialOne: ["Summon Living Bones", "attack -1, Target all adjacent enemies"],
@@ -5820,7 +5820,7 @@ export const BOSS_STATS = {
     ],
     "Merciless Overseer": [
         (numPlayers) => ({
-            health: 6 * numPlayers,
+            maxHP: 6 * numPlayers,
             move: 2,
             attack: "V",
             specialOne: ["All Scouts act again"],
@@ -5829,7 +5829,7 @@ export const BOSS_STATS = {
             extra: ["V = Number of Scouts present"],
         }),
         (numPlayers) => ({
-            health: 8 * numPlayers,
+            maxHP: 8 * numPlayers,
             move: 2,
             attack: "V",
             specialOne: ["All Scouts act again"],
@@ -5838,7 +5838,7 @@ export const BOSS_STATS = {
             extra: ["V = Number of Scouts present"],
         }),
         (numPlayers) => ({
-            health: 9 * numPlayers,
+            maxHP: 9 * numPlayers,
             move: 3,
             attack: "V",
             specialOne: ["All Scouts act again"],
@@ -5847,7 +5847,7 @@ export const BOSS_STATS = {
             extra: ["V = Number of Scouts present"],
         }),
         (numPlayers) => ({
-            health: 11 * numPlayers,
+            maxHP: 11 * numPlayers,
             move: 3,
             attack: "V",
             specialOne: ["All Scouts act again"],
@@ -5856,7 +5856,7 @@ export const BOSS_STATS = {
             extra: ["V = Number of Scouts present"],
         }),
         (numPlayers) => ({
-            health: 12 * numPlayers,
+            maxHP: 12 * numPlayers,
             move: 4,
             attack: "V",
             specialOne: ["All Scouts act again"],
@@ -5865,7 +5865,7 @@ export const BOSS_STATS = {
             extra: ["V = Number of Scouts present"],
         }),
         (numPlayers) => ({
-            health: 14 * numPlayers,
+            maxHP: 14 * numPlayers,
             move: 4,
             attack: "V",
             specialOne: ["All Scouts act again"],
@@ -5874,7 +5874,7 @@ export const BOSS_STATS = {
             extra: ["V = Number of Scouts present"],
         }),
         (numPlayers) => ({
-            health: 16 * numPlayers,
+            maxHP: 16 * numPlayers,
             move: 4,
             attack: "V",
             specialOne: ["All Scouts act again"],
@@ -5883,7 +5883,7 @@ export const BOSS_STATS = {
             extra: ["V = Number of Scouts present"],
         }),
         (numPlayers) => ({
-            health: 19 * numPlayers,
+            maxHP: 19 * numPlayers,
             move: 4,
             attack: "V",
             specialOne: ["All Scouts act again"],
@@ -5894,7 +5894,7 @@ export const BOSS_STATS = {
     ],
     "Prime Demon": [
         (numPlayers) => ({
-            health: 8 * numPlayers,
+            maxHP: 8 * numPlayers,
             move: 3,
             attack: 4,
             specialOne: ["Throne moves", "Summon Demon", "move +2", "attack -1"],
@@ -5902,7 +5902,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 9 * numPlayers,
+            maxHP: 9 * numPlayers,
             move: 4,
             attack: 4,
             specialOne: ["Throne moves", "Summon Demon", "move +2", "attack -1"],
@@ -5910,7 +5910,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 10 * numPlayers,
+            maxHP: 10 * numPlayers,
             move: 4,
             attack: 5,
             specialOne: ["Throne moves", "Summon Demon", "move +2", "attack -1"],
@@ -5918,7 +5918,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 12 * numPlayers,
+            maxHP: 12 * numPlayers,
             move: 4,
             attack: 6,
             specialOne: ["Throne moves", "Summon Demon", "move +2", "attack -1"],
@@ -5926,7 +5926,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 14 * numPlayers,
+            maxHP: 14 * numPlayers,
             move: 5,
             attack: 6,
             specialOne: ["Throne moves", "Summon Demon", "move +2", "attack -1"],
@@ -5934,7 +5934,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 16 * numPlayers,
+            maxHP: 16 * numPlayers,
             move: 5,
             attack: 7,
             specialOne: ["Throne moves", "Summon Demon", "move +2", "attack -1"],
@@ -5942,7 +5942,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 20 * numPlayers,
+            maxHP: 20 * numPlayers,
             move: 5,
             attack: 7,
             specialOne: ["Throne moves", "Summon Demon", "move +2", "attack -1"],
@@ -5950,7 +5950,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.WOUND, statusEffects.IMMOBILIZE, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE],
         }),
         (numPlayers) => ({
-            health: 22 * numPlayers,
+            maxHP: 22 * numPlayers,
             move: 5,
             attack: 8,
             specialOne: ["Throne moves", "Summon Demon", "move +2", "attack -1"],
@@ -5960,7 +5960,7 @@ export const BOSS_STATS = {
     ],
     "The Sightless Eye": [
         (numPlayers) => ({
-            health: 7 * numPlayers,
+            maxHP: 7 * numPlayers,
             attack: 5,
             range: 3,
             specialOne: ["Summon Deep Terror", { action: "attack -3", image: sightlessEyeSpecial1Area }],
@@ -5968,7 +5968,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 8 * numPlayers,
+            maxHP: 8 * numPlayers,
             attack: 6,
             range: 3,
             specialOne: ["Summon Deep Terror", { action: "attack -3", image: sightlessEyeSpecial1Area }],
@@ -5976,7 +5976,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 10 * numPlayers,
+            maxHP: 10 * numPlayers,
             attack: 6,
             range: 3,
             specialOne: ["Summon Deep Terror", { action: "attack -3", image: sightlessEyeSpecial1Area }],
@@ -5984,7 +5984,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 11 * numPlayers,
+            maxHP: 11 * numPlayers,
             attack: 7,
             range: 3,
             specialOne: ["Summon Deep Terror", { action: "attack -3", image: sightlessEyeSpecial1Area }],
@@ -5992,7 +5992,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 14 * numPlayers,
+            maxHP: 14 * numPlayers,
             attack: 7,
             range: 3,
             specialOne: ["Summon Deep Terror", { action: "attack -3", image: sightlessEyeSpecial1Area }],
@@ -6000,7 +6000,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 15 * numPlayers,
+            maxHP: 15 * numPlayers,
             attack: 8,
             range: 3,
             specialOne: ["Summon Deep Terror", { action: "attack -3", image: sightlessEyeSpecial1Area }],
@@ -6008,7 +6008,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 18 * numPlayers,
+            maxHP: 18 * numPlayers,
             attack: 8,
             range: 3,
             specialOne: ["Summon Deep Terror", { action: "attack -3", image: sightlessEyeSpecial1Area }],
@@ -6016,7 +6016,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE, statusEffects.PUSH, statusEffects.PULL],
         }),
         (numPlayers) => ({
-            health: 20 * numPlayers,
+            maxHP: 20 * numPlayers,
             attack: 9,
             range: 3,
             specialOne: ["Summon Deep Terror", { action: "attack -3", image: sightlessEyeSpecial1Area }],
@@ -6026,7 +6026,7 @@ export const BOSS_STATS = {
     ],
     "Winged Horror": [
         (numPlayers) => ({
-            health: 6 * numPlayers,
+            maxHP: 6 * numPlayers,
             move: 3,
             attack: 3,
             specialOne: ["attack -1, Target all adjacent enemies", "attack +0, range 3", "Hatch eggs"],
@@ -6034,7 +6034,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 7 * numPlayers,
+            maxHP: 7 * numPlayers,
             move: 4,
             attack: 3,
             specialOne: ["attack -1, Target all adjacent enemies", "attack +0, range 3", "Hatch eggs"],
@@ -6042,7 +6042,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 8 * numPlayers,
+            maxHP: 8 * numPlayers,
             move: 4,
             attack: 4,
             specialOne: ["attack -1, Target all adjacent enemies", "attack +0, range 3", "Hatch eggs"],
@@ -6050,7 +6050,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 10 * numPlayers,
+            maxHP: 10 * numPlayers,
             move: 4,
             attack: 4,
             specialOne: ["attack -1, Target all adjacent enemies", "attack +0, range 3", "Hatch eggs"],
@@ -6058,7 +6058,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 12 * numPlayers,
+            maxHP: 12 * numPlayers,
             move: 5,
             attack: 4,
             specialOne: ["attack -1, Target all adjacent enemies", "attack +0, range 3", "Hatch eggs"],
@@ -6066,7 +6066,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 14 * numPlayers,
+            maxHP: 14 * numPlayers,
             move: 5,
             attack: 5,
             specialOne: ["attack -1, Target all adjacent enemies", "attack +0, range 3", "Hatch eggs"],
@@ -6074,7 +6074,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 17 * numPlayers,
+            maxHP: 17 * numPlayers,
             move: 5,
             attack: 5,
             specialOne: ["attack -1, Target all adjacent enemies", "attack +0, range 3", "Hatch eggs"],
@@ -6082,7 +6082,7 @@ export const BOSS_STATS = {
             immunities: [statusEffects.POISON, statusEffects.DISARM, statusEffects.STUN, statusEffects.MUDDLE, statusEffects.CURSE],
         }),
         (numPlayers) => ({
-            health: 20 * numPlayers,
+            maxHP: 20 * numPlayers,
             move: 5,
             attack: 5,
             specialOne: ["attack -1, Target all adjacent enemies", "attack +0, range 3", "Hatch eggs"],

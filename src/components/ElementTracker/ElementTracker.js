@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import * as classNames from "classnames";
 
 import {ELEMENTS_LIST, INERT, WANING, STRONG, iconForElement} from "../../lib/elements";
-import {setStatusAction} from "../../reducers/elements";
+import {setStatusAction} from "../../store/elements";
 
 import "./ElementTracker.css";
 

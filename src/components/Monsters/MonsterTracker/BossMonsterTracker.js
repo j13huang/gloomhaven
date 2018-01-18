@@ -1,13 +1,15 @@
 import React from "react";
+import {connect} from "react-redux";
 
 import {BOSS_LIST, BOSS_STATS} from "../../../lib/monsters";
 import {Monster} from "./Monster";
 import {MonsterStats} from "./MonsterStats";
 import {iconForStatusEffect} from "../../../lib/statusEffects";
+import {selectors as attackModifierCardsSelectors} from "../../../store/attackModifierCards";
 
 import "./MonsterTracker.css";
 
-export class BossMonsterTracker extends React.Component {
+export class BossMonsterTrackerComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -42,7 +44,19 @@ export class BossMonsterTracker extends React.Component {
                     </div>
                 </div>
             </div>
-            <Monster maxHP={stats.maxHP} immunities={stats.immunities} />
+            {/*set unique key so that we remount on player count change*/}
+            <div className="MonsterTracker--Monster">
+                <Monster key={this.props.numPlayers} maxHP={stats.maxHP} immunities={stats.immunities} />
+                {(stats.maxHP === 0) && <div className="MonsterTracker--Boss--Cover">Add players</div>}
+            </div>
         </div>);
     }
 }
+
+export const BossMonsterTracker = connect(
+    (state) => {
+        return {
+            numPlayers: attackModifierCardsSelectors.numPlayers(state),
+        };
+    },
+)(BossMonsterTrackerComponent);

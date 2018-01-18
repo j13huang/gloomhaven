@@ -21,7 +21,7 @@
 
 .Monster--HP {
     height: 1rem;
-    width: 2rem;
+    width: 1rem;
     margin-right: 0.25rem;
     margin-bottom: 0.25rem;
     border: 1px solid red;
@@ -30,6 +30,7 @@
     justify-content: center;
     align-items: center;
     user-select: none;
+    font-size: x-small;
 }
 
 .Monster--HP--Active {

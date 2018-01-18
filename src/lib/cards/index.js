@@ -68,17 +68,3 @@ export const BLESS = {
 export function shuffle(cards) {
     return cards.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
 }
-
-export function newDeck(cards) {
-    return {
-        cards: shuffle(cards),
-        currentIndex: -1,
-        playedCards: [],
-    };
-}
-
-export function clearPlayedCards(playedCards) {
-    const firstShuffleIndex = playedCards.findIndex((c, i) => (i > 0) && (c.endAction === SHUFFLE));
-    // don't clear from the most recent card if the card is a reshuffle
-    return firstShuffleIndex === -1 ? playedCards : playedCards.filter((c, i) => i < firstShuffleIndex);
-}

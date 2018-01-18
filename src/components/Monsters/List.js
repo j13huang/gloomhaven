@@ -1,8 +1,12 @@
 import React from 'react';
+import {connect} from "react-redux";
+
+import {MONSTER_LIST} from "../../lib/monsters";
+import { addMonstersAction } from "../../store/monsters";
 
 import "./List.css";
 
-export class List extends React.Component {
+class ListComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -19,16 +23,11 @@ export class List extends React.Component {
                 selectedMonsters.push(o.value)
             }
         }
-        this.setState({selectedMonsters,})
-    }
-
-    addMonsters() {
-        this.props.onAddMonsters(this.state.selectedMonsters);
-        this.setState({selectedMonsters: []})
+        this.setState({selectedMonsters})
     }
 
     render() {
-        const searchResults = this.props.monsterList.filter((name) => name.toLowerCase().includes(this.state.search));
+        const searchResults = MONSTER_LIST.filter((name) => name.toLowerCase().includes(this.state.search));
         return (<div className="Monsters--List">
             <input
                 value={this.state.search}
@@ -42,8 +41,16 @@ export class List extends React.Component {
                     disabled={this.props.monstersInPlay.includes(name)}
                 >{name}</option>)}
             </select>
-            <button onClick={() => this.addMonsters()}>Add Monster(s)</button>
-            <button onClick={() => this.props.onReset()}>Reset</button>
+            <button onClick={() => this.props.addMonsters(this.state.selectedMonsters)}>Add Monster(s)</button>
         </div>);
     }
 }
+
+export const List = connect(
+    () => ({}),
+    (dispatch) => {
+        return {
+            addMonsters: (monsterNames) => {dispatch(addMonstersAction(monsterNames))},
+        };
+    },
+)(ListComponent);

@@ -11,7 +11,7 @@ import {
     addCardAction,
     togglePerkAction,
     selectors as attackModifierCardsSelectors,
-} from "../../reducers/attackModifierCards";
+} from "../../store/attackModifierCards";
 
 import "./Deck.css";
 
@@ -91,8 +91,8 @@ class DeckComponent extends React.Component {
 export const Deck = connect(
     (state, ownProps) => ({
         ...state.attackModifierCards[ownProps.name],
-        totalCurses: attackModifierCardsSelectors.totalCurses(state.attackModifierCards),
-        totalBlessings: attackModifierCardsSelectors.totalBlessings(state.attackModifierCards),
+        totalCurses: attackModifierCardsSelectors.totalCurses(state),
+        totalBlessings: attackModifierCardsSelectors.totalBlessings(state),
     }),
     (dispatch, ownProps) => ({
         resetDeck: () => dispatch(resetDeckAction(ownProps.name)),

@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 
 import {ElementTracker} from "../ElementTracker/ElementTracker"
-import {endTurnAction} from "../../reducers/turn";
+import {endTurnAction} from "../../store/turn";
 
 import "./Header.css";
 

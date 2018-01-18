@@ -3,13 +3,14 @@ import {connect} from "react-redux";
 
 import {Header} from "./Header/Header"
 import {Deck as AttackModifierDeck} from "./AttackModifiers/Deck"
-import {Monsters} from "./Monsters/Monsters"
+import {MonsterCards} from "./Monsters/MonsterCards"
+import {MonsterTrackers} from "./Monsters/MonsterTrackers"
 import {CLASSES} from "../lib/classes";
 import {
     addDeckAction,
     resetPlayersAction,
     selectors as attackModifierCardsSelectors,
-} from "../reducers/attackModifierCards";
+} from "../store/attackModifierCards";
 
 import "./Game.css";
 
@@ -20,7 +21,16 @@ class GameComponent extends React.Component {
             playerNameInput: "",
             selectableClasses: CLASSES,
             selectedClass: "",
+            selectedLevel: 1,
+            duplicateNameWarning: false,
         };
+    }
+
+    playerNameInputChange(input) {
+        this.setState({
+            playerNameInput: input,
+            duplicateNameWarning: this.props.players.includes(input),
+        });
     }
 
     selectClass(selectedClass) {
@@ -29,9 +39,18 @@ class GameComponent extends React.Component {
         });
     }
 
+    selectLevel(level) {
+        this.setState({
+            selectedLevel: level,
+        });
+    }
+
     canAddPlayer() {
-        // 4 + monsters players
-        return this.state.selectedClass && this.props.players.length < 5 && this.state.playerNameInput !== "";
+        // monsters + 4 players
+        return this.state.selectedClass &&
+            this.props.players.length < 5 &&
+            this.state.playerNameInput !== "" &&
+            !this.state.duplicateNameWarning;
     }
 
     addPlayer(name, selectedClass) {
@@ -64,7 +83,7 @@ class GameComponent extends React.Component {
                     <div className="Game--Players">
                         <input
                             value={this.state.playerNameInput}
-                            onChange={(e) => this.setState({playerNameInput: e.target.value})}
+                            onChange={(e) => this.playerNameInputChange(e.target.value)}
                             onKeyPress={(e) => {
                                 if (e.key === 'Enter') {
                                     this.addPlayer(this.state.playerNameInput, this.state.selectedClass);
@@ -81,6 +100,8 @@ class GameComponent extends React.Component {
                         >Add Player</button>
                         <button onClick={() => this.resetPlayers()}>Reset</button>
                     </div>
+                    {this.state.duplicateNameWarning &&
+                        <div className="Game--DuplicatePlayerWarning">A player with that name already exists</div>}
                     <div className="Game--AttackModifierDecks">
                         {this.props.players.map((name, i) => {
                             return <AttackModifierDeck key={i} name={name} />
@@ -88,8 +109,10 @@ class GameComponent extends React.Component {
                     </div>
                 </div>
                 <div className="Game--Section">
-                    <h3>Monsters</h3>
-                    <Monsters numPlayers={this.props.players.length}/>
+                    <MonsterCards selectedLevel={this.state.selectedLevel} onSelectLevel={(level) => this.selectLevel(level)} />
+                </div>
+                <div className="Game--Section">
+                    <MonsterTrackers level={this.state.selectedLevel} />
                 </div>
             </div>
         );
@@ -100,8 +123,8 @@ export const Game = connect(
     (state, ownProps) => {
         return {
             players: Object.keys(state.attackModifierCards),
-            totalCurses: attackModifierCardsSelectors.totalCurses(state.attackModifierCards),
-            totalBlessings: attackModifierCardsSelectors.totalBlessings(state.attackModifierCards),
+            totalCurses: attackModifierCardsSelectors.totalCurses(state),
+            totalBlessings: attackModifierCardsSelectors.totalBlessings(state),
         };
     },
     (dispatch, ownProps) => ({

@@ -1,7 +1,17 @@
-import {newDeck, shuffle} from "../lib/cards";
+import {shuffle} from "../lib/cards";
 import {newPerks} from "../lib/classes";
 import {END_ACTIONS, BASE_ATTACK_MODIFIER_CARDS, CURSE, BLESS} from "../lib/cards";
 import {END_TURN} from "./turn";
+
+function newDeck(cards) {
+    return {
+        cards: shuffle(cards),
+        currentIndex: -1,
+        playedCards: [],
+        curseCount: 0,
+        blessCount: 0,
+    };
+}
 
 function newAttackModifierDeck(cards, characterClass) {
     return {
@@ -9,8 +19,6 @@ function newAttackModifierDeck(cards, characterClass) {
         class: characterClass,
         needsShuffle: false,
         perks: newPerks(characterClass) || [],
-        curseCount: 0,
-        blessCount: 0,
     };
 }
 
@@ -23,7 +31,7 @@ function resetDeck(perks) {
             }
         });
     });
-    return {...newDeck(cards), curseCount: 0, blessCount: 0};
+    return newDeck(cards);
 }
 
 function shuffleCards(cards, currentIndex) {
@@ -32,7 +40,7 @@ function shuffleCards(cards, currentIndex) {
     return shuffle(filteredCards);
 }
 
-function revealNextCard({currentIndex, playedCards, cards, needsShuffle, curseCount, blessCount}) {
+function revealNextCard({cards, currentIndex, playedCards, needsShuffle, curseCount, blessCount}) {
     let nextCards = cards;
     let nextIndex = currentIndex + 1;
     if (nextIndex >= cards.length) {
@@ -126,12 +134,11 @@ export const reducer = (state = defaultState, action) => {
         }
         case REVEAL_CARD:
         {
-            const newDeck = revealNextCard(state[action.deckName]);
             return {
                 ...state,
                 [action.deckName]: {
                     ...state[action.deckName],
-                    ...newDeck,
+                    ...revealNextCard(state[action.deckName]),
                 },
             };
         }
@@ -159,15 +166,14 @@ export const reducer = (state = defaultState, action) => {
         }
         case END_TURN:
         {
-            const newState = {};
-            Object.keys(state).forEach((name) => {
+            return Object.keys(state).reduce((acc, name) => {
                 const deck = state[name];
-                newState[name] = {
+                acc[name] = {
                     ...deck,
                     ...(deck.needsShuffle ? shuffleDeck(deck) : {playedCards: []}),
-                };
-            });
-            return newState;
+                }
+                return acc;
+            }, {});
         }
         default: return state
     }
@@ -207,6 +213,8 @@ function totalCards(state, getCardsFunc) {
 }
 
 export const selectors = {
-    totalCurses: (state) => totalCards(state, (deck) => deck.curseCount),
-    totalBlessings: (state) => totalCards(state, (deck) => deck.blessCount),
+    totalCurses: (state) => totalCards(state.attackModifierCards, (deck) => deck.curseCount),
+    totalBlessings: (state) => totalCards(state.attackModifierCards, (deck) => deck.blessCount),
+    // - 1 for monsters deck
+    numPlayers: (state) => Object.keys(state.attackModifierCards).length - 1,
 };
