@@ -3,12 +3,12 @@ import {MONSTERS} from "../lib/monsters";
 import {END_ACTIONS} from "../lib/cards";
 import {END_TURN} from "./turn";
 
-function newDeck(cards, withCard) {
-    const newCards = shuffle(cards);
+function newDeck(cards,initialActive) {
     return {
-        cards: newCards,
-        currentIndex: withCard ? 0 : -1,
-        currentCard: withCard ? newCards[0] : null,
+        cards: shuffle(cards),
+        currentIndex: -1,
+        currentCard: null,
+        active: initialActive,
     };
 }
 
@@ -29,6 +29,10 @@ function revealNextCard({cards, currentIndex, currentCard}) {
     };
 }
 
+function hasActiveCards(monsters) {
+    return Object.keys(monsters).some((m) => monsters[m].currentCard);
+}
+
 const defaultState = {
 };
 
@@ -36,6 +40,7 @@ const RESET_MONSTERS = "monsters/reset";
 const ADD_MONSTERS = "monsters/add";
 const REMOVE_MONSTER = "monsters/remove";
 const REVEAL_CARDS = "monsters/decks/next";
+const SET_ACTIVE = "monsters/decks/setActive";
 
 // monster trackers
 /*
@@ -54,11 +59,11 @@ export const reducer = (state = defaultState, action) => {
         }
         case ADD_MONSTERS:
         {
-            const withCard = Object.keys(state).find((name) => state[name].currentCard !== null);
             return {
                 ...state,
                 ...action.monsters.reduce((acc, name) => {
-                    acc[name] = newDeck(MONSTERS[name].cards, withCard);
+                    const initialActive = name === "Boss";
+                    acc[name] = newDeck(MONSTERS[name].cards, initialActive);
                     return acc;
                 }, {}),
             };
@@ -72,9 +77,24 @@ export const reducer = (state = defaultState, action) => {
         case REVEAL_CARDS:
         {
             return Object.keys(state).reduce((acc, name) => {
-                acc[name] = revealNextCard(state[name]);
+                const monster = state[name];
+                acc[name] = {...monster, ...(monster.active && revealNextCard(state[name]))};
                 return acc;
             }, {});
+        }
+        case SET_ACTIVE:
+        {
+            const monster = state[action.name];
+            let newMonster = {...monster, active: action.active};
+            if (newMonster.active && hasActiveCards(state)) {
+                newMonster = {...newMonster, ...revealNextCard(monster)};
+            } else if (!newMonster.active) {
+                newMonster.currentCard = null;
+            }
+            return {
+                ...state,
+                [action.name]: newMonster,
+            };
         }
         case END_TURN:
         {
@@ -103,9 +123,22 @@ export function revealNextCardsAction() {
     return {type: REVEAL_CARDS};
 }
 
+export function setActiveAction(name, active) {
+    return {type: SET_ACTIVE, name, active};
+}
+
 export const selectors = {
     hasActiveCards: (state) => {
+        return hasActiveCards(state.monsters);
+    },
+    activeMonsters: (state) => {
         const monsters = state.monsters;
-        return Object.keys(monsters).some((m) => monsters[m].currentCard);
+        return Object.keys(monsters).reduce((acc, m) => {
+            const monster = monsters[m];
+            if (monster.active) {
+                acc[m] = monster;
+            }
+            return acc;
+        }, {});
     },
 };

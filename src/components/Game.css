@@ -1,3 +1,22 @@
+.Game--SpecialCardCount--Container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: larger;
+}
+
+.Game--SpecialCardCount {
+    display: flex;
+    align-items: flex-end;
+    margin-left: 16px;
+    font-size: xx-large;
+}
+
+.Game--SpecialCardCount--Icon {
+    height: 36px;
+    margin-right: 0.25rem;
+}
+
 .Game--Section {
     margin: 20px;
     padding: 12px;

@@ -33,10 +33,10 @@ export class Monster extends React.Component {
     render() {
         return (<div className={classNames({"Monster": true, "Monster--Elite": this.props.elite})}>
             <div className="Monster--StatusEffects">
-                {Object.keys(this.state.statusEffects).map((s, i) => {
+                {Object.keys(this.state.statusEffects).map((s) => {
                     const active = this.state.statusEffects[s];
                     const immune = this.props.immunities && this.props.immunities.includes(s);
-                    return (<div key={i} className={classNames({"Monster--StatusEffect--Container": true, "Monster--StatusEffect--Immune": immune})}>
+                    return (<div key={s} className={classNames({"Monster--StatusEffect--Container": true, "Monster--StatusEffect--Immune": immune})}>
                         <img
                             src={iconForStatusEffect(s)}
                             className={classNames({"Monster--StatusEffect": true, "Monster--StatusEffect--Inactive": !active})}

@@ -36,17 +36,20 @@ export class BossMonsterTrackerComponent extends React.Component {
                 <div className="MonsterTracker--Boss--ImmunitiesContainer">
                     <div>Immunities:</div>
                     <div className="MonsterTracker--Boss--Immunities">
-                        {stats.immunities && stats.immunities.map((c, i) =>
-                            <div key={i} className="MonsterTracker--Boss--ImmunityContainer">
-                                <img className="MonsterTracker--Boss--Immunity" src={iconForStatusEffect(c)} alt={`immune - ${c}`} />
+                        {stats.immunities && stats.immunities.map((s) =>
+                            <div key={s} className="MonsterTracker--Boss--ImmunityContainer">
+                                <img className="MonsterTracker--Boss--Immunity" src={iconForStatusEffect(s)} alt={`immune - ${s}`} />
                             </div>
                         )}
                     </div>
                 </div>
             </div>
-            {/*set unique key so that we remount on player count change*/}
+            {/*set unique key so that we remount on player count and boss name change*/}
             <div className="MonsterTracker--Monster">
-                <Monster key={this.props.numPlayers} maxHP={stats.maxHP} immunities={stats.immunities} />
+                <Monster key={`${this.state.selectedBoss}-${this.props.numPlayers}`}
+                    maxHP={stats.maxHP}
+                    immunities={stats.immunities}
+                />
                 {(stats.maxHP === 0) && <div className="MonsterTracker--Boss--Cover">Add players</div>}
             </div>
         </div>);

@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
+import * as classNames from "classnames";
 
 import {MONSTER_LIST} from "../../lib/monsters";
 import { addMonstersAction } from "../../store/monsters";
@@ -34,8 +35,9 @@ class ListComponent extends React.Component {
                 onChange={(e) => this.setState({search: e.target.value})}
                 placeholder="search..."
             />
-            <select size="10" onChange={(e) => this.handleMonsterSelection(e.target.options)} multiple value={this.state.selectedMonsters}>
+            <select size="20" onChange={(e) => this.handleMonsterSelection(e.target.options)} multiple value={this.state.selectedMonsters}>
                 {searchResults.map((name) => <option
+                    className={classNames({"Monsters--List--Boss": name === "Boss"})}
                     value={name}
                     key={name}
                     disabled={this.props.monstersInPlay.includes(name)}

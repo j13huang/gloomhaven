@@ -39,19 +39,6 @@
     background-color: inherit;
 }
 
-.Deck--Button--NeedsShuffle {
-    animation: pulse 1.2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-      background-color: rgb(28, 119, 255);
-    }
-    30%, 40% {
-      background-color: rgb(30, 255, 255);
-    }
- }
-
 .Deck--CardBack {
     max-width: 250px;
 }

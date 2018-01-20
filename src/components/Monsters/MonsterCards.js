@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from "react-redux";
+import * as classNames from "classnames";
 
 import {List} from "./List";
 import {Deck} from "./Deck";
+import {endTurnAction} from "../../store/turn";
 import {
     resetMonstersAction,
     removeMonsterAction,
@@ -12,14 +14,42 @@ import {
 import {selectors as attackModifierCardsSelectors} from "../../store/attackModifierCards";
 
 import "./Monsters.css";
+import "./MonsterCards.css";
 
-function MonsterCardsComponent({selectedLevel, monsters, hasActiveCards, onSelectLevel, resetMonsters, removeMonster, revealNextCards}) {
+function MonsterCardsComponent({selectedLevel, monsters, hasActiveCards, onSelectLevel, resetMonsters, removeMonster, revealNextCards, endTurn}) {
     const levelSelectID = "Monsters-LevelSelect";
     const monsterNames = Object.keys(monsters);
-    const monsterOrder = hasActiveCards ?
-        monsterNames.sort((a, b) => monsters[a].currentCard.initiative - monsters[b].currentCard.initiative) :
-        monsterNames;
-    return (
+    const activeMonsters = monsterNames.filter((m) => monsters[m].active);
+    const inactiveMonsters = monsterNames.filter((m) => !monsters[m].active);
+    const monsterOrder = activeMonsters.sort((a, b) => {
+        const monsterA = monsters[a];
+        const monsterB = monsters[b];
+        if (!monsterA.currentCard && !monsterB.currentCard) {
+            return 0;
+        }
+        return monsterA.currentCard.initiative - monsterB.currentCard.initiative;
+    }).concat(inactiveMonsters);
+    return (<div>
+        <div className="MonsterCards--Header">
+            <h3>Monsters</h3>
+            <button
+                className="MonsterCards--Header--Button"
+                disabled={!monsterNames.some((m) => monsters[m].active) || hasActiveCards}
+                onClick={() => revealNextCards(monsterNames)}
+            >
+                Flip Cards
+            </button>
+            <button
+                className={classNames({
+                    "MonsterCards--Header--Button": true,
+                    "MonsterCards--Header--ButtonReady": hasActiveCards,
+                })}
+                disabled={!hasActiveCards}
+                onClick={() => endTurn()}
+            >
+                End Turn
+            </button>
+        </div>
         <div className="Monsters">
             <div className="Monsters--List--Container">
                 <div>
@@ -31,18 +61,23 @@ function MonsterCardsComponent({selectedLevel, monsters, hasActiveCards, onSelec
                         })}
                     </select>
                 </div>
-                <button onClick={() => revealNextCards(monsterNames)}>Flip</button>
                 <List monstersInPlay={monsterNames} />
-                <button onClick={() => resetMonsters()}>Reset</button>
+                <button className="Monsters--List--ResetButton" onClick={() => resetMonsters()}>Reset</button>
             </div>
             {monsterOrder.map((name, i) => {
-                return (<div key={i} className="Monsters--Monster">
+                const monster = monsters[name];
+                return (<div key={name} className="Monsters--Monster">
                     <h5 className="Monsters--Monster--Name">{name}<button onClick={() => removeMonster(name)}>X</button></h5>
-                    <Deck card={monsters[name].currentCard} />
+                    <div className="MonsterCards--Deck">
+                        <Deck card={monster.currentCard} />
+                        {!monster.active && <div className={"MonsterCards--Deck--InactiveCover"}>
+                            Inactive
+                        </div>}
+                    </div>
                 </div>);
             })}
         </div>
-    );
+    </div>);
 }
 
 export const MonsterCards = connect(
@@ -55,6 +90,7 @@ export const MonsterCards = connect(
     },
     (dispatch) => {
         return {
+            endTurn: () => dispatch(endTurnAction()),
             resetMonsters: () => {dispatch(resetMonstersAction())},
             revealNextCards: () => {dispatch(revealNextCardsAction())},
             removeMonster: (name) => {dispatch(removeMonsterAction(name))},

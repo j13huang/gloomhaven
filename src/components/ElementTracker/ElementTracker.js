@@ -36,11 +36,11 @@ function Elements({className, elements, status, onClick}) {
 }
 */
 
-function ElementTrackerComponent({elements, setElementStatus}) {
-    return (<div className="ElementTracker">
-        {ELEMENTS_LIST.map((e, i) => {
+function ElementTrackerComponent({className, elements, setElementStatus}) {
+    return (<div className={classNames(className, "ElementTracker")}>
+        {ELEMENTS_LIST.map((e) => {
             const status = elements[e];
-            return (<div key={i} className="ElementTracker--Column">
+            return (<div key={e} className="ElementTracker--Column">
                 {/*e*/}
                 {[INERT, WANING, STRONG].map((s) =>
                     <div key={s} className={classNames({

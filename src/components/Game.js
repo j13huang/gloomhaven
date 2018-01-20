@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 
 import {Header} from "./Header/Header"
 import {Deck as AttackModifierDeck} from "./AttackModifiers/Deck"
+import curseCard from "./AttackModifiers/curse_card.jpg";
+import blessCard from "./AttackModifiers/bless_card.jpg";
 import {MonsterCards} from "./Monsters/MonsterCards"
 import {MonsterTrackers} from "./Monsters/MonsterTrackers"
 import {CLASSES} from "../lib/classes";
@@ -78,8 +80,17 @@ class GameComponent extends React.Component {
                 <Header />
                 <div className="Game--Section">
                     <h3>Attack Modifier Cards</h3>
-                    <div>Total Curse cards: {this.props.totalCurses}</div>
-                    <div>Total Blessing cards: {this.props.totalBlessings}</div>
+                    <div className="Game--SpecialCardCount--Container">
+                        Player card count: 
+                        <div className="Game--SpecialCardCount">
+                            <img className="Game--SpecialCardCount--Icon" src={curseCard} alt="curse cards"/>
+                            <div>({this.props.totalCurses})</div>
+                        </div>
+                        <div className="Game--SpecialCardCount">
+                            <img className="Game--SpecialCardCount--Icon" src={blessCard} alt="blessing cards"/>
+                            <div>({this.props.totalBlessings})</div>
+                        </div>
+                    </div>
                     <div className="Game--Players">
                         <input
                             value={this.state.playerNameInput}
@@ -103,8 +114,8 @@ class GameComponent extends React.Component {
                     {this.state.duplicateNameWarning &&
                         <div className="Game--DuplicatePlayerWarning">A player with that name already exists</div>}
                     <div className="Game--AttackModifierDecks">
-                        {this.props.players.map((name, i) => {
-                            return <AttackModifierDeck key={i} name={name} />
+                        {this.props.players.map((name) => {
+                            return <AttackModifierDeck key={name} name={name} />
                         })}
                     </div>
                 </div>

@@ -1,0 +1,43 @@
+.MonsterCards--Header {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.MonsterCards--Header--Button {
+    margin-left: 12px;
+    background-color: inherit;
+}
+
+.MonsterCards--Header--ButtonReady {
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+      background-color: rgb(28, 119, 255);
+    }
+    30%, 40% {
+      background-color: rgb(30, 255, 255);
+    }
+}
+
+.Monsters--List--ResetButton {
+    margin-top: 8px;
+}
+
+.MonsterCards--Deck {
+    position: relative;
+}
+
+.MonsterCards--Deck--InactiveCover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

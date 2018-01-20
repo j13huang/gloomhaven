@@ -25,7 +25,7 @@ export function MonsterStats({stats, elite}) {
         <div className="MonsterTracker--Stats--Extra">
             {stats.specialOne && <div><strong>Special 1: </strong><Actions actions={stats.specialOne} /></div>}
             {stats.specialTwo && <div><strong>Special 2: </strong><Actions actions={stats.specialTwo} /></div>}
-            {stats.extra && stats.extra.map((s, i) => <div key={i} className="MonsterTracker--Stats--SpecialLine">{s}</div>)}
+            {stats.extra && stats.extra.map((e, i) => <div key={i} className="MonsterTracker--Stats--SpecialLine">{e}</div>)}
         </div>
     </div>);
 }

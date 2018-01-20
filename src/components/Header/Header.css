@@ -1,7 +1,8 @@
 .Header {
     height: 36px;
     width: 100%;
-    background-color: rgb(235, 159, 72);
+    /*background-color: rgb(235, 159, 72);*/
+    background: white;
     position: fixed;
     box-sizing: border-box;
     z-index: 1000;
@@ -12,8 +13,27 @@
     justify-content: space-between;
 }
 
-.Header--EndTurn {
+.Header--Content--Section {
+    background-color: rgb(235, 159, 72);
+}
+
+.Header--EndTurnButton {
     height: 36px;
+    background: inherit;
+}
+
+.Header--EndTurnButton--Ready {
+    animation: pulse 1.2s infinite;
+    color: black;
+}
+
+@keyframes pulse {
+    0%, 100% {
+      background-color: rgb(28, 119, 255);
+    }
+    30%, 40% {
+      background-color: rgb(30, 255, 255);
+    }
 }
 
 .Header--HeightOffset {
@@ -21,6 +41,8 @@
 }
 
 .Header--TurnTracker {
+    flex: auto;
     display: flex;
     align-items: center;
+    justify-content: center;
 }

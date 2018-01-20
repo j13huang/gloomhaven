@@ -1,13 +1,15 @@
 import React from "react";
+import {connect} from "react-redux";
 import * as classNames from "classnames";
 
 import {MONSTERS} from "../../../lib/monsters";
 import {Monster} from "./Monster";
 import {MonsterStats} from "./MonsterStats";
+import {setActiveAction} from "../../../store/monsters";
 
 import "./MonsterTracker.css";
 
-export class MonsterTracker extends React.Component {
+class MonsterTrackerComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -21,13 +23,19 @@ export class MonsterTracker extends React.Component {
     }
 
     updateMonster(i, newMonster) {
+        const newMonsters = [
+            ...this.state.monsters.slice(0, i),
+            {...this.state.monsters[i], ...newMonster},
+            ...this.state.monsters.slice(i + 1),
+        ];
         this.setState({
-            monsters: [
-                ...this.state.monsters.slice(0, i),
-                {...this.state.monsters[i], ...newMonster},
-                ...this.state.monsters.slice(i + 1),
-            ],
+            monsters: newMonsters,
         });
+        const wasActive = this.state.monsters.some((m) => m.alive);
+        const isActive = newMonsters.some((m) => m.alive);
+        if (wasActive !== isActive) {
+            this.props.setActive(isActive);
+        }
     }
 
     render() {
@@ -64,3 +72,12 @@ export class MonsterTracker extends React.Component {
         </div>);
     }
 }
+
+export const MonsterTracker = connect(
+    () => ({}),
+    (dispatch, ownProps) => {
+        return {
+            setActive: (active) => {dispatch(setActiveAction(ownProps.name, active))},
+        };
+    },
+)(MonsterTrackerComponent);
