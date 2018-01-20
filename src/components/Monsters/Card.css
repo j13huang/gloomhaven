@@ -1,13 +1,73 @@
+.Monster--Card {
+    width: 250px;
+    border-radius: 16px;
+}
+
+.Monster--Card--Container {
+    position: relative;
+    width: 250px;
+    height: 170px;
+    border-radius: 16px;
+    background-image: url("./card.jpg");
+    background-size: contain;
+    color: white;
+    font-family: "SakkalMajalla";
+}
+
+.Monster--Card--Name {
+    font-family: "PirataOne";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.Monster--Card--Initiative {
+    position: absolute;
+    top: 37px;
+    left: 18px;
+    display: inline;
+    font-family: "PirataOne";
+}
+
+.Monster--Card--Actions {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    width: 192px;
+    height: 128px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: larger;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.Monster--Card--ActionsSubtext {
+    font-size: small;
+}
+
+.Monster--Card--EndAction {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: absolute;
+    top: 138px;
+    left: 220px;
+}
+
 .Card--Action {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     padding-left: 2px;
     padding-right: 2px;
 }
 
 .Card--Action--Border {
-    border: 1px dashed black;
+    border: 1px dashed white;
     margin-top: 2px;
 }
 

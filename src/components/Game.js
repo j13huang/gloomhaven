@@ -10,7 +10,7 @@ import {MonsterTrackers} from "./Monsters/MonsterTrackers"
 import {CLASSES} from "../lib/classes";
 import {
     addDeckAction,
-    resetPlayersAction,
+    resetDecksAction,
     selectors as attackModifierCardsSelectors,
 } from "../store/attackModifierCards";
 
@@ -84,11 +84,11 @@ class GameComponent extends React.Component {
                         Player card count: 
                         <div className="Game--SpecialCardCount">
                             <img className="Game--SpecialCardCount--Icon" src={curseCard} alt="curse cards"/>
-                            <div>({this.props.totalCurses})</div>
+                            <div>{`(${this.props.totalCurses})`}</div>
                         </div>
                         <div className="Game--SpecialCardCount">
                             <img className="Game--SpecialCardCount--Icon" src={blessCard} alt="blessing cards"/>
-                            <div>({this.props.totalBlessings})</div>
+                            <div>{`(${this.props.totalBlessings})`}</div>
                         </div>
                     </div>
                     <div className="Game--Players">
@@ -140,6 +140,6 @@ export const Game = connect(
     },
     (dispatch, ownProps) => ({
         addPlayer: (name, characterClass) => dispatch(addDeckAction(name, characterClass)),
-        resetPlayers: (card) => dispatch(resetPlayersAction()),
+        resetPlayers: (card) => dispatch(resetDecksAction()),
     }),
 )(GameComponent);

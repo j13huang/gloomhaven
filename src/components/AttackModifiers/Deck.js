@@ -6,7 +6,8 @@ import {Card} from "./Card";
 import cardBack from "./attack_modifier_card_back.jpg";
 import {END_ACTIONS, CURSE, BLESS} from "../../lib/cards";
 import {
-    resetDeckAction,
+    removeDeckAction,
+    resetCardsAction,
     revealNextCardAction,
     addCardAction,
     togglePerkAction,
@@ -35,6 +36,7 @@ class DeckComponent extends React.Component {
             })}>
                 <div className={classNames({"Deck--Name--Monsters": this.props.name === "Monsters"})}>
                     {this.props.name}
+                    {(this.props.name !== "Monsters") && <button onClick={() => {this.props.removeDeck()}}>X</button>}
                 </div>
                 {this.props.name && <div className="Deck--Class">
                     {this.props.class}
@@ -95,7 +97,8 @@ export const Deck = connect(
         totalBlessings: attackModifierCardsSelectors.totalBlessings(state),
     }),
     (dispatch, ownProps) => ({
-        resetDeck: () => dispatch(resetDeckAction(ownProps.name)),
+        removeDeck: () => dispatch(removeDeckAction(ownProps.name)),
+        resetCards: () => dispatch(resetCardsAction(ownProps.name)),
         addCard: (card) => dispatch(addCardAction(ownProps.name, card)),
         revealNextCard: () => dispatch(revealNextCardAction(ownProps.name)),
         togglePerk: (perkIndex, perkCheckIndex) => dispatch(togglePerkAction(ownProps.name, perkIndex, perkCheckIndex)),

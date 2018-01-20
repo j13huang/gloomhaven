@@ -37,7 +37,7 @@ class ListComponent extends React.Component {
             />
             <select size="20" onChange={(e) => this.handleMonsterSelection(e.target.options)} multiple value={this.state.selectedMonsters}>
                 {searchResults.map((name) => <option
-                    className={classNames({"Monsters--List--Boss": name === "Boss"})}
+                    className={classNames({"Monsters--List--Boss": (name === "Boss") && !this.props.monstersInPlay.includes(name)})}
                     value={name}
                     key={name}
                     disabled={this.props.monstersInPlay.includes(name)}

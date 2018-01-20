@@ -7,7 +7,6 @@ import {Deck} from "./Deck";
 import {endTurnAction} from "../../store/turn";
 import {
     resetMonstersAction,
-    removeMonsterAction,
     revealNextCardsAction,
     selectors as monstersSelectors,
 } from "../../store/monsters";
@@ -16,7 +15,7 @@ import {selectors as attackModifierCardsSelectors} from "../../store/attackModif
 import "./Monsters.css";
 import "./MonsterCards.css";
 
-function MonsterCardsComponent({selectedLevel, monsters, hasActiveCards, onSelectLevel, resetMonsters, removeMonster, revealNextCards, endTurn}) {
+function MonsterCardsComponent({selectedLevel, monsters, hasActiveCards, onSelectLevel, resetMonsters, revealNextCards, endTurn}) {
     const levelSelectID = "Monsters-LevelSelect";
     const monsterNames = Object.keys(monsters);
     const activeMonsters = monsterNames.filter((m) => monsters[m].active);
@@ -67,9 +66,8 @@ function MonsterCardsComponent({selectedLevel, monsters, hasActiveCards, onSelec
             {monsterOrder.map((name, i) => {
                 const monster = monsters[name];
                 return (<div key={name} className="Monsters--Monster">
-                    <h5 className="Monsters--Monster--Name">{name}<button onClick={() => removeMonster(name)}>X</button></h5>
                     <div className="MonsterCards--Deck">
-                        <Deck card={monster.currentCard} />
+                        <Deck name={name} card={monster.currentCard} />
                         {!monster.active && <div className={"MonsterCards--Deck--InactiveCover"}>
                             Inactive
                         </div>}
@@ -93,7 +91,6 @@ export const MonsterCards = connect(
             endTurn: () => dispatch(endTurnAction()),
             resetMonsters: () => {dispatch(resetMonstersAction())},
             revealNextCards: () => {dispatch(revealNextCardsAction())},
-            removeMonster: (name) => {dispatch(removeMonsterAction(name))},
         };
     },
 )(MonsterCardsComponent);

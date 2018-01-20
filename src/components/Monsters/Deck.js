@@ -3,17 +3,16 @@ import React from 'react';
 import {Card} from "./Card";
 import cardBack from "./monster_card_back.jpg";
 
-//import "./Deck.css";
+import "./Deck.css";
 
-export function Deck({card}) {
+export function Deck({name, card}) {
     return (
         <div>
-            <div>
-                <img src={cardBack} className="Deck--CardBack" alt="card back" />
+            <div className="Monsters--Deck--CardBack">
+                <img src={cardBack} className="Monsters--Deck--CardBackImage" alt="card back" />
+                <div className="Monsters--Deck--CardBackName">{name}</div>
             </div>
-            <div className="Deck--PlayedCards">
-                {card && <Card className="Deck--Card" card={card} />}
-            </div>
+            {card && <Card name={name} card={card} />}
         </div>
     );
 }

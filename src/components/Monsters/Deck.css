@@ -1,0 +1,21 @@
+.Monsters--Deck--CardBack {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.Monsters--Deck--CardBackImage {
+    max-width: 250px;
+    border-radius: 16px;
+    display: block;
+}
+
+.Monsters--Deck--CardBackName {
+    font-family: "PirataOne";
+    font-size: large;
+    color: white;
+    position: absolute;
+    top: 122px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}

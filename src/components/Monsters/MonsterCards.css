@@ -22,7 +22,7 @@
 }
 
 .Monsters--List--ResetButton {
-    margin-top: 8px;
+    margin-top: 12px;
 }
 
 .MonsterCards--Deck {
@@ -40,4 +40,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 16px;
 }

@@ -1,28 +1,21 @@
 import React from 'react';
-import * as classNames from 'classnames';
 
 import {Actions} from "./Actions/Actions";
-import {END_ACTIONS, iconForEndAction} from "../../lib/cards";
+import {iconForEndAction} from "../../lib/cards";
 
 import "./Card.css";
 
-export function Card({className, card}) {
-    return (
-        <div className={className}>
-            <div>^{card.initiative}</div>
-            <Actions actions={card.actions} />
-            <div className="Deck--Card--EndActionContainer">
-                {card.endAction &&
-                    <img
-                        className={classNames({
-                            "Deck--Card--EndAction": true,
-                            "Deck--Card--EndActionShuffle": card.endAction === END_ACTIONS.SHUFFLE,
-                        })}
-                        src={iconForEndAction(card.endAction)}
-                        alt={card.endAction}
-                    />
-                }
-            </div>
-        </div>
-    );
+export function Card({className, name, card}) {
+    return (<div className="Monster--Card--Container">
+        <div className="Monster--Card--Name">{name}</div>
+        <div className="Monster--Card--Initiative">{card.initiative}</div>
+        <Actions className="Monster--Card--Actions" actions={card.actions} />
+        {card.endAction &&
+            <img
+                className="Monster--Card--EndAction"
+                src={iconForEndAction(card.endAction)}
+                alt={card.endAction}
+            />
+        }
+    </div>);
 }

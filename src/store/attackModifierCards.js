@@ -22,7 +22,7 @@ function newAttackModifierDeck(cards, characterClass) {
     };
 }
 
-function resetDeck(perks) {
+function resetCards(perks) {
     let cards = BASE_ATTACK_MODIFIER_CARDS;
     perks.forEach((p) => {
         p.used.forEach((u) => {
@@ -104,16 +104,17 @@ const defaultState = {
     Monsters: newAttackModifierDeck(BASE_ATTACK_MODIFIER_CARDS, ""),
 };
 
-const RESET_PLAYERS = "attackModifierDeck/resetPlayers";
+const RESET_DECKS = "attackModifierDeck/reset";
 const ADD_DECK = "attackModifierDeck/add";
-const RESET_DECK = "attackModifierDeck/reset";
+const REMOVE_DECK = "attackModifierDeck/remove";
+const RESET_CARDS = "attackModifierDeck/cards/reset";
 const REVEAL_CARD = "attackModifierDeck/cards/next";
 const ADD_CARD = "attackModifierDeck/cards/add";
 const TOGGLE_PERK = "attackModifierDeck/perks/toggle";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
-        case RESET_PLAYERS: return defaultState;
+        case RESET_DECKS: return defaultState;
         case ADD_DECK:
         {
             return {
@@ -121,14 +122,22 @@ export const reducer = (state = defaultState, action) => {
                 [action.deckName]: newAttackModifierDeck(BASE_ATTACK_MODIFIER_CARDS, action.class),
             };
         }
-        case RESET_DECK:
+        case REMOVE_DECK:
+        {
+            const newState = {...state};
+            delete newState[action.deckName];
+            return {
+                ...newState,
+            };
+        }
+        case RESET_CARDS:
         {
             const perks = state[action.deckName].perks;
             return {
                 ...state,
                 [action.deckName]: {
                     ...state[action.deckName],
-                    ...resetDeck(perks),
+                    ...resetCards(perks),
                 },
             };
         }
@@ -179,16 +188,20 @@ export const reducer = (state = defaultState, action) => {
     }
 }
 
-export function resetPlayersAction() {
-    return {type: RESET_PLAYERS};
+export function resetDecksAction() {
+    return {type: RESET_DECKS};
 }
 
 export function addDeckAction(name, characterClass) {
     return {type: ADD_DECK, deckName: name, class: characterClass};
 }
 
-export function resetDeckAction(name) {
-    return {type: RESET_DECK, deckName: name};
+export function removeDeckAction(name) {
+    return {type: REMOVE_DECK, deckName: name};
+}
+
+export function resetCardsAction(name) {
+    return {type: RESET_CARDS, deckName: name};
 }
 
 export function revealNextCardAction(name) {

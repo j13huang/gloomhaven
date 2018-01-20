@@ -3,7 +3,7 @@ import {MONSTERS} from "../lib/monsters";
 import {END_ACTIONS} from "../lib/cards";
 import {END_TURN} from "./turn";
 
-function newDeck(cards,initialActive) {
+function newDeck(cards, initialActive) {
     return {
         cards: shuffle(cards),
         currentIndex: -1,
@@ -63,7 +63,11 @@ export const reducer = (state = defaultState, action) => {
                 ...state,
                 ...action.monsters.reduce((acc, name) => {
                     const initialActive = name === "Boss";
-                    acc[name] = newDeck(MONSTERS[name].cards, initialActive);
+                    const deck = newDeck(MONSTERS[name].cards, initialActive);
+                    acc[name] = {
+                        ...deck,
+                        ...(initialActive && hasActiveCards(state) && revealNextCard(deck)),
+                    };
                     return acc;
                 }, {}),
             };
@@ -85,7 +89,7 @@ export const reducer = (state = defaultState, action) => {
         case SET_ACTIVE:
         {
             const monster = state[action.name];
-            let newMonster = {...monster, active: action.active};
+            let newMonster = {...monster, active: action.active, ...(!action.active ? {currentCard: null} : (hasActiveCards(state) && revealNextCard(monster)))};
             if (newMonster.active && hasActiveCards(state)) {
                 newMonster = {...newMonster, ...revealNextCard(monster)};
             } else if (!newMonster.active) {
