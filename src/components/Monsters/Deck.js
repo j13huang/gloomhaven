@@ -5,14 +5,15 @@ import cardBack from "./monster_card_back.jpg";
 
 import "./Deck.css";
 
-export function Deck({name, card}) {
-    return (
-        <div>
-            <div className="Monsters--Deck--CardBack">
-                <img src={cardBack} className="Monsters--Deck--CardBackImage" alt="card back" />
-                <div className="Monsters--Deck--CardBackName">{name}</div>
-            </div>
-            {card && <Card name={name} card={card} />}
+export function Deck({name, card, active}) {
+    return (<div>
+        <div className="Monsters--Deck--CardBack">
+            <img src={cardBack} className="Monsters--Deck--CardBackImage" alt="card back" />
+            <div className="Monsters--Deck--CardBackName">{name}</div>
+            {!active && <div className={"Monsters--Deck--InactiveCover"}>
+                Inactive
+            </div>}
         </div>
-    );
+        {card && <Card name={name} card={card} />}
+    </div>);
 }

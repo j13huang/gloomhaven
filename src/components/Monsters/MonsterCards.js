@@ -67,10 +67,7 @@ function MonsterCardsComponent({selectedLevel, monsters, hasActiveCards, onSelec
                 const monster = monsters[name];
                 return (<div key={name} className="Monsters--Monster">
                     <div className="MonsterCards--Deck">
-                        <Deck name={name} card={monster.currentCard} />
-                        {!monster.active && <div className={"MonsterCards--Deck--InactiveCover"}>
-                            Inactive
-                        </div>}
+                        <Deck name={name} card={monster.currentCard} active={monster.active} />
                     </div>
                 </div>);
             })}

@@ -15,6 +15,7 @@
 .Game--SpecialCardCount--Icon {
     height: 36px;
     margin-right: 0.25rem;
+    border-radius: 4px;
 }
 
 .Game--Section {

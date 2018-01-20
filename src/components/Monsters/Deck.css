@@ -9,6 +9,20 @@
     display: block;
 }
 
+.Monsters--Deck--InactiveCover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+}
+
 .Monsters--Deck--CardBackName {
     font-family: "PirataOne";
     font-size: large;
