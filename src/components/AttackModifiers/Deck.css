@@ -3,8 +3,8 @@
     margin: 8px;
 }
 
-.Deck--Name--Monsters {
-    margin-bottom: 1rem;
+.Deck--MonsterPlaceholder {
+    height: 22px;
 }
 
 .Deck--Class {

@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import * as classNames from "classnames";
 
+import {BonusSelectors} from "../Bonuses";
 import {Card} from "./Card";
 import cardBack from "./attack_modifier_card_back.jpg";
 import {END_ACTIONS, CURSE, BLESS} from "../../lib/cards";
@@ -34,16 +35,17 @@ class DeckComponent extends React.Component {
                 "Deck": true,
                 //"Deck--NeedsShuffle": this.state.needsShuffle,
             })}>
-                <div className={classNames({"Deck--Name--Monsters": this.props.name === "Monsters"})}>
+                <div>
                     {this.props.name}
                     {(this.props.name !== "Monsters") && <button onClick={() => {this.props.removeDeck()}}>X</button>}
                 </div>
-                {this.props.name && <div className="Deck--Class">
-                    {this.props.class}
-                    {this.props.class &&
+                {(this.props.name === "Monsters") ? <div className="Deck--MonsterPlaceholder" /> :
+                    <div className="Deck--Class">
+                        {/*<button>Summon</button>*/}
+                        {this.props.class}
                         <button onClick={() => this.togglePerkDisplay(!this.state.showPerks)}>{`${this.state.showPerks ? "Hide" : "Show"} Perks`}</button>
-                    }
-                </div>}
+                    </div>
+                }
                 {this.state.showPerks && <div className="Deck--Perks">
                     {this.props.perks.map((p, i) => (
                         <div key={i} className="Deck--Perk">
@@ -51,8 +53,11 @@ class DeckComponent extends React.Component {
                             <label className="Deck--Perk--Name">{p.description}</label>
                         </div>)
                     )}
-                    <button onClick={() => {this.props.resetDeck()}}>Set deck</button>
+                    <button onClick={() => {this.props.resetCards()}}>Set deck</button>
                 </div>}
+                {(this.props.name === "Monsters") ? <div className="Deck--MonsterPlaceholder" /> :
+                    <BonusSelectors />
+                }
                 <div>
                     <button
                         disabled={(this.props.name === "Monsters" ? this.props.curseCount : this.props.totalCurses) >= 10}
