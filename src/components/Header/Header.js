@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 import * as classNames from "classnames";
 
 import {ElementTracker} from "../ElementTracker/ElementTracker"
-import {endTurnAction} from "../../store/turn";
-import { selectors as monstersSelectors } from "../../store/monsters";
+import {endTurnAction} from "../../store/actions/turn";
+import { selectors as monstersSelectors } from "../../store/monsterDecks";
 
 import "./Header.css";
 

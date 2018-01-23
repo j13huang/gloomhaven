@@ -1,10 +1,10 @@
 .Deck {
     text-align: center;
-    margin: 8px;
+    margin-right: 16px;
 }
 
 .Deck--MonsterPlaceholder {
-    height: 22px;
+    height: 18px;
 }
 
 .Deck--Class {

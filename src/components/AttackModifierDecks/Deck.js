@@ -2,18 +2,17 @@ import React from 'react';
 import {connect} from "react-redux";
 import * as classNames from "classnames";
 
-import {BonusSelectors} from "../Bonuses";
 import {Card} from "./Card";
 import cardBack from "./attack_modifier_card_back.jpg";
 import {END_ACTIONS, CURSE, BLESS} from "../../lib/cards";
 import {
-    removeDeckAction,
     resetCardsAction,
     revealNextCardAction,
     addCardAction,
     togglePerkAction,
-    selectors as attackModifierCardsSelectors,
-} from "../../store/attackModifierCards";
+    selectors as attackModifierDecksSelectors,
+} from "../../store/attackModifierDecks";
+import {removePlayerAction} from "../../store/actions/players";
 
 import "./Deck.css";
 
@@ -30,24 +29,18 @@ class DeckComponent extends React.Component {
     }
 
     render() {
+        const {deck} = this.props;
         return (
-            <div className={classNames({
-                "Deck": true,
-                //"Deck--NeedsShuffle": this.state.needsShuffle,
-            })}>
-                <div>
-                    {this.props.name}
-                    {(this.props.name !== "Monsters") && <button onClick={() => {this.props.removeDeck()}}>X</button>}
-                </div>
+            <div className="Deck">
+                <h5 className="Deck--Name">{this.props.name}</h5>
                 {(this.props.name === "Monsters") ? <div className="Deck--MonsterPlaceholder" /> :
                     <div className="Deck--Class">
-                        {/*<button>Summon</button>*/}
-                        {this.props.class}
+                        {deck.class}
                         <button onClick={() => this.togglePerkDisplay(!this.state.showPerks)}>{`${this.state.showPerks ? "Hide" : "Show"} Perks`}</button>
                     </div>
                 }
                 {this.state.showPerks && <div className="Deck--Perks">
-                    {this.props.perks.map((p, i) => (
+                    {deck.perks.map((p, i) => (
                         <div key={i} className="Deck--Perk">
                             {p.used.map((u, j) => <input key={j} type="checkbox" checked={u} onChange={(event) => this.props.togglePerk(i, j, event.target.checked)} />)}
                             <label className="Deck--Perk--Name">{p.description}</label>
@@ -55,28 +48,25 @@ class DeckComponent extends React.Component {
                     )}
                     <button onClick={() => {this.props.resetCards()}}>Set deck</button>
                 </div>}
-                {(this.props.name === "Monsters") ? <div className="Deck--MonsterPlaceholder" /> :
-                    <BonusSelectors />
-                }
                 <div>
                     <button
-                        disabled={(this.props.name === "Monsters" ? this.props.curseCount : this.props.totalCurses) >= 10}
+                        disabled={(this.props.name === "Monsters" ? deck.curseCount : this.props.totalCurses) >= 10}
                         onClick={() => {this.props.addCard(CURSE)}}
                     >
-                        Add Curse ({this.props.curseCount})
+                        Add Curse ({deck.curseCount})
                     </button>
                     <button
-                        disabled={(this.props.name === "Monsters" ? this.props.blessCount : this.props.totalBlessings) >= 10}
+                        disabled={(this.props.name === "Monsters" ? deck.blessCount : this.props.totalBlessings) >= 10}
                         onClick={() => {this.props.addCard(BLESS)}}
                     >
-                        Add Blessing ({this.props.blessCount})
+                        Add Blessing ({deck.blessCount})
                     </button>
                 </div>
                 <div>
                     <img src={cardBack} className="Deck--CardBack" onClick={() => {this.props.revealNextCard()}} alt="card back" />
                 </div>
                 <div className="Deck--PlayedCards">
-                    {this.props.playedCards && this.props.playedCards.map((card, i) => {
+                    {deck.playedCards && deck.playedCards.map((card, i) => {
                         return <Card
                             className={classNames({
                                 "Deck--Card": true,
@@ -97,12 +87,14 @@ class DeckComponent extends React.Component {
 
 export const Deck = connect(
     (state, ownProps) => ({
-        ...state.attackModifierCards[ownProps.name],
-        totalCurses: attackModifierCardsSelectors.totalCurses(state),
-        totalBlessings: attackModifierCardsSelectors.totalBlessings(state),
+        deck: {
+            ...state.attackModifierDecks[ownProps.name],
+        },
+        totalCurses: attackModifierDecksSelectors.totalCurses(state),
+        totalBlessings: attackModifierDecksSelectors.totalBlessings(state),
     }),
     (dispatch, ownProps) => ({
-        removeDeck: () => dispatch(removeDeckAction(ownProps.name)),
+        removePlayer: () => dispatch(removePlayerAction(ownProps.name)),
         resetCards: () => dispatch(resetCardsAction(ownProps.name)),
         addCard: (card) => dispatch(addCardAction(ownProps.name, card)),
         revealNextCard: () => dispatch(revealNextCardAction(ownProps.name)),

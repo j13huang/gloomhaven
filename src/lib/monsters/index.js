@@ -730,47 +730,6 @@ export const MONSTERS = {
         ],
         cards: IMP_CARDS,
     },
-    "Boss": {
-        stats: [
-            // boss stats in BOSS_STATS object
-        ],
-        cards: [
-            {
-                initiative: 85,
-                actions: ["Special 1"],
-                endAction: END_ACTIONS.SHUFFLE,
-            },
-            {
-                initiative: 73,
-                actions: ["Special 1"],
-            },
-            {
-                initiative: 52,
-                actions: ["move -1", "attack -1, range 3, target 2"],
-            },
-            {
-                initiative: 11,
-                actions: ["Special 2"],
-            },
-            {
-                initiative: 17,
-                actions: ["Special 2"],
-                endAction: END_ACTIONS.SHUFFLE,
-            },
-            {
-                initiative: 36,
-                actions: ["move +0", "attack +0"],
-            },
-            {
-                initiative: 79,
-                actions: ["Special 1"],
-            },
-            {
-                initiative: 14,
-                actions: ["Special 2"],
-            },
-        ],
-    },
     "Cave Bear": {
         stats: [
             {
@@ -6091,5 +6050,42 @@ export const BOSS_STATS = {
         }),
     ],
 }
+
+export const BOSS_CARDS = [
+    {
+        initiative: 85,
+        actions: ["Special 1"],
+        endAction: END_ACTIONS.SHUFFLE,
+    },
+    {
+        initiative: 73,
+        actions: ["Special 1"],
+    },
+    {
+        initiative: 52,
+        actions: ["move -1", "attack -1, range 3, target 2"],
+    },
+    {
+        initiative: 11,
+        actions: ["Special 2"],
+    },
+    {
+        initiative: 17,
+        actions: ["Special 2"],
+        endAction: END_ACTIONS.SHUFFLE,
+    },
+    {
+        initiative: 36,
+        actions: ["move +0", "attack +0"],
+    },
+    {
+        initiative: 79,
+        actions: ["Special 1"],
+    },
+    {
+        initiative: 14,
+        actions: ["Special 2"],
+    },
+];
 
 export const BOSS_LIST = Object.keys(BOSS_STATS);

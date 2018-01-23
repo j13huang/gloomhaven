@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+.MonsterTracker--Name {
+    text-align: center;
+}
+
 .MonsterTracker--StatsContainer {
     display: flex;
     background: rgb(185, 130, 57);
@@ -14,6 +18,11 @@
 .MonsterTracker--Boss--StatsContainer {
     background: rgb(148, 13, 13);
     color: white;
+}
+
+.MonsterTracker--StatusEffects--ToggleAll {
+    /* 2px margin + 1px border + 2px padding */
+    margin-left: 5px;
 }
 
 .MonsterTracker--Monster {
