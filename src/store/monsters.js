@@ -1,73 +1,58 @@
-import {shuffle} from "../lib/cards";
+import {STATUS_EFFECTS, newStatusEffectTracker} from "../lib/statusEffects";
 import {MONSTERS} from "../lib/monsters";
-import {END_ACTIONS} from "../lib/cards";
-import {END_TURN} from "./turn";
+import {RESET_MONSTERS, ADD_MONSTERS, REMOVE_MONSTER} from "./actions/monsters";
 
-function newDeck(cards, initialActive) {
+function newMonster(name, level, alive, elite) {
+    const monsterStats = MONSTERS[name].stats[level];
+    const stats = elite ? monsterStats.elite : monsterStats.normal;
     return {
-        cards: shuffle(cards),
-        currentIndex: -1,
-        currentCard: null,
-        active: initialActive,
-    };
-}
-
-function revealNextCard({cards, currentIndex, currentCard}) {
-    let nextCards = cards;
-    let nextIndex = currentIndex + 1;
-    if ((currentCard && currentCard.endAction === END_ACTIONS.SHUFFLE) ||
-        (nextIndex >= cards.length)) {
-        nextCards = shuffle(cards);
-        nextIndex = 0;
+        alive: alive,
+        elite: elite,
+        maxHP: stats.maxHP,
+        currentHP: stats.maxHP,
+        statusEffects: newStatusEffectTracker(),
     }
-
-    const nextCard = nextCards[nextIndex];
-    return {
-        cards: nextCards,
-        currentIndex: nextIndex,
-        currentCard: nextCard,
-    };
 }
 
-function hasActiveCards(monsters) {
-    return Object.keys(monsters).some((m) => monsters[m].currentCard);
+function newMonsters(name, level) {
+  return {
+      // TODO: calculate number of tokens instead of hardocde to 12
+      monsters: new Array(12).fill(newMonster(name, level, false, false))
+  };
 }
 
-const defaultState = {
+function getAllStatusEffects(monsters) {
+    const aliveMonsters = monsters.filter((m) => m.alive);
+    return STATUS_EFFECTS.reduce((acc, s) => {
+        if (aliveMonsters.length === 0 ) {
+            acc[s] = false;
+            return acc;
+        }
+        acc[s] = true;
+        aliveMonsters.forEach((m) => {
+            acc[s] = acc[s] && m.statusEffects[s];
+        });
+        return acc;
+    }, {});
 };
 
-const RESET_MONSTERS = "monsters/reset";
-const ADD_MONSTERS = "monsters/add";
-const REMOVE_MONSTER = "monsters/remove";
-const REVEAL_CARDS = "monsters/decks/next";
-const SET_ACTIVE = "monsters/decks/setActive";
+const defaultState = {};
 
-// monster trackers
-/*
-const ADD_MONSTER_TRACKER = "monsters/tracker/add";
-const REMOVE_MONSTER_TRACKER = "monsters/tracker/remove";
-const CHANGE_MONSTER_HEALTH = "monsters/tracker/hp/set";
-const TOGGLE_MONSTER_STATUS = "monsters/tracker/status/toggle";
-const TOGGLE_MONSTER_ELITE = "monsters/tracker/elite/toggle";
-*/
+const TOGGLE_ELITE = "monsters/toggleElite";
+const TOGGLE_ALIVE = "monsters/toggleAlive";
+const TOGGLE_ALL_STATUS_EFFECTS = "monsters/statusEffect/setAll";
+const TOGGLE_STATUS_EFFECT = "monsters/statusEffect/toggle";
+const SET_HP = "monsters/hp/set";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
-        case RESET_MONSTERS:
-        {
-            return defaultState;
-        }
+        case RESET_MONSTERS: return defaultState;
         case ADD_MONSTERS:
         {
             return {
                 ...state,
                 ...action.monsters.reduce((acc, name) => {
-                    const initialActive = name === "Boss";
-                    const deck = newDeck(MONSTERS[name].cards, initialActive);
-                    acc[name] = {
-                        ...deck,
-                        ...(initialActive && hasActiveCards(state) && revealNextCard(deck)),
-                    };
+                    acc[name] = newMonsters(name, action.level, action.numPlayers);
                     return acc;
                 }, {}),
             };
@@ -78,71 +63,134 @@ export const reducer = (state = defaultState, action) => {
             delete newState[action.name];
             return newState;
         }
-        case REVEAL_CARDS:
+        case TOGGLE_ELITE:
         {
-            return Object.keys(state).reduce((acc, name) => {
-                const monster = state[name];
-                acc[name] = {...monster, ...(monster.active && revealNextCard(state[name]))};
-                return acc;
-            }, {});
-        }
-        case SET_ACTIVE:
-        {
-            const monster = state[action.name];
-            let newMonster = {...monster, active: action.active, ...(!action.active ? {currentCard: null} : (hasActiveCards(state) && revealNextCard(monster)))};
-            if (newMonster.active && hasActiveCards(state)) {
-                newMonster = {...newMonster, ...revealNextCard(monster)};
-            } else if (!newMonster.active) {
-                newMonster.currentCard = null;
-            }
+            const monsters = state[action.name].monsters;
+            const monster = monsters[action.index];
             return {
                 ...state,
-                [action.name]: newMonster,
+                [action.name]: {
+                    monsters: [
+                        ...monsters.slice(0, action.index),
+                        newMonster(
+                            action.name,
+                            action.level,
+                            monster.alive,
+                            !monster.elite,
+                        ),
+                        ...monsters.slice(action.index + 1),
+                    ],
+                },
             };
         }
-        case END_TURN:
+        case TOGGLE_ALIVE:
         {
-            return Object.keys(state).reduce((acc, name) => {
-                acc[name] = {...state[name], currentCard: null};
-                return acc;
-            }, {});
+            const monsters = state[action.name].monsters;
+            const monster = monsters[action.index];
+            return {
+                ...state,
+                [action.name]: {
+                    monsters: [
+                        ...monsters.slice(0, action.index),
+                        newMonster(
+                            action.name,
+                            action.level,
+                            !monster.alive,
+                            monster.elite,
+                        ),
+                        ...monsters.slice(action.index + 1),
+                    ],
+                },
+            };
         }
-        default: return state
+        case TOGGLE_ALL_STATUS_EFFECTS:
+        {
+            const monsters = state[action.name].monsters;
+            const allStatusEffects = getAllStatusEffects(monsters);
+            return {
+                ...state,
+                [action.name]: {
+                    monsters: monsters.map((m) => {
+                        if (!m.alive) {
+                          return m;
+                        }
+                        return {
+                            ...m,
+                            statusEffects: {
+                                ...m.statusEffects,
+                                [action.statusEffect]: !allStatusEffects[action.statusEffect],
+                            },
+                        };
+                    })
+                },
+            };
+        }
+        case TOGGLE_STATUS_EFFECT:
+        {
+            const monsters = state[action.name].monsters;
+            const monster = monsters[action.index];
+            return {
+                ...state,
+                [action.name]: {
+                    monsters: [
+                        ...monsters.slice(0, action.index),
+                        {
+                            ...monster,
+                            statusEffects: {
+                                ...monster.statusEffects,
+                                [action.statusEffect]: !monster.statusEffects[action.statusEffect],
+                            },
+                        },
+                        ...monsters.slice(action.index + 1),
+                    ],
+                },
+            };
+        }
+        case SET_HP:
+        {
+            const monsters = state[action.name].monsters;
+            const monster = monsters[action.index];
+            return {
+                ...state,
+                [action.name]: {
+                    monsters: [
+                        ...monsters.slice(0, action.index),
+                        {
+                            ...monster,
+                            currentHP: action.hp,
+                        },
+                        ...monsters.slice(action.index + 1),
+                    ],
+                },
+            };
+        }
+        default: return state;
     }
 }
 
-export function resetMonstersAction() {
-    return {type: RESET_MONSTERS};
+export function toggleAliveAction(name, index, level) {
+    return {type: TOGGLE_ALIVE, name, index, level};
 }
 
-export function addMonstersAction(monsterNames) {
-    return {type: ADD_MONSTERS, monsters: monsterNames};
+export function toggleEliteAction(name, index, level) {
+    return {type: TOGGLE_ELITE, name, index, level};
 }
 
-export function removeMonsterAction(name) {
-    return {type: REMOVE_MONSTER, name};
+export function toggleAllStatusEffectsAction(name, statusEffect) {
+    return {type: TOGGLE_ALL_STATUS_EFFECTS, name, statusEffect};
 }
 
-export function revealNextCardsAction() {
-    return {type: REVEAL_CARDS};
+export function toggleStatusEffectAction(name, index, statusEffect) {
+    return {type: TOGGLE_STATUS_EFFECT, name, index, statusEffect};
 }
 
-export function setActiveAction(name, active) {
-    return {type: SET_ACTIVE, name, active};
+export function setHPAction(name, index, hp) {
+    return {type: SET_HP, name, index, hp};
 }
 
 export const selectors = {
-    hasActiveCards: (state) => {
-        return hasActiveCards(state.monsters);
-    },
-    activeMonsters: (state) => {
-        const monsters = state.monsters;
-        return Object.keys(monsters).reduce((acc, m) => {
-            const monster = monsters[m];
-            if (monster.active) {
-                acc[m] = monster;
-            }
-            return acc;
-        }, {});
-    },
+    // status effects across all monsters
+    allStatusEffects: (state, name) => getAllStatusEffects(state.monsters[name].monsters),
+    isActive: (state, name) => state.monsters[name].monsters.some((m) => m.alive),
+    hasMonstersInPlay: (state) => state.boss || Object.keys(state.monsters).length > 0,
 };

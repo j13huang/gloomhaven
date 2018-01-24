@@ -1,5 +1,5 @@
 import {ELEMENTS_LIST, INERT, WANING, STRONG} from "../lib/elements";
-import {END_TURN} from "./turn";
+import {END_TURN} from "./actions/turn";
 
 const defaultState = ELEMENTS_LIST.reduce((acc, e) => {acc[e] = INERT; return acc;}, {});
 

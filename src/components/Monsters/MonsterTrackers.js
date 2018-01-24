@@ -1,24 +1,17 @@
 import React from 'react';
 import {connect} from "react-redux";
 
+import {List} from "./List";
 import {BossMonsterTracker, MonsterTracker} from "./MonsterTracker";
-import {removeMonsterAction} from "../../store/monsters";
 
-import "./Monsters.css";
+import "./MonsterTrackers.css";
 
-export function MonsterTrackersComponent({level, monsters, removeMonster}) {
+export function MonsterTrackersComponent({boss, monsterNames}) {
     return (
         <div className="Monsters">
-            {Object.keys(monsters).map((name) => {
-                const isBoss = name === "Boss";
-                return (<div key={name} className="Monsters--Monster">
-                    <h5 className="Monsters--Monster--Name">{name}<button onClick={() => removeMonster(name)}>X</button></h5>
-                    {isBoss ?
-                        <BossMonsterTracker level={level} /> :
-                        <MonsterTracker key={name} name={name} level={level} />
-                    }
-                </div>);
-            })}
+            <List />
+            {boss && <BossMonsterTracker />}
+            {monsterNames.map((name) => <MonsterTracker key={name} name={name} />)}
         </div>
     );
 }
@@ -26,12 +19,8 @@ export function MonsterTrackersComponent({level, monsters, removeMonster}) {
 export const MonsterTrackers = connect(
     (state, ownProps) => {
         return {
-            monsters: state.monsters,
+            boss: state.boss,
+            monsterNames: Object.keys(state.monsters),
         };
-    },
-    (dispatch) => {
-        return {
-            removeMonster: (name) => {dispatch(removeMonsterAction(name))},
-        };
-    },
+    }
 )(MonsterTrackersComponent);

@@ -1,0 +1,28 @@
+.HPTracker--Container {
+    display: flex;
+}
+
+.HPTracker--Bars {
+    display: flex;
+    /*align-items: center;*/
+    flex-wrap: wrap;
+}
+
+.HPTracker--HP {
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+    border: 1px solid red;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    font-size: x-small;
+}
+
+.HPTracker--HP--Active {
+    background: red;
+    color: white;
+}

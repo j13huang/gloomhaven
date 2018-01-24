@@ -1,14 +1,11 @@
-.MonsterCards--Header {
-    display: flex;
+.MonsterDecks--Header--Button {
+    height: 64px;
+    margin-right: 12px;
     margin-bottom: 12px;
-}
-
-.MonsterCards--Header--Button {
-    margin-left: 12px;
     background-color: inherit;
 }
 
-.MonsterCards--Header--ButtonReady {
+.MonsterDecks--Header--ButtonReady {
     animation: pulse 1.2s infinite;
 }
 
@@ -21,10 +18,11 @@
     }
 }
 
-.Monsters--List--ResetButton {
-    margin-top: 12px;
+.MonsterDecks {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.MonsterCards--Deck {
+.MonsterDecks--Deck {
     position: relative;
 }

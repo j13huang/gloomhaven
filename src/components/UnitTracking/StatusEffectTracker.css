@@ -1,0 +1,39 @@
+.StatusEffects {
+    display: flex;
+}
+
+.StatusEffect--Container {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 0.25rem;
+}
+
+.StatusEffect {
+    height: 100%;
+    width: 100%;
+}
+
+.StatusEffect--Inactive {
+    opacity: 0.25;
+}
+
+.StatusEffect--Immune {
+    position: relative;
+}
+
+.StatusEffect--Immune:after {
+    content: "\A";
+    position: absolute;
+    width:100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    border-radius: 50%;
+    opacity:0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+.StatusEffect--Immune:hover:after {
+    opacity:1;
+}
+

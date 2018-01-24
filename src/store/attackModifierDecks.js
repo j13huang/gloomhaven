@@ -1,7 +1,8 @@
 import {shuffle} from "../lib/cards";
 import {newPerks} from "../lib/classes";
 import {END_ACTIONS, BASE_ATTACK_MODIFIER_CARDS, CURSE, BLESS} from "../lib/cards";
-import {END_TURN} from "./turn";
+import {ADD_PLAYER, REMOVE_PLAYER} from "./actions/players";
+import {END_TURN} from "./actions/turn";
 
 function newDeck(cards) {
     return {
@@ -105,8 +106,6 @@ const defaultState = {
 };
 
 const RESET_DECKS = "attackModifierDeck/reset";
-const ADD_DECK = "attackModifierDeck/add";
-const REMOVE_DECK = "attackModifierDeck/remove";
 const RESET_CARDS = "attackModifierDeck/cards/reset";
 const REVEAL_CARD = "attackModifierDeck/cards/next";
 const ADD_CARD = "attackModifierDeck/cards/add";
@@ -115,17 +114,17 @@ const TOGGLE_PERK = "attackModifierDeck/perks/toggle";
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
         case RESET_DECKS: return defaultState;
-        case ADD_DECK:
+        case ADD_PLAYER:
         {
             return {
                 ...state,
-                [action.deckName]: newAttackModifierDeck(BASE_ATTACK_MODIFIER_CARDS, action.class),
+                [action.name]: newAttackModifierDeck(BASE_ATTACK_MODIFIER_CARDS, action.class),
             };
         }
-        case REMOVE_DECK:
+        case REMOVE_PLAYER:
         {
             const newState = {...state};
-            delete newState[action.deckName];
+            delete newState[action.name];
             return {
                 ...newState,
             };
@@ -192,14 +191,6 @@ export function resetDecksAction() {
     return {type: RESET_DECKS};
 }
 
-export function addDeckAction(name, characterClass) {
-    return {type: ADD_DECK, deckName: name, class: characterClass};
-}
-
-export function removeDeckAction(name) {
-    return {type: REMOVE_DECK, deckName: name};
-}
-
 export function resetCardsAction(name) {
     return {type: RESET_CARDS, deckName: name};
 }
@@ -226,8 +217,6 @@ function totalCards(state, getCardsFunc) {
 }
 
 export const selectors = {
-    totalCurses: (state) => totalCards(state.attackModifierCards, (deck) => deck.curseCount),
-    totalBlessings: (state) => totalCards(state.attackModifierCards, (deck) => deck.blessCount),
-    // - 1 for monsters deck
-    numPlayers: (state) => Object.keys(state.attackModifierCards).length - 1,
+    totalCurses: (state) => totalCards(state.attackModifierDecks, (deck) => deck.curseCount),
+    totalBlessings: (state) => totalCards(state.attackModifierDecks, (deck) => deck.blessCount),
 };

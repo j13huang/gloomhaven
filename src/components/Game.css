@@ -1,3 +1,12 @@
+.Game--Section--Toggle {
+    cursor: pointer;
+    user-select: none;
+}
+
+.Game--Section--HidePlayers {
+    display: none;
+}
+
 .Game--SpecialCardCount--Container {
     display: flex;
     align-items: center;

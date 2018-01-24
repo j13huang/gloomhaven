@@ -38,6 +38,12 @@ const statusEffectIcons = {
 };
 
 export const STATUS_EFFECTS = Object.keys(statusEffectIcons);
+export function newStatusEffectTracker() {
+    return STATUS_EFFECTS.reduce((acc, s) => {
+        acc[s] = false;
+        return acc;
+    }, {});
+}
 
 export function iconForStatusEffect(name) {
     return {
