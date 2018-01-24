@@ -6,7 +6,7 @@ import cardBack from "./monster_card_back.jpg";
 import "./Deck.css";
 
 export function Deck({name, card, active}) {
-    return (<div>
+    return (<div className="Monsters--Deck--Container">
         <div className="Monsters--Deck--CardBack">
             <img src={cardBack} className="Monsters--Deck--CardBackImage" alt="card back" />
             <div className="Monsters--Deck--CardBackName">{name}</div>

@@ -196,6 +196,7 @@ const SCOUT_CARDS = [
 
 export const MONSTERS = {
     "Ancient Artillery": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -348,6 +349,7 @@ export const MONSTERS = {
         ],
     },
     "Bandit Archer": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -481,6 +483,7 @@ export const MONSTERS = {
         cards: ARCHER_CARDS,
     },
     "Bandit Guard": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -598,6 +601,7 @@ export const MONSTERS = {
         cards: GUARD_CARDS,
     },
     "Black Imp": {
+        tokenCount: 10,
         stats: [
             {
                 normal: {
@@ -731,6 +735,7 @@ export const MONSTERS = {
         cards: IMP_CARDS,
     },
     "Cave Bear": {
+        tokenCount: 4,
         stats: [
             {
                 normal: {
@@ -883,6 +888,7 @@ export const MONSTERS = {
         ],
     },
     "City Archer": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -1016,6 +1022,7 @@ export const MONSTERS = {
         cards: ARCHER_CARDS,
     },
     "City Guard": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -1133,6 +1140,7 @@ export const MONSTERS = {
         cards: GUARD_CARDS,
     },
     "Cultist": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -1285,6 +1293,7 @@ export const MONSTERS = {
         ],
     },
     "Deep Terror": {
+        tokenCount: 10,
         stats: [
             {
                 normal: {
@@ -1421,6 +1430,7 @@ export const MONSTERS = {
         ],
     },
     "Earth Demon": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -1573,6 +1583,7 @@ export const MONSTERS = {
         ],
     },
     "Flame Demon": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -1741,6 +1752,7 @@ export const MONSTERS = {
         ],
     },
     "Frost Demon": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -1893,6 +1905,7 @@ export const MONSTERS = {
         ],
     },
     "Forest Imp": {
+        tokenCount: 10,
         stats: [
             {
                 normal: {
@@ -2026,6 +2039,7 @@ export const MONSTERS = {
         cards: IMP_CARDS,
     },
     "Giant Viper": {
+        tokenCount: 10,
         stats: [
             {
                 normal: {
@@ -2178,6 +2192,7 @@ export const MONSTERS = {
         ],
     },
     "Harrower Infester": {
+        tokenCount: 4,
         stats: [
             {
                 normal: {
@@ -2330,6 +2345,7 @@ export const MONSTERS = {
         ],
     },
     "Hound": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -2482,6 +2498,7 @@ export const MONSTERS = {
         ],
     },
     "Inox Archer": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -2615,6 +2632,7 @@ export const MONSTERS = {
         cards: ARCHER_CARDS,
     },
     "Inox Guard": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -2732,6 +2750,7 @@ export const MONSTERS = {
         cards: GUARD_CARDS,
     },
     "Inox Shaman": {
+        tokenCount: 4,
         stats: [
             {
                 normal: {
@@ -2865,6 +2884,7 @@ export const MONSTERS = {
         cards: SHAMAN_CARDS,
     },
     "Living Bones": {
+        tokenCount: 10,
         stats: [
             {
                 normal: {
@@ -3017,6 +3037,7 @@ export const MONSTERS = {
         ],
     },
     "Living Corpse": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -3170,6 +3191,7 @@ export const MONSTERS = {
         ],
     },
     "Living Spirit": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -3338,6 +3360,7 @@ export const MONSTERS = {
         ],
     },
     "Lurker": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -3490,6 +3513,7 @@ export const MONSTERS = {
         ],
     },
     "Night Demon": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -3642,6 +3666,7 @@ export const MONSTERS = {
         ],
     },
     "Ooze": {
+        tokenCount: 10,
         stats: [
             {
                 normal: {
@@ -3810,6 +3835,7 @@ export const MONSTERS = {
         ],
     },
     "Rending Drake": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -3962,6 +3988,7 @@ export const MONSTERS = {
         ],
     },
     "Savvas Lavaflow": {
+        tokenCount: 4,
         stats: [
             {
                 normal: {
@@ -4130,6 +4157,7 @@ export const MONSTERS = {
         ],
     },
     "Savvas Icestorm": {
+        tokenCount: 4,
         stats: [
             {
                 normal: {
@@ -4282,6 +4310,7 @@ export const MONSTERS = {
         ],
     },
     "Spitting Drake": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -4450,6 +4479,7 @@ export const MONSTERS = {
         ],
     },
     "Stone Golem": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -4602,6 +4632,7 @@ export const MONSTERS = {
         ],
     },
     "Sun Demon": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -4754,6 +4785,7 @@ export const MONSTERS = {
         ],
     },
     "Vermling Scout": {
+        tokenCount: 10,
         stats: [
             {
                 normal: {
@@ -4871,6 +4903,7 @@ export const MONSTERS = {
         cards: SCOUT_CARDS,
     },
     "Vermling Shaman": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {
@@ -5004,6 +5037,7 @@ export const MONSTERS = {
         cards: SHAMAN_CARDS,
     },
     "Wind Demon": {
+        tokenCount: 6,
         stats: [
             {
                 normal: {

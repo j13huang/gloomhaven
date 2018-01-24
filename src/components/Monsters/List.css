@@ -6,9 +6,19 @@
     margin-right: 20px;
 }
 
-.Monsters--List--Boss {
-    font-weight: bold;
-    color: #c40b12;
+.Monsters--List--LevelContainer {
+    display: flex;
+}
+
+.Monsters-List--LevelSelect {
+    margin-left: 8px;
+}
+
+.Monsters--List--BossSelectorContainer {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
 }
 
 .Monsters--List--ResetButton {

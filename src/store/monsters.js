@@ -15,9 +15,9 @@ function newMonster(name, level, alive, elite) {
 }
 
 function newMonsters(name, level) {
-  return {
-      // TODO: calculate number of tokens instead of hardocde to 12
-      monsters: new Array(12).fill(newMonster(name, level, false, false))
+    const monster = MONSTERS[name];
+    return {
+        monsters: new Array(monster.tokenCount).fill(newMonster(name, level, false, false))
   };
 }
 

@@ -14,9 +14,12 @@ function newPlayer(characterClass, level) {
 }
 
 const defaultState = {
+    levelAdjustment: 0,
+    players: {},
 };
 
 const SET_LEVEL = "players/level/set";
+const SET_LEVEL_ADJUSTMENT = "players/level/setAdjustment";
 const TOGGLE_STATUS_EFFECT = "players/statusEffect/toggle";
 const SET_HP = "players/hp/set";
 
@@ -26,49 +29,71 @@ export const reducer = (state = defaultState, action) => {
         {
             return {
                 ...state,
-                [action.name]: {
-                    ...newPlayer(action.class, 1),
+                players: {
+                    ...state.players,
+                    [action.name]: {
+                        ...newPlayer(action.class, 1),
+                    },
                 },
             };
         }
         case REMOVE_PLAYER:
         {
-            const newState = {...state};
-            delete newState[action.name];
-            return newState;
+            const newPlayers = {...state.players};
+            delete newPlayers[action.name];
+            return {
+                ...state,
+                players: newPlayers,
+            };
         }
         case SET_LEVEL:
         {
-            const player = state[action.name];
+            const player = state.players[action.name];
             return {
                 ...state,
-                [action.name]: {
-                    ...newPlayer(player.class, action.level),
+                players: {
+                    ...state.players,
+                    [action.name]: {
+                        ...newPlayer(player.class, action.level),
+                    },
                 },
+            };
+        }
+        case SET_LEVEL_ADJUSTMENT:
+        {
+            return {
+                ...state,
+                levelAdjustment: action.levelAdjustment,
             };
         }
         case TOGGLE_STATUS_EFFECT:
         {
-            const player = state[action.name];
+            const player = state.players[action.name];
             return {
                 ...state,
-                [action.name]: {
-                    ...player,
-                    statusEffects: {
-                        ...player.statusEffects,
-                        [action.statusEffect]: !player.statusEffects[action.statusEffect],
+                players: {
+                    ...state.players,
+                    [action.name]: {
+                        ...player,
+                        statusEffects: {
+                            ...player.statusEffects,
+                            [action.statusEffect]: !player.statusEffects[action.statusEffect],
+                        },
                     },
                 },
             };
         }
         case SET_HP:
         {
-            const player = state[action.name];
+            const player = state.players[action.name];
             return {
                 ...state,
-                [action.name]: {
-                    ...player,
-                    hp: action.hp,
+                players: {
+                    ...state.players,
+                    [action.name]: {
+                        ...player,
+                        hp: action.hp,
+                    },
                 },
             };
         }
@@ -80,6 +105,10 @@ export function setLevelAction(name, level) {
     return {type: SET_LEVEL, name, level};
 }
 
+export function setLevelAdjustmentAction(levelAdjustment) {
+    return {type: SET_LEVEL_ADJUSTMENT, levelAdjustment};
+}
+
 export function toggleStatusEffectAction(name, statusEffect) {
     return {type: TOGGLE_STATUS_EFFECT, name, statusEffect};
 }
@@ -89,11 +118,18 @@ export function setHPAction(name, hp) {
 }
 
 export const selectors = {
-    numPlayers: (state) => Object.keys(state.players).length,
-    scenarioLevel: (state) => {
-        return Math.ceil(Object.keys(state.players).reduce((sum, p) => {
-            const player = state.players[p];
+    numPlayers: (state) => Object.keys(state.players.players).length,
+    baseScenarioLevel: (state) => {
+        return Math.ceil(Object.keys(state.players.players).reduce((sum, p) => {
+            const player = state.players.players[p];
             return sum + player.level;
         }, 0) / 2);
+    },
+    // + adjustment
+    scenarioLevel: (state) => {
+        return Math.ceil(Object.keys(state.players.players).reduce((sum, p) => {
+            const player = state.players.players[p];
+            return sum + player.level;
+        }, state.players.levelAdjustment) / 2);
     },
 };

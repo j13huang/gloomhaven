@@ -1,7 +1,11 @@
+.MonsterTracker--Container {
+    margin-right: 12px;
+}
+
 .MonsterTracker {
     margin-bottom: 8px;
     border: 1px solid black;
-    max-width: 260px;
+    width: 260px;
     box-sizing: border-box;
 }
 
@@ -42,8 +46,12 @@
     align-items: center;
 }
 
-.MonsterTracker--MonsterSelector {
+.MonsterTracker--MonsterSelectors {
     display: flex;
+}
+
+.MonsterTracker--MonsterSelector {
+    flex: auto;
 }
 
 .MonsterTracker--MonsterSelector--Alive {

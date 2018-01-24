@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+h5 {
+  margin-bottom: 8px;
+}
+
 @font-face {
   font-family: "PirataOne";
   src: url(./PirataOne-Regular.ttf) format('truetype');

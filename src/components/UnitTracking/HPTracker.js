@@ -3,8 +3,8 @@ import * as classNames from "classnames";
 
 import "./HPTracker.css";
 
-export function HPTracker({currentHP, maxHP, onHPClick}) {
-    return (<div className="HPTracker--Container">
+export function HPTracker({className, currentHP, maxHP, onHPClick}) {
+    return (<div className={classNames(className, "HPTracker--Container")}>
         <div>HP:</div>
         {(maxHP > 0) &&
             <div className="HPTracker--Bars">

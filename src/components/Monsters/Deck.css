@@ -1,3 +1,8 @@
+.Monsters--Deck--Container {
+    position: relative;
+    margin-right: 8px;
+}
+
 .Monsters--Deck--CardBack {
     position: relative;
     margin-bottom: 8px;

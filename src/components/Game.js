@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import * as classNames from "classnames";
 
 import {Header} from "./Header/Header"
-import {PlayerTrackers} from "./UnitTracking/PlayerTrackers"
+import {PlayerTrackers} from "./Players/PlayerTrackers"
 import {Deck as AttackModifierDeck} from "./AttackModifierDecks/Deck"
 import curseCard from "./AttackModifierDecks/curse_card.jpg";
 import blessCard from "./AttackModifierDecks/bless_card.jpg";
@@ -159,7 +159,7 @@ class GameComponent extends React.Component {
 export const Game = connect(
     (state, ownProps) => {
         return {
-            playerNames: Object.keys(state.players),
+            playerNames: Object.keys(state.players.players),
             hasMonstersInPlay: monstersSelectors.hasMonstersInPlay(state),
             totalCurses: attackModifierDecksSelectors.totalCurses(state),
             totalBlessings: attackModifierDecksSelectors.totalBlessings(state),

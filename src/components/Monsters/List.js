@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {BOSS_LIST, MONSTER_LIST} from "../../lib/monsters";
 import {addMonstersAction, resetMonstersAction} from "../../store/actions/monsters";
 import {setBossAction} from "../../store/actions/boss";
-import {selectors as playersSelectors} from "../../store/players";
+import {setLevelAdjustmentAction, selectors as playersSelectors} from "../../store/players";
 
 import "./List.css";
 
@@ -36,8 +36,18 @@ class ListComponent extends React.Component {
     render() {
         const searchResults = MONSTER_LIST.filter((name) => name.toLowerCase().includes(this.state.search));
         return (<div className="Monsters--List">
-            <div >Scenario Level: {this.props.scenarioLevel}</div>
-            <div>
+            <div className="Monsters--List--LevelContainer">
+                Level: {this.props.baseScenarioLevel}
+                <select
+                    className="Monsters-List--LevelSelect"
+                    disabled={this.props.monstersInPlay.length > 0}
+                    value={this.props.levelAdjustment}
+                    onChange={(event) => this.props.setLevelAdjustment(parseInt(event.target.value, 10))}
+                >
+                    {["-1", "+0", "+1", "+2"].map((value, i) => <option key={i - 1} value={i - 1}>{value}</option>)}
+                </select>
+            </div>
+            <div className="Monsters--List--BossSelectorContainer">
                 <select disabled={this.props.boss} value={this.state.selectedBoss} onChange={(event) => this.selectBoss(event.target.value)}>
                     {BOSS_LIST.map((b) => <option value={b} key={b}>{b}</option>)}
                 </select>
@@ -65,14 +75,17 @@ class ListComponent extends React.Component {
 export const List = connect(
     (state) => {
         return {
+            levelAdjustment: state.players.levelAdjustment,
             monstersInPlay: Object.keys(state.monsters),
             boss: state.boss,
+            baseScenarioLevel: playersSelectors.baseScenarioLevel(state),
             scenarioLevel: playersSelectors.scenarioLevel(state),
             numPlayers: playersSelectors.numPlayers(state),
         };
     },
     (dispatch, ownProps) => {
         return {
+            setLevelAdjustment: (levelAdjustment) => {dispatch(setLevelAdjustmentAction(levelAdjustment))},
             addBoss: (name, scenarioLevel, numPlayers) => {dispatch(setBossAction(name, scenarioLevel, numPlayers))},
             addMonsters: (monsterNames, scenarioLevel) => {dispatch(addMonstersAction(monsterNames, scenarioLevel))},
             resetMonsters: (monsterNames) => {dispatch(resetMonstersAction(monsterNames))},

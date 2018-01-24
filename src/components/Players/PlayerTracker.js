@@ -1,12 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import {BonusSelectors} from "../Bonuses";
-import {StatusEffectTracker} from "../StatusEffectTracker";
-import {HPTracker} from "../HPTracker";
-import {setLevelAction, toggleStatusEffectAction, setHPAction} from "../../../store/players";
-import {removePlayerAction} from "../../../store/actions/players";
-import {selectors as monstersSelectors} from "../../../store/monsters";
+import xpIcon from "./xp.svg";
+import {BonusSelectors} from "../UnitTracking/BonusSelectors";
+import {StatusEffectTracker} from "../UnitTracking/StatusEffectTracker";
+import {HPTracker} from "../UnitTracking/HPTracker";
+import {setLevelAction, toggleStatusEffectAction, setHPAction} from "../../store/players";
+import {removePlayerAction} from "../../store/actions/players";
+import {selectors as monstersSelectors} from "../../store/monsters";
 
 import "./PlayerTracker.css";
 
@@ -30,7 +31,7 @@ class PlayerTrackerComponent extends React.Component {
 
     render() {
         const levelSelectID = `Player-${this.props.name}-LevelSelect`;
-        return (<div>
+        return (<div className="PlayerTracker--Container">
             <h5 className="PlayerTracker--Name">
                 {this.props.name}
                 {!this.props.hasMonstersInPlay &&
@@ -39,16 +40,10 @@ class PlayerTrackerComponent extends React.Component {
                     </button>
                 }
             </h5>
-            {/*
-                <div>
-                    <select>
-                    </select>
-                    <button>Summon</button>
-                </div>
-            */}
-            <div className="PlayerTracker">
-                <div>
-                    <label className="" htmlFor={levelSelectID}>Level: </label>
+            <div className="PlayerTracker--Description">
+                <div className="PlayerTracker--Class">{this.props.player.class}</div>
+                <div className="PlayerTracker--LevelSelector">
+                    <label htmlFor={levelSelectID}>Level: </label>
                     <select
                         id={levelSelectID}
                         disabled={this.props.hasMonstersInPlay}
@@ -61,14 +56,27 @@ class PlayerTrackerComponent extends React.Component {
                         })}
                     </select>
                 </div>
-                <div className="PlayerTracker--XP">
-                    XP:
-                    <button disabled={this.state.xp === 0} onClick={() => this.setXP(this.state.xp - 1)}>-</button>
-                    {this.state.xp}
-                    <button onClick={() => this.setXP(this.state.xp + 1)}>+</button>
+            {/*
+                <div>
+                    <select>
+                    </select>
+                    <button>Summon</button>
                 </div>
-                <BonusSelectors />
-                <StatusEffectTracker
+            */}
+            </div>
+            <div className="PlayerTracker">
+                <div className="PlayerTracker--Stats">
+                    <div className="PlayerTracker--XP">
+                        <img className="PlayerTracker--XP--Icon" src={xpIcon} alt="xp" />
+                        <div className="PlayerTracker--XP--Buttons">
+                            <button disabled={this.state.xp === 0} onClick={() => this.setXP(this.state.xp - 1)}>-</button>
+                            {this.state.xp}
+                            <button onClick={() => this.setXP(this.state.xp + 1)}>+</button>
+                        </div>
+                    </div>
+                    <BonusSelectors />
+                </div>
+                <StatusEffectTracker className="PlayerTracker--StatusEffectTracker"
                     statusEffects={this.props.player.statusEffects}
                     onToggle={(s) => this.props.toggleStatusEffect(s)} />
                 {/* unique key on level so that when the level changes the hp gets rerendered */}
@@ -85,7 +93,7 @@ class PlayerTrackerComponent extends React.Component {
 export const PlayerTracker = connect(
     (state, ownProps) => {
         return {
-            player: state.players[ownProps.name],
+            player: state.players.players[ownProps.name],
             hasMonstersInPlay: monstersSelectors.hasMonstersInPlay(state),
         };
     },

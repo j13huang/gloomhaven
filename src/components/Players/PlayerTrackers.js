@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import {PlayerTracker} from "./PlayerTracker";
 
-import "./index.css";
+import "./PlayerTrackers.css";
 
 function PlayerTrackersComponent({playerNames}) {
     return (<div className="PlayerTrackers">
@@ -16,7 +16,7 @@ function PlayerTrackersComponent({playerNames}) {
 export const PlayerTrackers = connect(
     (state) => {
         return {
-            playerNames: Object.keys(state.players),
+            playerNames: Object.keys(state.players.players),
         };
     }
 )(PlayerTrackersComponent);

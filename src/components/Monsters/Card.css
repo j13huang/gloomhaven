@@ -1,9 +1,5 @@
 .Monster--Card {
-    width: 250px;
-    border-radius: 16px;
-}
-
-.Monster--Card--Container {
+    margin-bottom: 8px;
     position: relative;
     width: 250px;
     height: 170px;

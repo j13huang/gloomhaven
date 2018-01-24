@@ -1,6 +1,6 @@
 import React from "react";
 
-import {SHIELD, RETALIATE, iconForBonus} from "../../../lib/bonuses";
+import {SHIELD, RETALIATE, iconForBonus} from "../../lib/bonuses";
 import "./BonusSelectors.css";
 
 export class BonusSelectors extends React.Component {

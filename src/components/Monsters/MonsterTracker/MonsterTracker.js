@@ -30,7 +30,7 @@ class MonsterTrackerComponent extends React.Component {
     render() {
         const {name, monsters, scenarioLevel, removeMonster, allStatusEffects, toggleElite, toggleAllStatusEffects} = this.props;
         const monsterStats = MONSTERS[name].stats[scenarioLevel];
-        return (<div>
+        return (<div className="MonsterTracker--Container">
             <h5 className="MonsterTracker--Name">{name}<button onClick={() => removeMonster()}>X</button></h5>
             <div className="MonsterTracker">
                 <div className="MonsterTracker--StatsContainer">
@@ -41,11 +41,14 @@ class MonsterTrackerComponent extends React.Component {
                     Toggle All:
                     <StatusEffectTracker className="MonsterTracker--StatusEffects--ToggleAll" statusEffects={allStatusEffects} onToggle={(s) => toggleAllStatusEffects(s)} />
                 </div>
-                <div className="MonsterTracker--MonsterSelector">
+                <div className="MonsterTracker--MonsterSelectors">
                     {monsters.map(({alive, elite}, i) =>
                         <button key={i}
                             disabled={alive}
-                            className={classNames({"MonsterTracker--MonsterSelector--Alive": !alive})}
+                            className={classNames({
+                                "MonsterTracker--MonsterSelector": true,
+                                "MonsterTracker--MonsterSelector--Alive": !alive,
+                            })}
                             onClick={() => this.onToggleAlive(i)}
                         >
                             {i + 1}

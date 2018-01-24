@@ -1,0 +1,55 @@
+.PlayerTracker--Container {
+    margin-right: 16px;
+}
+
+.PlayerTracker--Name {
+    text-align: center;
+}
+
+.PlayerTracker--Description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.PlayerTracker--Class {
+    font-size: 0.75rem;
+    color: purple;
+}
+
+.PlayerTracker--LevelSelector {
+    display: flex;
+}
+
+.PlayerTracker {
+    width: 250px;
+    border: 1px solid black;
+    margin-top: 4px;
+    padding: 8px;
+}
+
+.PlayerTracker--Stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.PlayerTracker--XP {
+    display: flex;
+}
+
+.PlayerTracker--XP--Icon {
+    height: 24px;
+    width: 24px;
+    display: block;
+}
+
+.PlayerTracker--XP--Buttons {
+    display: flex;
+    align-items: center;
+}
+
+.PlayerTracker--StatusEffectTracker {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
