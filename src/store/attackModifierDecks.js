@@ -105,7 +105,6 @@ const defaultState = {
     Monsters: newAttackModifierDeck(BASE_ATTACK_MODIFIER_CARDS, ""),
 };
 
-const RESET_DECKS = "attackModifierDeck/reset";
 const RESET_CARDS = "attackModifierDeck/cards/reset";
 const REVEAL_CARD = "attackModifierDeck/cards/next";
 const ADD_CARD = "attackModifierDeck/cards/add";
@@ -113,7 +112,6 @@ const TOGGLE_PERK = "attackModifierDeck/perks/toggle";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
-        case RESET_DECKS: return defaultState;
         case ADD_PLAYER:
         {
             return {
@@ -185,10 +183,6 @@ export const reducer = (state = defaultState, action) => {
         }
         default: return state
     }
-}
-
-export function resetDecksAction() {
-    return {type: RESET_DECKS};
 }
 
 export function resetCardsAction(name) {

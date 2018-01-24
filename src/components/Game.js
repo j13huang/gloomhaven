@@ -9,11 +9,10 @@ import curseCard from "./AttackModifierDecks/curse_card.jpg";
 import blessCard from "./AttackModifierDecks/bless_card.jpg";
 import {MonsterDecks} from "./Monsters/MonsterDecks"
 import {MonsterTrackers} from "./Monsters/MonsterTrackers"
-import {CLASS_NAMES} from "../lib/classes";
 import {
-    resetDecksAction,
     selectors as attackModifierDecksSelectors,
 } from "../store/attackModifierDecks";
+import {selectors as playersSelectors} from "../store/players";
 import {selectors as monstersSelectors} from "../store/monsters";
 import {addPlayerAction} from "../store/actions/players";
 
@@ -24,7 +23,6 @@ class GameComponent extends React.Component {
         super(props);
         this.state = {
             playerNameInput: "",
-            selectableClasses: CLASS_NAMES,
             selectedClass: "",
             duplicateNameWarning: false,
             showSections: {
@@ -73,16 +71,8 @@ class GameComponent extends React.Component {
         this.setState({
             playerNameInput: "",
             selectedClass: "",
-            selectableClasses: this.state.selectableClasses.filter((c) => c !== selectedClass),
         });
         this.props.addPlayer(name, selectedClass);
-    }
-
-    resetPlayers() {
-        this.setState({
-            selectableClasses: CLASS_NAMES,
-        });
-        this.props.resetPlayers();
     }
 
     render() {
@@ -104,13 +94,13 @@ class GameComponent extends React.Component {
                         />
                         <select disabled={this.props.hasMonstersInPlay || this.props.playerNames.length === 4} value={this.state.selectedClass} onChange={(event) => this.selectClass(event.target.value)}>
                             <option value="">Select a class...</option>
-                            {this.state.selectableClasses.map((c) => <option value={c} key={c}>{c}</option>)}
+                            {this.props.selectableClasses.map((c) => <option value={c} key={c}>{c}</option>)}
                         </select>
                         <button
                             disabled={!this.canAddPlayer()}
                             onClick={() => this.addPlayer(this.state.playerNameInput, this.state.selectedClass)}
                         >Add Player</button>
-                        {/*<button onClick={() => this.resetPlayers()}>Reset</button>*/}
+                        {/*<button onClick={() => this.props.resetPlayers()}>Reset</button>*/}
                     </div>
                     {this.state.duplicateNameWarning &&
                         <div className="Game--DuplicatePlayerWarning">A player with that name already exists</div>}
@@ -159,6 +149,7 @@ class GameComponent extends React.Component {
 export const Game = connect(
     (state, ownProps) => {
         return {
+            selectableClasses: playersSelectors.selectableClasses(state),
             playerNames: Object.keys(state.players.players),
             hasMonstersInPlay: monstersSelectors.hasMonstersInPlay(state),
             totalCurses: attackModifierDecksSelectors.totalCurses(state),
@@ -167,6 +158,5 @@ export const Game = connect(
     },
     (dispatch, ownProps) => ({
         addPlayer: (name, characterClass) => dispatch(addPlayerAction(name, characterClass)),
-        resetPlayers: (card) => dispatch(resetDecksAction()),
     }),
 )(GameComponent);

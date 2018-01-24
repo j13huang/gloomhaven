@@ -1,4 +1,4 @@
-import {getCharacterStats} from "../lib/classes";
+import {CLASS_NAMES, getCharacterStats} from "../lib/classes";
 import {newStatusEffectTracker} from "../lib/statusEffects";
 import {ADD_PLAYER, REMOVE_PLAYER} from "./actions/players";
 
@@ -15,6 +15,7 @@ function newPlayer(characterClass, level) {
 
 const defaultState = {
     levelAdjustment: 0,
+    selectableClasses: CLASS_NAMES.reduce((acc, c) => {acc[c] = true; return acc;}, {}),
     players: {},
 };
 
@@ -29,6 +30,10 @@ export const reducer = (state = defaultState, action) => {
         {
             return {
                 ...state,
+                selectableClasses: {
+                    ...state.selectableClasses,
+                    [action.class]: false,
+                },
                 players: {
                     ...state.players,
                     [action.name]: {
@@ -39,10 +44,15 @@ export const reducer = (state = defaultState, action) => {
         }
         case REMOVE_PLAYER:
         {
+            const player = state.players[action.name];
             const newPlayers = {...state.players};
             delete newPlayers[action.name];
             return {
                 ...state,
+                selectableClasses: {
+                    ...state.selectableClasses,
+                    [player.class]: true,
+                },
                 players: newPlayers,
             };
         }
@@ -117,18 +127,24 @@ export function setHPAction(name, hp) {
     return {type: SET_HP, name, hp};
 }
 
-function calculateScenarioLevel(players, baseLevel) {
+function calculateScenarioLevel(players, levelAdjustment) {
     const playerNames = Object.keys(players);
     if (playerNames.length === 0) {
         return 0;
     }
-    return Math.ceil(playerNames.reduce((sum, p) => {
+    const averageLevel = playerNames.reduce((sum, p) => {
         const player = players[p];
         return sum + player.level;
-    }, baseLevel) / playerNames.length / 2);
+    }, 0) / playerNames.length;
+    return Math.ceil(averageLevel / 2) + levelAdjustment;
 }
 
 export const selectors = {
+    selectableClasses: (state) => {
+        return Object.keys(state.players.selectableClasses).filter((c) => {
+            return state.players.selectableClasses[c];
+        });
+    },
     numPlayers: (state) => Object.keys(state.players.players).length,
     baseScenarioLevel: (state) => {
         return calculateScenarioLevel(state.players.players, 0);
