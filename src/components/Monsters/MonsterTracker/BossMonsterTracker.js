@@ -41,7 +41,7 @@ export class BossMonsterTrackerComponent extends React.Component {
     render() {
         const stats = BOSS_STATS[this.props.boss.name][this.props.scenarioLevel](this.props.numPlayers);
 
-        return (<div>
+        return (<div className="MonsterTracker--Container">
             <h5 className="MonsterTracker--Name">{this.props.boss.name}<button onClick={() => this.props.removeBoss(this.props.boss.name)}>X</button></h5>
             <div className="MonsterTracker">
                 <div className="MonsterTracker--Boss--StatsContainer">
