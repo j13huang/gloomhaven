@@ -127,7 +127,7 @@ export function setHPAction(name, hp) {
     return {type: SET_HP, name, hp};
 }
 
-function calculateScenarioLevel(players, levelAdjustment) {
+function calculateScenarioLevel(players) {
     const playerNames = Object.keys(players);
     if (playerNames.length === 0) {
         return 0;
@@ -136,7 +136,7 @@ function calculateScenarioLevel(players, levelAdjustment) {
         const player = players[p];
         return sum + player.level;
     }, 0) / playerNames.length;
-    return Math.ceil(averageLevel / 2) + levelAdjustment;
+    return Math.ceil(averageLevel / 2);
 }
 
 export const selectors = {
@@ -147,10 +147,10 @@ export const selectors = {
     },
     numPlayers: (state) => Object.keys(state.players.players).length,
     baseScenarioLevel: (state) => {
-        return calculateScenarioLevel(state.players.players, 0);
+        return calculateScenarioLevel(state.players.players);
     },
     // + level adjustment
     scenarioLevel: (state) => {
-        return calculateScenarioLevel(state.players.players, state.players.levelAdjustment);
+        return calculateScenarioLevel(state.players.players) + state.players.levelAdjustment;
     },
 };
