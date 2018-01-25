@@ -8,46 +8,33 @@ import { selectors as monstersSelectors } from "../../store/monsterDecks";
 
 import "./Header.css";
 
- class HeaderComponent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            turn: 1,
-        };
-    }
-
-    endTurn() {
-        this.setState({turn: this.state.turn + 1});
-        this.props.endTurn();
-    }
-
-    render() {
-        return (<div>
-            <div className="Header">
-                <div className="Header--Content">
-                    <ElementTracker className="Header--Content--Section"/>
-                    <div className={classNames("Header--Content--Section", "Header--TurnTracker")}>Turn {this.state.turn}</div>
-                    <button
-                        className={classNames({
-                            "Header--EndTurnButton": true,
-                            "Header--EndTurnButton--Ready": this.props.endTurnReady,
-                        })}
-                        disabled={!this.props.endTurnReady}
-                        onClick={() => this.endTurn()}
-                    >
-                        End Turn
-                    </button>
-                </div>
+function HeaderComponent({turn, endTurnReady, endTurn}) {
+    return (<div>
+        <div className="Header">
+            <div className="Header--Content">
+                <ElementTracker className="Header--Content--Section"/>
+                <div className={classNames("Header--Content--Section", "Header--TurnTracker")}>Turn {turn}</div>
+                <button
+                    className={classNames({
+                        "Header--EndTurnButton": true,
+                        "Header--EndTurnButton--Ready": endTurnReady,
+                    })}
+                    disabled={!endTurnReady}
+                    onClick={() => endTurn()}
+                >
+                    End Turn
+                </button>
             </div>
-            <div className="Header--HeightOffset"></div>
-        </div>);
-    }
+        </div>
+        <div className="Header--HeightOffset"></div>
+    </div>);
 }
 
 export const Header = connect(
     (state) => {
         return {
             endTurnReady: monstersSelectors.hasActiveCards(state),
+            turn: state.turn,
         };
     },
     (dispatch) => ({
