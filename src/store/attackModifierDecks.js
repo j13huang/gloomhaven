@@ -44,16 +44,18 @@ function shuffleCards(cards, currentIndex) {
 function revealNextCard({cards, currentIndex, playedCards, needsShuffle, curseCount, blessCount}) {
     let nextCards = cards;
     let nextIndex = currentIndex + 1;
+    let nextPlayedCards = playedCards;
     if (nextIndex >= cards.length) {
         nextCards = shuffleCards(cards, currentIndex);
         nextIndex = 0;
+        nextPlayedCards = [];
     }
 
     const nextCard = nextCards[nextIndex];
     return {
         cards: nextCards,
         currentIndex: nextIndex,
-        playedCards: [nextCard].concat(playedCards),
+        playedCards: [nextCard].concat(nextPlayedCards),
         needsShuffle: needsShuffle || (nextCard.endAction === END_ACTIONS.SHUFFLE),
         curseCount: nextCard === CURSE ? (curseCount - 1) : curseCount,
         blessCount: nextCard === BLESS ? (blessCount - 1) : blessCount,
