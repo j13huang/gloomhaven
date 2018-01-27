@@ -1,8 +1,10 @@
 import React from 'react';
+import {connect} from "react-redux";
 import * as classNames from 'classnames';
 
 import {iconForElement} from '../../lib/elements';
 import {END_ACTIONS, iconForEndAction} from "../../lib/cards";
+import {undoCardAction} from '../../store/attackModifierDecks';
 
 import "./Card.css";
 
@@ -17,9 +19,15 @@ function Value({value}) {
     return <div>{value}</div>;
 }
 
-export function Card({className, card}) {
+function CardComponent({className, card, isMostRecentCard, undoCard}) {
     return (
-        <div className={className}>
+        <div className={classNames({
+                "Deck--Card--Container": true,
+                "Deck--Card--Shuffle": card.endAction === END_ACTIONS.SHUFFLE,
+                "Deck--Card--Discard": card.endAction === END_ACTIONS.DISCARD,
+                "Deck--Card--MostRecent": isMostRecentCard,
+                [className]: true,
+            })}>
             <Value value={card.modifier} />
             <Value value={card.extra} />
             <div className="Deck--Card--EndActionContainer">
@@ -35,6 +43,16 @@ export function Card({className, card}) {
                     <div><strong>{card.endAction}</strong></div>
                 }
             </div>
+            {isMostRecentCard && <div className="Deck--Card--UndoCover" onClick={() => undoCard()}>Undo</div>}
         </div>
     );
 }
+
+export const Card = connect(
+    () => ({}),
+    (dispatch, ownProps) => {
+        return {
+            undoCard: () => dispatch(undoCardAction(ownProps.name)),
+        };
+    },
+)(CardComponent);

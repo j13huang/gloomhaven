@@ -60,6 +60,18 @@ function revealNextCard({cards, currentIndex, playedCards, needsShuffle, curseCo
     };
 }
 
+function undoCard({cards, currentIndex, playedCards, curseCount, blessCount}) {
+    let currentCard = cards[currentIndex];
+    const newPlayedCards = playedCards.slice(1);
+    return {
+        currentIndex: currentIndex - 1,
+        playedCards: newPlayedCards,
+        needsShuffle: newPlayedCards.some((c) => c.endAction === END_ACTIONS.SHUFFLE),
+        curseCount: currentCard === CURSE ? (curseCount + 1) : curseCount,
+        blessCount: currentCard  === BLESS ? (blessCount + 1) : blessCount,
+    };
+}
+
 function addCard(deck, card) {
     // in case of -1 index
     const currentIndex = Math.max(0, deck.currentIndex);
@@ -107,6 +119,7 @@ const defaultState = {
 
 const RESET_CARDS = "attackModifierDeck/cards/reset";
 const REVEAL_CARD = "attackModifierDeck/cards/next";
+const UNDO_CARD = "attackModifierDeck/cards/undo";
 const ADD_CARD = "attackModifierDeck/cards/add";
 const TOGGLE_PERK = "attackModifierDeck/perks/toggle";
 
@@ -145,6 +158,16 @@ export const reducer = (state = defaultState, action) => {
                 [action.deckName]: {
                     ...state[action.deckName],
                     ...revealNextCard(state[action.deckName]),
+                },
+            };
+        }
+        case UNDO_CARD:
+        {
+            return {
+                ...state,
+                [action.deckName]: {
+                    ...state[action.deckName],
+                    ...undoCard(state[action.deckName]),
                 },
             };
         }
@@ -191,6 +214,10 @@ export function resetCardsAction(name) {
 
 export function revealNextCardAction(name) {
     return {type: REVEAL_CARD, deckName: name};
+}
+
+export function undoCardAction(name) {
+    return {type: UNDO_CARD, deckName: name};
 }
 
 export function addCardAction(name, card) {

@@ -37,7 +37,7 @@ function Elements({className, elements, status, onClick}) {
 */
 
 function ElementTrackerComponent({className, elements, setElementStatus}) {
-    return (<div className={classNames(className, "ElementTracker")}>
+    return (<div className={classNames("ElementTracker", className)}>
         {ELEMENTS_LIST.map((e) => {
             const status = elements[e];
             return (<div key={e} className="ElementTracker--Column">

@@ -1,10 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
-import * as classNames from "classnames";
 
 import {Card} from "./Card";
 import cardBack from "./attack_modifier_card_back.jpg";
-import {END_ACTIONS, CURSE, BLESS} from "../../lib/cards";
+import {CURSE, BLESS} from "../../lib/cards";
 import {
     resetCardsAction,
     revealNextCardAction,
@@ -68,14 +67,10 @@ class DeckComponent extends React.Component {
                 <div className="Deck--PlayedCards">
                     {deck.playedCards && deck.playedCards.map((card, i) => {
                         return <Card
-                            className={classNames({
-                                "Deck--Card": true,
-                                "Deck--Card--MostRecent": i === 0,
-                                "Deck--Card--Shuffle": card.endAction === END_ACTIONS.SHUFFLE,
-                                "Deck--Card--Discard": card.endAction === END_ACTIONS.DISCARD,
-                            })}
                             key={i}
                             card={card}
+                            name={this.props.name}
+                            isMostRecentCard={i === 0}
                         />
                     })
                     }

@@ -6,7 +6,7 @@ import {iconForStatusEffect} from "../../lib/statusEffects";
 import "./StatusEffectTracker.css";
 
 export function StatusEffectTracker({className, statusEffects, immunities = [], onToggle}) {
-    return (<div className={classNames(className, "StatusEffects")}>
+    return (<div className={classNames("StatusEffects", className)}>
         {Object.keys(statusEffects).map((s) => {
             const active = statusEffects[s];
             const immune = immunities.includes(s);

@@ -1,4 +1,4 @@
-.Deck--Card {
+.Deck--Card--Container {
     border: 1px solid black;
     width: 250px;
     margin-top: 4px;
@@ -6,6 +6,7 @@
     padding: 6px;
     box-sizing: border-box;
     text-align: center;
+    position: relative;
 }
 
 .Deck--Card--MostRecent {
@@ -35,4 +36,27 @@
 .Deck--Card--EndActionShuffle {
     background: black;
     border-radius: 50%;
+}
+
+.Deck--Card--UndoCover {
+}
+
+.Deck--Card--UndoCover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    opacity: 0;
+}
+
+.Deck--Card--UndoCover:hover {
+    opacity: 1;
 }
