@@ -2,6 +2,9 @@
     flex: auto;
     display: flex;
     padding: 4px;
+    padding-left: 12px;
+    background-color: grey;
+    color: white;
 }
 
 .MonsterTracker--Stats--Elite {
@@ -9,13 +12,12 @@
     align-items: flex-end;
     border: 4px solid gold;
     */
-    background: gold;
+    background-color: #D4AF37;
 }
 
 .MonsterTracker--Stats--Main {
     display: flex;
     flex-direction: column;
-    width: 25%;
     margin-right: 12px;
 }
 
@@ -35,6 +37,7 @@
 
 .MonsterTracker--Boss--ImmunitiesContainer {
     padding: 4px;
+    color: white;
 }
 
 .MonsterTracker--Boss--Immunities {

@@ -6,8 +6,8 @@ import {MOVE, ATTACK, RANGE, iconForStat} from "../../../lib/stats";
 
 import "./MonsterStats.css"
 
-export function MonsterStats({stats, elite}) {
-    return (<div className={classNames({"MonsterTracker--Stats": true, "MonsterTracker--Stats--Elite": elite})}>
+export function MonsterStats({className, stats, elite}) {
+    return (<div className={classNames({[className]: className, "MonsterTracker--Stats": true, "MonsterTracker--Stats--Elite": elite})}>
         <div className="MonsterTracker--Stats--Main">
             <div className="MonsterTracker--Stats--MainLine">
                 {stats.move || "–"}

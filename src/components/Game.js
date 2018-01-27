@@ -7,6 +7,7 @@ import {PlayerTrackers} from "./Players/PlayerTrackers"
 import {Deck as AttackModifierDeck} from "./AttackModifierDecks/Deck"
 import curseCard from "./AttackModifierDecks/curse_card.jpg";
 import blessCard from "./AttackModifierDecks/bless_card.jpg";
+import {MonsterDecks as MonsterDeckStats} from "./Monsters/MonsterDeckStats"
 import {MonsterDecks} from "./Monsters/MonsterDecks"
 import {MonsterTrackers} from "./Monsters/MonsterTrackers"
 import {
@@ -31,6 +32,7 @@ class GameComponent extends React.Component {
                 monsterDecks: true,
                 monsters: true,
             },
+            showStats: false,
         };
     }
 
@@ -137,8 +139,12 @@ class GameComponent extends React.Component {
                 </div>
                 <div className="Game--Section">
                     <h3>Monster Cards <span className="Game--Section--Toggle" onClick={() => this.toggleSection("monsterDecks")}>{this.state.showSections.monsterDecks ? "▾" : "▸"}</span></h3>
+                    <div className="Game--Monsters--StatsToggle">
+                        <label htmlFor="toggleStatsCheckbox">Toggle stats</label>
+                        <input id="toggleStatsCheckbox" type="checkbox" value={this.state.showStats} onChange={() => this.setState({showStats: !this.state.showStats})} />
+                    </div>
                     <div className={classNames({"Game--Section--HidePlayers": !this.state.showSections.monsterDecks})}>
-                        <MonsterDecks />
+                        {this.state.showStats ? <MonsterDeckStats /> : <MonsterDecks />}
                     </div>
                 </div>
             </div>

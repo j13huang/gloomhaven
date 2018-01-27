@@ -41,6 +41,10 @@
 .Game--Players {
 }
 
+.Game--Monsters--StatsToggle {
+    margin-bottom: 8px;
+}
+
 .Game--AttackModifierDecks {
     display: flex;
     flex-wrap: wrap;

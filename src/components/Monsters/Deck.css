@@ -1,6 +1,16 @@
 .Monsters--Deck--Container {
-    position: relative;
     margin-right: 8px;
+}
+
+.Monsters--Deck--Name {
+    text-align: center;
+}
+
+.Monsters--Deck--Stats {
+    width: 250px;
+    display: flex;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .Monsters--Deck--CardBack {

@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import * as classNames from "classnames";
 
 import {BOSS_STATS} from "../../../lib/monsters";
 import {STATUS_EFFECTS} from "../../../lib/statusEffects";
@@ -44,11 +45,9 @@ export class BossMonsterTrackerComponent extends React.Component {
         return (<div className="MonsterTracker--Container">
             <h5 className="MonsterTracker--Name">{this.props.boss.name}<button onClick={() => this.props.removeBoss(this.props.boss.name)}>X</button></h5>
             <div className="MonsterTracker">
-                <div className="MonsterTracker--Boss--StatsContainer">
-                    <div>
-                        <MonsterStats stats={stats} />
-                    </div>
-                    <div className="MonsterTracker--Boss--ImmunitiesContainer">
+                <div>
+                    <MonsterStats className="MonsterTracker--Boss--Stats" stats={stats} />
+                    <div className={classNames("MonsterTracker--Boss--Stats", "MonsterTracker--Boss--ImmunitiesContainer")}>
                         <div>Immunities:</div>
                         <div className="MonsterTracker--Boss--Immunities">
                             {stats.immunities && stats.immunities.map((s) =>
