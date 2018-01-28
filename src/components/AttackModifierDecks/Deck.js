@@ -2,14 +2,15 @@ import React from 'react';
 import {connect} from "react-redux";
 import * as classNames from "classnames";
 
+import {PerksModal} from "./PerksModal";
 import {Card} from "./Card";
-import cardBack from "./attack_modifier_card_back.jpg";
+import curseCard from "./curse.jpg";
+import blessCard from "./bless.jpg";
+import cardBack from "./card_back.jpg";
 import {CURSE, BLESS, shuffle, needsShuffle, END_ACTIONS, iconForEndAction} from "../../lib/cards";
 import {
-    resetCardsAction,
     revealNextCardAction,
     addCardAction,
-    togglePerkAction,
     selectors as attackModifierDecksSelectors,
 } from "../../store/attackModifierDecks";
 import {removePlayerAction} from "../../store/actions/players";
@@ -23,16 +24,6 @@ class DeckComponent extends React.Component {
             showPerks: false,
             discardingCards: [],
         };
-    }
-
-    togglePerkDisplay(showPerks) {
-        this.setState({showPerks});
-    }
-
-    shuffleCards(cards) {
-        this.setState({
-            discardingCards: shuffle(cards),
-        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -67,6 +58,16 @@ class DeckComponent extends React.Component {
         }
     }
 
+    togglePerksModal(showPerks) {
+        this.setState({showPerks});
+    }
+
+    shuffleCards(cards) {
+        this.setState({
+            discardingCards: shuffle(cards),
+        });
+    }
+
     render() {
         const {deck} = this.props;
         const willShuffle = needsShuffle(deck);
@@ -76,19 +77,11 @@ class DeckComponent extends React.Component {
                 {(this.props.name === "Monsters") ? <div className="Deck--MonsterPlaceholder" /> :
                     <div className="Deck--Class">
                         {deck.class}
-                        <button onClick={() => this.togglePerkDisplay(!this.state.showPerks)}>{`${this.state.showPerks ? "Hide" : "Show"} Perks`}</button>
+                        <button className="Deck--Perks--Button" onClick={() => this.togglePerksModal(!this.state.showPerks)}>Perks</button>
+                        {this.state.showPerks && <PerksModal name={this.props.name} onClose={() => this.togglePerksModal(false)} />}
                     </div>
                 }
-                {this.state.showPerks && <div className="Deck--Perks">
-                    {deck.perks.map((p, i) => (
-                        <div key={i} className="Deck--Perk">
-                            {p.used.map((u, j) => <input key={j} type="checkbox" checked={u} onChange={(event) => this.props.togglePerk(i, j, event.target.checked)} />)}
-                            <label className="Deck--Perk--Name">{p.description}</label>
-                        </div>)
-                    )}
-                    <button onClick={() => {this.props.resetCards()}}>Set deck</button>
-                </div>}
-                <div>
+                <div className="Deck--CardsLeft">
                     Cards left ({deck.cards.length - (deck.currentIndex + 1)})
                     <img
                         className={classNames({"Deck--Shuffle": true, "Deck--WillShuffle": willShuffle})}
@@ -96,18 +89,20 @@ class DeckComponent extends React.Component {
                         alt="shuffle"
                     />
                 </div>
-                <div>
+                <div className="Deck--AddCards--Container">
                     <button
+                        className="Deck--AddCards--Button"
                         disabled={(this.props.name === "Monsters" ? deck.curseCount : this.props.totalCurses) >= 10}
                         onClick={() => {this.props.addCard(CURSE)}}
                     >
-                        Add Curse ({deck.curseCount})
+                        +<img className="Deck--AddCards--Image"src={curseCard} alt="add curse" /> ({deck.curseCount})
                     </button>
                     <button
+                        className="Deck--AddCards--Button"
                         disabled={(this.props.name === "Monsters" ? deck.blessCount : this.props.totalBlessings) >= 10}
                         onClick={() => {this.props.addCard(BLESS)}}
                     >
-                        Add Blessing ({deck.blessCount})
+                        +<img className="Deck--AddCards--Image" src={blessCard} alt="add curse" /> ({deck.blessCount})
                     </button>
                 </div>
                 <div>
@@ -148,9 +143,7 @@ export const Deck = connect(
     }),
     (dispatch, ownProps) => ({
         removePlayer: () => dispatch(removePlayerAction(ownProps.name)),
-        resetCards: () => dispatch(resetCardsAction(ownProps.name)),
         addCard: (card) => dispatch(addCardAction(ownProps.name, card)),
         revealNextCard: () => dispatch(revealNextCardAction(ownProps.name)),
-        togglePerk: (perkIndex, perkCheckIndex) => dispatch(togglePerkAction(ownProps.name, perkIndex, perkCheckIndex)),
     }),
 )(DeckComponent);

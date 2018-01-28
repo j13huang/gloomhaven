@@ -1,0 +1,28 @@
+.PerksModal--Title{
+    text-align: center;
+}
+
+.PerksModal--Perks {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.PerksModal--Perk {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 4px;
+    text-align: left;
+}
+
+.PerksModal--Buttons--Description {
+    text-align: end;
+    font-size: x-small;
+    color: goldenrod;
+}
+
+.PerksModal--Buttons--Container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}

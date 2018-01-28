@@ -4,7 +4,7 @@
 }
 
 .Deck--MonsterPlaceholder {
-    height: 18px;
+    height: 17.5px;
 }
 
 .Deck--Class {
@@ -12,26 +12,32 @@
     color: purple;
 }
 
-.Deck--Perks {
-    max-width: 250px;
-    margin-bottom: 4px;
+.Deck--Perks--Button {
+    margin-left: 2px;
 }
 
-.Deck--Perk {
+.Deck--CardsLeft {
+    font-size: small;
+}
+
+.Deck--AddCards--Container {
     display: flex;
-    justify-content: flex-start;
-    border: 1px dashed black;
-    margin-bottom: 4px;
-    text-align: left;
+    justify-content: center;
 }
 
-.Deck--NeedsShuffle {
-    background-color: rgb(230, 88, 22);
+.Deck--AddCards--Button {
+    display: flex;
+}
+
+.Deck--AddCards--Image {
+    height: 14.4px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 .Deck--Shuffle {
     margin-left: 2px;
-    background-color: rgb(230, 88, 22);
+    background-color: black;
     height: 1rem;
     width: 1rem;
     border-radius: 50%;
@@ -54,8 +60,10 @@
 }
 
 .Deck--CardBack {
-    max-width: 250px;
+    max-width: 150px;
     border-radius: 16px;
+    display: block;
+    margin-bottom: 4px;
 }
 
 .Deck--PlayedCards {

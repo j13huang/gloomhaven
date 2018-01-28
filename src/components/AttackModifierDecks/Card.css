@@ -1,6 +1,13 @@
+.Deck--Card--Image {
+    max-width: 150px;
+    border-radius: 16px;
+    display: block;
+    margin-bottom: 4px;
+}
+
 .Deck--Card--Container {
     border: 1px solid black;
-    width: 250px;
+    width: 150px;
     margin-top: 4px;
     margin-bottom: 4px;
     padding: 6px;
@@ -36,9 +43,6 @@
 .Deck--Card--EndActionShuffle {
     background-color: black;
     border-radius: 50%;
-}
-
-.Deck--Card--UndoCover {
 }
 
 .Deck--Card--UndoCover {

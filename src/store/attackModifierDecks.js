@@ -22,7 +22,7 @@ function newAttackModifierDeck(cards, characterClass) {
     };
 }
 
-function resetCards(perks) {
+function applyPerks(perks) {
     let cards = BASE_ATTACK_MODIFIER_CARDS;
     perks.forEach((p) => {
         p.used.forEach((u) => {
@@ -132,23 +132,6 @@ function addCard(deck, card) {
     };
 }
 
-function togglePerk(perks, perkIndex, perkCheckIndex) {
-    return {
-        perks: [
-            ...perks.slice(0, perkIndex),
-            {
-                ...perks[perkIndex],
-                used: [
-                    ...perks[perkIndex].used.slice(0, perkCheckIndex),
-                    !perks[perkIndex].used[perkCheckIndex],
-                    ...perks[perkIndex].used.slice(perkCheckIndex + 1),
-                ],
-            },
-            ...perks.slice(perkIndex + 1),
-        ],
-    }
-}
-
 function shuffleDeck({cards, currentIndex}) {
     return {
         cards: shuffleCards(cards, currentIndex),
@@ -161,11 +144,10 @@ const defaultState = {
     Monsters: newAttackModifierDeck(BASE_ATTACK_MODIFIER_CARDS, ""),
 };
 
-const RESET_CARDS = "attackModifierDeck/cards/reset";
+const APPLY_PERKS = "attackModifierDeck/cards/perks/apply";
 const REVEAL_CARD = "attackModifierDeck/cards/next";
 const UNDO_CARD = "attackModifierDeck/cards/undo";
 const ADD_CARD = "attackModifierDeck/cards/add";
-const TOGGLE_PERK = "attackModifierDeck/perks/toggle";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -184,14 +166,14 @@ export const reducer = (state = defaultState, action) => {
                 ...newState,
             };
         }
-        case RESET_CARDS:
+        case APPLY_PERKS:
         {
-            const perks = state[action.deckName].perks;
             return {
                 ...state,
                 [action.deckName]: {
                     ...state[action.deckName],
-                    ...resetCards(perks),
+                    perks: action.perks,
+                    ...applyPerks(action.perks),
                 },
             };
         }
@@ -226,17 +208,6 @@ export const reducer = (state = defaultState, action) => {
                 },
             };
         }
-        case TOGGLE_PERK:
-        {
-            const perks = state[action.deckName].perks;
-            return {
-                ...state,
-                [action.deckName]: {
-                    ...state[action.deckName],
-                    ...togglePerk(perks, action.perkIndex, action.perkCheckIndex),
-                },
-            }
-        }
         case END_TURN:
         {
             return Object.keys(state).reduce((acc, name) => {
@@ -252,8 +223,8 @@ export const reducer = (state = defaultState, action) => {
     }
 }
 
-export function resetCardsAction(name) {
-    return {type: RESET_CARDS, deckName: name};
+export function applyPerksAction(name, perks) {
+    return {type: APPLY_PERKS, deckName: name, perks};
 }
 
 export function revealNextCardAction(name) {
@@ -266,10 +237,6 @@ export function undoCardAction(name) {
 
 export function addCardAction(name, card) {
     return {type: ADD_CARD, deckName: name, card};
-}
-
-export function togglePerkAction(name, perkIndex, perkCheckIndex) {
-    return {type: TOGGLE_PERK, deckName: name, perkIndex, perkCheckIndex};
 }
 
 function totalCards(state, getCardsFunc) {

@@ -5,8 +5,8 @@ import * as classNames from "classnames";
 import {Header} from "./Header/Header"
 import {PlayerTrackers} from "./Players/PlayerTrackers"
 import {Deck as AttackModifierDeck} from "./AttackModifierDecks/Deck"
-import curseCard from "./AttackModifierDecks/curse_card.jpg";
-import blessCard from "./AttackModifierDecks/bless_card.jpg";
+import curseCard from "./AttackModifierDecks/curse.jpg";
+import blessCard from "./AttackModifierDecks/bless.jpg";
 import {MonsterDecks as MonsterDeckStats} from "./Monsters/MonsterDeckStats"
 import {MonsterDecks} from "./Monsters/MonsterDecks"
 import {MonsterTrackers} from "./Monsters/MonsterTrackers"
