@@ -60,14 +60,60 @@ function revealNextCard({cards, currentIndex, playedCards, curseCount, blessCoun
     };
 }
 
-function undoCard({cards, currentIndex, playedCards, curseCount, blessCount}) {
+function handleUndoDiscard(cards, currentIndex, totalCount, cardToMatch) {
+    let newCards = cards;
+    let countIncrease = 0;
+
+    const matchedCards = newCards
+        .map((c, i) => [c, i, Math.random()])
+        .filter(([c, ..._], i) => i > currentIndex && c === cardToMatch)
+    if (totalCount === 10 && matchedCards.length > 0) {
+        // find largest random value aka pick one random number
+        const randomValue = {
+            value: matchedCards[0][2],
+            index: matchedCards[0][1],
+        };
+        matchedCards.forEach(([c, i, rand]) => {
+            if (rand > randomValue.value) {
+                randomValue.value = rand;
+                randomValue.index = i;
+            }
+        })
+        newCards = [
+            ...newCards.slice(0, randomValue.index),
+            ...newCards.slice(randomValue.index + 1),
+        ];
+    } else {
+        countIncrease = 1;
+    }
+
+    return [ newCards, countIncrease ];
+}
+
+function undoCard(state, deckName) {
+    const deck = state[deckName]
+    const {cards, currentIndex, playedCards, curseCount, blessCount} = deck;
+
+    let newCards = cards
+    let newCurseCount = curseCount;
+    let newBlessCount = blessCount;
+    let countIncrease = 0;
     let currentCard = cards[currentIndex];
-    const newPlayedCards = playedCards.slice(1);
+    if (currentCard === CURSE) {
+        const totalCurseCount = deckName === "Monsters" ? curseCount : totalCards(state, (deck) => deck.curseCount);
+        [newCards, countIncrease] = handleUndoDiscard(cards, currentIndex, totalCurseCount, CURSE);
+        newCurseCount = newCurseCount + countIncrease;
+    } else if (currentCard === BLESS) {
+        const totalBlessCount = deckName === "Monsters" ? blessCount : totalCards(state, (deck) => deck.blessCount);
+        [newCards, countIncrease] = handleUndoDiscard(cards, currentIndex, totalBlessCount, BLESS);
+        newBlessCount = newBlessCount + countIncrease;
+    }
     return {
+        cards: newCards,
         currentIndex: currentIndex - 1,
-        playedCards: newPlayedCards,
-        curseCount: currentCard === CURSE ? (curseCount + 1) : curseCount,
-        blessCount: currentCard  === BLESS ? (blessCount + 1) : blessCount,
+        playedCards: playedCards.slice(1),
+        curseCount: newCurseCount,
+        blessCount: newBlessCount,
     };
 }
 
@@ -165,7 +211,7 @@ export const reducer = (state = defaultState, action) => {
                 ...state,
                 [action.deckName]: {
                     ...state[action.deckName],
-                    ...undoCard(state[action.deckName]),
+                    ...undoCard(state, action.deckName),
                 },
             };
         }

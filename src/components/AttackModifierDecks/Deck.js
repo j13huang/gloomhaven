@@ -15,7 +15,6 @@ import {
 import {removePlayerAction} from "../../store/actions/players";
 
 import "./Deck.css";
-import { iconForElement } from '../../lib/elements/index';
 
 class DeckComponent extends React.Component {
     constructor(props) {
@@ -94,6 +93,7 @@ class DeckComponent extends React.Component {
                     <img
                         className={classNames({"Deck--Shuffle": true, "Deck--WillShuffle": willShuffle})}
                         src={iconForEndAction(END_ACTIONS.SHUFFLE)}
+                        alt="shuffle"
                     />
                 </div>
                 <div>
