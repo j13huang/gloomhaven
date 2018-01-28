@@ -29,6 +29,20 @@
     background-color: rgb(230, 88, 22);
 }
 
+.Deck--Shuffle {
+    margin-left: 2px;
+    background-color: rgb(230, 88, 22);
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    opacity: 0;
+    vertical-align: middle;
+}
+
+.Deck--WillShuffle {
+    opacity: 1;
+}
+
 .Deck--Button--Container {
     text-align: center;
 }
@@ -53,7 +67,7 @@
     /*
         can't use % for height transitions :(
     */
-    max-height: 888px;
+    max-height: 2208px;
     /*
     transition: max-height 3s linear, opacity 3s linear;
     */

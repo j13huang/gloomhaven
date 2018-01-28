@@ -4,7 +4,7 @@ import * as classNames from "classnames";
 
 import {Card} from "./Card";
 import cardBack from "./attack_modifier_card_back.jpg";
-import {CURSE, BLESS, shuffle, needsShuffle} from "../../lib/cards";
+import {CURSE, BLESS, shuffle, needsShuffle, END_ACTIONS, iconForEndAction} from "../../lib/cards";
 import {
     resetCardsAction,
     revealNextCardAction,
@@ -15,6 +15,7 @@ import {
 import {removePlayerAction} from "../../store/actions/players";
 
 import "./Deck.css";
+import { iconForElement } from '../../lib/elements/index';
 
 class DeckComponent extends React.Component {
     constructor(props) {
@@ -69,6 +70,7 @@ class DeckComponent extends React.Component {
 
     render() {
         const {deck} = this.props;
+        const willShuffle = needsShuffle(deck);
         return (
             <div className="Deck">
                 <h5 className="Deck--Name">{this.props.name}</h5>
@@ -87,7 +89,13 @@ class DeckComponent extends React.Component {
                     )}
                     <button onClick={() => {this.props.resetCards()}}>Set deck</button>
                 </div>}
-                <div>Cards left ({deck.cards.length - (deck.currentIndex + 1)})</div>
+                <div>
+                    Cards left ({deck.cards.length - (deck.currentIndex + 1)})
+                    <img
+                        className={classNames({"Deck--Shuffle": true, "Deck--WillShuffle": willShuffle})}
+                        src={iconForEndAction(END_ACTIONS.SHUFFLE)}
+                    />
+                </div>
                 <div>
                     <button
                         disabled={(this.props.name === "Monsters" ? deck.curseCount : this.props.totalCurses) >= 10}
