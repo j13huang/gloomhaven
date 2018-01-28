@@ -10,7 +10,7 @@ class PerksModalComponent extends React.Component {
     constructor(props) {
         super(props);
 
-        // taken from https://www.npmjs.com/package/react-modal#examples
+        // taken from https://github.com/reactjs/react-modal/tree/v3.1.11#examples
         this.customStyles = {
             content : {
                 top                   : '50%',
