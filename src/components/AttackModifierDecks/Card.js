@@ -20,13 +20,14 @@ function Value({value}) {
 }
 
 function CardComponent({className, card, isMostRecentCard, undoCard}) {
+    const propsClassName = className ? {[className]: true} : {};
     return (
         <div className={classNames({
                 "Deck--Card--Container": true,
                 "Deck--Card--Shuffle": card.endAction === END_ACTIONS.SHUFFLE,
                 "Deck--Card--Discard": card.endAction === END_ACTIONS.DISCARD,
                 "Deck--Card--MostRecent": isMostRecentCard,
-                [className]: true,
+                ...propsClassName
             })}>
             <Value value={card.modifier} />
             <Value value={card.extra} />

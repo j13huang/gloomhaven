@@ -139,9 +139,18 @@ class GameComponent extends React.Component {
                 </div>
                 <div className="Game--Section">
                     <h3>Monster Cards <span className="Game--Section--Toggle" onClick={() => this.toggleSection("monsterDecks")}>{this.state.showSections.monsterDecks ? "▾" : "▸"}</span></h3>
+                    {/*
+                    <ul className={classNames({"Game--original": true, "Game--test": this.state.showStats})}>
+                        {this.state.showStats && new Array(9).fill().map((_, i) => {
+                            return (<li key={i}>item {i}</li>);
+                        })}
+                    </ul>
+                    */}
                     <div className="Game--Monsters--StatsToggle">
-                        <label htmlFor="toggleStatsCheckbox">Toggle stats</label>
-                        <input id="toggleStatsCheckbox" type="checkbox" value={this.state.showStats} onChange={() => this.setState({showStats: !this.state.showStats})} />
+                        <label>
+                            <input id="showStatsCheckbox" type="checkbox" value={this.state.showStats} onChange={() => this.setState({showStats: !this.state.showStats})} />
+                            Show stats
+                        </label>
                     </div>
                     <div className={classNames({"Game--Section--HidePlayers": !this.state.showSections.monsterDecks})}>
                         {this.state.showStats ? <MonsterDeckStats /> : <MonsterDecks />}

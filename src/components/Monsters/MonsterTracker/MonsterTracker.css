@@ -15,12 +15,12 @@
 
 .MonsterTracker--StatsContainer {
     display: flex;
-    /*background: rgb(185, 130, 57);*/
+    /*background-color: rgb(185, 130, 57);*/
     color: white;
 }
 
 .MonsterTracker--Boss--Stats {
-    background: rgb(148, 13, 13);
+    background-color: rgb(148, 13, 13);
 }
 
 .MonsterTracker--StatusEffects--ToggleAll {

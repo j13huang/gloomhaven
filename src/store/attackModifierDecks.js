@@ -1,6 +1,6 @@
 import {shuffle} from "../lib/cards";
 import {newPerks} from "../lib/classes";
-import {END_ACTIONS, BASE_ATTACK_MODIFIER_CARDS, CURSE, BLESS} from "../lib/cards";
+import {END_ACTIONS, BASE_ATTACK_MODIFIER_CARDS, CURSE, BLESS, needsShuffle} from "../lib/cards";
 import {ADD_PLAYER, REMOVE_PLAYER} from "./actions/players";
 import {END_TURN} from "./actions/turn";
 
@@ -18,7 +18,6 @@ function newAttackModifierDeck(cards, characterClass) {
     return {
         ...newDeck(cards),
         class: characterClass,
-        needsShuffle: false,
         perks: newPerks(characterClass) || [],
     };
 }
@@ -41,7 +40,7 @@ function shuffleCards(cards, currentIndex) {
     return shuffle(filteredCards);
 }
 
-function revealNextCard({cards, currentIndex, playedCards, needsShuffle, curseCount, blessCount}) {
+function revealNextCard({cards, currentIndex, playedCards, curseCount, blessCount}) {
     let nextCards = cards;
     let nextIndex = currentIndex + 1;
     let nextPlayedCards = playedCards;
@@ -56,7 +55,6 @@ function revealNextCard({cards, currentIndex, playedCards, needsShuffle, curseCo
         cards: nextCards,
         currentIndex: nextIndex,
         playedCards: [nextCard].concat(nextPlayedCards),
-        needsShuffle: needsShuffle || (nextCard.endAction === END_ACTIONS.SHUFFLE),
         curseCount: nextCard === CURSE ? (curseCount - 1) : curseCount,
         blessCount: nextCard === BLESS ? (blessCount - 1) : blessCount,
     };
@@ -68,7 +66,6 @@ function undoCard({cards, currentIndex, playedCards, curseCount, blessCount}) {
     return {
         currentIndex: currentIndex - 1,
         playedCards: newPlayedCards,
-        needsShuffle: newPlayedCards.some((c) => c.endAction === END_ACTIONS.SHUFFLE),
         curseCount: currentCard === CURSE ? (curseCount + 1) : curseCount,
         blessCount: currentCard  === BLESS ? (blessCount + 1) : blessCount,
     };
@@ -111,7 +108,6 @@ function shuffleDeck({cards, currentIndex}) {
         cards: shuffleCards(cards, currentIndex),
         currentIndex: -1,
         playedCards: [],
-        needsShuffle: false,
     };
 }
 
@@ -201,7 +197,7 @@ export const reducer = (state = defaultState, action) => {
                 const deck = state[name];
                 acc[name] = {
                     ...deck,
-                    ...(deck.needsShuffle ? shuffleDeck(deck) : {playedCards: []}),
+                    ...(needsShuffle(deck) ? shuffleDeck(deck) : {playedCards: []}),
                 }
                 return acc;
             }, {});

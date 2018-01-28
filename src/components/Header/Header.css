@@ -2,7 +2,7 @@
     height: 36px;
     width: 100%;
     /*background-color: rgb(235, 159, 72);*/
-    background: white;
+    background-color: white;
     position: fixed;
     box-sizing: border-box;
     z-index: 1000;
@@ -19,7 +19,7 @@
 
 .Header--EndTurnButton {
     height: 36px;
-    background: inherit;
+    background-color: inherit;
 }
 
 .Header--EndTurnButton--Ready {
@@ -29,10 +29,10 @@
 
 @keyframes pulse {
     0%, 100% {
-      background-color: rgb(28, 119, 255);
+        background-color: rgb(28, 119, 255);
     }
     30%, 40% {
-      background-color: rgb(30, 255, 255);
+        background-color: rgb(30, 255, 255);
     }
 }
 

@@ -68,3 +68,10 @@ export const BLESS = {
 export function shuffle(cards) {
     return cards.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
 }
+
+export function needsShuffle({cards, currentIndex}) {
+    return cards
+        .filter((_, i) => i <= currentIndex)
+        .some((c) => c.endAction === END_ACTIONS.SHUFFLE);
+
+}

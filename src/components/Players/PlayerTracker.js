@@ -43,18 +43,19 @@ class PlayerTrackerComponent extends React.Component {
             <div className="PlayerTracker--Description">
                 <div className="PlayerTracker--Class">{this.props.player.class}</div>
                 <div className="PlayerTracker--LevelSelector">
-                    <label htmlFor={levelSelectID}>Level: </label>
-                    <select
-                        id={levelSelectID}
-                        disabled={this.props.hasMonstersInPlay}
-                        value={this.props.level}
-                        onChange={(event) => this.props.selectLevel(parseInt(event.target.value, 10))}
-                    >
-                        {new Array(9).fill().map((_, i) => {
-                            const level = i + 1;
-                            return (<option key={level} value={level}>{level}</option>);
-                        })}
-                    </select>
+                    <label>Level:
+                        <select
+                            id={levelSelectID}
+                            disabled={this.props.hasMonstersInPlay}
+                            value={this.props.level}
+                            onChange={(event) => this.props.selectLevel(parseInt(event.target.value, 10))}
+                        >
+                            {new Array(9).fill().map((_, i) => {
+                                const level = i + 1;
+                                return (<option key={level} value={level}>{level}</option>);
+                            })}
+                        </select>
+                    </label>
                 </div>
             {/*
                 <div>

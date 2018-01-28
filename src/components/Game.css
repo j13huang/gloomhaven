@@ -49,3 +49,16 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.Game--original {
+    border: 1px solid black;
+    overflow: hidden;
+    opacity: 1;
+    max-height: 100px;
+}
+
+.Game--test {
+    opacity: 0;
+    max-height: 0px;
+    transition: opacity 3s linear, max-height 3s linear;
+}

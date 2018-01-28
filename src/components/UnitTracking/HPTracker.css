@@ -23,6 +23,6 @@
 }
 
 .HPTracker--HP--Active {
-    background: red;
+    background-color: red;
     color: white;
 }
