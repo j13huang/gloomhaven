@@ -131,6 +131,6 @@ export const ElementTracker = connect(
         elements: state.elements,
     }),
     (dispatch) => ({
-        setElementStatus: (element, status) => dispatch(setStatusAction(element, status)),
+        setElementStatus: (element, status) => setStatusAction(dispatch, element, status),
     }),
 )(ElementTrackerComponent);

@@ -27,8 +27,8 @@ export const Monster = connect(
     },
     (dispatch, ownProps) => {
       return {
-        toggleStatusEffect: (s) => dispatch(toggleStatusEffectAction(ownProps.name, ownProps.index, s)),
-        setHP: (hp) => dispatch(setHPAction(ownProps.name, ownProps.index, hp)),
+        toggleStatusEffect: (s) => toggleStatusEffectAction(dispatch, ownProps.name, ownProps.index, s),
+        setHP: (hp) => setHPAction(dispatch, ownProps.name, ownProps.index, hp),
       };
     },
 )(MonsterComponent);

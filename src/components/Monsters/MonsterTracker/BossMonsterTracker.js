@@ -78,7 +78,7 @@ export const BossMonsterTracker = connect(
     },
     (dispatch, ownProps) => {
         return {
-            removeBoss: (name) => dispatch(removeBossAction(name)),
+            removeBoss: (name) => removeBossAction(dispatch, name),
         }
     },
 )(BossMonsterTrackerComponent);

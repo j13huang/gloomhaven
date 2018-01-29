@@ -246,7 +246,7 @@ export const Card = connect(
     () => ({}),
     (dispatch, ownProps) => {
         return {
-            undoCard: () => dispatch(undoCardAction(ownProps.name)),
+            undoCard: () => undoCardAction(dispatch, ownProps.name),
         };
     },
 )(CardComponent);

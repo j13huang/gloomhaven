@@ -1,13 +1,14 @@
 import React from 'react';
 import {connect} from "react-redux";
 import * as classNames from "classnames";
+import * as _ from "lodash";
 
 import {PerksModal} from "./PerksModal";
 import {Card} from "./Card";
 import curseCard from "./curse.jpg";
 import blessCard from "./bless.jpg";
 import cardBack from "./card_back.jpg";
-import {CURSE, BLESS, shuffle, needsShuffle, END_ACTIONS, iconForEndAction} from "../../lib/cards";
+import {CURSE, BLESS, needsShuffle, END_ACTIONS, iconForEndAction} from "../../lib/cards";
 import {
     revealNextCardAction,
     addCardAction,
@@ -31,22 +32,15 @@ class DeckComponent extends React.Component {
         // pretty hacky:
         // overdrawing the entire deck will change the current index but won't empty the played card list
         // (it will start with 1 card). Undoing a drawn card will decrease the current index by 1
-        // ending turn will empty the played card list
-        if (this.props.deck.currentIndex - nextProps.deck.currentIndex > 1 || (nextProps.deck.currentIndex !== -1 && nextProps.deck.playedCards.length === 0)) {
-            const shuffleDiscards = needsShuffle(this.props.deck);
+        // ending turn will empty the played card list and not change the currentIndex
+        const currentIndexDiff = this.props.deck.currentIndex - nextProps.deck.currentIndex;
+        if (currentIndexDiff > 1 ||
+            (currentIndexDiff === 0 && nextProps.deck.playedCards.length === 0) ||
+            !_.isEqual(this.props.deck.cards, nextProps.deck.cards)
+        ) {
             this.setState({
                 discardingCards: this.props.deck.playedCards,
-                shuffleDiscards,
-            }, () => {
-                /*
-                if (shuffleDiscards) {
-                    setTimeout(() => {
-                        const shuffleCards = () => this.shuffleCards(this.state.discardingCards);
-                        const intervalID = setInterval(shuffleCards, 200);
-                        setTimeout(() => clearInterval(intervalID), 1800);
-                    }, 200);
-                }
-                */
+                shuffleDiscards: needsShuffle(this.props.deck),
             });
             // timeout delay matching the animation/transition duration
             setTimeout(() => {
@@ -61,12 +55,6 @@ class DeckComponent extends React.Component {
 
     togglePerksModal(showPerks) {
         this.setState({showPerks});
-    }
-
-    shuffleCards(cards) {
-        this.setState({
-            discardingCards: shuffle(cards),
-        });
     }
 
     collapseRemainingCards(collapse) {
@@ -117,7 +105,7 @@ class DeckComponent extends React.Component {
                 <div>
                     <img src={cardBack} className="Deck--CardBack" onClick={() => {this.props.revealNextCard()}} alt="card back" />
                 </div>
-                <div className="Deck--PlayedCards">
+                {lastFiveCards.length > 0 && <div className="Deck--PlayedCards">
                     {lastFiveCards.map((card, i) => {
                         return <Card
                             key={i}
@@ -126,8 +114,8 @@ class DeckComponent extends React.Component {
                             isMostRecentCard={i === 0}
                         />
                     })}
-                </div>
-                <div className="Deck--RemainingCards"
+                </div>}
+                {remainingCards.length > 0 && <div className="Deck--RemainingCards"
                     onMouseEnter={() => this.collapseRemainingCards(false)}
                     onMouseLeave={() => this.collapseRemainingCards(true)}
                 >
@@ -141,7 +129,7 @@ class DeckComponent extends React.Component {
                     {(this.state.collapseRemainingCards) && <div className="Deck--RemainingCards--Cover">
                         <div className="Deck--RemainingCards--CoverText">{remainingCards.length} more card{remainingCards.length === 1 ? "" : "s"}...</div>
                     </div>}
-                </div>
+                </div>}
                 <div className={classNames({
                     "Deck--PlayedCards": true,
                     "Deck--DiscardingCards": this.state.discardingCards.length > 0,
@@ -150,6 +138,7 @@ class DeckComponent extends React.Component {
                         return <Card
                             key={i}
                             card={card}
+                            name={this.props.name}
                         >
                             {this.state.discardingCards.length > 0 &&
                                 <div className="Deck--DiscardingCards--Cover">{this.state.shuffleDiscards ? "Shuffling..." : ""}</div>
@@ -169,8 +158,8 @@ export const Deck = connect(
         totalBlessings: attackModifierDecksSelectors.totalBlessings(state),
     }),
     (dispatch, ownProps) => ({
-        removePlayer: () => dispatch(removePlayerAction(ownProps.name)),
-        addCard: (card) => dispatch(addCardAction(ownProps.name, card)),
-        revealNextCard: () => dispatch(revealNextCardAction(ownProps.name)),
+        removePlayer: () => removePlayerAction(dispatch, ownProps.name),
+        addCard: (card) => addCardAction(dispatch, ownProps.name, card),
+        revealNextCard: () => revealNextCardAction(dispatch, ownProps.name),
     }),
 )(DeckComponent);

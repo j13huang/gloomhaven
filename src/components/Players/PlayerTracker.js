@@ -100,10 +100,10 @@ export const PlayerTracker = connect(
     },
     (dispatch, ownProps) => {
         return {
-            selectLevel: (level) => dispatch(setLevelAction(ownProps.name, level)),
-            removePlayer: () => dispatch(removePlayerAction(ownProps.name)),
-            toggleStatusEffect: (statusEffect) => dispatch(toggleStatusEffectAction(ownProps.name, statusEffect)),
-            setHP: (hp) => dispatch(setHPAction(ownProps.name, hp)),
+            selectLevel: (level) => setLevelAction(dispatch, ownProps.name, level),
+            removePlayer: () => removePlayerAction(dispatch, ownProps.name),
+            toggleStatusEffect: (statusEffect) => toggleStatusEffectAction(dispatch, ownProps.name, statusEffect),
+            setHP: (hp) => setHPAction(dispatch, ownProps.name, hp),
         };
     },
 )(PlayerTrackerComponent);

@@ -117,12 +117,12 @@ export const reducer = (state = defaultState, action) => {
     }
 }
 
-export function revealNextCardsAction() {
-    return {type: REVEAL_CARDS};
+export function revealNextCardsAction(dispatch) {
+    dispatch({type: REVEAL_CARDS});
 }
 
-export function toggleActiveAction(name) {
-    return {type: TOGGLE_ACTIVE, name};
+export function toggleActiveAction(dispatch, name) {
+    dispatch({type: TOGGLE_ACTIVE, name});
 }
 
 export const selectors = {

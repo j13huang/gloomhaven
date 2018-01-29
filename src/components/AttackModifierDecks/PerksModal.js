@@ -78,7 +78,7 @@ export const PerksModal = connect(
     },
     (dispatch, ownProps) => {
         return {
-            applyPerks: (perks) => dispatch(applyPerksAction(ownProps.name, perks)),
+            applyPerks: (perks) => applyPerksAction(dispatch, ownProps.name, perks),
         };
     }
 )(PerksModalComponent);

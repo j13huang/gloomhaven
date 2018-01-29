@@ -223,20 +223,20 @@ export const reducer = (state = defaultState, action) => {
     }
 }
 
-export function applyPerksAction(name, perks) {
-    return {type: APPLY_PERKS, deckName: name, perks};
+export function applyPerksAction(dispatch, name, perks) {
+    dispatch({type: APPLY_PERKS, deckName: name, perks});
 }
 
-export function revealNextCardAction(name) {
-    return {type: REVEAL_CARD, deckName: name};
+export function revealNextCardAction(dispatch, name) {
+    dispatch({type: REVEAL_CARD, deckName: name});
 }
 
-export function undoCardAction(name) {
-    return {type: UNDO_CARD, deckName: name};
+export function undoCardAction(dispatch, name) {
+    dispatch({type: UNDO_CARD, deckName: name});
 }
 
-export function addCardAction(name, card) {
-    return {type: ADD_CARD, deckName: name, card};
+export function addCardAction(dispatch, name, card) {
+    dispatch({type: ADD_CARD, deckName: name, card});
 }
 
 function totalCards(state, getCardsFunc) {

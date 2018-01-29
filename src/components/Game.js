@@ -172,6 +172,6 @@ export const Game = connect(
         };
     },
     (dispatch, ownProps) => ({
-        addPlayer: (name, characterClass) => dispatch(addPlayerAction(name, characterClass)),
+        addPlayer: (name, characterClass) => addPlayerAction(dispatch, name, characterClass),
     }),
 )(GameComponent);

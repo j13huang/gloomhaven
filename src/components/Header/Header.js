@@ -38,6 +38,6 @@ export const Header = connect(
         };
     },
     (dispatch) => ({
-        endTurn: () => dispatch(endTurnAction()),
+        endTurn: () => endTurnAction(dispatch),
     }),
 )(HeaderComponent);

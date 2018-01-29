@@ -9,35 +9,35 @@
 }
 
 .AttackModifierCard--Image {
-    max-width: 150px;
+    max-width: 200px;
     display: block;
 }
 
 .AttackModifierCard--MonsterCover {
     position: absolute;
-    top: 77px;
-    left: 8px;
+    top: 103px;
+    left: 12px;
     background-image: url("./deck_player_cover.png");
     background-size: contain;
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
 }
 
 .AttackModifierCard--ExtraIcon {
     position: absolute;
-    top: 40px;
+    top: 52px;
     left: 8px;
-    height: 24px;
-    width: 24px;
+    height: 36px;
+    width: 36px;
 }
 
 .AttackModifierCard--RollingIcon {
     position: absolute;
-    top: 40px;
-    left: 116px;
-    height: 24px;
-    width: 24px;
+    top: 52px;
+    left: 154px;
+    height: 36px;
+    width: 36px;
 }
 
 .AttackModifierCard--CustomCard {
@@ -46,10 +46,10 @@
 
 .AttackModifierCard--MainIcon {
     position: absolute;
-    top: 19px;
-    left: 43px;
-    height: 64px;
-    width: 64px;
+    top: 20px;
+    left: 53px;
+    height: 93px;
+    width: 93px;
     border-radius: 50%;
 }
 
@@ -57,20 +57,21 @@
     position: absolute;
     font-family: "PirataOne";
     color: rgb(232, 230, 231);
-    top: 58px;
+    top: 76px;
     width: 100%;
     text-align: center;
+    font-size: 24px;
 }
 
 .AttackModifierCard--CustomExtra--Container {
     position: absolute;
     font-family: "PirataOne";
     border: 1px solid white;
-    top: 36px;
+    top: 50px;
     left: 3px;
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
 }
 
 .AttackModifierCard--CustomExtra {
@@ -81,13 +82,13 @@
     position: absolute;
     top: 2px;
     left: 0;
-    height: 20px;
+    height: 24px;
     width: 100%;
 }
 
 .AttackModifierCard--CustomExtra--Value {
     position: absolute;
-    top: 5px;
+    top: 8px;
     /* left: 4px; */
     width: 100%;
     font-size: 14px;
@@ -95,32 +96,32 @@
 
 .AttackModifierCard--CustomExtra--SelfText {
     position: absolute;
-    top: 20px;
+    top: 26px;
     width: 100%;
     color: white;
-    font-size: 8px;
+    font-size: 10px;
 }
 
 .AttackModifierCard--PlusThree {
     font-family: "PirataOne";
     color: rgb(232, 230, 231);
-    background-image: radial-gradient(closest-corner at 24px 18px, rgb(251, 248, 220) 0px, rgba(139, 183, 93, 0.9) 40px, transparent 64px);
+    background-image: radial-gradient(closest-corner at 34px 22px, rgb(251, 248, 220) 0px, rgba(102, 151, 65, 0.9) 80px, transparent 140px);
     text-shadow: 1px 1px rgb(50, 64, 25), -1px -1px rgb(50, 64, 25);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 64px;
-    box-sizing: border-box;
-    padding-left: 4px;
+    font-size: 80px;
 }
 
 .AttackModifierCard--PlusThree--Plus {
-    padding-bottom: 6px;
-    margin-right: -4px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    margin-right: -5px;
 }
 
 .AttackModifierCard--PlusThree--Three {
-    margin-right: 8px;
+    margin-right: 11px;
+    margin-top: 6px;
 }
 
 .AttackModifierCard--ColorCover {
@@ -132,31 +133,31 @@
 }
 
 .AttackModifierCard--AirColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(152, 176, 181, 0.8) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(152, 176, 181, 0.8) 50px, transparent 100%);
 }
 
 .AttackModifierCard--DarkColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(33, 41, 49, 0.8) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(33, 41, 49, 0.8) 50px, transparent 100%);
 }
 
 .AttackModifierCard--FireColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(227, 66, 31, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(227, 66, 31, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--EarthColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(125, 168, 42, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(125, 168, 42, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--IceColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(86, 200, 239, 0.5) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(86, 200, 239, 0.5) 50px, transparent 100%);
 }
 
 .AttackModifierCard--LightColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(236, 166, 16, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(236, 166, 16, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--DisarmColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(98, 116, 122, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(98, 116, 122, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--DisarmColor {
@@ -164,7 +165,7 @@
 }
 
 .AttackModifierCard--ImmobilizeColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(153, 40, 45, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(153, 40, 45, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--ImmobilizeColor {
@@ -172,7 +173,7 @@
 }
 
 .AttackModifierCard--InvisibleColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(25, 23, 21, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(25, 23, 21, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--InvisibleColor {
@@ -180,7 +181,7 @@
 }
 
 .AttackModifierCard--MuddleColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(105, 78, 59, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(105, 78, 59, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--MuddleColor {
@@ -188,7 +189,7 @@
 }
 
 .AttackModifierCard--PoisonColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(116, 124, 94, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(116, 124, 94, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--PoisonColor {
@@ -196,7 +197,7 @@
 }
 
 .AttackModifierCard--StrengthenColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(89, 150, 214, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(89, 150, 214, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--StrengthenColor {
@@ -204,7 +205,7 @@
 }
 
 .AttackModifierCard--StunColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(46, 64, 103, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(46, 64, 103, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--StunColor {
@@ -212,7 +213,7 @@
 }
 
 .AttackModifierCard--WoundColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(230, 80, 29, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(230, 80, 29, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--WoundColor {
@@ -220,7 +221,7 @@
 }
 
 .AttackModifierCard--PierceColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(199, 130, 62, 0.6) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(199, 130, 62, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--PierceColor {
@@ -228,7 +229,7 @@
 }
 
 .AttackModifierCard--AddTargetColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(169, 28, 34, 0.8) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(169, 28, 34, 0.8) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--AddTargetColor {
@@ -236,7 +237,7 @@
 }
 
 .AttackModifierCard--AddTargetColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(206, 45, 45 0.8) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(206, 45, 45 0.8) 50px, transparent 100%);
 }
 
 .AttackModifierCard--HealColor {
@@ -251,16 +252,16 @@
     position: absolute;
     font-family: "PirataOne";
     color: white;
-    font-size: 18px;
-    background-color: rgba(199, 130, 62, 0.8);
-    top: 40px;
-    left: 58px;
+    font-size: 24px;
+    background-color: rgba(199, 130, 62, 1);
+    top: 52px;
+    left: 76px;
     padding-left: 2px;
     padding-right: 2px;
 }
 
 .AttackModifierCard--PushColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(72, 72, 74, 0.8) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(72, 72, 74, 0.8) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--PushColor {
@@ -268,7 +269,7 @@
 }
 
 .AttackModifierCard--PullColor {
-    background-image: radial-gradient(circle, transparent 32px, rgba(72, 72, 74, 0.8) 40px, transparent 100%);
+    background-image: radial-gradient(circle, transparent 40px, rgba(72, 72, 74, 0.8) 50px, transparent 100%);
 }
 
 .AttackModifierCard--MainIcon--PullColor {
@@ -277,7 +278,7 @@
 
 .Deck--Card--Container {
     border: 1px solid black;
-    width: 150px;
+    width: 200px;
     margin-top: 4px;
     margin-bottom: 4px;
     padding: 6px;

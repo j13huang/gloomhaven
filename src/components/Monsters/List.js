@@ -85,10 +85,10 @@ export const List = connect(
     },
     (dispatch, ownProps) => {
         return {
-            setLevelAdjustment: (levelAdjustment) => {dispatch(setLevelAdjustmentAction(levelAdjustment))},
-            addBoss: (name, scenarioLevel, numPlayers) => {dispatch(setBossAction(name, scenarioLevel, numPlayers))},
-            addMonsters: (monsterNames, scenarioLevel) => {dispatch(addMonstersAction(monsterNames, scenarioLevel))},
-            resetMonsters: (monsterNames) => {dispatch(resetMonstersAction(monsterNames))},
+            setLevelAdjustment: (levelAdjustment) => {setLevelAdjustmentAction(dispatch, levelAdjustment)},
+            addBoss: (name, scenarioLevel, numPlayers) => {setBossAction(dispatch, name, scenarioLevel, numPlayers)},
+            addMonsters: (monsterNames, scenarioLevel) => {addMonstersAction(dispatch, monsterNames, scenarioLevel)},
+            resetMonsters: (monsterNames) => {resetMonstersAction(dispatch, monsterNames)},
         };
     },
 )(ListComponent);

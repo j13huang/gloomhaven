@@ -81,12 +81,12 @@ export const MonsterTracker = connect(
     },
     (dispatch, ownProps) => {
         return {
-            removeMonster: () => {dispatch(removeMonsterAction(ownProps.name))},
-            toggleAlive: (i, scenarioLevel) => dispatch(toggleAliveAction(ownProps.name, i, scenarioLevel)),
-            toggleElite: (i, scenarioLevel) => dispatch(toggleEliteAction(ownProps.name, i, scenarioLevel)),
-            toggleActive: (active) => {dispatch(toggleActiveAction(ownProps.name, active))},
+            removeMonster: () => {removeMonsterAction(dispatch, ownProps.name)},
+            toggleAlive: (i, scenarioLevel) => toggleAliveAction(dispatch, ownProps.name, i, scenarioLevel),
+            toggleElite: (i, scenarioLevel) => toggleEliteAction(dispatch, ownProps.name, i, scenarioLevel),
+            toggleActive: (active) => {toggleActiveAction(dispatch, ownProps.name, active)},
             toggleAllStatusEffects: (statusEffect) =>
-                dispatch(toggleAllStatusEffectsAction(ownProps.name, statusEffect)),
+                toggleAllStatusEffectsAction(dispatch, ownProps.name, statusEffect),
         };
     },
 )(MonsterTrackerComponent);

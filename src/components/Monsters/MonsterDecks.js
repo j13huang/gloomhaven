@@ -64,8 +64,8 @@ export const MonsterDecks = connect(
     },
     (dispatch) => {
         return {
-            endTurn: () => dispatch(endTurnAction()),
-            revealNextCards: () => {dispatch(revealNextCardsAction())},
+            endTurn: () => endTurnAction(dispatch),
+            revealNextCards: () => {revealNextCardsAction(dispatch)},
         };
     },
 )(MonsterDecksComponent);

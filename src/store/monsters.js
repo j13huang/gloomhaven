@@ -168,24 +168,24 @@ export const reducer = (state = defaultState, action) => {
     }
 }
 
-export function toggleAliveAction(name, index, level) {
-    return {type: TOGGLE_ALIVE, name, index, level};
+export function toggleAliveAction(dispatch, name, index, level) {
+    dispatch({type: TOGGLE_ALIVE, name, index, level});
 }
 
-export function toggleEliteAction(name, index, level) {
-    return {type: TOGGLE_ELITE, name, index, level};
+export function toggleEliteAction(dispatch, name, index, level) {
+    dispatch({type: TOGGLE_ELITE, name, index, level});
 }
 
-export function toggleAllStatusEffectsAction(name, statusEffect) {
-    return {type: TOGGLE_ALL_STATUS_EFFECTS, name, statusEffect};
+export function toggleAllStatusEffectsAction(dispatch, name, statusEffect) {
+    dispatch({type: TOGGLE_ALL_STATUS_EFFECTS, name, statusEffect});
 }
 
-export function toggleStatusEffectAction(name, index, statusEffect) {
-    return {type: TOGGLE_STATUS_EFFECT, name, index, statusEffect};
+export function toggleStatusEffectAction(dispatch, name, index, statusEffect) {
+    dispatch({type: TOGGLE_STATUS_EFFECT, name, index, statusEffect});
 }
 
-export function setHPAction(name, index, hp) {
-    return {type: SET_HP, name, index, hp};
+export function setHPAction(dispatch, name, index, hp) {
+    dispatch({type: SET_HP, name, index, hp});
 }
 
 export const selectors = {

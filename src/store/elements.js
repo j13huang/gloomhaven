@@ -26,6 +26,6 @@ export const reducer = (state = defaultState, action) => {
     }
 }
 
-export function setStatusAction(element, status) {
-    return {type: SET_STATUS, element, status};
+export function setStatusAction(dispatch, element, status) {
+    dispatch({type: SET_STATUS, element, status});
 }

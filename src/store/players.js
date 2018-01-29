@@ -111,20 +111,20 @@ export const reducer = (state = defaultState, action) => {
     }
 }
 
-export function setLevelAction(name, level) {
-    return {type: SET_LEVEL, name, level};
+export function setLevelAction(dispatch, name, level) {
+    dispatch({type: SET_LEVEL, name, level});
 }
 
-export function setLevelAdjustmentAction(levelAdjustment) {
-    return {type: SET_LEVEL_ADJUSTMENT, levelAdjustment};
+export function setLevelAdjustmentAction(dispatch, levelAdjustment) {
+    dispatch({type: SET_LEVEL_ADJUSTMENT, levelAdjustment});
 }
 
-export function toggleStatusEffectAction(name, statusEffect) {
-    return {type: TOGGLE_STATUS_EFFECT, name, statusEffect};
+export function toggleStatusEffectAction(dispatch, name, statusEffect) {
+    dispatch({type: TOGGLE_STATUS_EFFECT, name, statusEffect});
 }
 
-export function setHPAction(name, hp) {
-    return {type: SET_HP, name, hp};
+export function setHPAction(dispatch, name, hp) {
+    dispatch({type: SET_HP, name, hp});
 }
 
 function calculateScenarioLevel(players) {
