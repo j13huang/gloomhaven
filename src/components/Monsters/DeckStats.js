@@ -22,7 +22,6 @@ export function Deck({name, level, card, active, stats}) {
         <div className="Monsters--Deck--Container">
             <div className="Monsters--Deck--CardBack">
                 {statsSection}
-                <div className="Monsters--Deck--CardBackName">{name}</div>
                 {!active && <div className={"Monsters--Deck--InactiveCover"}>
                     Inactive
                 </div>}
