@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 
 import xpIcon from "./xp.svg";
+//import xpIcon from "./xp_white.svg";
 import {BonusSelectors} from "../UnitTracking/BonusSelectors";
 import {StatusEffectTracker} from "../UnitTracking/StatusEffectTracker";
 import {HPTracker} from "../UnitTracking/HPTracker";

@@ -42,6 +42,11 @@
     height: 24px;
     width: 24px;
     display: block;
+    /*
+    padding: 2px;
+    background-color: blue;
+    border-radius: 50%;
+    */
 }
 
 .PlayerTracker--XP--Buttons {
