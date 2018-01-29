@@ -23,6 +23,7 @@ class DeckComponent extends React.Component {
         this.state = {
             showPerks: false,
             discardingCards: [],
+            collapseRemainingCards: true,
         };
     }
 
@@ -47,7 +48,7 @@ class DeckComponent extends React.Component {
                 }
                 */
             });
-            // timeout delay matching the transition/animation duration
+            // timeout delay matching the animation/transition duration
             setTimeout(() => {
                 this.setState({
                     discardingCards: [],
@@ -68,9 +69,17 @@ class DeckComponent extends React.Component {
         });
     }
 
+    collapseRemainingCards(collapse) {
+        this.setState({
+            collapseRemainingCards: collapse,
+        });
+    }
+
     render() {
         const {deck} = this.props;
         const willShuffle = needsShuffle(deck);
+        const lastFiveCards = deck.playedCards.slice(0, 5);
+        const remainingCards = deck.playedCards.slice(5);
         return (
             <div className="Deck">
                 <h5 className="Deck--Name">{this.props.name}</h5>
@@ -109,25 +118,43 @@ class DeckComponent extends React.Component {
                     <img src={cardBack} className="Deck--CardBack" onClick={() => {this.props.revealNextCard()}} alt="card back" />
                 </div>
                 <div className="Deck--PlayedCards">
-                    {deck.playedCards && deck.playedCards.map((card, i) => {
+                    {lastFiveCards.map((card, i) => {
                         return <Card
                             key={i}
                             card={card}
                             name={this.props.name}
                             isMostRecentCard={i === 0}
                         />
-                    }) }
+                    })}
+                </div>
+                <div className="Deck--RemainingCards"
+                    onMouseEnter={() => this.collapseRemainingCards(false)}
+                    onMouseLeave={() => this.collapseRemainingCards(true)}
+                >
+                    {remainingCards.map((card, i) => {
+                        return <Card
+                            key={i}
+                            card={card}
+                            name={this.props.name}
+                        />;
+                    })}
+                    {(this.state.collapseRemainingCards) && <div className="Deck--RemainingCards--Cover">
+                        <div className="Deck--RemainingCards--CoverText">{remainingCards.length} more card{remainingCards.length === 1 ? "" : "s"}...</div>
+                    </div>}
                 </div>
                 <div className={classNames({
                     "Deck--PlayedCards": true,
                     "Deck--DiscardingCards": this.state.discardingCards.length > 0,
-                    "Deck--DiscardingCards--Shuffle": this.state.shuffleDiscards,
                 })}>
                     {this.state.discardingCards.map((card, i) => {
                         return <Card
                             key={i}
                             card={card}
-                        />
+                        >
+                            {this.state.discardingCards.length > 0 &&
+                                <div className="Deck--DiscardingCards--Cover">{this.state.shuffleDiscards ? "Shuffling..." : ""}</div>
+                            }
+                        </Card>
                     })}
                 </div>
             </div>

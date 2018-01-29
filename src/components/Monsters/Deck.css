@@ -22,6 +22,7 @@
     max-width: 250px;
     border-radius: 16px;
     display: block;
+    box-shadow: 4px 4px 4px grey;
 }
 
 .Monsters--Deck--InactiveCover {

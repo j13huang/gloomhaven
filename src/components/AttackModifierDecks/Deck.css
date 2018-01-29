@@ -63,7 +63,8 @@
     max-width: 150px;
     border-radius: 16px;
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 12px;
+    box-shadow: 4px 4px 4px grey;
 }
 
 .Deck--PlayedCards {
@@ -72,43 +73,72 @@
     flex-direction: column;
     align-items: center;
     opacity: 1;
+    margin-bottom: 4px;
     /*
         can't use % for height transitions :(
-        pick a height that is so large that it will never be too large
+        hard code pixels to 6 cards
     */
-    max-height: 8000px;
+    max-height: 630px;
+}
+
+.Deck--RemainingCards--Cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color:rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: white;
+    border-radius: 16px;
+}
+
+.Deck--RemainingCards--CoverText {
+    margin-top: 40px;
+}
+
+.Deck--RemainingCards {
+    position: relative;
+    overflow: hidden;
     /*
-    transition: max-height 3s linear, opacity 3s linear;
+        can't use % for height transitions :(
     */
+    max-height: 102px;
+    transition: max-height 2s cubic-bezier(0.2, 1, 1, 1);
+}
+
+.Deck--RemainingCards:hover {
+    /*
+        can't use % for height transitions :(
+        pick a height that is so large that it will never be too large (60 cards * (102 px height + 4px padding)
+    */
+    max-height: 6331.4px;
+    transition: max-height 3s ease-in;
 }
 
 .Deck--DiscardingCards {
     overflow: hidden;
     opacity: 0;
+    /*
+        can't use % for height transitions :(
+        hard code pixels to 1 card
+    max-height: 105px;
+    */
     max-height: 0;
     transition: max-height 1.2s ease-out, opacity 2.5s ease-out;
 }
 
-.Deck--DiscardingCards:after {
-    content: "\A";
-    position: absolute;
-    width:100%; height:100%;
-    top:0; left:0;
-    background-color:rgba(0,0,0,0.6);
-    opacity: 1;
-    transition: all 0.1s;
-}
-
-.Deck--DiscardingCards--Shuffle:after {
+.Deck--DiscardingCards--Cover {
     display: flex;
     justify-content: center;
     align-items: center;
-    content: "Shuffling...";
     position: absolute;
     width:100%; height:100%;
     top:0; left:0;
     background-color:rgba(0,0,0,0.6);
     color: white;
-    opacity: 1;
     transition: all 0.1s;
+    border-radius: 16px;
 }

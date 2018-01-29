@@ -194,7 +194,7 @@ function getExtraImage(card) {
     />);
 }
 
-function CardComponent({className, card, name, isMostRecentCard, undoCard}) {
+function CardComponent({className, card, name, isMostRecentCard, undoCard, children}) {
     const propsClassName = className ? {[className]: true} : {};
     const cardImage = getCardImage(card, "AttackModifierCard--Image");
     if (cardImage) {
@@ -209,8 +209,9 @@ function CardComponent({className, card, name, isMostRecentCard, undoCard}) {
                     className="AttackModifierCard--RollingIcon"
                     alt="rolling"
                 />}
+                {isMostRecentCard && <div className="AttackModifierCard--UndoCover" onClick={() => undoCard()}>Undo</div>}
+                {children}
             </div>
-            {isMostRecentCard && <div className="AttackModifierCard--UndoCover" onClick={() => undoCard()}>Undo</div>}
         </div>);
     }
     return (

@@ -120,7 +120,7 @@ function undoCard(state, deckName) {
 function addCard(deck, card) {
     // in case of -1 index
     const currentIndex = Math.max(0, deck.currentIndex);
-    const randomIndex = (Math.random() * (deck.cards.length - currentIndex)) + currentIndex;
+    const randomIndex = Math.ceil(Math.random() * (deck.cards.length - currentIndex)) + currentIndex;
     return {
         cards: [
             ...deck.cards.slice(0, randomIndex),

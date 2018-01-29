@@ -1,12 +1,11 @@
-.AttackModifierCard--Container {
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 4px;
+.AttackModifierCard--Container+.AttackModifierCard--Container {
+    margin-top: 4px;
 }
 
 .AttackModifierCard--ImageContainer {
     position: relative;
+    overflow: hidden;
+    border-radius: 16px;
 }
 
 .AttackModifierCard--Image {
