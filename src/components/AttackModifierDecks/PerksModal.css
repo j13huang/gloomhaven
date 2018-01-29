@@ -1,5 +1,7 @@
 .PerksModal--Title{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .PerksModal--Perks {
@@ -14,6 +16,35 @@
     margin-bottom: 4px;
     text-align: left;
 }
+
+.PerksModal--CardIcon {
+    height: 1.5rem;
+    margin-left: 0.5rem;
+    border-radius: 4px;
+}
+
+.PerksModal--MinusOne--Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    font-family: "PirataOne";
+    font-size: 40px;
+}
+
+.PerksModal--ItemIcon {
+    margin-right: 1rem;
+    height: 4rem;
+    border: 1px solid brown;
+    border-radius: 4px;
+}
+
+.PerksModal--MinusOne--Select {
+    margin-left: 1rem;
+    font-family: "PirataOne";
+    font-size: 40px;
+}
+
 
 .PerksModal--Buttons--Description {
     text-align: end;

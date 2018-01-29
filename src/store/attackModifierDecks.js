@@ -1,6 +1,6 @@
 import {shuffle} from "../lib/cards";
 import {newPerks} from "../lib/classes";
-import {END_ACTIONS, BASE_DECK, CURSE, BLESS, needsShuffle} from "../lib/cards";
+import {END_ACTIONS, BASE_DECK, BASE_CARDS, CURSE, BLESS, needsShuffle} from "../lib/cards";
 import {ADD_PLAYER, REMOVE_PLAYER} from "./actions/players";
 import {END_TURN} from "./actions/turn";
 
@@ -19,10 +19,12 @@ function newAttackModifierDeck(cards, characterClass) {
         ...newDeck(cards),
         class: characterClass,
         perks: newPerks(characterClass) || [],
+        // from items
+        minusOneCards: 0,
     };
 }
 
-function applyPerks(perks) {
+function applyPerks(perks, minusOneCards) {
     let cards = BASE_DECK;
     perks.forEach((p) => {
         p.used.forEach((u) => {
@@ -31,6 +33,7 @@ function applyPerks(perks) {
             }
         });
     });
+    cards = cards.concat(new Array(minusOneCards).fill(BASE_CARDS.MINUS_ONE));
     return newDeck(cards);
 }
 
@@ -173,7 +176,8 @@ export const reducer = (state = defaultState, action) => {
                 [action.deckName]: {
                     ...state[action.deckName],
                     perks: action.perks,
-                    ...applyPerks(action.perks),
+                    minusOneCards: action.minusOneCards,
+                    ...applyPerks(action.perks, action.minusOneCards),
                 },
             };
         }
@@ -223,8 +227,8 @@ export const reducer = (state = defaultState, action) => {
     }
 }
 
-export function applyPerksAction(dispatch, name, perks) {
-    dispatch({type: APPLY_PERKS, deckName: name, perks});
+export function applyPerksAction(dispatch, name, perks, minusOneCards) {
+    dispatch({type: APPLY_PERKS, deckName: name, perks, minusOneCards});
 }
 
 export function revealNextCardAction(dispatch, name) {

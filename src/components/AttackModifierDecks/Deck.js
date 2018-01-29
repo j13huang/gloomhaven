@@ -74,7 +74,7 @@ class DeckComponent extends React.Component {
                 {(this.props.name === "Monsters") ? <div className="Deck--MonsterPlaceholder" /> :
                     <div className="Deck--Class">
                         {deck.class}
-                        <button className="Deck--Perks--Button" onClick={() => this.togglePerksModal(!this.state.showPerks)}>Perks</button>
+                        <button className="Deck--Perks--Button" onClick={() => this.togglePerksModal(!this.state.showPerks)}>Edit Deck</button>
                         {this.state.showPerks && <PerksModal name={this.props.name} onClose={() => this.togglePerksModal(false)} />}
                     </div>
                 }

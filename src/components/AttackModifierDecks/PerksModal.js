@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import Modal from 'react-modal';
 
 import { applyPerksAction } from "../../store/attackModifierDecks";
+import minusOneCard from "./-1.jpg";
+import minusOneItemIcon from "./minusOneItemIcon.svg";
 
 import "./PerksModal.css";
 
@@ -24,6 +26,7 @@ class PerksModalComponent extends React.Component {
 
         this.state = {
             perks: props.initialPerks,
+            minusOneCards: props.initialMinusOneCards,
         };
     }
 
@@ -44,15 +47,22 @@ class PerksModalComponent extends React.Component {
         });
     }
 
+    setMinusOneCards(minusOneCards) {
+        this.setState({
+            minusOneCards,
+        });
+    }
+
     applyPerks() {
-        this.props.applyPerks(this.state.perks);
+        this.props.applyPerks(this.state.perks, this.state.minusOneCards);
         this.props.onClose();
     }
 
     render() {
         return (<Modal isOpen contentLabel="Perks" style={this.customStyles} >
-            <h3 className="PerksModal--Title">{this.props.class} Perks</h3>
+            <h2 className="PerksModal--Title">{this.props.class}</h2>
             <div className="PerksModal--Perks">
+                <h3 className="PerksModal--Title">Perks</h3>
                 {this.state.perks.map((p, i) => (
                     <div key={i} className="PerksModal--Perk">
                         {p.used.map((u, j) => <input key={j} type="checkbox" checked={u} onChange={() => this.togglePerk(i, j)} />)}
@@ -60,7 +70,19 @@ class PerksModalComponent extends React.Component {
                     </div>)
                 )}
             </div>
-            <div className="PerksModal--Buttons--Description">Applying new perks will reset your deck with the new cards</div>
+            <div>
+                <h3 className="PerksModal--Title">Add <img className="PerksModal--CardIcon" src={minusOneCard} alt="-1 card"/></h3>
+                <div className="PerksModal--MinusOne--Container">
+                    <img className="PerksModal--ItemIcon" src={minusOneItemIcon} alt="-1"/>
+                    x
+                    <select className="PerksModal--MinusOne--Select" value={this.state.minusOneCards} onChange={(event) => this.setMinusOneCards(parseInt(event.target.value, 10))}>
+                        {new Array(6).fill().map((_, i) => {
+                            return <option key={i} value={i}>{i}</option>
+                        })}
+                    </select>
+                </div>
+            </div>
+            <div className="PerksModal--Buttons--Description">Applying these cards will reset and reshuffle your deck</div>
             <div className="PerksModal--Buttons--Container">
                 <button onClick={() => this.props.onClose()}>Cancel</button>
                 <button onClick={() => this.applyPerks()}>Apply</button>
@@ -73,12 +95,13 @@ export const PerksModal = connect(
     (state, ownProps) => {
         return {
             initialPerks: state.attackModifierDecks[ownProps.name].perks,
+            initialMinusOneCards: state.attackModifierDecks[ownProps.name].minusOneCards,
             class: state.players.players[ownProps.name].class,
         };
     },
     (dispatch, ownProps) => {
         return {
-            applyPerks: (perks) => applyPerksAction(dispatch, ownProps.name, perks),
+            applyPerks: (perks, minusOneCards) => applyPerksAction(dispatch, ownProps.name, perks, minusOneCards),
         };
     }
 )(PerksModalComponent);
