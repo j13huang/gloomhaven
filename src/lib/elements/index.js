@@ -29,7 +29,7 @@ const elementIcons = {
     [DARK]: darkIcon,
 };
 
-export const ELEMENTS_LIST = Object.keys(elementIcons);
+export const ELEMENTS = Object.keys(elementIcons);
 
 export function iconForElement(name) {
     return {

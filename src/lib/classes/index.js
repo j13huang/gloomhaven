@@ -1,7 +1,9 @@
 import * as _ from "lodash";
 
-import {NUMBER_MODIFIERS, END_ACTIONS} from "../cards";
+import {BASE_CARDS, NUMBER_MODIFIERS, END_ACTIONS} from "../cards";
+import * as bonuses from "../bonuses";
 import * as elements from "../elements";
+import * as statusEffects from "../statusEffects";
 
 class CardsFilter {
     constructor(cards) {
@@ -49,7 +51,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(2, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
+                    .removeCards(2, BASE_CARDS.MINUS_ONE)
                     .cards(),
             },
             {
@@ -57,8 +59,8 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                    .removeCards(1, BASE_CARDS.MINUS_ONE)
+                    .addCards(1, BASE_CARDS.PLUS_ONE)
                     .cards(),
             },
             {
@@ -66,7 +68,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                    .addCards(2, BASE_CARDS.PLUS_ONE)
                     .cards(),
             },
             {
@@ -82,7 +84,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(3, {modifier: "push 1", endAction: END_ACTIONS.ROLLING})
+                    .addCards(3, {modifier: statusEffects.push(1), endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -90,7 +92,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(2, {modifier: "pierce 3", endAction: END_ACTIONS.ROLLING})
+                    .addCards(2, {modifier: bonuses.pierce(3), endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -98,7 +100,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: "stun", endAction: END_ACTIONS.ROLLING})
+                    .addCards(1, {modifier: statusEffects.STUN, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -106,8 +108,8 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: "disarm", endAction: END_ACTIONS.ROLLING})
-                    .addCards(1, {modifier: "muddle", endAction: END_ACTIONS.ROLLING})
+                    .addCards(1, {modifier: statusEffects.DISARM, endAction: END_ACTIONS.ROLLING})
+                    .addCards(1, {modifier: statusEffects.MUDDLE, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -115,7 +117,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: "add target", endAction: END_ACTIONS.ROLLING})
+                    .addCards(1, {modifier: bonuses.ADD_TARGET, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -123,7 +125,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: "shield 1, self"})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: bonuses.shield("1")})
                     .cards(),
             },
             {
@@ -131,7 +133,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                    .addCards(1, BASE_CARDS.PLUS_ONE)
                     .cards(),
             },
         ],
@@ -154,7 +156,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(4, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                    .removeCards(4, BASE_CARDS.PLUS_ZERO)
                     .cards(),
             },
             {
@@ -162,8 +164,8 @@ const CLASSES = {
                 used: [false, false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                    .removeCards(1, BASE_CARDS.MINUS_ONE)
+                    .addCards(1, BASE_CARDS.PLUS_ONE)
                     .cards(),
             },
             {
@@ -171,8 +173,8 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.MINUS_TWO})
-                    .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_TWO})
+                    .addCards(1, BASE_CARDS.MINUS_TWO)
+                    .addCards(2, BASE_CARDS.PLUS_TWO)
                     .cards(),
             },
             {
@@ -180,7 +182,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: "immobilize"})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: statusEffects.IMMOBILIZE})
                     .cards(),
             },
             {
@@ -188,7 +190,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_TWO, extra: "muddle"})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_TWO, extra: statusEffects.MUDDLE})
                     .cards(),
             },
             {
@@ -196,7 +198,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(2, {modifier: "push 2", endAction: END_ACTIONS.ROLLING})
+                    .addCards(2, {modifier: statusEffects.push(2)})
                     .cards(),
             },
             {
@@ -245,7 +247,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(2, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
+                    .removeCards(2, BASE_CARDS.MINUS_ONE)
                     .cards(),
             },
             {
@@ -253,7 +255,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(4, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                    .removeCards(4, BASE_CARDS.PLUS_ZERO)
                     .cards(),
             },
             {
@@ -261,8 +263,8 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
-                    .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_TWO})
+                    .removeCards(2, BASE_CARDS.PLUS_ONE)
+                    .addCards(2, BASE_CARDS.PLUS_TWO)
                     .cards(),
             },
             {
@@ -270,8 +272,8 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_TWO})
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                    .removeCards(1, BASE_CARDS.MINUS_TWO)
+                    .addCards(1, BASE_CARDS.PLUS_ZERO)
                     .cards(),
             },
             {
@@ -295,7 +297,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(3, {modifier: "pull 1", endAction: END_ACTIONS.ROLLING})
+                    .addCards(3, {modifier: statusEffects.pull(1), endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -303,7 +305,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(3, {modifier: "muddle", endAction: END_ACTIONS.ROLLING})
+                    .addCards(3, {modifier: statusEffects.MUDDLE, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -311,7 +313,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(2, {modifier: "immobilize", endAction: END_ACTIONS.ROLLING})
+                    .addCards(2, {modifier: statusEffects.IMMOBILIZE, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -319,7 +321,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: "stun", endAction: END_ACTIONS.ROLLING})
+                    .addCards(1, {modifier: statusEffects.STUN, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -327,8 +329,8 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: "disarm", endAction: END_ACTIONS.ROLLING})
-                    .addCards(1, {modifier: "muddle", endAction: END_ACTIONS.ROLLING})
+                    .addCards(1, {modifier: statusEffects.DISARM, endAction: END_ACTIONS.ROLLING})
+                    .addCards(1, {modifier: statusEffects.MUDDLE, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -356,7 +358,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(2, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
+                    .removeCards(2, BASE_CARDS.MINUS_ONE)
                     .cards(),
             },
             {
@@ -364,7 +366,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(4, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                    .removeCards(4, BASE_CARDS.PLUS_ZERO)
                     .cards(),
             },
             {
@@ -372,8 +374,8 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_TWO})
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                    .removeCards(1, BASE_CARDS.MINUS_TWO)
+                    .addCards(1, BASE_CARDS.PLUS_ZERO)
                     .cards(),
             },
             {
@@ -381,8 +383,8 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                    .removeCards(1, BASE_CARDS.MINUS_ONE)
+                    .addCards(1, BASE_CARDS.PLUS_ONE)
                     .cards(),
             },
             {
@@ -390,8 +392,8 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_TWO})
+                    .removeCards(1, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, BASE_CARDS.PLUS_TWO)
                     .cards(),
             },
             {
@@ -407,7 +409,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(2, {modifier: "pierce 3", endAction: END_ACTIONS.ROLLING})
+                    .addCards(2, {modifier: bonuses.pierce(3), endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -415,7 +417,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(2, {modifier: "poison", endAction: END_ACTIONS.ROLLING})
+                    .addCards(2, {modifier: statusEffects.POISON, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -423,7 +425,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(2, {modifier: "muddle", endAction: END_ACTIONS.ROLLING})
+                    .addCards(2, {modifier: statusEffects.MUDDLE, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -431,7 +433,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: "invisible", endAction: END_ACTIONS.ROLLING})
+                    .addCards(1, {modifier: statusEffects.INVISIBLE, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -459,7 +461,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(4, {modifier: NUMBER_MODIFIERS.PLUS_ZERO})
+                    .removeCards(4, BASE_CARDS.PLUS_ZERO)
                     .cards(),
             },
             {
@@ -467,8 +469,8 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                    .removeCards(1, BASE_CARDS.MINUS_ONE)
+                    .addCards(1, BASE_CARDS.PLUS_ONE)
                     .cards(),
             },
             {
@@ -476,7 +478,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                    .addCards(2, BASE_CARDS.PLUS_ONE)
                     .cards(),
             },
             {
@@ -484,7 +486,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO, extra: "stun"})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO, extra: statusEffects.STUN})
                     .cards(),
             },
             {
@@ -492,7 +494,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: "wound"})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: statusEffects.WOUND})
                     .cards(),
             },
             {
@@ -500,7 +502,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: "immobilize"})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: statusEffects.IMMOBILIZE})
                     .cards(),
             },
             {
@@ -508,7 +510,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: "curse"})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: statusEffects.CURSE})
                     .cards(),
             },
             {
@@ -564,7 +566,7 @@ const CLASSES = {
                 description: "Remove two -1 cards",
                 used: [false, false],
                 filterCards: (cards) => new CardsFilter(cards)
-                    .removeCards(2, {modifier: NUMBER_MODIFIERS.MINUS_ONE})
+                    .removeCards(2, BASE_CARDS.MINUS_ONE)
                     .cards(),
             },
             {
@@ -572,8 +574,8 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .removeCards(1, {modifier: NUMBER_MODIFIERS.MINUS_TWO})
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                    .removeCards(1, BASE_CARDS.MINUS_TWO)
+                    .addCards(1, BASE_CARDS.PLUS_ONE)
                     .cards(),
             },
             {
@@ -581,7 +583,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                    .addCards(2, BASE_CARDS.PLUS_ONE)
                     .cards(),
             },
             {
@@ -605,7 +607,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(3, {modifier: "muddle", endAction: END_ACTIONS.ROLLING})
+                    .addCards(3, {modifier: statusEffects.MUDDLE, endAction: END_ACTIONS.ROLLING})
                     .cards(),
             },
             {
@@ -613,7 +615,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: "wound"})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: statusEffects.WOUND})
                     .cards(),
             },
             {
@@ -621,7 +623,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: "immobilize"})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: statusEffects.IMMOBILIZE})
                     .cards(),
             },
             {
@@ -629,7 +631,7 @@ const CLASSES = {
                 used: [false, false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: "Heal 2 self"})
+                    .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: bonuses.heal("+2")})
                     .cards(),
             },
             {
@@ -637,7 +639,7 @@ const CLASSES = {
                 used: [false],
                 filterCards: (cards) =>
                     new CardsFilter(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO, extra: "add target"})
+                    .addCards(1, {modifier: bonuses.ADD_TARGET})
                     .cards(),
             },
             {

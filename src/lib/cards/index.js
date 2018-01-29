@@ -30,38 +30,40 @@ export function iconForEndAction(name) {
     return endActionIcons[name];
 }
 
-export const BASE_ATTACK_MODIFIER_CARDS = [
-    { modifier: PLUS_ZERO, },
-    { modifier: PLUS_ZERO, },
-    { modifier: PLUS_ZERO, },
-    { modifier: PLUS_ZERO, },
-    { modifier: PLUS_ZERO, },
-    { modifier: PLUS_ZERO, },
-    { modifier: PLUS_ONE, },
-    { modifier: PLUS_ONE, },
-    { modifier: PLUS_ONE, },
-    { modifier: PLUS_ONE, },
-    { modifier: PLUS_ONE, },
-    { modifier: MINUS_ONE, },
-    { modifier: MINUS_ONE, },
-    { modifier: MINUS_ONE, },
-    { modifier: MINUS_ONE, },
-    { modifier: MINUS_ONE, },
-    { modifier: PLUS_TWO, },
-    { modifier: MINUS_TWO, },
-    { modifier: TIMES_TWO, endAction: SHUFFLE, },
-    { modifier: NULL, endAction: SHUFFLE, },
+export const BASE_CARDS = {
+    PLUS_ZERO: {modifier: PLUS_ZERO},
+    PLUS_ONE: {modifier: PLUS_ONE},
+    PLUS_TWO: {modifier: PLUS_TWO},
+    MINUS_ONE: {modifier: MINUS_ONE},
+    MINUS_TWO: {modifier: MINUS_TWO},
+    TIMES_TWO: {modifier: TIMES_TWO, endAction: SHUFFLE},
+    NULL: {modifier: NULL, endAction: SHUFFLE},
+};
+export const CURSE = { modifier: NULL, endAction: DISCARD };
+export const BLESS = { modifier: TIMES_TWO, endAction: DISCARD };
+
+export const BASE_DECK = [
+    BASE_CARDS.PLUS_ZERO,
+    BASE_CARDS.PLUS_ZERO,
+    BASE_CARDS.PLUS_ZERO,
+    BASE_CARDS.PLUS_ZERO,
+    BASE_CARDS.PLUS_ZERO,
+    BASE_CARDS.PLUS_ZERO,
+    BASE_CARDS.PLUS_ONE,
+    BASE_CARDS.PLUS_ONE,
+    BASE_CARDS.PLUS_ONE,
+    BASE_CARDS.PLUS_ONE,
+    BASE_CARDS.PLUS_ONE,
+    BASE_CARDS.MINUS_ONE,
+    BASE_CARDS.MINUS_ONE,
+    BASE_CARDS.MINUS_ONE,
+    BASE_CARDS.MINUS_ONE,
+    BASE_CARDS.MINUS_ONE,
+    BASE_CARDS.PLUS_TWO,
+    BASE_CARDS.MINUS_TWO,
+    BASE_CARDS.TIMES_TWO,
+    BASE_CARDS.NULL,
 ];
-
-export const CURSE = {
-    modifier: NULL,
-    endAction: DISCARD,
-};
-
-export const BLESS = {
-    modifier: TIMES_TWO,
-    endAction: DISCARD,
-};
 
 // https://gist.github.com/guilhermepontes/17ae0cc71fa2b13ea8c20c94c5c35dc4#gistcomment-2271465
 export function shuffle(cards) {

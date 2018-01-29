@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import * as classNames from "classnames";
 
-import {ELEMENTS_LIST, INERT, WANING, STRONG, iconForElement} from "../../lib/elements";
+import {ELEMENTS, INERT, WANING, STRONG, iconForElement} from "../../lib/elements";
 import {setStatusAction} from "../../store/elements";
 
 import "./ElementTracker.css";
@@ -23,7 +23,7 @@ const classNameForStatus = {
 function Elements({className, elements, status, onClick}) {
     return (<div className="ElementTracker--Column">
         {status}
-        {ELEMENTS_LIST.map((e, i) => {
+        {ELEMENTS.map((e, i) => {
             const activeClass = (elements[e] === status) && "ElementTracker--Element--Active";
             return (<img key={i}
                 className={classNames("ElementTracker--Element", activeClass)}
@@ -38,7 +38,7 @@ function Elements({className, elements, status, onClick}) {
 
 function ElementTrackerComponent({className, elements, setElementStatus}) {
     return (<div className={classNames("ElementTracker", className)}>
-        {ELEMENTS_LIST.map((e) => {
+        {ELEMENTS.map((e) => {
             const status = elements[e];
             return (<div key={e} className="ElementTracker--Column">
                 {/*e*/}
@@ -68,7 +68,7 @@ function ElementTrackerComponent({className, elements, setElementStatus}) {
         {/*}
         <div className="ElementTracker--Column">
             <div>Elements:</div>
-            {ELEMENTS_LIST.map((e, i) => {
+            {ELEMENTS.map((e, i) => {
                 const status = elements[e];
                 let className;
                 let nextStatus = "";

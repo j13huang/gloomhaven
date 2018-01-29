@@ -45,12 +45,23 @@ export function newStatusEffectTracker() {
     }, {});
 }
 
+const allStatusEffectIcons = {
+    ...statusEffectIcons,
+    [PUSH]: pushIcon,
+    [PULL]: pullIcon,
+    [CURSE]: curseIcon,
+    [BLESS]: blessIcon,
+};
+export const ALL_STATUS_EFFECTS = Object.keys(allStatusEffectIcons);
+
 export function iconForStatusEffect(name) {
-    return {
-        ...statusEffectIcons,
-        [PUSH]: pushIcon,
-        [PULL]: pullIcon,
-        [CURSE]: curseIcon,
-        [BLESS]: blessIcon,
-    }[name];
+    return allStatusEffectIcons[name];
+}
+
+export function push(value) {
+    return {type: PUSH, value};
+}
+
+export function pull(value) {
+    return {type: PULL, value};
 }

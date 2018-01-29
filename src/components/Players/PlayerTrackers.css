@@ -1,3 +1,4 @@
 .PlayerTrackers {
     display: flex;
+    flex-wrap: wrap;
 }

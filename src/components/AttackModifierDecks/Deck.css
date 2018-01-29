@@ -74,8 +74,9 @@
     opacity: 1;
     /*
         can't use % for height transitions :(
+        pick a height that is so large that it will never be too large
     */
-    max-height: 2208px;
+    max-height: 8000px;
     /*
     transition: max-height 3s linear, opacity 3s linear;
     */

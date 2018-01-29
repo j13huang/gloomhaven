@@ -1,6 +1,6 @@
 import {shuffle} from "../lib/cards";
 import {newPerks} from "../lib/classes";
-import {END_ACTIONS, BASE_ATTACK_MODIFIER_CARDS, CURSE, BLESS, needsShuffle} from "../lib/cards";
+import {END_ACTIONS, BASE_DECK, CURSE, BLESS, needsShuffle} from "../lib/cards";
 import {ADD_PLAYER, REMOVE_PLAYER} from "./actions/players";
 import {END_TURN} from "./actions/turn";
 
@@ -23,7 +23,7 @@ function newAttackModifierDeck(cards, characterClass) {
 }
 
 function applyPerks(perks) {
-    let cards = BASE_ATTACK_MODIFIER_CARDS;
+    let cards = BASE_DECK;
     perks.forEach((p) => {
         p.used.forEach((u) => {
             if (u) {
@@ -141,7 +141,7 @@ function shuffleDeck({cards, currentIndex}) {
 }
 
 const defaultState = {
-    Monsters: newAttackModifierDeck(BASE_ATTACK_MODIFIER_CARDS, ""),
+    Monsters: newAttackModifierDeck(BASE_DECK, ""),
 };
 
 const APPLY_PERKS = "attackModifierDeck/cards/perks/apply";
@@ -155,7 +155,7 @@ export const reducer = (state = defaultState, action) => {
         {
             return {
                 ...state,
-                [action.name]: newAttackModifierDeck(BASE_ATTACK_MODIFIER_CARDS, action.class),
+                [action.name]: newAttackModifierDeck(BASE_DECK, action.class),
             };
         }
         case REMOVE_PLAYER:
