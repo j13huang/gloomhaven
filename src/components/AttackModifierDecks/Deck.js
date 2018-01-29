@@ -126,8 +126,8 @@ class DeckComponent extends React.Component {
                             name={this.props.name}
                         />;
                     })}
-                    {(this.state.collapseRemainingCards) && <div className="Deck--RemainingCards--Cover">
-                        <div className="Deck--RemainingCards--CoverText">{remainingCards.length} more card{remainingCards.length === 1 ? "" : "s"}...</div>
+                    {(this.state.collapseRemainingCards && remainingCards.length > 1) && <div className="Deck--RemainingCards--Cover">
+                        <div className="Deck--RemainingCards--CoverText">{remainingCards.length} more cards...</div>
                     </div>}
                 </div>}
                 <div className={classNames({
