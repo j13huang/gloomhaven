@@ -89,17 +89,17 @@ class DeckComponent extends React.Component {
                 <div className="Deck--AddCards--Container">
                     <button
                         className="Deck--AddCards--Button"
+                        disabled={this.props.totalBlessings >= 10}
+                        onClick={() => {this.props.addCard(BLESS)}}
+                    >
+                        +<img className="Deck--AddCards--Image" src={blessCard} alt="add curse" /> ({deck.blessCount})
+                    </button>
+                    <button
+                        className="Deck--AddCards--Button"
                         disabled={(this.props.name === "Monsters" ? deck.curseCount : this.props.totalCurses) >= 10}
                         onClick={() => {this.props.addCard(CURSE)}}
                     >
                         +<img className="Deck--AddCards--Image"src={curseCard} alt="add curse" /> ({deck.curseCount})
-                    </button>
-                    <button
-                        className="Deck--AddCards--Button"
-                        disabled={(this.props.name === "Monsters" ? deck.blessCount : this.props.totalBlessings) >= 10}
-                        onClick={() => {this.props.addCard(BLESS)}}
-                    >
-                        +<img className="Deck--AddCards--Image" src={blessCard} alt="add curse" /> ({deck.blessCount})
                     </button>
                 </div>
                 <div>

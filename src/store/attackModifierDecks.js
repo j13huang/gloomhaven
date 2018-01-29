@@ -100,11 +100,11 @@ function undoCard(state, deckName) {
     let countIncrease = 0;
     let currentCard = cards[currentIndex];
     if (currentCard === CURSE) {
-        const totalCurseCount = deckName === "Monsters" ? curseCount : totalCards(state, (deck) => deck.curseCount);
+        const totalCurseCount = deckName === "Monsters" ? curseCount : totalCurseCards(state);
         [newCards, countIncrease] = handleUndoDiscard(cards, currentIndex, totalCurseCount, CURSE);
         newCurseCount = newCurseCount + countIncrease;
     } else if (currentCard === BLESS) {
-        const totalBlessCount = deckName === "Monsters" ? blessCount : totalCards(state, (deck) => deck.blessCount);
+        const totalBlessCount = totalBlessingCards(state);
         [newCards, countIncrease] = handleUndoDiscard(cards, currentIndex, totalBlessCount, BLESS);
         newBlessCount = newBlessCount + countIncrease;
     }
@@ -239,16 +239,22 @@ export function addCardAction(dispatch, name, card) {
     dispatch({type: ADD_CARD, deckName: name, card});
 }
 
-function totalCards(state, getCardsFunc) {
+function totalCurseCards(state) {
     return Object.keys(state).reduce((total, name) => {
         if (name === "Monsters") {
             return total;
         }
-        return total + getCardsFunc(state[name]);
+        return total + state[name].curseCount;
+    }, 0);
+}
+
+function totalBlessingCards(state) {
+    return Object.keys(state).reduce((total, name) => {
+        return total + state[name].blessCount;
     }, 0);
 }
 
 export const selectors = {
-    totalCurses: (state) => totalCards(state.attackModifierDecks, (deck) => deck.curseCount),
-    totalBlessings: (state) => totalCards(state.attackModifierDecks, (deck) => deck.blessCount),
+    totalCurses: (state) => totalCurseCards(state.attackModifierDecks),
+    totalBlessings: (state) => totalBlessingCards(state.attackModifierDecks),
 };

@@ -10,15 +10,14 @@
 .Game--SpecialCardCount--Container {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
-    font-size: larger;
 }
 
 .Game--SpecialCardCount {
     display: flex;
-    align-items: flex-end;
-    margin-left: 16px;
-    font-size: xx-large;
+    align-items: center;
+    margin-left: 6px;
+    margin-right: 10px;
+    font-size: x-large;
 }
 
 .Game--SpecialCardCount--Icon {

@@ -202,7 +202,7 @@ function CardComponent({className, card, name, isMostRecentCard, undoCard, child
             <div className="AttackModifierCard--ImageContainer">
                 {cardImage}
                 {card.extra && <ColorCover iconName={card.extra} />}
-                {name !== "Monsters" && <div className="AttackModifierCard--MonsterCover"></div>}
+                {name !== "Monsters" && !_.isEqual(card, BLESS) && <div className="AttackModifierCard--MonsterCover"></div>}
                 {card.extra && getExtraImage(card)}
                 {card.endAction === END_ACTIONS.ROLLING && <img
                     src={iconForEndAction(card.endAction)}

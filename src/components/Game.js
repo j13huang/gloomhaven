@@ -61,7 +61,7 @@ class GameComponent extends React.Component {
     canAddPlayer() {
         return !this.props.hasMonstersInPlay &&
             this.state.selectedClass &&
-            this.props.playerNames.length < 4 &&
+            //this.props.playerNames.length < 4 &&
             this.state.playerNameInput !== "" &&
             !this.state.duplicateNameWarning;
     }
@@ -85,7 +85,8 @@ class GameComponent extends React.Component {
                     <h3>Players <span className="Game--Section--Toggle" onClick={() => this.toggleSection("players")}>{this.state.showSections.players ? "▾" : "▸"}</span></h3>
                     <div className="Game--Players">
                         <input
-                            disabled={this.props.hasMonstersInPlay || this.props.playerNames.length === 4}
+                            disabled={this.props.hasMonstersInPlay}
+                            // || this.props.playerNames.length === 4}
                             value={this.state.playerNameInput}
                             onChange={(e) => this.playerNameInputChange(e.target.value)}
                             onKeyPress={(e) => {
@@ -94,7 +95,12 @@ class GameComponent extends React.Component {
                                 }
                             }}
                         />
-                        <select disabled={this.props.hasMonstersInPlay || this.props.playerNames.length === 4} value={this.state.selectedClass} onChange={(event) => this.selectClass(event.target.value)}>
+                        <select
+                            disabled={this.props.hasMonstersInPlay}
+                            // || this.props.playerNames.length === 4}
+                            value={this.state.selectedClass}
+                            onChange={(event) => this.selectClass(event.target.value)}
+                        >
                             <option value="">Select a class...</option>
                             {this.props.selectableClasses.map((c) => <option value={c} key={c}>{c}</option>)}
                         </select>
@@ -114,14 +120,15 @@ class GameComponent extends React.Component {
                     <h3>Attack Modifier Decks <span className="Game--Section--Toggle" onClick={() => this.toggleSection("attackModifierDecks")}>{this.state.showSections.attackModifierDecks ? "▾" : "▸"}</span></h3>
                     <div className={classNames({"Game--Section--HidePlayers": !this.state.showSections.attackModifierDecks})}>
                         <div className="Game--SpecialCardCount--Container">
-                            Player card count:
-                            <div className="Game--SpecialCardCount">
-                                <img className="Game--SpecialCardCount--Icon" src={curseCard} alt="curse cards"/>
-                                <div>{`(${this.props.totalCurses})`}</div>
-                            </div>
+                            Blessing card count:
                             <div className="Game--SpecialCardCount">
                                 <img className="Game--SpecialCardCount--Icon" src={blessCard} alt="blessing cards"/>
                                 <div>{`(${this.props.totalBlessings})`}</div>
+                            </div>
+                            Player curse count:
+                            <div className="Game--SpecialCardCount">
+                                <img className="Game--SpecialCardCount--Icon" src={curseCard} alt="curse cards"/>
+                                <div>{`(${this.props.totalCurses})`}</div>
                             </div>
                         </div>
                         <div className="Game--AttackModifierDecks">
