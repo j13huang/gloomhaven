@@ -8,10 +8,12 @@ import { toggleStatusEffectAction, setHPAction } from "../../../store/monsters";
 
 import "./Monster.css";
 
-function MonsterComponent({currentHP, maxHP, elite, immunities = [], statusEffects, toggleStatusEffect, setHP}) {
-    return (<div className={classNames({"Monster": true, "Monster--Elite": elite})}>
+function MonsterComponent({maxHP, elite, immunities = [], statusEffects, toggleStatusEffect, setHP}) {
+    //return (<div className={classNames({"Monster--Container": true, "Monster--Container--Elite": elite})}>
+    return (<div>
         <StatusEffectTracker statusEffects={statusEffects} onToggle={(s) => toggleStatusEffect(s)} />
-        <HPTracker currentHP={currentHP} maxHP={maxHP} onHPClick={(hp) => setHP(hp)} />
+        {/* set unique key so it rerenders on maxHP change */}
+        <HPTracker key={maxHP} maxHP={maxHP} onHPClick={(hp) => setHP(hp)} />
     </div>);
 }
 

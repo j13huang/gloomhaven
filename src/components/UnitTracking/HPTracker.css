@@ -1,26 +1,47 @@
 .HPTracker--Container {
     display: flex;
+    margin-top: 4px;
+}
+
+.HPTracker--HPText {
+    display: flex;
+    align-items: center;
 }
 
 .HPTracker--Bars {
     display: flex;
-    /*align-items: center;*/
+    align-items: center;
     flex-wrap: wrap;
 }
 
 .HPTracker--HP {
-    height: 1rem;
-    width: 1rem;
-    margin-right: 0.25rem;
-    margin-bottom: 0.25rem;
-    border: 1px solid red;
+    height: 22px;
+    width: 22px;
     color: black;
     display: flex;
     justify-content: center;
     align-items: center;
     user-select: none;
     font-size: x-small;
+    border-bottom: 1px solid black;
 }
+
+.HPTracker--HP:nth-child(-n+10) {
+    border-top: 1px solid black;
+}
+
+.HPTracker--HP:nth-child(10n) {
+    border-right: 1px solid black;
+}
+
+.HPTracker--HP:nth-child(n) {
+    border-left: 1px solid black;
+}
+
+.HPTracker--HP:last-child {
+    border-right: 1px solid black;
+}
+
 
 .HPTracker--HP--Active {
     background-color: red;

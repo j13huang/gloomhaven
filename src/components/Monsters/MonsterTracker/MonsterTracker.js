@@ -37,26 +37,28 @@ class MonsterTrackerComponent extends React.Component {
                     <MonsterStats stats={monsterStats.normal} />
                     <MonsterStats stats={monsterStats.elite} elite />
                 </div>
-                <div>
-                    Toggle All:
-                    <StatusEffectTracker className="MonsterTracker--StatusEffects--ToggleAll" statusEffects={allStatusEffects} onToggle={(s) => toggleAllStatusEffects(s)} />
-                </div>
-                <div className="MonsterTracker--MonsterSelectors">
-                    {monsters.map(({alive, elite}, i) =>
-                        <button key={i}
-                            disabled={alive}
-                            className={classNames({
-                                "MonsterTracker--MonsterSelector": true,
-                                "MonsterTracker--MonsterSelector--Alive": !alive,
-                            })}
-                            onClick={() => this.onToggleAlive(i)}
-                        >
-                            {i + 1}
-                        </button>
-                    )}
+                <div className="MonsterTracker--Controls">
+                    <div className="MonsterTracker--StatusEffects--ToggleAll">
+                        Toggle All:
+                        <StatusEffectTracker statusEffects={allStatusEffects} onToggle={(s) => toggleAllStatusEffects(s)} />
+                    </div>
+                    <div className="MonsterTracker--MonsterSelectors">
+                        {monsters.map(({alive, elite}, i) =>
+                            <button key={i}
+                                disabled={alive}
+                                className={classNames({
+                                    "MonsterTracker--MonsterSelector": true,
+                                    "MonsterTracker--MonsterSelector--Alive": !alive,
+                                })}
+                                onClick={() => this.onToggleAlive(i)}
+                            >
+                                {i + 1}
+                            </button>
+                        )}
+                    </div>
                 </div>
                 {monsters.map(({alive, elite}, i) => {
-                    return alive && (<div key={i}>
+                    return alive && (<div key={i} className={classNames({"MonsterTracker--Monster": true, "MonsterTracker--Monster--Elite": elite})}>
                         <div className="MonsterTracker--Monster--Controls">
                             <div className="MonsterTracker--Monster--Number">{`${i + 1}`}</div>
                             <button onClick={() => this.onToggleAlive(i)}>Kill</button>

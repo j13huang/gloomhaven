@@ -19,14 +19,8 @@ export class BossMonsterTrackerComponent extends React.Component {
 
         const statusEffects = STATUS_EFFECTS.reduce((acc, s) => {acc[s] = false; return acc;}, {});
         this.state = {
-            hp: props.boss.maxHP,
             statusEffects,
         };
-    }
-
-    setHP(hp) {
-        //this.setState({hp: hp <= this.state.hp ? hp - 1 : hp});
-        this.setState({hp});
     }
 
     toggleStatusEffect(statusEffect) {
@@ -60,7 +54,8 @@ export class BossMonsterTrackerComponent extends React.Component {
                 </div>
                 <div className="MonsterTracker--Monster">
                     <StatusEffectTracker statusEffects={this.state.statusEffects} immunities={stats.immunities} onToggle={(s) => this.toggleStatusEffect(s)} />
-                    <HPTracker currentHP={this.state.hp} maxHP={stats.maxHP} onHPClick={(hp) => this.setHP(hp)} />
+                    {/* set unique key so it rerenders on maxHP change */}
+                    <HPTracker key={stats.maxHP} maxHP={stats.maxHP} onHPClick={(hp) => {}} />
                     {(this.props.numPlayers === 0) && <div className="MonsterTracker--Boss--Cover">Add players</div>}
                 </div>
             </div>

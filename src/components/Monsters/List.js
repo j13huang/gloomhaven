@@ -40,7 +40,7 @@ class ListComponent extends React.Component {
                 Level: {this.props.baseScenarioLevel}
                 <select
                     className="Monsters-List--LevelSelect"
-                    disabled={this.props.monstersInPlay.length > 0}
+                    disabled={this.props.boss || this.props.monstersInPlay.length > 0}
                     value={this.props.levelAdjustment}
                     onChange={(event) => this.props.setLevelAdjustment(parseInt(event.target.value, 10))}
                 >

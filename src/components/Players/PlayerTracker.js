@@ -81,8 +81,8 @@ class PlayerTrackerComponent extends React.Component {
                 <StatusEffectTracker className="PlayerTracker--StatusEffectTracker"
                     statusEffects={this.props.player.statusEffects}
                     onToggle={(s) => this.props.toggleStatusEffect(s)} />
-                {/* unique key on level so that when the level changes the hp gets rerendered */}
-                <HPTracker
+                {/* unique key on maxHP so that when the level changes the hp gets rerendered */}
+                <HPTracker key={this.props.player.maxHP}
                     currentHP={this.props.player.hp}
                     maxHP={this.props.player.maxHP}
                     onHPClick={(hp) => (this.props.player.hp !== hp) && this.props.setHP(hp)}
