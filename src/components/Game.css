@@ -60,6 +60,7 @@
     color: black;
     border: 1px solid black;
     padding: 8px;
+    user-select: none;
 }
 
 .Game--Monsters--StatsToggle:first-of-type {

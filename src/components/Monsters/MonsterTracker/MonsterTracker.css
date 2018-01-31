@@ -61,7 +61,11 @@
 
 .MonsterTracker--Monster {
     padding: 8px;
-    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.MonsterTracker--Monster:last-of-type {
+    border-bottom: 0;
 }
 
 .MonsterTracker--Monster--Elite {
