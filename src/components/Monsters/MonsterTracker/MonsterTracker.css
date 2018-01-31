@@ -16,6 +16,8 @@
     display: flex;
     /*background-color: rgb(185, 130, 57);*/
     color: white;
+    /* TODO noooooooo (night demon) */
+    overflow: hidden;
 }
 
 .MonsterTracker--Boss--Stats {

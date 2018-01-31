@@ -145,19 +145,31 @@ class GameComponent extends React.Component {
                     </div>
                 </div>
                 <div className="Game--Section">
-                    <h3>Monster Cards <span className="Game--Section--Toggle" onClick={() => this.toggleSection("monsterDecks")}>{this.state.showSections.monsterDecks ? "▾" : "▸"}</span></h3>
-                    {/*
-                    <ul className={classNames({"Game--original": true, "Game--test": this.state.showStats})}>
-                        {this.state.showStats && new Array(9).fill().map((_, i) => {
-                            return (<li key={i}>item {i}</li>);
-                        })}
-                    </ul>
-                    */}
-                    <div className="Game--Monsters--StatsToggle">
-                        <label>
-                            <input id="showStatsCheckbox" type="checkbox" value={this.state.showStats} onChange={() => this.setState({showStats: !this.state.showStats})} />
-                            Show stats
-                        </label>
+                    <div className="Game--MonsterCards--TitleContainer">
+                        <h3>Monster Cards <span className="Game--Section--Toggle" onClick={() => this.toggleSection("monsterDecks")}>{this.state.showSections.monsterDecks ? "▾" : "▸"}</span></h3>
+                        {/*
+                        <ul className={classNames({"Game--original": true, "Game--test": this.state.showStats})}>
+                            {this.state.showStats && new Array(9).fill().map((_, i) => {
+                                return (<li key={i}>item {i}</li>);
+                            })}
+                        </ul>
+                        */}
+                        <div className="Game--Monsters--StatsToggleContainer">
+                            <label className={classNames({
+                                "Game--Monsters--StatsToggle": true,
+                                "Game--Monsters--StatsToggleActive": !this.state.showStats,
+                            })}>
+                                <input type="radio" checked={!this.state.showStats} onChange={() => this.setState({showStats: false})} />
+                                Hide stats
+                            </label>
+                            <label className={classNames({
+                                "Game--Monsters--StatsToggle": true,
+                                "Game--Monsters--StatsToggleActive": this.state.showStats,
+                            })}>
+                                <input type="radio" checked={this.state.showStats} onChange={() => this.setState({showStats: true})} />
+                                Show stats
+                            </label>
+                        </div>
                     </div>
                     <div className={classNames({"Game--Section--HidePlayers": !this.state.showSections.monsterDecks})}>
                         {this.state.showStats ? <MonsterDeckStats /> : <MonsterDecks />}

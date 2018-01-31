@@ -31,7 +31,6 @@ class PlayerTrackerComponent extends React.Component {
     }
 
     render() {
-        const levelSelectID = `Player-${this.props.name}-LevelSelect`;
         return (<div className="PlayerTracker--Container">
             <h5 className="PlayerTracker--Name">
                 {this.props.name}
@@ -46,7 +45,6 @@ class PlayerTrackerComponent extends React.Component {
                 <div className="PlayerTracker--LevelSelector">
                     <label>Level:
                         <select
-                            id={levelSelectID}
                             disabled={this.props.hasMonstersInPlay}
                             value={this.props.level}
                             onChange={(event) => this.props.selectLevel(parseInt(event.target.value, 10))}

@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import * as classNames from "classnames";
 
 import {HPTracker} from "../../UnitTracking/HPTracker";
 import { StatusEffectTracker } from "../../UnitTracking/StatusEffectTracker";
