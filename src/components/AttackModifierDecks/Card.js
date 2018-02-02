@@ -17,6 +17,7 @@ import timesTwoCardImage from "./2x.jpg";
 import nullCardImage from "./null.jpg";
 import curseCardImage from "./curse.jpg";
 import blessCardImage from "./bless.jpg";
+import blankCardImage from "./blank.png";
 
 import "./Card.css";
 
@@ -117,7 +118,7 @@ function MainIcon({iconName}) {
 function CustomCard({className, card}) {
     const iconName = card.modifier.type ? card.modifier.type : card.modifier;
     return (<div className="AttackModifierCard--CustomCard">
-        <img className={className} src={plusZeroCardImage} alt={`${card.modifier} ${card.extra} ${card.endAction}`} />
+        <img className={className} src={blankCardImage} alt={`${card.modifier} ${card.extra} ${card.endAction}`} />
         <ColorCover iconName={iconName} />
         <MainIcon iconName={iconName} />
         {card.modifier.type &&
@@ -130,11 +131,12 @@ function CustomCard({className, card}) {
 
 function PlusThree({className, card}) {
     return (<div className="AttackModifierCard--CustomCard">
-        <img className={className} src={plusOneCardImage} alt={`${card.modifier} ${card.extra} ${card.endAction}`} />
+        <img className={className} src={blankCardImage} alt={`${card.modifier} ${card.extra} ${card.endAction}`} />
         <div className={classNames("AttackModifierCard--MainIcon", "AttackModifierCard--PlusThree")}>
             <span className="AttackModifierCard--PlusThree--Plus">+</span>
             <span className="AttackModifierCard--PlusThree--Three">3</span>
         </div>
+        <div className={classNames("AttackModifierCard--ColorCover", "AttackModifierCard--GreenColor")}></div>
     </div>);
 }
 

@@ -105,12 +105,16 @@
 .AttackModifierCard--PlusThree {
     font-family: "PirataOne";
     color: rgb(232, 230, 231);
-    background-image: radial-gradient(closest-corner at 34px 22px, rgb(251, 248, 220) 0px, rgba(102, 151, 65, 0.9) 80px, transparent 140px);
+    background-image: radial-gradient(closest-corner at 34px 22px, rgba(240, 241, 212, 0.3) 0px, rgba(181, 217, 145, 0.7) 22px, rgba(80, 137, 65, 0.8) 50px, transparent 150px);
     text-shadow: 1px 1px rgb(50, 64, 25), -1px -1px rgb(50, 64, 25);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 80px;
+}
+
+.AttackModifierCard--GreenColor {
+    background-image: radial-gradient(circle, transparent 40px, rgba(103, 151, 68, 0.6) 50px, transparent 100%);
 }
 
 .AttackModifierCard--PlusThree--Plus {
