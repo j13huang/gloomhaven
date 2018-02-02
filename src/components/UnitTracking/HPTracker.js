@@ -1,6 +1,5 @@
 import React from "react";
 import * as classNames from "classnames";
-import * as _ from "lodash";
 
 import "./HPTracker.css";
 
@@ -8,7 +7,7 @@ export class HPTracker extends React.Component {
     constructor(props) {
         super(props)
 
-        this.onHPClick = _.debounce(props.onHPClick, 500);
+        this.changeHPFinish = () => this._changeHPFinish()
         this.state = {
             hp: props.maxHP,
         }
@@ -17,7 +16,15 @@ export class HPTracker extends React.Component {
     changeHP(hp) {
         // if clicking... this.setState({hp: hp <= this.state.hp ? hp - 1 : hp});
         this.setState({hp});
-        this.onHPClick(hp);
+    }
+
+    changeHPStart(hp) {
+        document.addEventListener('mouseup', this.changeHPFinish, false);
+    }
+
+    _changeHPFinish() {
+        document.removeEventListener('mouseup', this.changeHPFinish, false);
+        this.props.onHPChange(this.state.hp);
     }
 
     render() {
@@ -29,9 +36,12 @@ export class HPTracker extends React.Component {
                         const hp = i + 1;
                         return (<div key={hp}
                             className={classNames({"HPTracker--HP": true, "HPTracker--HP--Active": hp <= this.state.hp})}
-                            onMouseDown={() => this.changeHP(hp)}
+                            onMouseDown={() => {
+                                this.changeHP(hp);
+                                this.changeHPStart(hp)
+                            }}
                             onMouseOver={(event) =>{
-                                // left click
+                                // left mouse button
                                 // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
                                 if (event.buttons % 2 === 1) {
                                     this.changeHP(hp)

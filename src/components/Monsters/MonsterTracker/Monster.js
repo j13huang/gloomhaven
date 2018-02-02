@@ -12,7 +12,7 @@ function MonsterComponent({maxHP, elite, immunities = [], statusEffects, toggleS
     return (<div>
         <StatusEffectTracker statusEffects={statusEffects} onToggle={(s) => toggleStatusEffect(s)} />
         {/* set unique key so it rerenders on maxHP change */}
-        <HPTracker key={maxHP} maxHP={maxHP} onHPClick={(hp) => setHP(hp)} />
+        <HPTracker key={maxHP} maxHP={maxHP} onHPChange={(hp) => setHP(hp)} />
     </div>);
 }
 

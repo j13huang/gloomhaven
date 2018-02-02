@@ -55,7 +55,7 @@ export class BossMonsterTrackerComponent extends React.Component {
                 <div className="MonsterTracker--Monster">
                     <StatusEffectTracker statusEffects={this.state.statusEffects} immunities={stats.immunities} onToggle={(s) => this.toggleStatusEffect(s)} />
                     {/* set unique key so it rerenders on maxHP change */}
-                    <HPTracker key={stats.maxHP} maxHP={stats.maxHP} onHPClick={(hp) => {}} />
+                    <HPTracker key={stats.maxHP} maxHP={stats.maxHP} onHPChange={(hp) => {}} />
                     {(this.props.numPlayers === 0) && <div className="MonsterTracker--Boss--Cover">Add players</div>}
                 </div>
             </div>

@@ -83,7 +83,7 @@ class PlayerTrackerComponent extends React.Component {
                 <HPTracker key={this.props.player.maxHP}
                     currentHP={this.props.player.hp}
                     maxHP={this.props.player.maxHP}
-                    onHPClick={(hp) => (this.props.player.hp !== hp) && this.props.setHP(hp)}
+                    onHPChange={(hp) => (this.props.player.hp !== hp) && this.props.setHP(hp)}
                 />
             </div>
         </div>);
