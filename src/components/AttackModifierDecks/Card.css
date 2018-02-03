@@ -105,7 +105,7 @@
 .AttackModifierCard--PlusThree {
     font-family: "PirataOne";
     color: rgb(232, 230, 231);
-    background-image: radial-gradient(closest-corner at 34px 22px, rgba(240, 241, 212, 0.3) 0px, rgba(181, 217, 145, 0.7) 22px, rgba(80, 137, 65, 0.8) 50px, transparent 150px);
+    background-image: radial-gradient(closest-corner at 34px 22px, rgba(240, 241, 212, 0.3) 0px, rgba(181, 217, 145, 0.7) 22px, rgba(80, 137, 65, 0.7) 70px, transparent 200px);
     text-shadow: 1px 1px rgb(50, 64, 25), -1px -1px rgb(50, 64, 25);
     display: flex;
     justify-content: center;
