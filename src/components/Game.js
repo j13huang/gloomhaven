@@ -85,6 +85,7 @@ class GameComponent extends React.Component {
                     <h3>Players <span className="Game--Section--Toggle" onClick={() => this.toggleSection("players")}>{this.state.showSections.players ? "▾" : "▸"}</span></h3>
                     <div className="Game--Players">
                         <input
+                            placeholder="Player name"
                             disabled={this.props.hasMonstersInPlay}
                             // || this.props.playerNames.length === 4}
                             value={this.state.playerNameInput}

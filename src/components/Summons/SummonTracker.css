@@ -1,49 +1,80 @@
 .SummonTracker--Container {
     background-image: url("./summonBackground.png");
     background-size: contain;
-    height: 260px;
+    height: 232px;
     position: relative;
     color: white;
     margin-top: 8px;
 }
 
+/*
+.SummonTracker--Container:before {
+.SummonTracker--Color {
+    content: "\A";
+    background-color: rgba(128, 0, 128, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+*/
+
 .SummonTracker--Name {
     font-family: "PirataOne";
     font-size: 16px;
-    text-align: center;
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.SummonTracker--StatsContainer {
-    margin-top: 16px;
-    width: 100%;
+.SummonTracker--XButton {
+    margin-left: 4px;
+}
+
+.SummonTracker--Section {
     padding-left: 16px;
     padding-right: 16px;
     box-sizing: border-box;
+}
+
+.SummonTracker--StatsContainer {
+    margin-top: 28px;
+    width: 100%;
     display: flex;
+    font-family: "SakkalMajalla";
 }
 
 .SummonTracker--Stat {
     display: flex;
-    justify-content: center;
-    /*
-    font-family: "SakkalMajalla";
-    */
     font-size: 40px;
+    /*
+    flex: auto;
+    */
+    justify-content: center;
+    flex: 1;
+}
+
+.SummonTracker--Extra {
+    margin-top: 4px;
+    font-family: "SakkalMajalla";
+    display: flex;
+    justify-content: center;
 }
 
 .SummonTracker--Stat--Icon {
-    height: 40px;
-    width: 40px;
-    margin-right: 8px;
+    height: 32px;
+    width: 32px;
+    margin-right: 4px;
     display: block;
+}
+
+.SummonTracker--Stat--Value {
+    line-height: 0.8;
 }
 
 .SummonTracker {
     position: absolute;
-    top: 160px;
+    top: 140px;
     width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
-    box-sizing: border-box;
 }

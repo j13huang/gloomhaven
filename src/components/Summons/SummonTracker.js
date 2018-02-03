@@ -1,7 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
+import * as classNames from "classnames";
 
-import {ATTACK, MOVE, RANGE, iconForStat} from "../../lib/stats";
+import {ATTACK, MOVEMENT, RANGE, iconForStat} from "../../lib/stats";
 import {newStatusEffectTracker} from "../../lib/statusEffects";
 import {StatusEffectTracker} from "../UnitTracking/StatusEffectTracker";
 import {HPTracker} from "../UnitTracking/HPTracker";
@@ -35,35 +36,36 @@ class SummonTrackerComponent extends React.Component {
 
     render() {
         return (<div className="SummonTracker--Container">
+            <div className="SummonTracker--Color"></div>
             <div className="SummonTracker--Name">
                 {this.props.name}
-                <button onClick={() => this.props.removeSummon()}>X</button>
+                <button className="SummonTracker--XButton" onClick={() => this.props.removeSummon()}>X</button>
             </div>
-            <div className="SummonTracker--StatsContainer">
-                <div className="SummonTracker--Stat">
-                <div>
-                    <img className="SummonTracker--Stat--Icon" src={iconForStat(ATTACK)} alt="attack" />
+            <div className="SummonTracker--Section">
+                <div className="SummonTracker--StatsContainer">
+                    <div className="SummonTracker--Stat">
+                        <div>
+                            <img className="SummonTracker--Stat--Icon" src={iconForStat(ATTACK)} alt="attack" />
+                        </div>
+                        <div className="SummonTracker--Stat--Value">{this.props.attack === 0 ? "-" : this.props.attack}</div>
                     </div>
-                    <div>{this.props.attack === 0 ? "-" : this.props.attack}</div>
-                </div>
-                {/*
-                <div className="SummonTracker--Stat">
-                <div>
-                    <img className="SummonTracker--Stat--Icon" src={iconForStat(MOVE)} alt="move" />
+                    <div className="SummonTracker--Stat">
+                        <div>
+                            <img className="SummonTracker--Stat--Icon" src={iconForStat(MOVEMENT)} alt="movement" />
+                        </div>
+                        <div className="SummonTracker--Stat--Value">{this.props.movement === 0 ? "-" : this.props.movement}</div>
                     </div>
-                    <div>{this.props.movement === 0 ? "-" : this.props.movement}</div>
-                </div>
-                <div className="SummonTracker--Stat">
-                <div>
-                    <img className="SummonTracker--Stat--Icon" src={iconForStat(RANGE)} alt="range" />
+                    <div className="SummonTracker--Stat">
+                        <div>
+                            <img className="SummonTracker--Stat--Icon" src={iconForStat(RANGE)} alt="range" />
+                        </div>
+                        <div className="SummonTracker--Stat--Value">{this.props.range === 0 ? "-" : this.props.range}</div>
                     </div>
-                    <div>{this.props.range === 0 ? "-" : this.props.range}</div>
                 </div>
-                */}
+                <div className="SummonTracker--Extra">{this.props.extra}</div>
             </div>
-            <div>{this.props.extra}</div>
-            <div className="SummonTracker">
-                <StatusEffectTracker className="SummonTracker--StatusEffectTracker"
+            <div className={classNames("SummonTracker--Section", "SummonTracker")}>
+                <StatusEffectTracker
                     statusEffects={this.state.statusEffects}
                     onToggle={(s) => this.toggleStatusEffect(s)} />
                 <HPTracker

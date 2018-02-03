@@ -2,7 +2,7 @@ import React from "react";
 import * as classNames from "classnames";
 
 import {Actions} from "../Actions/Actions";
-import {MOVE, ATTACK, RANGE, iconForStat} from "../../../lib/stats";
+import {MOVEMENT, ATTACK, RANGE, iconForStat} from "../../../lib/stats";
 
 import "./MonsterStats.css"
 
@@ -11,7 +11,7 @@ export function MonsterStats({className, stats, elite}) {
         <div className="MonsterTracker--Stats--Main">
             <div className="MonsterTracker--Stats--MainLine">
                 {stats.move === 0 ? "-" : stats.move}
-                <img src={iconForStat(MOVE)} className="MonsterTracker--StatIcon" alt="movement" />
+                <img src={iconForStat(MOVEMENT)} className="MonsterTracker--StatIcon" alt="movement" />
             </div>
             <div className="MonsterTracker--Stats--MainLine">
                 {stats.attack === 0 ? "-" : stats.attack}

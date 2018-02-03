@@ -1,8 +1,41 @@
 .SummonModal--Title {
     text-align: center;
+    margin-bottom: 2px;
 }
 
 .SummonModal--Title--PlayerName {
     text-align: center;
     font-size: x-small;
+    margin-bottom: 16px;
+    color: purple;
+}
+
+.SummonModal--Summon--StatsContainer {
+    display: flex;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.SummonModal--Summon--StatsColumn {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.SummonModal--Summon--Stat {
+    display: flex;
+}
+
+.SummonModal--Stat--Icon {
+    height: 12px;
+    width: 12px;
+    background-color: black;
+    display: block;
+    padding: 2px;
+}
+
+.SummonModal--Summon--Buttons{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
 }
