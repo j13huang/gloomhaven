@@ -10,15 +10,15 @@ export function MonsterStats({className, stats, elite}) {
     return (<div className={classNames({"MonsterTracker--Stats--Container": true, "MonsterTracker--Stats--Elite": elite, [className]: !!className})}>
         <div className="MonsterTracker--Stats--Main">
             <div className="MonsterTracker--Stats--MainLine">
-                {stats.move || "–"}
+                {stats.move === 0 ? "-" : stats.move}
                 <img src={iconForStat(MOVE)} className="MonsterTracker--StatIcon" alt="movement" />
             </div>
             <div className="MonsterTracker--Stats--MainLine">
-                {stats.attack || "–"}
+                {stats.attack === 0 ? "-" : stats.attack}
                 <img src={iconForStat(ATTACK)} className="MonsterTracker--StatIcon" alt="attack" />
             </div>
             <div className="MonsterTracker--Stats--MainLine">
-                {stats.range || "–"}
+                {stats.range === 0 ? "-" : stats.range}
                 <img src={iconForStat(RANGE)} className="MonsterTracker--StatIcon" alt="range" />
             </div>
         </div>

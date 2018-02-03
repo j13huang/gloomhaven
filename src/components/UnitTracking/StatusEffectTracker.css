@@ -1,6 +1,6 @@
 .StatusEffects {
     display: flex;
-    padding-left: 6px;
+    justify-content: center;
 }
 
 .StatusEffect--Container {

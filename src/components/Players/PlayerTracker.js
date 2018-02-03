@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 
 import xpIcon from "./xp.svg";
 //import xpIcon from "./xp_white.svg";
+import {SummonModal} from "./SummonModal";
+import {SummonTrackers} from "../Summons/SummonTrackers";
 import {BonusSelectors} from "../UnitTracking/BonusSelectors";
 import {StatusEffectTracker} from "../UnitTracking/StatusEffectTracker";
 import {HPTracker} from "../UnitTracking/HPTracker";
@@ -18,6 +20,7 @@ class PlayerTrackerComponent extends React.Component {
 
         this.state = {
             xp: 0,
+            showSummonModal: false,
         };
     }
 
@@ -30,18 +33,24 @@ class PlayerTrackerComponent extends React.Component {
         })
     }
 
+    toggleSummonModal(showSummonModal) {
+        this.setState({
+            showSummonModal,
+        })
+    }
+
     render() {
         return (<div className="PlayerTracker--Container">
             <h5 className="PlayerTracker--Name">
                 {this.props.name}
                 {!this.props.hasMonstersInPlay &&
-                    <button onClick={() => this.props.removePlayer()}>
-                        X
-                    </button>
+                    <button onClick={() => this.props.removePlayer()}>X</button>
                 }
             </h5>
             <div className="PlayerTracker--Description">
                 <div className="PlayerTracker--Class">{this.props.player.class}</div>
+                <button className="PlayerTracker--Summon--Button" onClick={() => this.toggleSummonModal(!this.state.showSummonModal)}>Summon</button>
+                {this.state.showSummonModal && <SummonModal name={this.props.name} onClose={() => this.toggleSummonModal(false)} />}
                 <div className="PlayerTracker--LevelSelector">
                     <label>Level:
                         <select
@@ -56,13 +65,6 @@ class PlayerTrackerComponent extends React.Component {
                         </select>
                     </label>
                 </div>
-            {/*
-                <div>
-                    <select>
-                    </select>
-                    <button>Summon</button>
-                </div>
-            */}
             </div>
             <div className="PlayerTracker">
                 <div className="PlayerTracker--Stats">
@@ -76,7 +78,7 @@ class PlayerTrackerComponent extends React.Component {
                     </div>
                     <BonusSelectors />
                 </div>
-                <StatusEffectTracker className="PlayerTracker--StatusEffectTracker"
+                <StatusEffectTracker
                     statusEffects={this.props.player.statusEffects}
                     onToggle={(s) => this.props.toggleStatusEffect(s)} />
                 {/* unique key on maxHP so that when the level changes the hp gets rerendered */}
@@ -85,6 +87,9 @@ class PlayerTrackerComponent extends React.Component {
                     maxHP={this.props.player.maxHP}
                     onHPChange={(hp) => (this.props.player.hp !== hp) && this.props.setHP(hp)}
                 />
+            </div>
+            <div className="PlayerTracker--Summons">
+                <SummonTrackers name={this.props.name} />
             </div>
         </div>);
     }

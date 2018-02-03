@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import * as classNames from "classnames";
 
 import {Header} from "./Header/Header"
-import {SummonCreator} from "./Players/SummonCreator"
 import {PlayerTrackers} from "./Players/PlayerTrackers"
 import {Deck as AttackModifierDeck} from "./AttackModifierDecks/Deck"
 import curseCard from "./AttackModifierDecks/curse.jpg";
@@ -110,7 +109,6 @@ class GameComponent extends React.Component {
                             onClick={() => this.addPlayer(this.state.playerNameInput, this.state.selectedClass)}
                         >Add Player</button>
                         {/*<button onClick={() => this.props.resetPlayers()}>Reset</button>*/}
-                        <SummonCreator />
                     </div>
                     {this.state.duplicateNameWarning &&
                         <div className="Game--DuplicatePlayerWarning">A player with that name already exists</div>}

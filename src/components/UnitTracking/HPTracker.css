@@ -24,6 +24,7 @@
     user-select: none;
     font-size: x-small;
     border-bottom: 1px solid black;
+    border-left: 1px solid black;
 }
 
 .HPTracker--HP:nth-child(-n+10) {
@@ -34,16 +35,18 @@
     border-right: 1px solid black;
 }
 
-.HPTracker--HP:nth-child(n) {
-    border-left: 1px solid black;
-}
-
 .HPTracker--HP:last-child {
     border-right: 1px solid black;
 }
-
 
 .HPTracker--HP--Active {
     background-color: red;
     color: white;
 }
+
+/* more specific */
+.HPTracker--HP.HPTracker--HP--White {
+    border-color: white;
+    color: white;
+}
+

@@ -1,0 +1,49 @@
+.SummonTracker--Container {
+    background-image: url("./summonBackground.png");
+    background-size: contain;
+    height: 260px;
+    position: relative;
+    color: white;
+    margin-top: 8px;
+}
+
+.SummonTracker--Name {
+    font-family: "PirataOne";
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+}
+
+.SummonTracker--StatsContainer {
+    margin-top: 16px;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.SummonTracker--Stat {
+    display: flex;
+    justify-content: center;
+    /*
+    font-family: "SakkalMajalla";
+    */
+    font-size: 40px;
+}
+
+.SummonTracker--Stat--Icon {
+    height: 40px;
+    width: 40px;
+    margin-right: 8px;
+    display: block;
+}
+
+.SummonTracker {
+    position: absolute;
+    top: 160px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}

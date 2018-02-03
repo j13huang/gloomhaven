@@ -201,12 +201,14 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 4,
+                    move: 0,
                     attack: 2,
                     range: 4,
                     extra: [],
                 },
                 elite: {
                     maxHP: 7,
+                    move: 0,
                     attack: 3,
                     range: 5,
                     extra: [],
@@ -215,12 +217,14 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 6,
+                    move: 0,
                     attack: 2,
                     range: 4,
                     extra: [],
                 },
                 elite: {
                     maxHP: 9,
+                    move: 0,
                     attack: 3,
                     range: 5,
                     extra: [],
@@ -229,12 +233,14 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 7,
+                    move: 0,
                     attack: 2,
                     range: 5,
                     extra: [],
                 },
                 elite: {
                     maxHP: 11,
+                    move: 0,
                     attack: 3,
                     range: 6,
                     extra: [],
@@ -243,12 +249,14 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 8,
+                    move: 0,
                     attack: 3,
                     range: 5,
                     extra: [],
                 },
                 elite: {
                     maxHP: 13,
+                    move: 0,
                     attack: 4,
                     range: 6,
                     extra: [],
@@ -257,12 +265,14 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 9,
+                    move: 0,
                     attack: 4,
                     range: 5,
                     extra: [],
                 },
                 elite: {
                     maxHP: 13,
+                    move: 0,
                     attack: 4,
                     range: 6,
                     extra: ["target 2"],
@@ -271,12 +281,14 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 11,
+                    move: 0,
                     attack: 4,
                     range: 6,
                     extra: [],
                 },
                 elite: {
                     maxHP: 15,
+                    move: 0,
                     attack: 4,
                     range: 7,
                     extra: ["target 2"],
@@ -285,12 +297,14 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 14,
+                    move: 0,
                     attack: 4,
                     range: 6,
                     extra: [],
                 },
                 elite: {
                     maxHP: 16,
+                    move: 0,
                     attack: 5,
                     range: 7,
                     extra: ["target 2"],
@@ -299,12 +313,14 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 16,
+                    move: 0,
                     attack: 4,
                     range: 7,
                     extra: [],
                 },
                 elite: {
                     maxHP: 20,
+                    move: 0,
                     attack: 5,
                     range: 7,
                     extra: ["target 2"],
@@ -1298,11 +1314,13 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 3,
+                    move: 0,
                     attack: 2,
                     extra: [],
                 },
                 elite: {
                     maxHP: 5,
+                    move: 0,
                     attack: 3,
                     extra: [],
                 },
@@ -1310,11 +1328,13 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 4,
+                    move: 0,
                     attack: 2,
                     extra: ["retaliate 1"],
                 },
                 elite: {
                     maxHP: 6,
+                    move: 0,
                     attack: 3,
                     extra: ["retaliate 1"],
                 },
@@ -1322,11 +1342,13 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 4,
+                    move: 0,
                     attack: 3,
                     extra: ["retaliate 1"],
                 },
                 elite: {
                     maxHP: 7,
+                    move: 0,
                     attack: 4,
                     extra: ["retaliate 1"],
                 },
@@ -1334,11 +1356,13 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 5,
+                    move: 0,
                     attack: 3,
                     extra: ["retaliate 2"],
                 },
                 elite: {
                     maxHP: 8,
+                    move: 0,
                     attack: 4,
                     extra: ["retaliate 2"],
                 },
@@ -1346,11 +1370,13 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 6,
+                    move: 0,
                     attack: 4,
                     extra: ["retaliate 2"],
                 },
                 elite: {
                     maxHP: 9,
+                    move: 0,
                     attack: 5,
                     extra: ["retaliate 2"],
                 },
@@ -1358,11 +1384,13 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 7,
+                    move: 0,
                     attack: 4,
                     extra: ["retaliate 3"],
                 },
                 elite: {
                     maxHP: 11,
+                    move: 0,
                     attack: 5,
                     extra: ["retaliate 3"],
                 },
@@ -1370,11 +1398,13 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 8,
+                    move: 0,
                     attack: 5,
                     extra: ["retaliate 3"],
                 },
                 elite: {
                     maxHP: 13,
+                    move: 0,
                     attack: 6,
                     extra: ["retaliate 3"],
                 },
@@ -1382,11 +1412,13 @@ export const MONSTERS = {
             {
                 normal: {
                     maxHP: 9,
+                    move: 0,
                     attack: 5,
                     extra: ["retaliate 4"],
                 },
                 elite: {
                     maxHP: 15,
+                    move: 0,
                     attack: 6,
                     extra: ["retaliate 4"],
                 },

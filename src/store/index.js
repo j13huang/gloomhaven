@@ -1,5 +1,6 @@
 import { combineReducers, createStore } from 'redux';
 import {reducer as players} from './players';
+import {reducer as summons} from './summons';
 import { reducer as attackModifierDecks } from './attackModifierDecks';
 import { reducer as elements } from "./elements";
 import {reducer as boss} from './boss';
@@ -10,6 +11,7 @@ import {reducer as turn} from './turn';
 export const store = createStore(
   combineReducers({
     players,
+    summons,
     attackModifierDecks,
     elements,
     boss,

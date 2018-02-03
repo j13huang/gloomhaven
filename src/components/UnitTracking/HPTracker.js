@@ -35,7 +35,11 @@ export class HPTracker extends React.Component {
                     {new Array(maxHP).fill().map((_, i) => {
                         const hp = i + 1;
                         return (<div key={hp}
-                            className={classNames({"HPTracker--HP": true, "HPTracker--HP--Active": hp <= this.state.hp})}
+                            className={
+                                classNames({"HPTracker--HP": true,
+                                "HPTracker--HP--Active": hp <= this.state.hp,
+                                "HPTracker--HP--White": this.props.white,
+                            })}
                             onMouseDown={() => {
                                 this.changeHP(hp);
                                 this.changeHPStart(hp)

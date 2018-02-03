@@ -10,21 +10,12 @@ function newPlayer(characterClass, level) {
         hp: stats.maxHP,
         maxHP: stats.maxHP,
         statusEffects: newStatusEffectTracker(),
-        summons: {},
     };
 }
 
 const defaultState = {
     levelAdjustment: 0,
     selectableClasses: CLASS_NAMES.reduce((acc, c) => {acc[c] = true; return acc;}, {}),
-    summonInput: {
-        name: "",
-        hp: 0,
-        movement: 0,
-        attack: 0,
-        range: 0,
-        extra: "",
-    },
     players: {},
 };
 
@@ -32,9 +23,6 @@ const SET_LEVEL = "players/level/set";
 const SET_LEVEL_ADJUSTMENT = "players/level/setAdjustment";
 const TOGGLE_STATUS_EFFECT = "players/statusEffect/toggle";
 const SET_HP = "players/hp/set";
-const UPDATE_SUMMON_INPUT = "summonInput/update";
-const ADD_SUMMON = "players/summons/add";
-const REMOVE_SUMMON = "players/summons/remove";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -119,50 +107,6 @@ export const reducer = (state = defaultState, action) => {
                 },
             };
         }
-        case UPDATE_SUMMON_INPUT:
-        {
-            return {
-                ...state,
-                summonInput: {
-                    ...state.summonInput,
-                    ...action.summonInput,
-                },
-            };
-        }
-        case ADD_SUMMON:
-        {
-            const player = state.players[action.name];
-            const summonName = action.summonName ? action.summonName : `${action.name} summon #${Object.keys(player.summons)}`;
-            return {
-                ...state,
-                players: {
-                    ...state.players,
-                    [action.name]: {
-                        ...player,
-                        summons: {
-                            ...player.summons,
-                            [summonName]: action.summonInput,
-                        },
-                    },
-                },
-            };
-        }
-        case REMOVE_SUMMON:
-        {
-            const player = state.players[action.name];
-            const newSummons = {...player.summons};
-            delete newSummons[action.summonName];
-            return {
-                ...state,
-                players: {
-                    ...state.players,
-                    [action.name]: {
-                        ...player,
-                        summons: newSummons,
-                    },
-                },
-            };
-        }
         default: return state;
     }
 }
@@ -181,18 +125,6 @@ export function toggleStatusEffectAction(dispatch, name, statusEffect) {
 
 export function setHPAction(dispatch, name, hp) {
     dispatch({type: SET_HP, name, hp});
-}
-
-export function updateSummonInputAction(summonInput) {
-    return {type: UPDATE_SUMMON_INPUT, summonInput};
-}
-
-export function addSummonAction(name, summonName, summonInput) {
-    return {type: ADD_SUMMON, summonName, summonInput};
-}
-
-export function removeSummonAction(name, summonName) {
-    return {type: REMOVE_SUMMON, summonName};
 }
 
 function calculateScenarioLevel(players) {
@@ -214,9 +146,7 @@ export const selectors = {
         });
     },
     numPlayers: (state) => Object.keys(state.players.players).length,
-    baseScenarioLevel: (state) => {
-        return calculateScenarioLevel(state.players.players);
-    },
+    baseScenarioLevel: (state) => calculateScenarioLevel(state.players.players),
     // + level adjustment
     scenarioLevel: (state) => {
         return calculateScenarioLevel(state.players.players) + state.players.levelAdjustment;
