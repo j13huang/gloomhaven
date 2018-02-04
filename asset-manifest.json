@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.c1b06f2d.css",
-  "main.css.map": "static/css/main.c1b06f2d.css.map",
-  "main.js": "static/js/main.90d211e4.js",
-  "main.js.map": "static/js/main.90d211e4.js.map",
+  "main.css": "static/css/main.054f4e28.css",
+  "main.css.map": "static/css/main.054f4e28.css.map",
+  "main.js": "static/js/main.6dcffb8c.js",
+  "main.js.map": "static/js/main.6dcffb8c.js.map",
   "static/media/+0.jpg": "static/media/+0.acd31880.jpg",
   "static/media/+1.jpg": "static/media/+1.051d3400.jpg",
   "static/media/+2.jpg": "static/media/+2.48910310.jpg",
@@ -47,6 +47,7 @@
   "static/media/light.svg": "static/media/light.ef434304.svg",
   "static/media/minusOneItemIcon.svg": "static/media/minusOneItemIcon.48e26d68.svg",
   "static/media/monster_card_back.jpg": "static/media/monster_card_back.1c2fbc78.jpg",
+  "static/media/move.svg": "static/media/move.4bfeefc7.svg",
   "static/media/movement.svg": "static/media/movement.4bfeefc7.svg",
   "static/media/muddle.svg": "static/media/muddle.96983af1.svg",
   "static/media/null.jpg": "static/media/null.5a9fe71c.jpg",
@@ -64,6 +65,7 @@
   "static/media/strengthen.svg": "static/media/strengthen.8acb9b8e.svg",
   "static/media/stun.svg": "static/media/stun.b82f281d.svg",
   "static/media/summonBackground.png": "static/media/summonBackground.d9ae2336.png",
+  "static/media/target.svg": "static/media/target.91304f4e.svg",
   "static/media/use_element.svg": "static/media/use_element.eb11cf13.svg",
   "static/media/wound.svg": "static/media/wound.52753d3c.svg",
   "static/media/xp.svg": "static/media/xp.127c4074.svg"
