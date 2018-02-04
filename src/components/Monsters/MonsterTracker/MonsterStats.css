@@ -1,8 +1,9 @@
 .MonsterTracker--Stats--Container {
     flex: 1;
     display: flex;
-    padding: 4px;
-    padding-left: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
     background-color: grey;
     color: white;
 }
@@ -18,7 +19,7 @@
 .MonsterTracker--Stats--Main {
     display: flex;
     flex-direction: column;
-    margin-right: 8px;
+    margin-right: 6px;
 }
 
 .MonsterTracker--Stats--MainLine {
@@ -27,7 +28,7 @@
 }
 
 .MonsterTracker--Stats--Extra {
-    font-size: smaller;
+    font-size: small;
     font-weight: bolder;
 }
 

@@ -69,7 +69,9 @@
 
 .Card--Image {
     width: 48px;
+    /*
     height: 48px;
+    */
     padding-left: 8px;
 }
 
