@@ -33,10 +33,11 @@ class DeckComponent extends React.Component {
         // overdrawing the entire deck will change the current index but won't empty the played card list
         // (it will start with 1 card). Undoing a drawn card will decrease the current index by 1
         // ending turn will empty the played card list and not change the currentIndex
+        // adding a bless/curse will shuffle the deck and increase the card count
         const currentIndexDiff = this.props.deck.currentIndex - nextProps.deck.currentIndex;
         if (currentIndexDiff > 1 ||
             (currentIndexDiff === 0 && nextProps.deck.playedCards.length === 0) ||
-            !_.isEqual(this.props.deck.cards, nextProps.deck.cards)
+            (this.props.deck.cards.length === nextProps.deck.cards && !_.isEqual(this.props.deck.cards, nextProps.deck.cards))
         ) {
             this.setState({
                 discardingCards: this.props.deck.playedCards,
