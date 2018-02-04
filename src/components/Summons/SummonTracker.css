@@ -48,9 +48,6 @@
 .SummonTracker--Stat {
     display: flex;
     font-size: 40px;
-    /*
-    flex: auto;
-    */
     justify-content: center;
     flex: 1;
 }

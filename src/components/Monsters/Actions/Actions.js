@@ -1,9 +1,17 @@
 import React from "react";
 import * as classNames from 'classnames';
 
+import {iconForAction} from "../../../lib/actions";
 import * as elements from "../../../lib/elements";
 
-function Action({action, border}) {
+function actionForType(type) {
+    if (!type) {
+        return null;
+    }
+    return <img src={iconForAction(type)} alt={type} />
+}
+
+function Action({action}) {
     return (<div className="Card--Action">
         {typeof(action) === "string" ? action : action.action}
         {action.image && <img className="Card--Image" src={action.image} alt="extra info for card"/>}
@@ -29,7 +37,10 @@ export function Actions({className, actions}) {
                     </div>
                 );
             }
-            return (<Action key={i} action={a} border/>);
+            return (<div>
+                <Action key={i} action={a} />
+                {a.subActions && a.subActions.map((sa, j) => <Action key={j} action={sa} />)}
+            </div>);
         })}
     </div>);
 }

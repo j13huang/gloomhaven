@@ -44,21 +44,15 @@ class SummonTrackerComponent extends React.Component {
             <div className="SummonTracker--Section">
                 <div className="SummonTracker--StatsContainer">
                     <div className="SummonTracker--Stat">
-                        <div>
-                            <img className="SummonTracker--Stat--Icon" src={iconForStat(ATTACK)} alt="attack" />
-                        </div>
+                        <img className="SummonTracker--Stat--Icon" src={iconForStat(ATTACK)} alt="attack" />
                         <div className="SummonTracker--Stat--Value">{this.props.attack === 0 ? "-" : this.props.attack}</div>
                     </div>
                     <div className="SummonTracker--Stat">
-                        <div>
-                            <img className="SummonTracker--Stat--Icon" src={iconForStat(MOVEMENT)} alt="movement" />
-                        </div>
+                        <img className="SummonTracker--Stat--Icon" src={iconForStat(MOVEMENT)} alt="movement" />
                         <div className="SummonTracker--Stat--Value">{this.props.movement === 0 ? "-" : this.props.movement}</div>
                     </div>
                     <div className="SummonTracker--Stat">
-                        <div>
-                            <img className="SummonTracker--Stat--Icon" src={iconForStat(RANGE)} alt="range" />
-                        </div>
+                        <img className="SummonTracker--Stat--Icon" src={iconForStat(RANGE)} alt="range" />
                         <div className="SummonTracker--Stat--Value">{this.props.range === 0 ? "-" : this.props.range}</div>
                     </div>
                 </div>

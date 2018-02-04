@@ -1,5 +1,5 @@
 .MonsterTracker--Stats--Container {
-    flex: 50%;
+    flex: 1;
     display: flex;
     padding: 4px;
     padding-left: 12px;
@@ -27,7 +27,6 @@
 }
 
 .MonsterTracker--Stats--Extra {
-    flex: auto;
     font-size: smaller;
     font-weight: bolder;
 }
