@@ -3,6 +3,7 @@ import * as classNames from "classnames";
 
 import {Actions} from "../Actions/Actions";
 import {MOVEMENT, ATTACK, RANGE, iconForStat} from "../../../lib/stats";
+import {getIcon} from "../../../lib/icons";
 
 import "./MonsterStats.css"
 
@@ -25,7 +26,14 @@ export function MonsterStats({className, stats, elite}) {
         <div className="MonsterTracker--Stats--Extra">
             {stats.specialOne && <div><strong>Special 1: </strong><Actions actions={stats.specialOne} /></div>}
             {stats.specialTwo && <div><strong>Special 2: </strong><Actions actions={stats.specialTwo} /></div>}
-            {stats.extra && stats.extra.map((e, i) => <div key={i} className="MonsterTracker--Stats--ExtraLine">{e}</div>)}
+            {stats.extra && stats.extra.map((e, i) =>
+                <div key={i}>
+                    {typeof(e) === "string" ? e :
+                    <div className="MonsterTracker--Stats--ExtraLine">
+                        {e.type} {e.modifier}
+                        <img className="MonsterTracker--StatIcon" src={getIcon(e.type)} alt={e.type} />
+                    </div>}
+                </div>)}
         </div>
     </div>);
 }

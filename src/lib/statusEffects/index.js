@@ -12,19 +12,19 @@ import woundIcon from "./wound.svg";
 import pushIcon from "./push.svg";
 import pullIcon from "./pull.svg";
 
-export const BLESS = "bless";
-export const CURSE = "curse";
-export const DISARM = "disarm";
-export const IMMOBILIZE = "immobilize";
-export const INVISIBLE = "invisible";
-export const MUDDLE = "muddle";
-export const POISON = "poison";
-export const STRENGTHEN = "strengthen";
-export const STUN = "stun";
-export const WOUND = "wound";
+export const BLESS = "BLESS";
+export const CURSE = "CURSE";
+export const DISARM = "DISARM";
+export const IMMOBILIZE = "IMMOBILIZE";
+export const INVISIBLE = "INVISIBLE";
+export const MUDDLE = "MUDDLE";
+export const POISON = "POISON";
+export const STRENGTHEN = "STRENGTHEN";
+export const STUN = "STUN";
+export const WOUND = "WOUND";
 
-export const PUSH = "push";
-export const PULL = "pull";
+export const PUSH = "PUSH";
+export const PULL = "PULL";
 
 const statusEffectIcons = {
     [POISON]: poisonIcon,

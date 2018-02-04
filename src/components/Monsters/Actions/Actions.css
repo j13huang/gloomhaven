@@ -1,0 +1,25 @@
+.Action--Section {
+    margin-bottom: 2px;
+}
+
+.CustomAction--Container {
+    display: flex;
+}
+
+.CustomAction--Icon {
+    height: 16px;
+    width: 16px;
+    margin-left: 2px;
+    margin-right: 4px;
+}
+
+.Card--SubAction {
+    font-size: 70%;
+}
+
+.CustomAction--SubAction--Icon {
+    height: 12px;
+    width: 12px;
+    margin-left: 2px;
+    margin-right: 2px;
+}

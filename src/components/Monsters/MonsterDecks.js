@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import * as classNames from "classnames";
 
 import {Deck} from "./Deck";
+import {MONSTERS, BOSS_STATS} from "../../lib/monsters";
 import {endTurnAction} from "../../store/actions/turn";
 import {
     revealNextCardsAction,
@@ -12,7 +13,7 @@ import { selectors as playersSelectors } from "../../store/players";
 
 import "./MonsterDecks.css";
 
-function MonsterDecksComponent({scenarioLevel, decks, hasActiveCards, revealNextCards, endTurn}) {
+function MonsterDecksComponent({decks, hasActiveCards, revealNextCards, endTurn, showStats, numPlayers, scenarioLevel, boss}) {
     const deckNames = Object.keys(decks);
     const activeDecks = deckNames.filter((m) => decks[m].active);
     const inactiveDecks = deckNames.filter((m) => !decks[m].active);
@@ -47,7 +48,18 @@ function MonsterDecksComponent({scenarioLevel, decks, hasActiveCards, revealNext
         <div className="MonsterDecks">
             {deckOrder.map((name) => {
                 const deck = decks[name];
-                return (<Deck key={name} name={name} card={deck.currentCard} active={deck.active} />);
+                if (!showStats) {
+                    return (<Deck key={name} name={name} card={deck.currentCard} active={deck.active} />);
+                }
+                let monsterStats;
+                if (name === "Boss") {
+                    monsterStats = BOSS_STATS[boss.name][scenarioLevel](numPlayers);
+                } else {
+                    monsterStats = MONSTERS[name].stats[scenarioLevel];
+                }
+                return (
+                    <Deck key={name} name={name} card={deck.currentCard} active={deck.active} stats={monsterStats} />
+                );
             })}
         </div>
     </div>);
@@ -60,6 +72,7 @@ export const MonsterDecks = connect(
             hasActiveCards: monstersSelectors.hasActiveCards(state),
             numPlayers: playersSelectors.numPlayers(state),
             scenarioLevel: playersSelectors.scenarioLevel(state),
+            boss: state.boss,
         };
     },
     (dispatch) => {

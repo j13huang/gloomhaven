@@ -18,7 +18,7 @@
 .MonsterTracker--Stats--Main {
     display: flex;
     flex-direction: column;
-    margin-right: 12px;
+    margin-right: 8px;
 }
 
 .MonsterTracker--Stats--MainLine {
@@ -31,9 +31,15 @@
     font-weight: bolder;
 }
 
+.MonsterTracker--Stats--ExtraLine {
+    display: flex;    
+}
+
 .MonsterTracker--StatIcon {
     width: 1rem;
     height: 1rem;
+    margin-left: 2px;
+    margin-bottom: 2px;
 }
 
 .MonsterTracker--Boss--ImmunitiesContainer {

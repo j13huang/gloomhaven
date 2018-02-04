@@ -4,9 +4,10 @@ import * as classNames from 'classnames';
 import * as _ from "lodash";
 
 import {ELEMENTS, AIR, DARK, EARTH, FIRE, ICE, LIGHT, iconForElement} from '../../lib/elements';
-import {ALL_STATUS_EFFECTS, DISARM, IMMOBILIZE, INVISIBLE, MUDDLE, POISON, STRENGTHEN, STUN, WOUND, PUSH, PULL, iconForStatusEffect} from '../../lib/statusEffects';
+import {ALL_STATUS_EFFECTS, DISARM, IMMOBILIZE, INVISIBLE, MUDDLE, POISON, STRENGTHEN, STUN, WOUND, PUSH, PULL} from '../../lib/statusEffects';
 import {BASE_CARDS, CURSE, BLESS, END_ACTIONS, iconForEndAction, NUMBER_MODIFIERS} from "../../lib/cards";
-import {BONUSES, HEAL, SHIELD, PIERCE, ADD_TARGET, iconForBonus} from "../../lib/bonuses";
+import {BONUSES, HEAL, SHIELD, PIERCE, ADD_TARGET} from "../../lib/bonuses";
+import {getIcon} from "../../lib/icons";
 import {undoCardAction} from '../../store/attackModifierDecks';
 import minusOneCardImage from "./-1.jpg";
 import minusTwoCardImage from "./-2.jpg";
@@ -30,17 +31,6 @@ function Value({value}) {
         </div>);
     }
     return <div>{value}</div>;
-}
-
-function getIcon(extra) {
-    if (ELEMENTS.includes(extra)) {
-        return iconForElement(extra);
-    } else if (ALL_STATUS_EFFECTS.includes(extra)) {
-        return iconForStatusEffect(extra);
-    } else if (BONUSES.includes(extra)) {
-        return iconForBonus(extra);
-    }
-    return null;
 }
 
 function ColorCover({iconName}) {
@@ -216,6 +206,7 @@ function CardComponent({className, card, name, isMostRecentCard, undoCard, child
             </div>
         </div>);
     }
+    // deprecated
     return (
         <div className={classNames({
                 "Deck--Card--Container": true,

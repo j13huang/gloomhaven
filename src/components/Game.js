@@ -7,7 +7,6 @@ import {PlayerTrackers} from "./Players/PlayerTrackers"
 import {Deck as AttackModifierDeck} from "./AttackModifierDecks/Deck"
 import curseCard from "./AttackModifierDecks/curse.jpg";
 import blessCard from "./AttackModifierDecks/bless.jpg";
-import {MonsterDecks as MonsterDeckStats} from "./Monsters/MonsterDeckStats"
 import {MonsterDecks} from "./Monsters/MonsterDecks"
 import {MonsterTrackers} from "./Monsters/MonsterTrackers"
 import {
@@ -173,7 +172,7 @@ class GameComponent extends React.Component {
                         </div>
                     </div>
                     <div className={classNames({"Game--Section--HidePlayers": !this.state.showSections.monsterDecks})}>
-                        {this.state.showStats ? <MonsterDeckStats /> : <MonsterDecks />}
+                        <MonsterDecks showStats={this.state.showStats} />
                     </div>
                 </div>
             </div>

@@ -11,6 +11,7 @@
     display: flex;
     border-radius: 16px;
     overflow: hidden;
+    margin-bottom: 4px;
 }
 
 .Monsters--Deck--CardBack {
