@@ -74,7 +74,11 @@
 }
 
 .Game--Monsters--StatsToggle:not(.Game--Monsters--StatsToggleActive):hover {
+    /*
     background-color: rgba(124, 31, 31, 0.6);
+    */
+    border-color: rgba(148, 13, 13, 1);
+    color: rgba(148, 13, 13, 1);
 }
 
 .Game--Monsters--StatsToggle input[type="radio"]{

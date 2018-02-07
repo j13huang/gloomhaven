@@ -9,9 +9,7 @@ import curseCard from "./AttackModifierDecks/curse.jpg";
 import blessCard from "./AttackModifierDecks/bless.jpg";
 import {MonsterDecks} from "./Monsters/MonsterDecks"
 import {MonsterTrackers} from "./Monsters/MonsterTrackers"
-import {
-    selectors as attackModifierDecksSelectors,
-} from "../store/attackModifierDecks";
+import { selectors as attackModifierDecksSelectors } from "../store/attackModifierDecks";
 import {selectors as playersSelectors} from "../store/players";
 import {selectors as monstersSelectors} from "../store/monsters";
 import {addPlayerAction} from "../store/actions/players";
@@ -31,7 +29,7 @@ class GameComponent extends React.Component {
                 monsterDecks: true,
                 monsters: true,
             },
-            showStats: false,
+            showStats: true,
         };
     }
 
