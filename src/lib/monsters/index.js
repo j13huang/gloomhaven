@@ -79,7 +79,7 @@ const GUARD_CARDS = [
     },
     {
         initiative: 55,
-        actions: [action(MOVE, "-1"), action(ATTACK, "+0"), action(STRENGTHEN, null, ["self"])],
+        actions: [action(MOVE, "-1"), action(ATTACK, "+0"), action(STRENGTHEN, null, ["Self"])],
     },
     {
         initiative: 50,
@@ -111,7 +111,7 @@ const IMP_CARDS = [
     },
     {
         initiative: 5,
-        actions: [action(SHIELD, "5"), action(HEAL, "1", ["self"])],
+        actions: [action(SHIELD, "5"), action(HEAL, "1", ["Self"])],
     },
     {
         initiative: 37,
@@ -138,7 +138,7 @@ const SHAMAN_CARDS = [
     },
     {
         initiative: 89,
-        actions: [action(MOVE, "-1"), action(HEAL, "1", ["Affect all adjacent allies"]), action(BLESS, null, ["self"])],
+        actions: [action(MOVE, "-1"), action(HEAL, "1", ["Affect all adjacent allies"]), action(BLESS, null, ["Self"])],
     },
     {
         initiative: 62,
@@ -902,7 +902,7 @@ export const MONSTERS = {
         cards: [
             {
                 initiative: 3,
-                actions: [action(SHIELD, "1"), action(RETALIATE, "2"), action(HEAL, "2", ["self"])],
+                actions: [action(SHIELD, "1"), action(RETALIATE, "2"), action(HEAL, "2", ["Self"])],
             },
             {
                 initiative: 13,
@@ -1339,7 +1339,7 @@ export const MONSTERS = {
         cards: [
             {
                 initiative: 39,
-                actions: [action(MOVE, "-1"), action(ATTACK, "+0"), action(HEAL, "1", ["self"])],
+                actions: [action(MOVE, "-1"), action(ATTACK, "+0"), action(HEAL, "1", ["Self"])],
             },
             {
                 initiative: 10,
@@ -1686,7 +1686,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 40,
-                actions: [action(HEAL, "3", ["self"]), { type: "element", use: elements.EARTH, action: action(IMMOBILIZE, null, ["Target all enemies within range 3"]) }],
+                actions: [action(HEAL, "3", ["Self"]), { type: "element", use: elements.EARTH, action: action(IMMOBILIZE, null, ["Target all enemies within range 3"]) }],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
@@ -2016,7 +2016,7 @@ export const MONSTERS = {
         cards: [
             {
                 initiative: 18,
-                actions: [action(IMMOBILIZE, null, ["Target all enemies within range 2"]), { type: "element", use: elements.ICE, action: action(HEAL, "3", ["self"]) }],
+                actions: [action(IMMOBILIZE, null, ["Target all enemies within range 2"]), { type: "element", use: elements.ICE, action: action(HEAL, "3", ["Self"]) }],
             },
             {
                 initiative: 18,
@@ -2497,7 +2497,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 7,
-                actions: [action(ATTACK, "-1", [action(RANGE, "3"), action(MUDDLE)]), action(HEAL, "3", ["self"])],
+                actions: [action(ATTACK, "-1", [action(RANGE, "3"), action(MUDDLE)]), action(HEAL, "3", ["Self"])],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
@@ -2506,11 +2506,11 @@ export const MONSTERS = {
             },
             {
                 initiative: 16,
-                actions: [action(MOVE, "-1"), action(ATTACK, "-1"), action(HEAL, "5", ["self"])],
+                actions: [action(MOVE, "-1"), action(ATTACK, "-1"), action(HEAL, "5", ["Self"])],
             },
             {
                 initiative: 30,
-                actions: [action(MOVE, "-1"), action(ATTACK, "+0", [], aoeLine4WithBlack), { type: "element", use: elements.DARK, action: 'Perform "heal 2 self" for each target damaged' }],
+                actions: [action(MOVE, "-1"), action(ATTACK, "+0", [], aoeLine4WithBlack), { type: "element", use: elements.DARK, action: 'Perform "heal 2 Self" for each target damaged' }],
             },
             {
                 initiative: 38,
@@ -3240,7 +3240,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 12,
-                actions: [action(SHIELD, "1"), action(HEAL, "2", ["self"])],
+                actions: [action(SHIELD, "1"), action(HEAL, "2", ["Self"])],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
@@ -3257,7 +3257,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 20,
-                actions: [action(MOVE, "-2"), action(ATTACK, "+0"), action(HEAL, "2", ["self"])],
+                actions: [action(MOVE, "-2"), action(ATTACK, "+0"), action(HEAL, "2", ["Self"])],
                 endAction: END_ACTIONS.SHUFFLE,
             },
         ],
@@ -3597,7 +3597,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 75,
-                actions: [action(MOVE, "-1"), action(ATTACK, "+1", [action(RANGE, "-1")]), action(HEAL, "1", ["self"])],
+                actions: [action(MOVE, "-1"), action(ATTACK, "+1", [action(RANGE, "-1")]), action(HEAL, "1", ["Self"])],
             },
         ],
     },
@@ -3758,7 +3758,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 41,
-                actions: [{ type: "element", use: elements.ICE, action: action(STRENGTHEN, null, ["self"]) }, action(MOVE, "+0"), action(ATTACK, "-1", [action(WOUND)])],
+                actions: [{ type: "element", use: elements.ICE, action: action(STRENGTHEN, null, ["Self"]) }, action(MOVE, "+0"), action(ATTACK, "-1", [action(WOUND)])],
             },
             {
                 initiative: 61,
@@ -3905,7 +3905,7 @@ export const MONSTERS = {
         cards: [
             {
                 initiative: 35,
-                actions: [action(ATTACK, "-1"), action(ATTACK, "-1", [action(PIERCE, "2")]), { type: "element", use: elements.LIGHT, action: action(CURSE, null, ["self"]) }],
+                actions: [action(ATTACK, "-1"), action(ATTACK, "-1", [action(PIERCE, "2")]), { type: "element", use: elements.LIGHT, action: action(CURSE, null, ["Self"]) }],
             },
             {
                 initiative: 15,
@@ -3923,7 +3923,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 7,
-                actions: [action(MOVE, "+1"), action(ATTACK, "-1"), { type: "element", use: elements.DARK, action: action(INVISIBLE, null, ["self"]) }],
+                actions: [action(MOVE, "+1"), action(ATTACK, "-1"), { type: "element", use: elements.DARK, action: action(INVISIBLE, null, ["Self"]) }],
             },
             {
                 initiative: 26,
@@ -4086,7 +4086,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 66,
-                actions: [action(MOVE, "-1"), "loot 1", action(HEAL, "2", ["self"])],
+                actions: [action(MOVE, "-1"), "loot 1", action(HEAL, "2", ["Self"])],
             },
             {
                 initiative: 66,
@@ -4243,7 +4243,7 @@ export const MONSTERS = {
         cards: [
             {
                 initiative: 6,
-                actions: [action(SHIELD, "2"), action(HEAL, "2", ["self"]), action(STRENGTHEN, null, ["self"])],
+                actions: [action(SHIELD, "2"), action(HEAL, "2", ["Self"]), action(STRENGTHEN, null, ["Self"])],
             },
             {
                 initiative: 12,
@@ -4589,7 +4589,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 19,
-                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [action(RANGE, "-1")]), action(SHIELD, "1, Affect self and all allies within range 2"), { type: "element", create: elements.ICE }],
+                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [action(RANGE, "-1")]), action(SHIELD, "1, Affect Self and all allies within range 2"), { type: "element", create: elements.ICE }],
             },
             {
                 initiative: 35,
@@ -4754,7 +4754,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 6,
-                actions: [action(SHIELD, "2"), action(HEAL, "2", ["self"]), action(STRENGTHEN, null, ["self"])],
+                actions: [action(SHIELD, "2"), action(HEAL, "2", ["Self"]), action(STRENGTHEN, null, ["Self"])],
             },
             {
                 initiative: 32,
@@ -5092,7 +5092,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 88,
-                actions: [action(MOVE, "-1"), action(ATTACK, "-1", ["Target all adjacent enemies"]), { type: "element", use: elements.DARK, action: action(MUDDLE, null, ["self"]) }],
+                actions: [action(MOVE, "-1"), action(ATTACK, "-1", ["Target all adjacent enemies"]), { type: "element", use: elements.DARK, action: action(MUDDLE, null, ["Self"]) }],
             },
             {
                 initiative: 17,
@@ -5101,7 +5101,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 73,
-                actions: [action(MOVE, "+0"), action(ATTACK, "+1"), { type: "element", use: elements.LIGHT, action: action(HEAL, "3", ["self"]) }],
+                actions: [action(MOVE, "+0"), action(ATTACK, "+1"), { type: "element", use: elements.LIGHT, action: action(HEAL, "3", ["Self"]) }],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
@@ -5529,7 +5529,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 9,
-                actions: [action(ATTACK, "-1"), action(HEAL, "1", ["self"]), { type: "element", use: elements.AIR, action: action(INVISIBLE, null, ["self"]) }],
+                actions: [action(ATTACK, "-1"), action(HEAL, "1", ["Self"]), { type: "element", use: elements.AIR, action: action(INVISIBLE, null, ["Self"]) }],
             },
             {
                 initiative: 21,
@@ -5717,7 +5717,7 @@ export const BOSS_STATS = {
             move: 2,
             attack: 3,
             range: 0,
-            specialOne: [action(HEAL, "2", ["Affect self and all allies"])],
+            specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
             specialTwo: ["All allies add +1 attack to all attacks this round"],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
@@ -5726,7 +5726,7 @@ export const BOSS_STATS = {
             move: 2,
             attack: 3,
             range: 0,
-            specialOne: [action(HEAL, "2", ["Affect self and all allies"])],
+            specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
             specialTwo: ["All allies add +1 attack to all attacks this round"],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
@@ -5735,7 +5735,7 @@ export const BOSS_STATS = {
             move: 2,
             attack: 4,
             range: 0,
-            specialOne: [action(HEAL, "2", ["Affect self and all allies"])],
+            specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
             specialTwo: ["All allies add +1 attack to all attacks this round"],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
@@ -5744,7 +5744,7 @@ export const BOSS_STATS = {
             move: 3,
             attack: 4,
             range: 0,
-            specialOne: [action(HEAL, "2", ["Affect self and all allies"])],
+            specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
             specialTwo: ["All allies add +1 attack to all attacks this round"],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
@@ -5753,7 +5753,7 @@ export const BOSS_STATS = {
             move: 3,
             attack: 5,
             range: 0,
-            specialOne: [action(HEAL, "2", ["Affect self and all allies"])],
+            specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
             specialTwo: ["All allies add +1 attack to all attacks this round"],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
@@ -5762,7 +5762,7 @@ export const BOSS_STATS = {
             move: 3,
             attack: 5,
             range: 0,
-            specialOne: [action(HEAL, "2", ["Affect self and all allies"])],
+            specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
             specialTwo: ["All allies add +1 attack to all attacks this round"],
             immunities: [DISARM, WOUND, MUDDLE, STUN],
         }),
@@ -5771,7 +5771,7 @@ export const BOSS_STATS = {
             move: 4,
             attack: 6,
             range: 0,
-            specialOne: [action(HEAL, "2", ["Affect self and all allies"])],
+            specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
             specialTwo: ["All allies add +1 attack to all attacks this round"],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
@@ -5780,7 +5780,7 @@ export const BOSS_STATS = {
             move: 4,
             attack: 6,
             range: 0,
-            specialOne: [action(HEAL, "2", ["Affect self and all allies"])],
+            specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
             specialTwo: ["All allies add +1 attack to all attacks this round"],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
@@ -5791,8 +5791,8 @@ export const BOSS_STATS = {
             move: 3,
             attack: 2,
             range: 0,
-            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["self"])],
-            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "4", ["self"]), "sheld 1"],
+            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["Self"])],
+            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "4", ["Self"]), "sheld 1"],
             immunities: [WOUND, DISARM, STUN, MUDDLE, CURSE],
         }),
         (numPlayers) => ({
@@ -5800,8 +5800,8 @@ export const BOSS_STATS = {
             move: 3,
             attack: 3,
             range: 0,
-            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["self"])],
-            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "4", ["self"]), action(SHIELD, "1")],
+            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["Self"])],
+            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "4", ["Self"]), action(SHIELD, "1")],
             immunities: [WOUND, DISARM, STUN, MUDDLE, CURSE],
         }),
         (numPlayers) => ({
@@ -5809,8 +5809,8 @@ export const BOSS_STATS = {
             move: 4,
             attack: 3,
             range: 0,
-            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["self"])],
-            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "5", ["self"]), action(SHIELD, "1")],
+            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["Self"])],
+            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "5", ["Self"]), action(SHIELD, "1")],
             immunities: [WOUND, DISARM, STUN, MUDDLE, CURSE],
         }),
         (numPlayers) => ({
@@ -5818,8 +5818,8 @@ export const BOSS_STATS = {
             move: 4,
             attack: 4,
             range: 0,
-            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["self"])],
-            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "5", ["self"]), action(SHIELD, "1")],
+            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["Self"])],
+            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "5", ["Self"]), action(SHIELD, "1")],
             immunities: [WOUND, DISARM, STUN, MUDDLE, CURSE],
         }),
         (numPlayers) => ({
@@ -5827,8 +5827,8 @@ export const BOSS_STATS = {
             move: 4,
             attack: 4,
             range: 0,
-            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["self"])],
-            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "6", ["self"]), action(SHIELD, "1")],
+            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["Self"])],
+            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "6", ["Self"]), action(SHIELD, "1")],
             immunities: [WOUND, DISARM, STUN, MUDDLE, CURSE],
         }),
         (numPlayers) => ({
@@ -5836,8 +5836,8 @@ export const BOSS_STATS = {
             move: 4,
             attack: 5,
             range: 0,
-            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["self"])],
-            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "6", ["self"]), action(SHIELD, "1")],
+            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["Self"])],
+            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "6", ["Self"]), action(SHIELD, "1")],
             immunities: [WOUND, DISARM, STUN, MUDDLE, CURSE],
         }),
         (numPlayers) => ({
@@ -5845,8 +5845,8 @@ export const BOSS_STATS = {
             move: 4,
             attack: 6,
             range: 0,
-            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["self"])],
-            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "7", ["self"]), action(SHIELD, "1")],
+            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["Self"])],
+            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "7", ["Self"]), action(SHIELD, "1")],
             immunities: [WOUND, DISARM, STUN, MUDDLE, CURSE],
         }),
         (numPlayers) => ({
@@ -5854,8 +5854,8 @@ export const BOSS_STATS = {
             move: 5,
             attack: 7,
             range: 0,
-            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["self"])],
-            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "7", ["self"]), action(SHIELD, "1")],
+            specialOne: [{ type: "element", use: elements.DARK, action: "Summon Night Demon" }, action(INVISIBLE, null, ["Self"])],
+            specialTwo: [{ type: "element", use: elements.LIGHT, action: "Summon Sun Demon" }, action(HEAL, "7", ["Self"]), action(SHIELD, "1")],
             immunities: [WOUND, DISARM, STUN, MUDDLE, CURSE],
         }),
     ],

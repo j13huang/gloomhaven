@@ -28,12 +28,8 @@
 }
 
 .ElementTracker--Element--Border {
-    border: 1px solid rgba(0, 0, 0, 0);
+    border: 1px solid rgba(128, 128, 128, 0.5);
     border-radius: 50%;
-}
-
-.ElementTracker--Element--BorderActive {
-    border: 1px solid lime;
 }
 
 .ElementTracker--Element--BorderInert {
@@ -42,12 +38,12 @@
 
 .ElementTracker--Element--BorderWaning {
     /*border: 1px solid goldenrod;*/
-    border: 1px solid rgba(128, 128, 128, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .ElementTracker--Element--BorderStrong {
     /*border: 1px solid gold;*/
-    border: 1px solid rgba(128, 128, 128, 0.5);
+    border: 1px solid white;
 }
 
 .ElementTracker--Element--Inert {
@@ -55,7 +51,7 @@
 }
 
 .ElementTracker--Element--Waning {
-    opacity: 0.60;
+    opacity: 0.70;
 }
 
 .ElementTracker--Element--Strong {

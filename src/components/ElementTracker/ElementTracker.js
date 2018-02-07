@@ -49,7 +49,7 @@ function ElementTrackerComponent({className, elements, setElementStatus}) {
                         "ElementTracker--Element--Border": true,
                         //"ElementTracker--Element--BorderActive": status === s,
                         //"ElementTracker--Element--BorderActive": true,
-                        [borderClassNameForStatus[s]]: true,
+                        [borderClassNameForStatus[s]]: status === s,
                     })}>
                         <img
                             className={classNames({

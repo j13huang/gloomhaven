@@ -70,7 +70,7 @@
 .Game--Monsters--StatsToggleActive {
     background-color: rgba(148, 13, 13, 1);
     color: white;
-    transition: 0.25s ease-in;
+    transition: 0.1s linear;
 }
 
 .Game--Monsters--StatsToggle:not(.Game--Monsters--StatsToggleActive):hover {
