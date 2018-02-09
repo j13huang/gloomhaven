@@ -1,16 +1,22 @@
 import {shuffle} from "../lib/cards";
 import {MONSTERS, BOSS_CARDS} from "../lib/monsters";
-import {END_ACTIONS} from "../lib/cards";
+import {END_ACTIONS, needsShuffle} from "../lib/cards";
 import {RESET_MONSTERS, ADD_MONSTERS, REMOVE_MONSTER} from "./actions/monsters";
 import {SET_BOSS, REMOVE_BOSS} from "./actions/boss";
 import {END_TURN} from "./actions/turn";
 
 function newDeck(cards, initialActive) {
     return {
+        ...shuffleDeck({cards}),
+        active: initialActive,
+    };
+}
+
+function shuffleDeck({cards}) {
+    return {
         cards: shuffle(cards),
         currentIndex: -1,
         currentCard: null,
-        active: initialActive,
     };
 }
 
@@ -109,7 +115,11 @@ export const reducer = (state = defaultState, action) => {
         case END_TURN:
         {
             return Object.keys(state).reduce((acc, name) => {
-                acc[name] = {...state[name], currentCard: null};
+                const deck = state[name];
+                acc[name] = {
+                    ...deck,
+                    ...(needsShuffle(deck) ? shuffleDeck(deck) : {currentCard: null}),
+                };
                 return acc;
             }, {});
         }
