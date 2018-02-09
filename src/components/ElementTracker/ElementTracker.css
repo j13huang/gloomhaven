@@ -59,7 +59,7 @@
     opacity: 1;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 656px) {
     .ElementTracker {
         max-width: 297px;
     }

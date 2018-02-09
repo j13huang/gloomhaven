@@ -48,7 +48,7 @@
     justify-content: center;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 656px) {
     .Header {
         height: 72px;
     }
