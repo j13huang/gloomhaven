@@ -46,3 +46,17 @@
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 450px) {
+    .Header {
+        height: 72px;
+    }
+
+    .Header--HeightOffset {
+        height: 72px;
+    }
+
+    .Header--EndTurnButton {
+        height: 72px;
+    }
+}

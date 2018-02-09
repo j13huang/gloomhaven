@@ -1,6 +1,6 @@
 .ElementTracker {
     display: flex;
-    border: 1px solid black;
+    flex-wrap: wrap;
 }
 
 .ElementTracker--Column {
@@ -10,8 +10,9 @@
     padding-right: 4px;
 }
 
-.ElementTracker--Column+.ElementTracker--Column {
-    border-left: 1px solid black;
+.ElementTracker--Column {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .ElementTracker--Element {
@@ -57,3 +58,14 @@
 .ElementTracker--Element--Strong {
     opacity: 1;
 }
+
+@media (max-width: 450px) {
+    .ElementTracker {
+        max-width: 300px;
+    }
+
+    .ElementTracker--Column:nth-of-type(3n+1) {
+        border-right: 1px solid black;
+    }
+}
+
