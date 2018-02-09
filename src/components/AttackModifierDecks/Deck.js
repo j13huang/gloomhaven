@@ -12,6 +12,7 @@ import {CURSE, BLESS, needsShuffle, END_ACTIONS, iconForEndAction} from "../../l
 import {
     revealNextCardAction,
     addCardAction,
+    removeCardAction,
     selectors as attackModifierDecksSelectors,
 } from "../../store/attackModifierDecks";
 import {removePlayerAction} from "../../store/actions/players";
@@ -88,20 +89,26 @@ class DeckComponent extends React.Component {
                     />
                 </div>
                 <div className="Deck--AddCards--Container">
+                    <img className="Deck--AddCards--Image" src={blessCard} alt="add bless" />
                     <button
-                        className="Deck--AddCards--Button"
+                        disabled={deck.blessCount === 0}
+                        onClick={() => {this.props.removeCard(BLESS)}}
+                    >-</button>
+                    {deck.blessCount}
+                    <button
                         disabled={this.props.totalBlessings >= 10}
                         onClick={() => {this.props.addCard(BLESS)}}
-                    >
-                        +<img className="Deck--AddCards--Image" src={blessCard} alt="add curse" /> ({deck.blessCount})
-                    </button>
+                    >+</button>
+                    <img className="Deck--AddCards--Image"src={curseCard} alt="add curse" />
                     <button
-                        className="Deck--AddCards--Button"
+                        disabled={deck.curseCount === 0}
+                        onClick={() => {this.props.removeCard(CURSE)}}
+                    >-</button>
+                    {deck.curseCount}
+                    <button
                         disabled={(this.props.name === "Monsters" ? deck.curseCount : this.props.totalCurses) >= 10}
                         onClick={() => {this.props.addCard(CURSE)}}
-                    >
-                        +<img className="Deck--AddCards--Image"src={curseCard} alt="add curse" /> ({deck.curseCount})
-                    </button>
+                    >+</button>
                 </div>
                 <div>
                     <img src={cardBack} className="Deck--CardBack" onClick={() => {this.props.revealNextCard()}} alt="card back" />
@@ -161,6 +168,7 @@ export const Deck = connect(
     (dispatch, ownProps) => ({
         removePlayer: () => removePlayerAction(dispatch, ownProps.name),
         addCard: (card) => addCardAction(dispatch, ownProps.name, card),
+        removeCard: (card) => removeCardAction(dispatch, ownProps.name, card),
         revealNextCard: () => revealNextCardAction(dispatch, ownProps.name),
     }),
 )(DeckComponent);

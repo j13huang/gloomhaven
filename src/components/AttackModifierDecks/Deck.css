@@ -23,6 +23,7 @@
 .Deck--AddCards--Container {
     display: flex;
     justify-content: center;
+    margin-bottom: 2px;
 }
 
 .Deck--AddCards--Button {
@@ -30,9 +31,10 @@
 }
 
 .Deck--AddCards--Image {
-    height: 14.4px;
+    height: 18px;
     margin-left: 2px;
     margin-right: 2px;
+    border-radius: 2px;
 }
 
 .Deck--Shuffle {

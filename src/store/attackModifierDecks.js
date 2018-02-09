@@ -63,29 +63,54 @@ function revealNextCard({cards, currentIndex, playedCards, curseCount, blessCoun
     };
 }
 
-function handleUndoDiscard(cards, currentIndex, totalCount, cardToMatch) {
+function addCard(deck, card) {
+    // in case of -1 index
+    const currentIndex = Math.max(0, deck.currentIndex);
+    const randomIndex = Math.ceil(Math.random() * (deck.cards.length - currentIndex)) + currentIndex;
+    return {
+        cards: [
+            ...deck.cards.slice(0, randomIndex),
+            card,
+            ...deck.cards.slice(randomIndex),
+        ],
+        curseCount: card === CURSE ? (deck.curseCount + 1) : deck.curseCount,
+        blessCount: card === BLESS ? (deck.blessCount + 1) : deck.blessCount,
+    };
+}
+
+function removeCard(cards, currentIndex, cardToRemove) {
+    const matchedCards = cards
+        .map((c, i) => [c, i, Math.random()])
+        .filter(([c, ...rest], i) => i > currentIndex && c === cardToRemove)
+
+    if (matchedCards.length === 0) {
+        return cards;
+    }
+
+    // find largest random value aka pick one random number
+    const randomValue = {
+        value: matchedCards[0][2],
+        index: matchedCards[0][1],
+    };
+    matchedCards.forEach(([c, i, rand]) => {
+        if (rand > randomValue.value) {
+            randomValue.value = rand;
+            randomValue.index = i;
+        }
+    });
+
+    return [
+        ...cards.slice(0, randomValue.index),
+        ...cards.slice(randomValue.index + 1),
+    ];
+}
+
+function handleUndoDiscard(cards, currentIndex, totalCount, cardToRemove) {
     let newCards = cards;
     let countIncrease = 0;
 
-    const matchedCards = newCards
-        .map((c, i) => [c, i, Math.random()])
-        .filter(([c, ..._], i) => i > currentIndex && c === cardToMatch)
-    if (totalCount === 10 && matchedCards.length > 0) {
-        // find largest random value aka pick one random number
-        const randomValue = {
-            value: matchedCards[0][2],
-            index: matchedCards[0][1],
-        };
-        matchedCards.forEach(([c, i, rand]) => {
-            if (rand > randomValue.value) {
-                randomValue.value = rand;
-                randomValue.index = i;
-            }
-        })
-        newCards = [
-            ...newCards.slice(0, randomValue.index),
-            ...newCards.slice(randomValue.index + 1),
-        ];
+    if (totalCount === 10) {
+        newCards = removeCard(cards, currentIndex, cardToRemove);
     } else {
         countIncrease = 1;
     }
@@ -120,21 +145,6 @@ function undoCard(state, deckName) {
     };
 }
 
-function addCard(deck, card) {
-    // in case of -1 index
-    const currentIndex = Math.max(0, deck.currentIndex);
-    const randomIndex = Math.ceil(Math.random() * (deck.cards.length - currentIndex)) + currentIndex;
-    return {
-        cards: [
-            ...deck.cards.slice(0, randomIndex),
-            card,
-            ...deck.cards.slice(randomIndex),
-        ],
-        curseCount: card === CURSE ? (deck.curseCount + 1) : deck.curseCount,
-        blessCount: card === BLESS ? (deck.blessCount + 1) : deck.blessCount,
-    };
-}
-
 function shuffleDeck({cards, currentIndex}) {
     return {
         cards: shuffleCards(cards, currentIndex),
@@ -149,8 +159,9 @@ const defaultState = {
 
 const APPLY_PERKS = "attackModifierDeck/cards/perks/apply";
 const REVEAL_CARD = "attackModifierDeck/cards/next";
-const UNDO_CARD = "attackModifierDeck/cards/undo";
 const ADD_CARD = "attackModifierDeck/cards/add";
+const REMOVE_CARD = "attackModifierDeck/cards/remove";
+const UNDO_CARD = "attackModifierDeck/cards/undo";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -191,16 +202,6 @@ export const reducer = (state = defaultState, action) => {
                 },
             };
         }
-        case UNDO_CARD:
-        {
-            return {
-                ...state,
-                [action.deckName]: {
-                    ...state[action.deckName],
-                    ...undoCard(state, action.deckName),
-                },
-            };
-        }
         case ADD_CARD:
         {
             const deck = state[action.deckName];
@@ -209,6 +210,29 @@ export const reducer = (state = defaultState, action) => {
                 [action.deckName]: {
                     ...deck,
                     ...addCard(deck, action.card),
+                },
+            };
+        }
+        case REMOVE_CARD:
+        {
+            const deck = state[action.deckName];
+            return {
+                ...state,
+                [action.deckName]: {
+                    ...deck,
+                    cards: removeCard(deck.cards, deck.currentIndex, action.card),
+                    curseCount: action.card === CURSE ? deck.curseCount - 1 : deck.curseCount,
+                    blessCount: action.card === BLESS ? deck.blessCount - 1 : deck.blessCount,
+                },
+            };
+        }
+        case UNDO_CARD:
+        {
+            return {
+                ...state,
+                [action.deckName]: {
+                    ...state[action.deckName],
+                    ...undoCard(state, action.deckName),
                 },
             };
         }
@@ -241,6 +265,10 @@ export function undoCardAction(dispatch, name) {
 
 export function addCardAction(dispatch, name, card) {
     dispatch({type: ADD_CARD, deckName: name, card});
+}
+
+export function removeCardAction(dispatch, name, card) {
+    dispatch({type: REMOVE_CARD, deckName: name, card});
 }
 
 function totalCurseCards(state) {
