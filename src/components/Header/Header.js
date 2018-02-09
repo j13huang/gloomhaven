@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import * as classNames from "classnames";
 
 import {ElementTracker} from "../ElementTracker/ElementTracker"
+import {EndTurnButton} from "./EndTurnButton"
 import {endTurnAction} from "../../store/actions/turn";
 import { selectors as monstersSelectors } from "../../store/monsterDecks";
 
@@ -13,18 +14,15 @@ function HeaderComponent({turn, endTurnReady, endTurn}) {
         <div className="Header">
             <div className="Header--Content">
                 <ElementTracker className="Header--Content--Section"/>
-                {/*<div className={classNames("Header--Content--Section", "Header--TurnTracker")}>Turn {turn}</div>*/}
-                <button
+                <EndTurnButton
                     className={classNames({
                         "Header--EndTurnButton": true,
                         "Header--EndTurnButton--Ready": endTurnReady,
                     })}
-                    disabled={!endTurnReady}
-                    onClick={() => endTurn()}
-                >
-                    <div>End Turn</div>
-                    <div>(Turn {turn})</div>
-                </button>
+                    turn={turn}
+                    endTurnReady={endTurnReady}
+                    endTurn={() => endTurn()}
+                />
             </div>
         </div>
         <div className="Header--HeightOffset"></div>

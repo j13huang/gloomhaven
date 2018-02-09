@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import * as classNames from "classnames";
 
 import {Deck} from "./Deck";
+import {EndTurnButton} from "../Header/EndTurnButton";
 import {MONSTERS, BOSS_STATS} from "../../lib/monsters";
 import {endTurnAction} from "../../store/actions/turn";
 import {
@@ -34,16 +35,14 @@ function MonsterDecksComponent({decks, hasActiveCards, revealNextCards, endTurn,
             >
                 Flip Cards
             </button>
-            <button
+            <EndTurnButton
                 className={classNames({
                     "MonsterDecks--Header--Button": true,
                     "MonsterDecks--Header--ButtonReady": hasActiveCards,
                 })}
-                disabled={!hasActiveCards}
-                onClick={() => endTurn()}
-            >
-                End Turn
-            </button>
+                endTurnReady={hasActiveCards}
+                endTurn={() => endTurn()}
+            />
         </div>
         <div className="MonsterDecks">
             {deckOrder.map((name) => {
