@@ -50,7 +50,7 @@ export class EndTurnButton extends React.Component {
             </button>
             <Modal isOpen={this.state.showWarning} contentLabel="End Turn" style={this.customStyles}>
                 <div>Are you sure you want to end your turn?</div>
-                <div>No monster cards have been flipped this turn.</div>
+                <div>No monster cards have been flipped yet.</div>
                 <div className="EndTurnButton--Modal--Buttons">
                     <button onClick={() => this.setState({showWarning: false})}>No</button>
                     <button onClick={() => {
