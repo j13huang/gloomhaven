@@ -61,7 +61,7 @@
 
 @media (max-width: 450px) {
     .ElementTracker {
-        max-width: 300px;
+        max-width: 297px;
     }
 
     .ElementTracker--Column:nth-of-type(3n+1) {

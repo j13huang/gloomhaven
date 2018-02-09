@@ -20,6 +20,7 @@
 .Header--EndTurnButton {
     height: 36px;
     background-color: inherit;
+    flex: auto;
 }
 
 .Header--EndTurnButton--Ready {
@@ -47,7 +48,7 @@
     justify-content: center;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 425px) {
     .Header {
         height: 72px;
     }

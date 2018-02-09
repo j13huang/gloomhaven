@@ -13,7 +13,7 @@ function HeaderComponent({turn, endTurnReady, endTurn}) {
         <div className="Header">
             <div className="Header--Content">
                 <ElementTracker className="Header--Content--Section"/>
-                <div className={classNames("Header--Content--Section", "Header--TurnTracker")}>Turn {turn}</div>
+                {/*<div className={classNames("Header--Content--Section", "Header--TurnTracker")}>Turn {turn}</div>*/}
                 <button
                     className={classNames({
                         "Header--EndTurnButton": true,
@@ -22,7 +22,8 @@ function HeaderComponent({turn, endTurnReady, endTurn}) {
                     disabled={!endTurnReady}
                     onClick={() => endTurn()}
                 >
-                    End Turn
+                    <div>End Turn</div>
+                    <div>(Turn {turn})</div>
                 </button>
             </div>
         </div>
