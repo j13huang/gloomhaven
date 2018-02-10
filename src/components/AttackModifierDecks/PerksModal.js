@@ -14,6 +14,7 @@ class PerksModalComponent extends React.Component {
         super(props);
 
         // taken from https://github.com/reactjs/react-modal/tree/v3.1.11#examples
+        /*
         this.customStyles = {
             content : {
                 top                   : '50%',
@@ -24,6 +25,17 @@ class PerksModalComponent extends React.Component {
                 transform             : 'translate(-50%, -50%)'
               }
         };
+        */
+
+        this.customStyles = {
+            content: {
+                top:"112px",
+                left:"50%",
+                transform             : 'translateX(-45%)',
+                position:"absolute",
+                width:"60%",
+            }
+        }
 
         this.state = {
             perkUsage: props.initialPerkUsage,
@@ -57,6 +69,7 @@ class PerksModalComponent extends React.Component {
     }
 
     render() {
+        //return (<Modal isOpen contentLabel="Perks" className={{ base:"test", }}>
         return (<Modal isOpen contentLabel="Perks" style={this.customStyles}>
             <h2 className="PerksModal--Title">{this.props.class}</h2>
             <div className="PerksModal--Perks">
