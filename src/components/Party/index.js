@@ -70,7 +70,6 @@ class PartyComponent extends React.Component {
             </div>
             <select
                 className="Party--Load--Select"
-                disabled={!this.state.savedData}
                 value={this.state.selectedParty}
                 onChange={(event) => this.selectParty(event.target.value)}
             >
