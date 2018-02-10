@@ -2,6 +2,7 @@ import {shuffle} from "../lib/cards";
 import {MONSTERS, BOSS_CARDS} from "../lib/monsters";
 import {END_ACTIONS, needsShuffle} from "../lib/cards";
 import {RESET_MONSTERS, ADD_MONSTERS, REMOVE_MONSTER} from "./actions/monsters";
+import {LOAD_PARTY} from "./actions/party";
 import {SET_BOSS, REMOVE_BOSS} from "./actions/boss";
 import {END_TURN} from "./actions/turn";
 
@@ -49,6 +50,10 @@ const TOGGLE_ACTIVE = "monsters/decks/toggleActive";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
+        case LOAD_PARTY:
+        {
+            return defaultState;
+        }
         case RESET_MONSTERS:
         {
             return defaultState;

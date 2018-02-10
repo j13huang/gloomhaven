@@ -55,7 +55,7 @@ class PlayerTrackerComponent extends React.Component {
                     <label>Level:
                         <select
                             disabled={this.props.hasMonstersInPlay}
-                            value={this.props.level}
+                            value={this.props.player.level}
                             onChange={(event) => this.props.selectLevel(parseInt(event.target.value, 10))}
                         >
                             {new Array(9).fill().map((_, i) => {

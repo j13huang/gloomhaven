@@ -1,5 +1,6 @@
 import {STATUS_EFFECTS, newStatusEffectTracker} from "../lib/statusEffects";
 import {MONSTERS} from "../lib/monsters";
+import {LOAD_PARTY} from "./actions/party";
 import {RESET_MONSTERS, ADD_MONSTERS, REMOVE_MONSTER} from "./actions/monsters";
 
 function newMonster(name, level, alive, elite) {
@@ -46,6 +47,10 @@ const SET_HP = "monsters/hp/set";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
+        case LOAD_PARTY:
+        {
+            return defaultState;
+        }
         case RESET_MONSTERS: return defaultState;
         case ADD_MONSTERS:
         {

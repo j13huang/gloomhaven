@@ -38,6 +38,8 @@
 }
 
 .Game--Players {
+    display: flex;
+    justify-content: space-between;
 }
 
 .Game--AttackModifierDecks {

@@ -1,5 +1,6 @@
 import {STATUS_EFFECTS} from "../lib/statusEffects";
 import {BOSS_STATS} from "../lib/monsters";
+import {LOAD_PARTY} from "./actions/party";
 import {SET_BOSS, REMOVE_BOSS} from "./actions/boss";
 import {RESET_MONSTERS} from "./actions/monsters";
 
@@ -20,6 +21,10 @@ const defaultState = null;
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
+        case LOAD_PARTY:
+        {
+            return defaultState;
+        }
         case RESET_MONSTERS:
         {
             return defaultState;

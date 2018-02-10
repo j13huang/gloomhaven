@@ -1,6 +1,7 @@
 import {shuffle} from "../lib/cards";
-import {newPerks} from "../lib/classes";
+import {newPerksUsage, perksForClass} from "../lib/classes";
 import {END_ACTIONS, BASE_DECK, BASE_CARDS, CURSE, BLESS, needsShuffle} from "../lib/cards";
+import {LOAD_PARTY} from "./actions/party";
 import {ADD_PLAYER, REMOVE_PLAYER} from "./actions/players";
 import {END_TURN} from "./actions/turn";
 
@@ -18,18 +19,19 @@ function newAttackModifierDeck(cards, characterClass) {
     return {
         ...newDeck(cards),
         class: characterClass,
-        perks: newPerks(characterClass) || [],
+        perkUsage: newPerksUsage(characterClass) || [],
         // from items
         minusOneCards: 0,
     };
 }
 
-function applyPerks(perks, minusOneCards) {
+function newDeckWithPerks(characterClass, perkUsage, minusOneCards) {
     let cards = BASE_DECK;
-    perks.forEach((p) => {
-        p.used.forEach((u) => {
+    perkUsage.forEach((pu, i) => {
+        const cardModifierFn = perksForClass(characterClass)[i].modifyCards;
+        pu.forEach((u) => {
             if (u) {
-                cards = p.filterCards(cards);
+                cards = cardModifierFn(cards);
             }
         });
     });
@@ -157,7 +159,7 @@ const defaultState = {
     Monsters: newAttackModifierDeck(BASE_DECK, ""),
 };
 
-const APPLY_PERKS = "attackModifierDeck/cards/perks/apply";
+const APPLY_PERK_USAGE = "attackModifierDeck/cards/perks/applyUsage";
 const REVEAL_CARD = "attackModifierDeck/cards/next";
 const ADD_CARD = "attackModifierDeck/cards/add";
 const REMOVE_CARD = "attackModifierDeck/cards/remove";
@@ -165,6 +167,22 @@ const UNDO_CARD = "attackModifierDeck/cards/undo";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
+        case LOAD_PARTY:
+        {
+            const loadedState = Object.entries(action.party).reduce((acc, [playerName, playerData]) => {
+                acc[playerName] = {
+                    ...newDeckWithPerks(playerData.class, playerData.perkUsage, playerData.minusOneCards),
+                    class: playerData.class,
+                    perkUsage: action.perkUsage,
+                    minusOneCards: action.minusOneCards,
+                };
+                return acc;
+            }, {});
+            return {
+                ...defaultState,
+                ...loadedState,
+            };
+        }
         case ADD_PLAYER:
         {
             return {
@@ -180,15 +198,16 @@ export const reducer = (state = defaultState, action) => {
                 ...newState,
             };
         }
-        case APPLY_PERKS:
+        case APPLY_PERK_USAGE:
         {
+            const deck = state[action.deckName];
             return {
                 ...state,
                 [action.deckName]: {
-                    ...state[action.deckName],
-                    perks: action.perks,
+                    ...deck,
+                    perkUsage: action.perkUsage,
                     minusOneCards: action.minusOneCards,
-                    ...applyPerks(action.perks, action.minusOneCards),
+                    ...newDeckWithPerks(deck.class, action.perkUsage, action.minusOneCards),
                 },
             };
         }
@@ -251,8 +270,8 @@ export const reducer = (state = defaultState, action) => {
     }
 }
 
-export function applyPerksAction(dispatch, name, perks, minusOneCards) {
-    dispatch({type: APPLY_PERKS, deckName: name, perks, minusOneCards});
+export function applyPerkUsageAction(dispatch, name, perkUsage, minusOneCards) {
+    dispatch({type: APPLY_PERK_USAGE, deckName: name, perkUsage, minusOneCards});
 }
 
 export function revealNextCardAction(dispatch, name) {

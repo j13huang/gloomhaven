@@ -1,4 +1,5 @@
 import {ELEMENTS, INERT, WANING, STRONG} from "../lib/elements";
+import {LOAD_PARTY} from "./actions/party";
 import {END_TURN} from "./actions/turn";
 
 const defaultState = ELEMENTS.reduce((acc, e) => {acc[e] = INERT; return acc;}, {});
@@ -7,6 +8,10 @@ const SET_STATUS = "elements/status/set";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
+        case LOAD_PARTY:
+        {
+            return defaultState;
+        }
         case SET_STATUS:
         {
             return {

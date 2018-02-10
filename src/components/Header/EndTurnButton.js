@@ -1,8 +1,5 @@
 import React from "react";
-import * as classNames from "classnames";
 import Modal from "react-modal";
-
-import {ElementTracker} from "../ElementTracker/ElementTracker"
 
 import "./EndTurnButton.css";
 

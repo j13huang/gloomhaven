@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 import Modal from 'react-modal';
 
-import { applyPerksAction } from "../../store/attackModifierDecks";
+import { applyPerkUsageAction } from "../../store/attackModifierDecks";
+import { perksForClass } from "../../lib/classes";
 import minusOneCard from "./-1.jpg";
 import minusOneItemIcon from "./minusOneItemIcon.svg";
 
@@ -25,24 +26,21 @@ class PerksModalComponent extends React.Component {
         };
 
         this.state = {
-            perks: props.initialPerks,
+            perkUsage: props.initialPerkUsage,
             minusOneCards: props.initialMinusOneCards,
         };
     }
 
     togglePerk(i, j) {
         this.setState({
-            perks: [
-                ...this.state.perks.slice(0, i),
-                {
-                    ...this.state.perks[i],
-                    used: [
-                        ...this.state.perks[i].used.slice(0, j),
-                        !this.state.perks[i].used[j],
-                        ...this.state.perks[i].used.slice(j + 1),
-                    ],
-                },
-                ...this.state.perks.slice(i + 1),
+            perkUsage: [
+                ...this.state.perkUsage.slice(0, i),
+                [
+                    ...this.state.perkUsage[i].slice(0, j),
+                    !this.state.perkUsage[i][j],
+                    ...this.state.perkUsage[i].slice(j + 1),
+                ],
+                ...this.state.perkUsage.slice(i + 1),
             ],
         });
     }
@@ -54,7 +52,7 @@ class PerksModalComponent extends React.Component {
     }
 
     applyPerks() {
-        this.props.applyPerks(this.state.perks, this.state.minusOneCards);
+        this.props.applyPerks(this.state.perkUsage, this.state.minusOneCards);
         this.props.onClose();
     }
 
@@ -63,12 +61,13 @@ class PerksModalComponent extends React.Component {
             <h2 className="PerksModal--Title">{this.props.class}</h2>
             <div className="PerksModal--Perks">
                 <h3 className="PerksModal--Title">Perks</h3>
-                {this.state.perks.map((p, i) => (
-                    <div key={i} className="PerksModal--Perk">
-                        {p.used.map((u, j) => <input key={j} type="checkbox" checked={u} onChange={() => this.togglePerk(i, j)} />)}
-                        <label className="PerksModal--Perk--Name">{p.description}</label>
-                    </div>)
-                )}
+                {this.state.perkUsage.map((pu, i) => {
+                    const description = perksForClass(this.props.class)[i].description;
+                    return (<div key={i} className="PerksModal--Perk">
+                        {pu.map((u, j) => <input key={j} type="checkbox" checked={u} onChange={() => this.togglePerk(i, j)} />)}
+                        <label className="PerksModal--Perk--Name">{description}</label>
+                    </div>);
+                })}
             </div>
             <div>
                 <h3 className="PerksModal--Title">Add <img className="PerksModal--CardIcon" src={minusOneCard} alt="-1 card"/></h3>
@@ -94,14 +93,14 @@ class PerksModalComponent extends React.Component {
 export const PerksModal = connect(
     (state, ownProps) => {
         return {
-            initialPerks: state.attackModifierDecks[ownProps.name].perks,
+            initialPerkUsage: state.attackModifierDecks[ownProps.name].perkUsage,
             initialMinusOneCards: state.attackModifierDecks[ownProps.name].minusOneCards,
             class: state.players.players[ownProps.name].class,
         };
     },
     (dispatch, ownProps) => {
         return {
-            applyPerks: (perks, minusOneCards) => applyPerksAction(dispatch, ownProps.name, perks, minusOneCards),
+            applyPerks: (perkUsage, minusOneCards) => applyPerkUsageAction(dispatch, ownProps.name, perkUsage, minusOneCards),
         };
     }
 )(PerksModalComponent);

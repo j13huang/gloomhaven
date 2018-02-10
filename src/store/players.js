@@ -1,5 +1,6 @@
 import {CLASS_NAMES, getCharacterStats} from "../lib/classes";
 import {newStatusEffectTracker} from "../lib/statusEffects";
+import {LOAD_PARTY} from "./actions/party";
 import {ADD_PLAYER, REMOVE_PLAYER} from "./actions/players";
 
 function newPlayer(characterClass, level) {
@@ -26,6 +27,17 @@ const SET_HP = "players/hp/set";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
+        case LOAD_PARTY:
+        {
+            const loadedPlayers = Object.entries(action.party).reduce((acc, [playerName, playerData]) => {
+                acc[playerName] = newPlayer(playerData.class, playerData.level);
+                return acc;
+            }, {});
+            return {
+                ...defaultState,
+                players: loadedPlayers,
+            };
+        }
         case ADD_PLAYER:
         {
             return {

@@ -1,3 +1,4 @@
+import {LOAD_PARTY} from "./actions/party";
 import {newStatusEffectTracker} from "../lib/statusEffects";
 
 export const baseStats = {
@@ -27,6 +28,10 @@ const SET_HP = "summons/hp/set";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
+        case LOAD_PARTY:
+        {
+            return defaultState;
+        }
         case ADD_SUMMON:
         {
             const summons = state[action.playerName];
