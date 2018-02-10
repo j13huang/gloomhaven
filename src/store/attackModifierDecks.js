@@ -173,8 +173,8 @@ export const reducer = (state = defaultState, action) => {
                 acc[playerName] = {
                     ...newDeckWithPerks(playerData.class, playerData.perkUsage, playerData.minusOneCards),
                     class: playerData.class,
-                    perkUsage: action.perkUsage,
-                    minusOneCards: action.minusOneCards,
+                    perkUsage: playerData.perkUsage,
+                    minusOneCards: playerData.minusOneCards,
                 };
                 return acc;
             }, {});
