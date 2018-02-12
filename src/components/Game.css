@@ -3,6 +3,12 @@
     user-select: none;
 }
 
+.Game--Section--ToggleSymbol {
+    /*
+    width: 1rem;
+    */
+}
+
 .Game--Section--HidePlayers {
     display: none;
 }
@@ -87,7 +93,6 @@
     opacity: 0;
     position: absolute;
 }
-
 
 .Game--original {
     border: 1px solid black;

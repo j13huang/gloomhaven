@@ -2,6 +2,7 @@ import {CLASS_NAMES, getCharacterStats} from "../lib/classes";
 import {newStatusEffectTracker} from "../lib/statusEffects";
 import {LOAD_PARTY} from "./actions/party";
 import {ADD_PLAYER, REMOVE_PLAYER} from "./actions/players";
+import {END_TURN} from "./actions/turn";
 
 function newPlayer(characterClass, level) {
     const stats = getCharacterStats(characterClass, level - 1);
@@ -18,12 +19,14 @@ const defaultState = {
     levelAdjustment: 0,
     selectableClasses: CLASS_NAMES.reduce((acc, c) => {acc[c] = true; return acc;}, {}),
     players: {},
+    initiative: {},
 };
 
 const SET_LEVEL = "players/level/set";
 const SET_LEVEL_ADJUSTMENT = "players/level/setAdjustment";
 const TOGGLE_STATUS_EFFECT = "players/statusEffect/toggle";
 const SET_HP = "players/hp/set";
+const SET_INITIATIVE = "players/initiative/set";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -119,6 +122,23 @@ export const reducer = (state = defaultState, action) => {
                 },
             };
         }
+        case SET_INITIATIVE:
+        {
+            return {
+                ...state,
+                initiative: {
+                    ...state.initiative,
+                    [action.initiative]: !state.initiative[action.initiative],
+                },
+            };
+        }
+        case END_TURN:
+        {
+            return {
+                ...state,
+                initiative: {},
+            };
+        }
         default: return state;
     }
 }
@@ -137,6 +157,10 @@ export function toggleStatusEffectAction(dispatch, name, statusEffect) {
 
 export function setHPAction(dispatch, name, hp) {
     dispatch({type: SET_HP, name, hp});
+}
+
+export function setIntiativeAction(dispatch, initiative) {
+    dispatch({type: SET_INITIATIVE, initiative});
 }
 
 function calculateScenarioLevel(players) {

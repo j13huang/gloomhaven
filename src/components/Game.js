@@ -31,6 +31,7 @@ class GameComponent extends React.Component {
                 monsters: true,
             },
             showStats: true,
+            showInitiativeTimeline: false,
         };
     }
 
@@ -40,6 +41,12 @@ class GameComponent extends React.Component {
                 ...this.state.showSections,
                 [section]: !this.state.showSections[section],
             },
+        });
+    }
+
+    toggleInitiativeTimeline() {
+        this.setState({
+            showInitiativeTimeline: !this.state.showInitiativeTimeline,
         });
     }
 
@@ -80,7 +87,7 @@ class GameComponent extends React.Component {
             <div>
                 <Header />
                 <div className="Game--Section">
-                    <h3>Players <span className="Game--Section--Toggle" onClick={() => this.toggleSection("players")}>{this.state.showSections.players ? "▾" : "▸"}</span></h3>
+                    <h3 className="Game--Section--Toggle" onClick={() => this.toggleSection("players")}>Players <span className="Game--Section--ToggleSymbol">{this.state.showSections.players ? "▾" : "▸"}</span></h3>
                     <div className="Game--Players">
                         <div>
                             <input
@@ -121,7 +128,7 @@ class GameComponent extends React.Component {
                     </div>
                 </div>
                 <div className="Game--Section">
-                    <h3>Attack Modifier Decks <span className="Game--Section--Toggle" onClick={() => this.toggleSection("attackModifierDecks")}>{this.state.showSections.attackModifierDecks ? "▾" : "▸"}</span></h3>
+                    <h3 className="Game--Section--Toggle" onClick={() => this.toggleSection("attackModifierDecks")}>Attack Modifier Decks <span className="Game--Section--ToggleSymbol">{this.state.showSections.attackModifierDecks ? "▾" : "▸"}</span></h3>
                     <div className={classNames({"Game--Section--HidePlayers": !this.state.showSections.attackModifierDecks})}>
                         <div className="Game--SpecialCardCount--Container">
                             Blessing card count:
@@ -143,14 +150,14 @@ class GameComponent extends React.Component {
                     </div>
                 </div>
                 <div className="Game--Section">
-                    <h3>Monsters <span className="Game--Section--Toggle" onClick={() => this.toggleSection("monsters")}>{this.state.showSections.monsters ? "▾" : "▸"}</span></h3>
+                    <h3 className="Game--Section--Toggle" onClick={() => this.toggleSection("monsters")}>Monsters <span className="Game--Section--ToggleSymbol">{this.state.showSections.monsters ? "▾" : "▸"}</span></h3>
                     <div className={classNames({"Game--Section--HidePlayers": !this.state.showSections.monsters})}>
                         <MonsterTrackers />
                     </div>
                 </div>
                 <div className="Game--Section">
                     <div className="Game--MonsterCards--TitleContainer">
-                        <h3>Monster Cards <span className="Game--Section--Toggle" onClick={() => this.toggleSection("monsterDecks")}>{this.state.showSections.monsterDecks ? "▾" : "▸"}</span></h3>
+                        <h3 className="Game--Section--Toggle" onClick={() => this.toggleSection("monsterDecks")}>Monster Cards <span className="Game--Section--ToggleSymbol">{this.state.showSections.monsterDecks ? "▾" : "▸"}</span></h3>
                         {/*
                         <ul className={classNames({"Game--original": true, "Game--test": this.state.showStats})}>
                             {this.state.showStats && new Array(9).fill().map((_, i) => {
@@ -176,7 +183,7 @@ class GameComponent extends React.Component {
                         </div>
                     </div>
                     <div className={classNames({"Game--Section--HidePlayers": !this.state.showSections.monsterDecks})}>
-                        <MonsterDecks showStats={this.state.showStats} />
+                        <MonsterDecks showStats={this.state.showStats} showTimeline={this.state.showInitiativeTimeline} toggleTimeline={() => this.toggleInitiativeTimeline()} />
                     </div>
                 </div>
             </div>

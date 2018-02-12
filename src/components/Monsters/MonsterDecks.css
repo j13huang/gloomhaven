@@ -1,7 +1,10 @@
 .MonsterDecks--Header--Button {
+    margin-bottom: 12px;
+}
+
+.MonsterDecks--Header--Button {
     height: 64px;
     margin-right: 12px;
-    margin-bottom: 12px;
     background-color: inherit;
 }
 
@@ -16,6 +19,50 @@
     30%, 40% {
       background-color: rgb(30, 255, 255);
     }
+}
+
+.MonsterDecks--Timeline--Toggle {
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 8px;
+}
+
+.MonsterDecks--Timeline {
+    display: flex;
+    flex-wrap: wrap;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    margin-bottom: 12px;
+}
+
+.MonsterDecks--Timeline--BaseCell {
+    position: relative;
+    height: 16px;
+    width: 16px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    flex-grow: 1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    user-select: none;
+}
+
+.MonsterDecks--Timeline--MonsterCell {
+    background-color: rgba(148, 13, 13, 1);
+    color: white;
+}
+
+.MonsterDecks--Timeline--PlayerCell {
+    background-color: red;
+    color: white;
+}
+
+.MonsterDecks--Timeline--MonsterCell.MonsterDecks--Timeline--PlayerCell {
+    background-color: rgb(236, 144, 5);
+    color: white;
 }
 
 .MonsterDecks {

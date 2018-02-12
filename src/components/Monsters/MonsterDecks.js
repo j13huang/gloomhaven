@@ -10,11 +10,11 @@ import {
     revealNextCardsAction,
     selectors as monstersSelectors,
 } from "../../store/monsterDecks";
-import { selectors as playersSelectors } from "../../store/players";
+import { selectors as playersSelectors, setIntiativeAction } from "../../store/players";
 
 import "./MonsterDecks.css";
 
-function MonsterDecksComponent({decks, hasActiveCards, revealNextCards, endTurn, showStats, numPlayers, scenarioLevel, boss}) {
+function MonsterDecksComponent({decks, hasActiveCards, revealNextCards, endTurn, showStats, numPlayers, scenarioLevel, boss, showTimeline, toggleTimeline, playerInitiative, setPlayerInitiative}) {
     const deckNames = Object.keys(decks);
     const activeDecks = deckNames.filter((m) => decks[m].active);
     const inactiveDecks = deckNames.filter((m) => !decks[m].active);
@@ -26,6 +26,13 @@ function MonsterDecksComponent({decks, hasActiveCards, revealNextCards, endTurn,
         }
         return deckA.currentCard.initiative - deckB.currentCard.initiative;
     }).concat(inactiveDecks);
+    const initiativeOrderMap = deckOrder.reduce((acc, m) => {
+        const deck = decks[m];
+        if (deck.currentCard) {
+            acc[decks[m].currentCard.initiative] = true;
+        }
+        return acc;
+    }, {});
     return (<div>
         <div className="MonsterDecks--Header">
             <button
@@ -44,6 +51,24 @@ function MonsterDecksComponent({decks, hasActiveCards, revealNextCards, endTurn,
                 endTurn={() => endTurn()}
             />
         </div>
+        <h6 className="MonsterDecks--Timeline--Toggle" onClick={() => toggleTimeline()}>Initiative Timeline <span>{showTimeline ? "▾" : "▸"}</span></h6>
+        {showTimeline && <div className="MonsterDecks--Timeline">
+            {new Array(99).fill().map((_, i) => {
+                let content = i + 1;
+                if (initiativeOrderMap[i + 1] && playerInitiative[i + 1]) {
+                    content = "*";
+                } else if (initiativeOrderMap[i + 1]) {
+                    content = "M";
+                } else if (playerInitiative[i + 1]) {
+                    content = "P";
+                }
+                return (<div key={i + 1} className={classNames({
+                    "MonsterDecks--Timeline--BaseCell": true,
+                    "MonsterDecks--Timeline--MonsterCell": initiativeOrderMap[i + 1],
+                    "MonsterDecks--Timeline--PlayerCell": playerInitiative[i + 1],
+                })} onClick={() => setPlayerInitiative(i + 1)}>{content}</div>);
+            })}
+        </div>}
         <div className="MonsterDecks">
             {deckOrder.map((name) => {
                 const deck = decks[name];
@@ -72,12 +97,14 @@ export const MonsterDecks = connect(
             numPlayers: playersSelectors.numPlayers(state),
             scenarioLevel: playersSelectors.scenarioLevel(state),
             boss: state.boss,
+            playerInitiative: state.players.initiative,
         };
     },
     (dispatch) => {
         return {
             endTurn: () => endTurnAction(dispatch),
             revealNextCards: () => {revealNextCardsAction(dispatch)},
+            setPlayerInitiative: (initiative) => {setIntiativeAction(dispatch, initiative)},
         };
     },
 )(MonsterDecksComponent);
