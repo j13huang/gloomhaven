@@ -21,6 +21,10 @@
     }
 }
 
+.MonsterDecks--Timeline--ToggleContainer {
+    display: flex;
+}
+
 .MonsterDecks--Timeline--Toggle {
     cursor: pointer;
     user-select: none;

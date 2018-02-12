@@ -51,7 +51,9 @@ function MonsterDecksComponent({decks, hasActiveCards, revealNextCards, endTurn,
                 endTurn={() => endTurn()}
             />
         </div>
-        <h6 className="MonsterDecks--Timeline--Toggle" onClick={() => toggleTimeline()}>Initiative Timeline <span>{showTimeline ? "▾" : "▸"}</span></h6>
+        <div className="MonsterDecks--Timeline--ToggleContainer">
+            <h6 className="MonsterDecks--Timeline--Toggle" onClick={() => toggleTimeline()}>Initiative Timeline <span>{showTimeline ? "▾" : "▸"}</span></h6>
+        </div>
         {showTimeline && <div className="MonsterDecks--Timeline">
             {new Array(99).fill().map((_, i) => {
                 let content = i + 1;
