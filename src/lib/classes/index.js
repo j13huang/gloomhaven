@@ -649,6 +649,130 @@ const CLASSES = {
             },
         ],
     },
+    "Triforce": {
+        stats: [
+            {maxHP: 6},
+            {maxHP: 7},
+            {maxHP: 8},
+            {maxHP: 9},
+            {maxHP: 10},
+            {maxHP: 11},
+            {maxHP: 12},
+            {maxHP: 13},
+            {maxHP: 14},
+        ],
+        perks: [
+            {
+                description: "Remove two -1 cards",
+                used: [false, false],
+                modifyCards: (cards) => new CardsModifier(cards)
+                    .removeCards(2, BASE_CARDS.MINUS_ONE)
+                    .cards(),
+            },
+            {
+                description: "Replace one -1 card with one +1 card",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(1, BASE_CARDS.MINUS_ONE)
+                    .addCards(1, BASE_CARDS.PLUS_ONE)
+                    .cards(),
+            },
+            {
+                description: "Replace one +0 card with one +2 card",
+                used: [false, false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(1, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, BASE_CARDS.PLUS_TWO)
+                    .cards(),
+            },
+            {
+                description: "Add three FIRE cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(3, {modifer: elements.FIRE})
+                    .cards(),
+            },
+            {
+                description: "Add three ICE cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(3, {modifer: elements.ICE})
+                    .cards(),
+            },
+            {
+                description: "Add three AIR cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(3, {modifer: elements.AIR})
+                    .cards(),
+            },
+            {
+                description: "Add three EARTH cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(3, {modifer: elements.EARTH})
+                    .cards(),
+            },
+            {
+                description: "Replace two +0 card with one FIRE and one EARTH card",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(2, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, {modifer: elements.FIRE})
+                    .addCards(1, {modifer: elements.EARTH})
+                    .cards(),
+            },
+            {
+                description: "Replace two +0 card with one ICE and one AIR card",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(2, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, {modifer: elements.ICE})
+                    .addCards(1, {modifer: elements.AIR})
+                    .cards(),
+            },
+            {
+                description: "Add two +1 PUSH 1 cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: statusEffects.PUSH})
+                    .cards(),
+            },
+            {
+                description: "Add one +1 WOUND card",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: statusEffects.WOUND})
+                    .cards(),
+            },
+            {
+                description: "Add one STUN card",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(1, {modifier: statusEffects.STUN})
+                    .cards(),
+            },
+            {
+                description: "Add one +0 ADD TARGET card",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(1, {modifier: bonuses.ADD_TARGET})
+                    .cards(),
+            },
+        ],
+    },
 };
 
 export function newPerksUsage(characterClass) {
