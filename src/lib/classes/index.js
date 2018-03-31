@@ -575,7 +575,7 @@ const CLASSES = {
                 modifyCards: (cards) =>
                     new CardsModifier(cards)
                     .removeCards(1, BASE_CARDS.MINUS_TWO)
-                    .addCards(1, BASE_CARDS.PLUS_ONE)
+                    .addCards(1, BASE_CARDS.PLUS_ZERO)
                     .cards(),
             },
             {
