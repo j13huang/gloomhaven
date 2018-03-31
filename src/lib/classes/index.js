@@ -281,7 +281,7 @@ const CLASSES = {
                 used: [false, false],
                 modifyCards: (cards) =>
                     new CardsModifier(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO, extra: elements.ICE})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_TWO, extra: elements.ICE})
                     .cards(),
             },
             {
