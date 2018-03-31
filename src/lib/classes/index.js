@@ -692,7 +692,7 @@ const CLASSES = {
                 used: [false],
                 modifyCards: (cards) =>
                     new CardsModifier(cards)
-                    .addCards(3, {modifer: elements.FIRE})
+                    .addCards(3, {modifier: elements.FIRE})
                     .cards(),
             },
             {
@@ -700,7 +700,7 @@ const CLASSES = {
                 used: [false],
                 modifyCards: (cards) =>
                     new CardsModifier(cards)
-                    .addCards(3, {modifer: elements.ICE})
+                    .addCards(3, {modifier: elements.ICE})
                     .cards(),
             },
             {
@@ -708,7 +708,7 @@ const CLASSES = {
                 used: [false],
                 modifyCards: (cards) =>
                     new CardsModifier(cards)
-                    .addCards(3, {modifer: elements.AIR})
+                    .addCards(3, {modifier: elements.AIR})
                     .cards(),
             },
             {
@@ -716,7 +716,7 @@ const CLASSES = {
                 used: [false],
                 modifyCards: (cards) =>
                     new CardsModifier(cards)
-                    .addCards(3, {modifer: elements.EARTH})
+                    .addCards(3, {modifier: elements.EARTH})
                     .cards(),
             },
             {
