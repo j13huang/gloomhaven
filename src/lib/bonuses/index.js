@@ -3,12 +3,14 @@ import retaliateIcon from "./retaliate.svg";
 import shieldIcon from "./shield.svg";
 import pierceIcon from "./pierce.svg";
 import addTargetIcon from "./add_target.svg";
+import refreshItemIcon from "./refresh_item.svg";
 
 export const HEAL = "heal";
 export const RETALIATE = "retaliate";
 export const SHIELD = "shield";
 export const PIERCE = "pierce";
 export const ADD_TARGET = "add_target";
+export const REFRESH_ITEM = "refresh_item";
 
 const bonusIcons = {
     [HEAL]: healIcon,
@@ -16,6 +18,7 @@ const bonusIcons = {
     [SHIELD]: shieldIcon,
     [PIERCE]: pierceIcon,
     [ADD_TARGET]: addTargetIcon,
+    [REFRESH_ITEM]: refreshItemIcon,
 };
 
 export const BONUSES = Object.keys(bonusIcons);

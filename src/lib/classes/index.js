@@ -773,6 +773,100 @@ const CLASSES = {
             },
         ],
     },
+    "Three Spears": {
+        stats: [
+            {maxHP: 10},
+            {maxHP: 12},
+            {maxHP: 14},
+            {maxHP: 16},
+            {maxHP: 18},
+            {maxHP: 20},
+            {maxHP: 22},
+            {maxHP: 24},
+            {maxHP: 26},
+        ],
+        perks: [
+            {
+                description: "Remove two -1 cards",
+                used: [false, false],
+                modifyCards: (cards) => new CardsModifier(cards)
+                    .removeCards(2, BASE_CARDS.MINUS_ONE)
+                    .cards(),
+            },
+            {
+                description: "Remove four +0 cards",
+                used: [false],
+                modifyCards: (cards) => new CardsModifier(cards)
+                    .removeCards(4, BASE_CARDS.PLUS_ZERO)
+                    .cards(),
+            },
+            {
+                description: "Replace one +0 card with one +2 card",
+                used: [false, false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(1, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, BASE_CARDS.PLUS_TWO)
+                    .cards(),
+            },
+            {
+                description: "Add two ROLLING +1 cards",
+                used: [false, false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE, endAction: END_ACTIONS.ROLLING})
+                    .cards(),
+            },
+            {
+                description: "Add three ROLLING MUDDLE cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(3, {modifier: statusEffects.MUDDLE, endAction: END_ACTIONS.ROLLING})
+                    .cards(),
+            },
+            {
+                description: "Add two ROLLING PIERCE 3 cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(2, {modifier: bonuses.pierce(3), endAction: END_ACTIONS.ROLLING})
+                    .cards(),
+            },
+            {
+                description: "Add one ROLLING STUN card",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(1, {modifier: statusEffects.STUN, endAction: END_ACTIONS.ROLLING})
+                    .cards(),
+            },
+            {
+                description: "Add one +0 ADD TARGET card",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(1, {modifier: bonuses.ADD_TARGET})
+                    .cards(),
+            },
+            {
+                description: "Add one +0 REFRESH ITEM card",
+                used: [false, false, false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(1, {modifier: bonuses.REFRESH_ITEM})
+                    .cards(),
+            },
+            {
+                description: "Ignore negative item effects and add two +1 cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(2, BASE_CARDS.PLUS_ONE)
+                    .cards(),
+            },
+        ],
+    },
 };
 
 export function newPerksUsage(characterClass) {
