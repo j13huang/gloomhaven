@@ -867,6 +867,102 @@ const CLASSES = {
             },
         ],
     },
+    "Cthulhu": {
+        stats: [
+          {maxHP: 6},
+          {maxHP: 7},
+          {maxHP: 8},
+          {maxHP: 9},
+          {maxHP: 10},
+          {maxHP: 11},
+          {maxHP: 12},
+          {maxHP: 13},
+          {maxHP: 14},
+        ],
+        perks: [
+          {
+            description: "Replace one -2 card with one +0 card",
+            used: [false],
+            modifyCards: (cards) =>
+            new CardsModifier(cards)
+            .removeCards(1, BASE_CARDS.MINUS_TWO)
+            .addCards(1, BASE_CARDS.PLUS_ZERO)
+            .cards(),
+          },
+          {
+            description: "Replace one -1 card with one +1 card",
+            used: [false, false],
+            modifyCards: (cards) =>
+            new CardsModifier(cards)
+            .removeCards(1, BASE_CARDS.MINUS_ONE)
+            .addCards(1, BASE_CARDS.PLUS_ONE)
+            .cards(),
+          },
+          {
+            description: "Replace one +0 card with one +2 card",
+            used: [false, false],
+            modifyCards: (cards) =>
+            new CardsModifier(cards)
+            .removeCards(1, BASE_CARDS.PLUS_ZERO)
+            .addCards(1, BASE_CARDS.PLUS_TWO)
+            .cards(),
+          },
+            {
+                description: "Add two +1 cards",
+                used: [false],
+                modifyCards: (cards) => new CardsModifier(cards)
+                    .addCards(2, BASE_CARDS.PLUS_ONE)
+                    .cards(),
+            },
+            {
+                description: "Add one +1 AIR card",
+                used: [false, false, false],
+                modifyCards: (cards) => new CardsModifier(cards)
+                    .removeCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: elements.AIR})
+                    .cards(),
+            },
+            {
+                description: "Add three ROLLING POISON cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(3, {modifier: statusEffects.POISON, endAction: END_ACTIONS.ROLLING})
+                    .cards(),
+            },
+            {
+                description: "Add two ROLLING CURSE cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(2, {modifier: statusEffects.CURSE, endAction: END_ACTIONS.ROLLING})
+                    .cards(),
+            },
+            {
+                description: "Add two ROLLING IMMOBILIZE cards",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(2, {modifier: statusEffects.IMMOBILIZE, endAction: END_ACTIONS.ROLLING})
+                    .cards(),
+            },
+            {
+                description: "Add one ROLLING STUN card",
+                used: [false, false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(1, {modifier: statusEffects.STUN, endAction: END_ACTIONS.ROLLING})
+                    .cards(),
+            },
+            {
+                description: "Ignore negative item effects and add one +1 card",
+                used: [false],
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(1, BASE_CARDS.PLUS_ONE)
+                    .cards(),
+            },
+        ],
+    },
 };
 
 export function newPerksUsage(characterClass) {
