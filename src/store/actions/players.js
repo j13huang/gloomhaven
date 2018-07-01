@@ -2,8 +2,8 @@ export const ADD_PLAYER = "players/add";
 export const REMOVE_PLAYER = "players/remove";
 const RESET_PLAYERS = "players/reset";
 
-export function addPlayerAction(dispatch, name, characterClass) {
-    dispatch({type: ADD_PLAYER, name, class: characterClass});
+export function addPlayerAction(dispatch, name, characterClass, level) {
+    dispatch({type: ADD_PLAYER, name, class: characterClass, level,});
 }
 
 export function resetPlayersAction(dispatch) {

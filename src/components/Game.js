@@ -3,14 +3,14 @@ import {connect} from "react-redux";
 import * as classNames from "classnames";
 
 import {Header} from "./Header/Header"
-import {Party} from "./Party"
+import {PartyManager} from "./PartyManager"
 import {PlayerTrackers} from "./Players/PlayerTrackers"
 import {Deck as AttackModifierDeck} from "./AttackModifierDecks/Deck"
 import curseCard from "./AttackModifierDecks/curse.jpg";
 import blessCard from "./AttackModifierDecks/bless.jpg";
 import {MonsterDecks} from "./Monsters/MonsterDecks"
 import {MonsterTrackers} from "./Monsters/MonsterTrackers"
-import { selectors as attackModifierDecksSelectors } from "../store/attackModifierDecks";
+import {selectors as attackModifierDecksSelectors} from "../store/attackModifierDecks";
 import {selectors as playersSelectors} from "../store/players";
 import {selectors as monstersSelectors} from "../store/monsters";
 import {addPlayerAction} from "../store/actions/players";
@@ -50,79 +50,13 @@ class GameComponent extends React.Component {
         });
     }
 
-    playerNameInputChange(input) {
-        this.setState({
-            playerNameInput: input,
-            duplicateNameWarning: this.props.playerNames.includes(input),
-        });
-    }
-
-    selectClass(selectedClass) {
-        this.setState({
-            selectedClass,
-        });
-    }
-
-    canAddPlayer() {
-        return !this.props.hasMonstersInPlay &&
-            this.state.selectedClass &&
-            //this.props.playerNames.length < 4 &&
-            this.state.playerNameInput !== "" &&
-            !this.state.duplicateNameWarning;
-    }
-
-    addPlayer(name, selectedClass) {
-        if (!this.canAddPlayer()) {
-            return;
-        }
-        this.setState({
-            playerNameInput: "",
-            selectedClass: "",
-        });
-        this.props.addPlayer(name, selectedClass);
-    }
-
     render() {
         return (
             <div>
                 <Header />
                 <div className="Game--Section">
                     <h3 className="Game--Section--Toggle" onClick={() => this.toggleSection("players")}>Players <span className="Game--Section--ToggleSymbol">{this.state.showSections.players ? "▾" : "▸"}</span></h3>
-                    <div className="Game--Players">
-                        <div>
-                            <input
-                                placeholder="Name"
-                                disabled={this.props.hasMonstersInPlay}
-                                // || this.props.playerNames.length === 4}
-                                value={this.state.playerNameInput}
-                                onChange={(e) => this.playerNameInputChange(e.target.value)}
-                                onKeyPress={(e) => {
-                                    if (e.key === 'Enter') {
-                                        this.addPlayer(this.state.playerNameInput, this.state.selectedClass);
-                                    }
-                                }}
-                            />
-                            <select
-                                disabled={this.props.hasMonstersInPlay}
-                                // || this.props.playerNames.length === 4}
-                                value={this.state.selectedClass}
-                                onChange={(event) => this.selectClass(event.target.value)}
-                            >
-                                <option value="">Select a class...</option>
-                                {this.props.selectableClasses.map((c) => <option value={c} key={c}>{c}</option>)}
-                            </select>
-                            <button
-                                disabled={!this.canAddPlayer()}
-                                onClick={() => this.addPlayer(this.state.playerNameInput, this.state.selectedClass)}
-                            >Add Player</button>
-                            {/*<button onClick={() => this.props.resetPlayers()}>Reset</button>*/}
-                        </div>
-                        <div>
-                            <Party />
-                        </div>
-                    </div>
-                    {this.state.duplicateNameWarning &&
-                        <div className="Game--DuplicatePlayerWarning">A player with that name already exists</div>}
+                    <PartyManager />
                     <div className={classNames({"Game--Section--HidePlayers": !this.state.showSections.players})}>
                         <PlayerTrackers />
                     </div>
@@ -202,6 +136,6 @@ export const Game = connect(
         };
     },
     (dispatch, ownProps) => ({
-        addPlayer: (name, characterClass) => addPlayerAction(dispatch, name, characterClass),
+        addPlayer: (name, characterClass) => addPlayerAction(dispatch, name, characterClass, 0),
     }),
 )(GameComponent);

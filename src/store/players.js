@@ -52,7 +52,7 @@ export const reducer = (state = defaultState, action) => {
                 players: {
                     ...state.players,
                     [action.name]: {
-                        ...newPlayer(action.class, 1),
+                        ...newPlayer(action.class, action.level || 1),
                     },
                 },
             };

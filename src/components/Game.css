@@ -38,16 +38,6 @@
     border: 1px solid black;
 }
 
-.Game--DuplicatePlayerWarning {
-    color: red;
-    font-size: small;
-}
-
-.Game--Players {
-    display: flex;
-    justify-content: space-between;
-}
-
 .Game--AttackModifierDecks {
     display: flex;
     flex-wrap: wrap;

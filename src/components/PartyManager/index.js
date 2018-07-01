@@ -5,7 +5,7 @@ import {loadPartyAction} from "../../store/actions/party";
 
 import "./index.css";
 
-class PartyComponent extends React.Component {
+class PartyManagerComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -60,7 +60,7 @@ class PartyComponent extends React.Component {
 
     render() {
         return (<div>
-            <div>
+            <div className="PartyManager--section">
                 <input
                     placeholder="Party name"
                     value={this.state.partyNameInput}
@@ -69,7 +69,6 @@ class PartyComponent extends React.Component {
                 <button onClick={() => this.saveParty()}>Save Party</button>
             </div>
             <select
-                className="Party--Load--Select"
                 value={this.state.selectedParty}
                 onChange={(event) => this.selectParty(event.target.value)}
             >
@@ -78,19 +77,17 @@ class PartyComponent extends React.Component {
                     <option value={partyName} key={partyName}>{partyName}</option>
                 )}
             </select>
-            <div className="Party--Load--Container">
-                <button disabled={!this.state.selectedParty} onClick={() => this.deleteParty()}>
-                    Delete Party
-                </button>
-                <button disabled={!this.state.selectedParty} onClick={() => this.loadParty()}>
-                    Load Party
-                </button>
-            </div>
+            <button disabled={!this.state.selectedParty} onClick={() => this.loadParty()}>
+                Load Party
+            </button>
+            <button disabled={!this.state.selectedParty} onClick={() => this.deleteParty()}>
+                Delete Party
+            </button>
         </div>);
     }
 }
 
-export const Party = connect(
+export const PartyManager = connect(
     (state) => {
         return {
             players: state.players.players,
@@ -102,5 +99,5 @@ export const Party = connect(
             loadParty: (party) => loadPartyAction(dispatch, party),
         }
     }
-)(PartyComponent);
+)(PartyManagerComponent);
 
