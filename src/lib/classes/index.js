@@ -281,7 +281,7 @@ const CLASSES = {
                 maxPerkCount: 2,
                 modifyCards: (cards) =>
                     new CardsModifier(cards)
-                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ZERO, extra: elements.ICE})
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_TWO, extra: elements.ICE})
                     .cards(),
             },
             {
@@ -575,7 +575,7 @@ const CLASSES = {
                 modifyCards: (cards) =>
                     new CardsModifier(cards)
                     .removeCards(1, BASE_CARDS.MINUS_TWO)
-                    .addCards(1, BASE_CARDS.PLUS_ONE)
+                    .addCards(1, BASE_CARDS.PLUS_ZERO)
                     .cards(),
             },
             {
