@@ -69,6 +69,7 @@ export const reducer = (state = defaultState, action) => {
                     [player.class]: true,
                 },
                 players: newPlayers,
+                initiative: {},
             };
         }
         case SET_LEVEL:

@@ -1,6 +1,6 @@
 .InitiativeSelector--container {
     position: absolute;
-    top: -60px;
+    top: -50px;
     display: flex;
     flex-direction: column;
     align-items: center;
