@@ -17,7 +17,10 @@ class InitiativeSelectorComponent extends React.Component {
                             "InitiativeSelector--player",
                             playerInitiativeNames.includes(p) && "InitiativeSelector--player--selected",
                         )}
-                        onClick={() => togglePlayerInitiative(p)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            togglePlayerInitiative(p);
+                        }}
                     >
                         {p}
                     </div>

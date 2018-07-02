@@ -97,8 +97,9 @@ class MonsterDecksComponent extends React.Component {
                         "MonsterDecks--Timeline--MonsterCell": hasMonsterInitiative,
                         "MonsterDecks--Timeline--PlayerCell": hasPlayerInitiative,
                     })}
-                        onClick={() => {
+                        onClick={(e) => {
                             if (numPlayers > 0) {
+                                //e.stopPropagation();
                                 this.showInitiativeSelector(i);
                             }
                         }}
