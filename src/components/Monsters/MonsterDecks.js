@@ -26,12 +26,12 @@ class MonsterDecksComponent extends React.Component {
 
     showInitiativeSelector(index) {
         this.setState({initiativeSelectorIndex: index});
-        //document.addEventListener("click", this.hideInitiativeSelector, false);
+        document.addEventListener("click", this.hideInitiativeSelector, false);
     }
 
     hideInitiativeSelector = () => {
         this.setState({initiativeSelectorIndex: -1});
-        //document.removeEventListener("click", this.hideInitiativeSelector, false);
+        document.removeEventListener("click", this.hideInitiativeSelector, false);
     }
 
     render() {
@@ -96,22 +96,19 @@ class MonsterDecksComponent extends React.Component {
                         "MonsterDecks--Timeline--SelectedCell": this.state.initiativeSelectorIndex === i,
                         "MonsterDecks--Timeline--MonsterCell": hasMonsterInitiative,
                         "MonsterDecks--Timeline--PlayerCell": hasPlayerInitiative,
-                    })} onClick={() => {
-                        if (numPlayers > 0) {
-                            this.showInitiativeSelector(i);
-                        }
-                    }}>
+                    })}
+                        onClick={() => {
+                            if (numPlayers > 0) {
+                                this.showInitiativeSelector(i);
+                            }
+                        }}
+                        onBlur={() => {
+                            // why no worky? :(
+                            this.hideInitiativeSelector(i);
+                        }}
+                    >
                         {this.state.initiativeSelectorIndex === i &&
-                            <React.Fragment>
-                                <div
-                                    className="MonsterDecks--Timeline--initiativeSelectorBackground"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        this.hideInitiativeSelector();
-                                    }}
-                                />
-                                <InitiativeSelector playerInitiativeNames={playerInitiativeNames} initiative={i + 1}/>
-                            </React.Fragment>
+                            <InitiativeSelector playerInitiativeNames={playerInitiativeNames} initiative={i + 1}/>
                         }
                         {content}
                     </div>);
