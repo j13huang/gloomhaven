@@ -26,7 +26,7 @@ const SET_LEVEL = "players/level/set";
 const SET_LEVEL_ADJUSTMENT = "players/level/setAdjustment";
 const TOGGLE_STATUS_EFFECT = "players/statusEffect/toggle";
 const SET_HP = "players/hp/set";
-const SET_INITIATIVE = "players/initiative/set";
+const TOGGLE_INITIATIVE = "players/initiative/toggle";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -122,13 +122,16 @@ export const reducer = (state = defaultState, action) => {
                 },
             };
         }
-        case SET_INITIATIVE:
+        case TOGGLE_INITIATIVE:
         {
             return {
                 ...state,
                 initiative: {
                     ...state.initiative,
-                    [action.initiative]: !state.initiative[action.initiative],
+                    [action.initiative]: {
+                        ...state.initiative[action.initiative],
+                        [action.playerName]: !(state.initiative[action.initiative] || {})[action.playerName],
+                    }
                 },
             };
         }
@@ -159,8 +162,8 @@ export function setHPAction(dispatch, name, hp) {
     dispatch({type: SET_HP, name, hp});
 }
 
-export function setIntiativeAction(dispatch, initiative) {
-    dispatch({type: SET_INITIATIVE, initiative});
+export function toggleIntiativeAction(dispatch, playerName, initiative) {
+    dispatch({type: TOGGLE_INITIATIVE, playerName, initiative});
 }
 
 function calculateScenarioLevel(players) {

@@ -42,7 +42,7 @@
 .MonsterDecks--Timeline--BaseCell {
     position: relative;
     height: 16px;
-    width: 16px;
+    min-width: 24px;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
     flex-grow: 1;
@@ -52,6 +52,11 @@
     align-items: center;
     font-size: 12px;
     user-select: none;
+}
+
+.MonsterDecks--Timeline--SelectedCell {
+    background-color: black;
+    color: white;
 }
 
 .MonsterDecks--Timeline--MonsterCell {
@@ -67,6 +72,14 @@
 .MonsterDecks--Timeline--MonsterCell.MonsterDecks--Timeline--PlayerCell {
     background-color: rgb(236, 144, 5);
     color: white;
+}
+
+.MonsterDecks--Timeline--initiativeSelectorBackground {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 .MonsterDecks {
