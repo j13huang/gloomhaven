@@ -21,7 +21,7 @@ export const Monster = connect(
         if (ownProps.name === "Boss") {
             return {};
         }
-        const monster = state.monsters[ownProps.name].monsters[ownProps.index];
+        const monster = state.monsters.monsters[ownProps.name].monsters[ownProps.index];
         return {
             ...monster,
         };

@@ -20,7 +20,7 @@ export const MonsterTrackers = connect(
     (state, ownProps) => {
         return {
             boss: state.boss,
-            monsterNames: Object.keys(state.monsters),
+            monsterNames: Object.keys(state.monsters.monsters),
         };
     }
 )(MonsterTrackersComponent);

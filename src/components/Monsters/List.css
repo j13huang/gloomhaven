@@ -10,8 +10,12 @@
     display: flex;
 }
 
-.Monsters-List--LevelSelect {
+.Monsters--List--LevelSelect {
     margin-left: 8px;
+}
+
+.Monsters--List--allowIndividualMonsterLevels {
+    font-size: 11px;
 }
 
 .Monsters--List--BossSelectorContainer {

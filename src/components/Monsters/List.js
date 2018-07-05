@@ -5,6 +5,7 @@ import {BOSS_LIST, MONSTER_LIST} from "../../lib/monsters";
 import {addMonstersAction, resetMonstersAction} from "../../store/actions/monsters";
 import {setBossAction} from "../../store/actions/boss";
 import {setLevelAdjustmentAction, selectors as playersSelectors} from "../../store/players";
+import {toggleAllowIndividualMonsterLevels} from "../../store/monsters";
 
 import "./List.css";
 
@@ -39,7 +40,7 @@ class ListComponent extends React.Component {
             <div className="Monsters--List--LevelContainer">
                 Level: {this.props.baseScenarioLevel}
                 <select
-                    className="Monsters-List--LevelSelect"
+                    className="Monsters--List--LevelSelect"
                     disabled={this.props.boss || this.props.monstersInPlay.length > 0}
                     value={this.props.levelAdjustment}
                     onChange={(event) => this.props.setLevelAdjustment(parseInt(event.target.value, 10))}
@@ -47,6 +48,10 @@ class ListComponent extends React.Component {
                     {["-1", "+0", "+1", "+2"].map((value, i) => <option key={i - 1} value={i - 1}>{value}</option>)}
                 </select>
             </div>
+            <label className="Monsters--List--allowIndividualMonsterLevels">
+                <input type="checkbox" checked={this.props.allowIndividualMonsterLevels} onChange={() => this.props.toggleAllowIndividualMonsterLevels()}/>
+                Allow individual monster levels
+            </label>
             <div className="Monsters--List--BossSelectorContainer">
                 <select disabled={this.props.boss} value={this.state.selectedBoss} onChange={(event) => this.selectBoss(event.target.value)}>
                     {BOSS_LIST.map((b) => <option value={b} key={b}>{b}</option>)}
@@ -76,7 +81,8 @@ export const List = connect(
     (state) => {
         return {
             levelAdjustment: state.players.levelAdjustment,
-            monstersInPlay: Object.keys(state.monsters),
+            monstersInPlay: Object.keys(state.monsters.monsters),
+            allowIndividualMonsterLevels: state.monsters.allowIndividualMonsterLevels,
             boss: state.boss,
             baseScenarioLevel: playersSelectors.baseScenarioLevel(state),
             scenarioLevel: playersSelectors.scenarioLevel(state),
@@ -85,7 +91,8 @@ export const List = connect(
     },
     (dispatch, ownProps) => {
         return {
-            setLevelAdjustment: (levelAdjustment) => {setLevelAdjustmentAction(dispatch, levelAdjustment)},
+            setLevelAdjustment: (levelAdjustment) => setLevelAdjustmentAction(dispatch, levelAdjustment),
+            toggleAllowIndividualMonsterLevels: () => toggleAllowIndividualMonsterLevels(dispatch),
             addBoss: (name, scenarioLevel, numPlayers) => {setBossAction(dispatch, name, scenarioLevel, numPlayers)},
             addMonsters: (monsterNames, scenarioLevel) => {addMonstersAction(dispatch, monsterNames, scenarioLevel)},
             resetMonsters: (monsterNames) => {resetMonstersAction(dispatch, monsterNames)},

@@ -66,7 +66,7 @@ class MonsterTrackerComponent extends React.Component {
                                 <button onClick={() => this.onToggleAlive(i)}>Kill</button>
                                 <button onClick={() => toggleElite(i)}>Normal/Elite</button>
                             </div>
-                            <div>
+                            {this.props.allowIndividualMonsterLevels && <div>
                                 <span>Level:</span>
                                 <select
                                     value={level}
@@ -77,6 +77,7 @@ class MonsterTrackerComponent extends React.Component {
                                     })}
                                 </select>
                             </div>
+                            }
                         </div>
                         {alive && <Monster name={name} index={i} />}
                     </div>);
@@ -89,7 +90,8 @@ class MonsterTrackerComponent extends React.Component {
 export const MonsterTracker = connect(
     (state, ownProps) => {
         return {
-            monsters: state.monsters[ownProps.name].monsters,
+            monsters: state.monsters.monsters[ownProps.name].monsters,
+            allowIndividualMonsterLevels: state.monsters.allowIndividualMonsterLevels,
             // global status effects across all monsters
             allStatusEffects: monstersSelectors.allStatusEffects(state, ownProps.name),
             scenarioLevel: playersSelectors.scenarioLevel(state),
