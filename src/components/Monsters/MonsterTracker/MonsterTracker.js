@@ -9,6 +9,7 @@ import {StatusEffectTracker} from "../../UnitTracking/StatusEffectTracker";
 import {
     toggleAliveAction,
     toggleEliteAction,
+    setLevelAction,
     toggleAllStatusEffectsAction,
     selectors as monstersSelectors,
 } from "../../../store/monsters";
@@ -24,7 +25,7 @@ class MonsterTrackerComponent extends React.Component {
         if (activeChange) {
             this.props.toggleActive(this.props.name);
         }
-        this.props.toggleAlive(index, this.props.scenarioLevel);
+        this.props.toggleAlive(index);
     }
 
     render() {
@@ -57,12 +58,25 @@ class MonsterTrackerComponent extends React.Component {
                         )}
                     </div>
                 </div>
-                {monsters.map(({alive, elite}, i) => {
+                {monsters.map(({alive, elite, level}, i) => {
                     return alive && (<div key={i} className={classNames({"MonsterTracker--Monster": true, "MonsterTracker--Monster--Elite": elite})}>
                         <div className="MonsterTracker--Monster--Controls">
-                            <div className="MonsterTracker--Monster--Number">{`${i + 1}`}</div>
-                            <button onClick={() => this.onToggleAlive(i)}>Kill</button>
-                            <button onClick={() => toggleElite(i, this.props.scenarioLevel)}>Normal/Elite</button>
+                            <div>
+                                <span className="MonsterTracker--Monster--Number">{`${i + 1}`}</span>
+                                <button onClick={() => this.onToggleAlive(i)}>Kill</button>
+                                <button onClick={() => toggleElite(i)}>Normal/Elite</button>
+                            </div>
+                            <div>
+                                <span>Level:</span>
+                                <select
+                                    value={level}
+                                    onChange={(event) => this.props.setLevel(i, parseInt(event.target.value, 10))}
+                                >
+                                    {new Array(8).fill().map((_, level) => {
+                                        return (<option key={level} value={level}>{level}</option>);
+                                    })}
+                                </select>
+                            </div>
                         </div>
                         {alive && <Monster name={name} index={i} />}
                     </div>);
@@ -84,9 +98,10 @@ export const MonsterTracker = connect(
     (dispatch, ownProps) => {
         return {
             removeMonster: () => {removeMonsterAction(dispatch, ownProps.name)},
-            toggleAlive: (i, scenarioLevel) => toggleAliveAction(dispatch, ownProps.name, i, scenarioLevel),
-            toggleElite: (i, scenarioLevel) => toggleEliteAction(dispatch, ownProps.name, i, scenarioLevel),
+            toggleAlive: (i) => toggleAliveAction(dispatch, ownProps.name, i),
+            toggleElite: (i) => toggleEliteAction(dispatch, ownProps.name, i),
             toggleActive: (active) => {toggleActiveAction(dispatch, ownProps.name, active)},
+            setLevel: (i, level) => {setLevelAction(dispatch, ownProps.name, i, level)},
             toggleAllStatusEffects: (statusEffect) =>
                 toggleAllStatusEffectsAction(dispatch, ownProps.name, statusEffect),
         };

@@ -9,6 +9,7 @@ function newMonster(name, level, alive, elite) {
     return {
         alive: alive,
         elite: elite,
+        level,
         maxHP: stats.maxHP,
         currentHP: stats.maxHP,
         statusEffects: newStatusEffectTracker(),
@@ -41,6 +42,7 @@ const defaultState = {};
 
 const TOGGLE_ELITE = "monsters/toggleElite";
 const TOGGLE_ALIVE = "monsters/toggleAlive";
+const SET_LEVEL = "monsters/level/set";
 const TOGGLE_ALL_STATUS_EFFECTS = "monsters/statusEffect/setAll";
 const TOGGLE_STATUS_EFFECT = "monsters/statusEffect/toggle";
 const SET_HP = "monsters/hp/set";
@@ -79,7 +81,7 @@ export const reducer = (state = defaultState, action) => {
                         ...monsters.slice(0, action.index),
                         newMonster(
                             action.name,
-                            action.level,
+                            monster.level,
                             monster.alive,
                             !monster.elite,
                         ),
@@ -99,8 +101,28 @@ export const reducer = (state = defaultState, action) => {
                         ...monsters.slice(0, action.index),
                         newMonster(
                             action.name,
-                            action.level,
+                            monster.level,
                             !monster.alive,
+                            monster.elite,
+                        ),
+                        ...monsters.slice(action.index + 1),
+                    ],
+                },
+            };
+        }
+        case SET_LEVEL:
+        {
+            const monsters = state[action.name].monsters;
+            const monster = monsters[action.index];
+            return {
+                ...state,
+                [action.name]: {
+                    monsters: [
+                        ...monsters.slice(0, action.index),
+                        newMonster(
+                            action.name,
+                            action.level,
+                            monster.alive,
                             monster.elite,
                         ),
                         ...monsters.slice(action.index + 1),
@@ -173,12 +195,16 @@ export const reducer = (state = defaultState, action) => {
     }
 }
 
-export function toggleAliveAction(dispatch, name, index, level) {
-    dispatch({type: TOGGLE_ALIVE, name, index, level});
+export function toggleAliveAction(dispatch, name, index) {
+    dispatch({type: TOGGLE_ALIVE, name, index});
 }
 
-export function toggleEliteAction(dispatch, name, index, level) {
-    dispatch({type: TOGGLE_ELITE, name, index, level});
+export function toggleEliteAction(dispatch, name, index) {
+    dispatch({type: TOGGLE_ELITE, name, index});
+}
+
+export function setLevelAction(dispatch, name, index, level) {
+    dispatch({type: SET_LEVEL, name, index, level});
 }
 
 export function toggleAllStatusEffectsAction(dispatch, name, statusEffect) {
