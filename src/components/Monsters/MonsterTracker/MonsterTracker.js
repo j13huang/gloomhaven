@@ -59,28 +59,38 @@ class MonsterTrackerComponent extends React.Component {
                     </div>
                 </div>
                 {monsters.map(({alive, elite, level}, i) => {
-                    return alive && (<div key={i} className={classNames({"MonsterTracker--Monster": true, "MonsterTracker--Monster--Elite": elite})}>
-                        <div className="MonsterTracker--Monster--Controls">
-                            <div>
-                                <span className="MonsterTracker--Monster--Number">{`${i + 1}`}</span>
-                                <button onClick={() => this.onToggleAlive(i)}>Kill</button>
-                                <button onClick={() => toggleElite(i)}>Normal/Elite</button>
-                            </div>
-                            {this.props.allowIndividualMonsterLevels && <div>
-                                <span>Level:</span>
-                                <select
-                                    value={level}
-                                    onChange={(event) => this.props.setLevel(i, parseInt(event.target.value, 10))}
-                                >
-                                    {new Array(8).fill().map((_, level) => {
-                                        return (<option key={level} value={level}>{level}</option>);
-                                    })}
-                                </select>
-                            </div>
+                    const individualMonsterStats = (level !== scenarioLevel) && MONSTERS[name].stats[level];
+                    return alive && (<React.Fragment key={i}>
+                        {individualMonsterStats && <div className="MonsterTracker--StatsContainer">
+                            {elite ? 
+                                <MonsterStats stats={individualMonsterStats.elite} elite /> :
+                                <MonsterStats stats={individualMonsterStats.normal} />
                             }
                         </div>
-                        {alive && <Monster name={name} index={i} />}
-                    </div>);
+                        }
+                        <div className={classNames({"MonsterTracker--Monster": true, "MonsterTracker--Monster--Elite": elite})}>
+                            <div className="MonsterTracker--Monster--Controls">
+                                <div>
+                                    <span className="MonsterTracker--Monster--Number">{`${i + 1}`}</span>
+                                    <button onClick={() => this.onToggleAlive(i)}>Kill</button>
+                                    <button onClick={() => toggleElite(i)}>Normal/Elite</button>
+                                </div>
+                                {this.props.allowIndividualMonsterLevels && <div>
+                                    <span>Level:</span>
+                                    <select
+                                        value={level}
+                                        onChange={(event) => this.props.setLevel(i, parseInt(event.target.value, 10))}
+                                    >
+                                        {new Array(8).fill().map((_, level) => {
+                                            return (<option key={level} value={level}>{level}</option>);
+                                        })}
+                                    </select>
+                                </div>
+                                }
+                            </div>
+                            {alive && <Monster name={name} index={i} />}
+                        </div>
+                    </React.Fragment>);
                 })}
             </div>
         </div>);
