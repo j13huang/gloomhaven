@@ -7,9 +7,14 @@ import { setIntiativeAction, unsetIntiativeAction } from "../../../store/players
 import "./InitiativeSelector.css";
 
 class InitiativeSelectorComponent extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.container = React.createRef();
+    }
     // https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
     handleClickOutside = (e) => {
-        if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+        if (this.container && this.container.current && !this.container.current.contains(e.target)) {
             this.props.onHide();
         }
     }
@@ -22,13 +27,9 @@ class InitiativeSelectorComponent extends React.Component {
         document.removeEventListener('click', this.handleClickOutside);
     }
 
-    setWrapperRef(node) {
-        this.wrapperRef = node;
-    }
-
     render() {
         const {players, initiative, setInitiative, unsetInitiative} = this.props;
-        return (<div className="InitiativeSelector--container" ref={(node) => this.setWrapperRef(node)}>
+        return (<div className="InitiativeSelector--container" ref={this.container}>
             <div className="InitiativeSelector--players">
                 {Object.entries(players).map(([name, p]) =>
                     <div key={name}
