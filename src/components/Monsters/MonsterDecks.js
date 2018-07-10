@@ -26,12 +26,10 @@ class MonsterDecksComponent extends React.Component {
 
     showInitiativeSelector(index) {
         this.setState({initiativeSelectorIndex: index});
-        document.addEventListener("click", this.hideInitiativeSelector, false);
     }
 
     hideInitiativeSelector = () => {
         this.setState({initiativeSelectorIndex: -1});
-        document.removeEventListener("click", this.hideInitiativeSelector, false);
     }
 
     render() {
@@ -79,19 +77,19 @@ class MonsterDecksComponent extends React.Component {
             </div>
             {showTimeline && <div className="MonsterDecks--Timeline">
                 {new Array(99).fill().map((_, i) => {
-                    let content = i + 1;
-                    const monsterInitiativeNames = initiativeOrderMap[i + 1];
-                    const playerInitiativeNames = Object.entries(playerInitiatives[i + 1] || {}).filter(([_, v]) => !!v).map(([k]) => k);
+                    const initiative = i + 1;
+                    const monsterInitiativeNames = initiativeOrderMap[initiative];
+                    const playerInitiativeNames = playerInitiatives[initiative];
                     const hasMonsterInitiative = monsterInitiativeNames && monsterInitiativeNames.length > 0;
                     const hasPlayerInitiative = playerInitiativeNames && playerInitiativeNames.length > 0;
-                    if (hasMonsterInitiative && hasPlayerInitiative) {
-                        content = `${[...playerInitiativeNames, ...monsterInitiativeNames].join(", ")}`;
-                    } else if (hasMonsterInitiative) {
-                        content = monsterInitiativeNames.join(", ");
-                    } else if (hasPlayerInitiative) {
-                        content = playerInitiativeNames.join(", ");
+                    let content = [];
+                    if (hasMonsterInitiative) {
+                        content = content.concat(monsterInitiativeNames);
                     }
-                    return (<div key={i + 1} className={classNames({
+                    if (hasPlayerInitiative) {
+                        content = content.concat(playerInitiativeNames);
+                    }
+                    return (<div key={initiative} className={classNames({
                         "MonsterDecks--Timeline--BaseCell": true,
                         "MonsterDecks--Timeline--SelectedCell": this.state.initiativeSelectorIndex === i,
                         "MonsterDecks--Timeline--MonsterCell": hasMonsterInitiative,
@@ -103,15 +101,11 @@ class MonsterDecksComponent extends React.Component {
                                 this.showInitiativeSelector(i);
                             }
                         }}
-                        onBlur={() => {
-                            // why no worky? :(
-                            this.hideInitiativeSelector(i);
-                        }}
                     >
                         {this.state.initiativeSelectorIndex === i &&
-                            <InitiativeSelector playerInitiativeNames={playerInitiativeNames} initiative={i + 1}/>
+                            <InitiativeSelector initiative={initiative} onHide={() => this.hideInitiativeSelector()}/>
                         }
-                        {content}
+                        {content.length > 0 ? content.join(", ") : initiative}
                     </div>);
                 })}
             </div>}
@@ -144,7 +138,7 @@ export const MonsterDecks = connect(
             numPlayers: playersSelectors.numPlayers(state),
             scenarioLevel: playersSelectors.scenarioLevel(state),
             boss: state.boss,
-            playerInitiatives: state.players.initiative,
+            playerInitiatives: playersSelectors.initiatives(state),
         };
     },
     (dispatch) => {

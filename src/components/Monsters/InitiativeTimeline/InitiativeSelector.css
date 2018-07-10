@@ -1,9 +1,10 @@
 .InitiativeSelector--container {
     position: absolute;
-    top: -50px;
+    top: -54px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    white-space: nowrap;
 }
 
 .InitiativeSelector--players {
@@ -24,6 +25,7 @@
     background-color: white;
     color: black;
     padding: 4px;
+    padding-bottom: 2px;
 }
 
 .InitiativeSelector--player:hover {
@@ -38,6 +40,12 @@
 
 .InitiativeSelector--player:not(:last-child) {
     margin-right: 2px;
+}
+
+.InitiativeSelector--player--initiative {
+    font-family: "PirataOne";
+    text-align: center;
+    margin-top: 4px;
 }
 
 .InitiativeSelector--arrows {

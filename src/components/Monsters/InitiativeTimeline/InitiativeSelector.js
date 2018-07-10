@@ -2,27 +2,52 @@ import React from 'react';
 import {connect} from "react-redux";
 import * as classNames from "classnames";
 
-import { toggleIntiativeAction } from "../../../store/players";
+import { setIntiativeAction, unsetIntiativeAction } from "../../../store/players";
 
 import "./InitiativeSelector.css";
 
 class InitiativeSelectorComponent extends React.Component {
+    // https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
+    handleClickOutside = (e) => {
+        if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+            this.props.onHide();
+        }
+    }
+
+    componentDidMount() {
+        document.addEventListener("click", this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this.handleClickOutside);
+    }
+
+    setWrapperRef(node) {
+        this.wrapperRef = node;
+    }
+
     render() {
-        const {players, playerInitiativeNames, togglePlayerInitiative} = this.props;
-        return (<div className="InitiativeSelector--container">
+        const {players, initiative, setInitiative, unsetInitiative} = this.props;
+        return (<div className="InitiativeSelector--container" ref={(node) => this.setWrapperRef(node)}>
             <div className="InitiativeSelector--players">
-                {Object.keys(players).map((p) =>
-                    <div key={p}
+                {Object.entries(players).map(([name, p]) =>
+                    <div key={name}
                         className={classNames(
                             "InitiativeSelector--player",
-                            playerInitiativeNames.includes(p) && "InitiativeSelector--player--selected",
+                            (p.initiative === initiative) && "InitiativeSelector--player--selected",
                         )}
                         onClick={(e) => {
-                            e.stopPropagation();
-                            togglePlayerInitiative(p);
+                            //e.stopPropagation();
+                            if (p.initiative === initiative) {
+                                unsetInitiative(name);
+                            } else {
+                                setInitiative(name, initiative);
+                            }
                         }}
                     >
-                        {p}
+                        <div>{name}</div>
+                        {/* '\u00A0' is unicode nbsp */}
+                        <div className="InitiativeSelector--player--initiative">{p.initiative ? `(${p.initiative})` : "\u00A0"}</div>
                     </div>
                 )}
             </div>
@@ -42,7 +67,8 @@ export const InitiativeSelector = connect(
     },
     (dispatch, ownProps) => {
         return {
-            togglePlayerInitiative: (playerName) => {toggleIntiativeAction(dispatch, playerName, ownProps.initiative)},
+            setInitiative: (playerName) => {setIntiativeAction(dispatch, playerName, ownProps.initiative)},
+            unsetInitiative: (playerName) => {unsetIntiativeAction(dispatch, playerName)},
         };
     },
 )(InitiativeSelectorComponent);

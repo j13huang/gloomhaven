@@ -12,6 +12,7 @@ function newPlayer(characterClass, level) {
         hp: stats.maxHP,
         maxHP: stats.maxHP,
         statusEffects: newStatusEffectTracker(),
+        initiative: null,
     };
 }
 
@@ -19,14 +20,14 @@ const defaultState = {
     levelAdjustment: 0,
     selectableClasses: CLASS_NAMES.reduce((acc, c) => {acc[c] = true; return acc;}, {}),
     players: {},
-    initiative: {},
 };
 
 const SET_LEVEL = "players/level/set";
 const SET_LEVEL_ADJUSTMENT = "players/level/setAdjustment";
 const TOGGLE_STATUS_EFFECT = "players/statusEffect/toggle";
 const SET_HP = "players/hp/set";
-const TOGGLE_INITIATIVE = "players/initiative/toggle";
+const SET_INITIATIVE = "players/initiative/set";
+const UNSET_INITIATIVE = "players/initiative/unset";
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -123,16 +124,29 @@ export const reducer = (state = defaultState, action) => {
                 },
             };
         }
-        case TOGGLE_INITIATIVE:
+        case SET_INITIATIVE:
         {
             return {
                 ...state,
-                initiative: {
-                    ...state.initiative,
-                    [action.initiative]: {
-                        ...state.initiative[action.initiative],
-                        [action.playerName]: !(state.initiative[action.initiative] || {})[action.playerName],
-                    }
+                players: {
+                    ...state.players,
+                    [action.playerName]: {
+                        ...state.players[action.playerName],
+                        initiative: action.initiative,
+                    },
+                },
+            };
+        }
+        case UNSET_INITIATIVE:
+        {
+            return {
+                ...state,
+                players: {
+                    ...state.players,
+                    [action.playerName]: {
+                        ...state.players[action.playerName],
+                        initiative: null,
+                    },
                 },
             };
         }
@@ -140,7 +154,6 @@ export const reducer = (state = defaultState, action) => {
         {
             return {
                 ...state,
-                initiative: {},
             };
         }
         default: return state;
@@ -163,8 +176,12 @@ export function setHPAction(dispatch, name, hp) {
     dispatch({type: SET_HP, name, hp});
 }
 
-export function toggleIntiativeAction(dispatch, playerName, initiative) {
-    dispatch({type: TOGGLE_INITIATIVE, playerName, initiative});
+export function setIntiativeAction(dispatch, playerName, initiative) {
+    dispatch({type: SET_INITIATIVE, playerName, initiative});
+}
+
+export function unsetIntiativeAction(dispatch, playerName) {
+    dispatch({type: UNSET_INITIATIVE, playerName});
 }
 
 function calculateScenarioLevel(players) {
@@ -190,5 +207,14 @@ export const selectors = {
     // + level adjustment
     scenarioLevel: (state) => {
         return calculateScenarioLevel(state.players.players) + state.players.levelAdjustment;
+    },
+    initiatives: (state) => {
+        return Object.entries(state.players.players).reduce((acc, [name, player]) => {
+            if (!player.initiative) {
+                return acc;
+            }
+            acc[player.initiative] = (acc[player.initiative] || []).concat(name);
+            return acc;
+        }, {});
     },
 };
