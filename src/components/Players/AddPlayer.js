@@ -11,11 +11,12 @@ class AddPlayerComponent extends React.Component {
     constructor(props) {
         super(props);
 
+        const initialPlayerName = `Player ${props.initialPlayerNumber}`;
         this.state = {
             selectedClass: props.selectableClasses[0],
             level: 1,
-            playerNameInput: `Player ${props.initialPlayerNumber}`,
-            duplicateNameWarning: false,
+            playerNameInput: initialPlayerName,
+            duplicateNameWarning: props.playerNames.includes(initialPlayerName),
         };
     }
 

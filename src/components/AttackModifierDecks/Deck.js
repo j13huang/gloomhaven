@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import * as classNames from "classnames";
 import * as _ from "lodash";
 
-import {PerksModal} from "./PerksModal";
 import {Card} from "./Card";
 import curseCard from "./curse.jpg";
 import blessCard from "./bless.jpg";
@@ -23,7 +22,6 @@ class DeckComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showPerks: false,
             discardingCards: [],
             collapseRemainingCards: true,
         };
@@ -55,10 +53,6 @@ class DeckComponent extends React.Component {
         }
     }
 
-    togglePerksModal(showPerks) {
-        this.setState({showPerks});
-    }
-
     collapseRemainingCards(collapse) {
         this.setState({
             collapseRemainingCards: collapse,
@@ -73,13 +67,6 @@ class DeckComponent extends React.Component {
         return (
             <div className="Deck">
                 <h5 className="Deck--Name">{this.props.name}</h5>
-                {(this.props.name === "Monsters") ? <div className="Deck--MonsterPlaceholder" /> :
-                    <div className="Deck--Class">
-                        {deck.class}
-                        <button className="Deck--Perks--Button" onClick={() => this.togglePerksModal(!this.state.showPerks)}>Edit Deck</button>
-                        {this.state.showPerks && <PerksModal name={this.props.name} onClose={() => this.togglePerksModal(false)} />}
-                    </div>
-                }
                 <div className="Deck--CardsLeft">
                     Cards left ({deck.cards.length - (deck.currentIndex + 1)})
                     <img
@@ -89,27 +76,31 @@ class DeckComponent extends React.Component {
                     />
                 </div>
                 <div className="Deck--AddCards--Container">
-                    <img className="Deck--AddCards--Image" src={blessCard} alt="add bless" />
-                    <button
-                        disabled={deck.blessCount === 0}
-                        onClick={() => {this.props.removeCard(BLESS)}}
-                    >-</button>
-                    {deck.blessCount}
-                    <button
-                        disabled={this.props.totalBlessings >= 10}
-                        onClick={() => {this.props.addCard(BLESS)}}
-                    >+</button>
-                    <img className="Deck--AddCards--Image"src={curseCard} alt="add curse" />
-                    <button
-                        disabled={deck.curseCount === 0}
-                        onClick={() => {this.props.removeCard(CURSE)}}
-                    >-</button>
-                    {deck.curseCount}
-                    <button
-                        disabled={(this.props.name === "Monsters" ? deck.curseCount : this.props.totalCurses) >= 10}
-                        onClick={() => {this.props.addCard(CURSE)}}
-                    >+</button>
-                </div>
+                    <div className="Deck--AddCards">
+                        <img className="Deck--AddCards--Image" src={blessCard} alt="add bless" />
+                        <button
+                            disabled={deck.blessCount === 0}
+                            onClick={() => {this.props.removeCard(BLESS)}}
+                        >-</button>
+                        {deck.blessCount}
+                        <button
+                            disabled={this.props.totalBlessings >= 10}
+                            onClick={() => {this.props.addCard(BLESS)}}
+                        >+</button>
+                    </div>
+                    <div className="Deck--AddCards">
+                        <img className="Deck--AddCards--Image"src={curseCard} alt="add curse" />
+                        <button
+                            disabled={deck.curseCount === 0}
+                            onClick={() => {this.props.removeCard(CURSE)}}
+                        >-</button>
+                        {deck.curseCount}
+                        <button
+                            disabled={(this.props.name === "Monsters" ? deck.curseCount : this.props.totalCurses) >= 10}
+                            onClick={() => {this.props.addCard(CURSE)}}
+                        >+</button>
+                        </div>
+                    </div>
                 <div>
                     <img src={cardBack} className="Deck--CardBack" onClick={() => {this.props.revealNextCard()}} alt="card back" />
                 </div>

@@ -15,6 +15,8 @@
 .PlayerTracker--Class {
     font-size: 0.75rem;
     color: purple;
+    text-align: center;
+    margin-bottom: 4px;
 }
 
 .PlayerTracker--LevelSelector {

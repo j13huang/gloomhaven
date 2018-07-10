@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 
 import { applyPerkUsageAction } from "../../store/attackModifierDecks";
 import { perksForClass } from "../../lib/classes";
-import minusOneCard from "./-1.jpg";
-import minusOneItemIcon from "./minusOneItemIcon.svg";
+import minusOneCard from "../AttackModifierDecks/-1.jpg";
+import minusOneItemIcon from "../AttackModifierDecks/minusOneItemIcon.svg";
 
 import "./PerksModal.css";
 

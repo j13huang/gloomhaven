@@ -12,18 +12,19 @@
     color: purple;
 }
 
-.Deck--Perks--Button {
-    margin-left: 2px;
-}
-
 .Deck--CardsLeft {
     font-size: small;
 }
 
 .Deck--AddCards--Container {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin-bottom: 2px;
+}
+
+.Deck--AddCards {
+    display: flex;
+    justify-content: center;
 }
 
 .Deck--AddCards--Button {

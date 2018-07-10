@@ -5,7 +5,8 @@ body {
 }
 
 h5 {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  margin-top: 8px;
 }
 
 @font-face {

@@ -71,7 +71,9 @@ class ListComponent extends React.Component {
                 >{name}</option>)}
             </select>
             <button onClick={() => this.props.addMonsters(this.state.selectedMonsters, this.props.scenarioLevel)}>Add Monster(s)</button>
-            <button className="Monsters--List--ResetButton" onClick={() => this.props.resetMonsters()}>Reset</button>
+            {/*
+                <button className="Monsters--List--ResetButton" onClick={() => this.props.resetMonsters()}>Reset</button>
+            */}
             {(this.props.numPlayers === 0) && <div className="Monsters--List--Cover">Add Players</div>}
         </div>);
     }

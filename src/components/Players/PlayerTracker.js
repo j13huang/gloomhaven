@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 
 import xpIcon from "./xp.svg";
 //import xpIcon from "./xp_white.svg";
+import {PerksModal} from "./PerksModal";
 import {SummonModal} from "./SummonModal";
 import {SummonTrackers} from "../Summons/SummonTrackers";
 import {BonusSelectors} from "../UnitTracking/BonusSelectors";
@@ -20,6 +21,7 @@ class PlayerTrackerComponent extends React.Component {
 
         this.state = {
             xp: 0,
+            showPerksModal: false,
             showSummonModal: false,
         };
     }
@@ -32,6 +34,13 @@ class PlayerTrackerComponent extends React.Component {
             xp,
         })
     }
+
+    togglePerksModal(showPerksModal) {
+        this.setState({
+            showPerksModal,
+        })
+    }
+
 
     toggleSummonModal(showSummonModal) {
         this.setState({
@@ -47,10 +56,12 @@ class PlayerTrackerComponent extends React.Component {
                     <button onClick={() => this.props.removePlayer()}>X</button>
                 }
             </h5>
+            <div className="PlayerTracker--Class">{this.props.player.class}</div>
             <div className="PlayerTracker--Description">
-                <div className="PlayerTracker--Class">{this.props.player.class}</div>
                 <button className="PlayerTracker--Summon--Button" onClick={() => this.toggleSummonModal(!this.state.showSummonModal)}>Summon</button>
                 {this.state.showSummonModal && <SummonModal name={this.props.name} onClose={() => this.toggleSummonModal(false)} />}
+                <button className="PlayerTracker--Perks--Button" onClick={() => this.togglePerksModal(!this.state.showPerksModal)}>Edit Deck</button>
+                {this.state.showPerksModal && <PerksModal name={this.props.name} onClose={() => this.togglePerksModal(false)} />}
                 <div className="PlayerTracker--LevelSelector">
                     <label>Level:
                         <select
