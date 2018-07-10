@@ -152,8 +152,14 @@ export const reducer = (state = defaultState, action) => {
         }
         case END_TURN:
         {
+            const newPlayers = Object.entries(state.players).reduce((acc, [name, player]) => {
+                const newPlayer = {...player, initiative: null};
+                acc[name] = newPlayer;
+                return acc;
+            }, {});
             return {
                 ...state,
+                players: newPlayers,
             };
         }
         default: return state;
