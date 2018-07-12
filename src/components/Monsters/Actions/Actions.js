@@ -3,6 +3,7 @@ import * as classNames from 'classnames';
 
 import {getIcon} from "../../../lib/icons";
 import * as elements from "../../../lib/elements";
+import {TEXT} from "../../../lib/actions";
 
 import "./Actions.css";
 
@@ -17,7 +18,8 @@ function CustomAction({action, subAction}) {
 function Action({action, subAction}) {
     return (<div className={classNames({"Card--Action": true, "Card--SubAction": subAction})}>
         {typeof(action) === "string" && action}
-        {action.type && <CustomAction action={action} subAction={subAction} />}
+        {action.type === TEXT && action.modifier}
+        {action.type && action.type !== TEXT && <CustomAction action={action} subAction={subAction} />}
         {action.image && <img className="Card--Image" src={action.image} alt="extra info for card"/>}
     </div>);
 }

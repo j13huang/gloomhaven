@@ -16,7 +16,7 @@ import sightlessEyeSpecial2Area from "./sightlessEyeSpecial2Area.svg";
 import { END_ACTIONS } from "../cards";
 import * as elements from "../elements";
 import {POISON, WOUND, IMMOBILIZE, MUDDLE, DISARM, STUN, INVISIBLE, PUSH, PULL, BLESS, CURSE, STRENGTHEN } from "../statusEffects"
-import { action, ATTACK, MOVE, RANGE, HEAL, TARGET, SHIELD, RETALIATE, PIERCE } from "../actions";
+import { action, ATTACK, MOVE, RANGE, HEAL, TARGET, SHIELD, RETALIATE, PIERCE, TEXT } from "../actions";
 
 const ARCHER_CARDS = [
     {
@@ -1343,12 +1343,11 @@ export const MONSTERS = {
             },
             {
                 initiative: 10,
-                //TODO
-                actions: [action(MOVE, "-1"), action(ATTACK, "+0"), { action: "on death: attack +2", image: aoeCircleWithMiddleBlack }],
+                actions: [action(MOVE, "-1"), action(ATTACK, "-1"), action(TEXT, "On death:", [action(ATTACK, "+2", null, aoeCircleWithMiddleBlack)])],
             },
             {
                 initiative: 10,
-                actions: [action(MOVE, "-1"), action(ATTACK, "-1"), { action: "on death: attack +2", image: aoeCircleWithMiddleBlack }],
+                actions: [action(MOVE, "-1"), action(ATTACK, "-1"), action(TEXT, "On death:", [action(ATTACK, "+2", null, aoeCircleWithMiddleBlack)])],
             },
             {
                 initiative: 31,

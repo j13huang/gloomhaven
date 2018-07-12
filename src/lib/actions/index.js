@@ -16,6 +16,7 @@ export const RANGE = "Range";
 export const RETALIATE = "Retaliate";
 export const SHIELD = "Shield";
 export const TARGET = "Target";
+export const TEXT = "TEXT";
 
 export const PIERCE = "PIERCE";
 export const PUSH = "PUSH";
