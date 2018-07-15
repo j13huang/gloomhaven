@@ -236,16 +236,21 @@
     background-image: radial-gradient(circle, transparent 40px, rgba(169, 28, 34, 0.8) 50px, transparent 100%);
 }
 
-.AttackModifierCard--RefreshItemColor {
-    background-image: radial-gradient(circle, transparent 40px, rgba(169, 28, 34, 0.8) 50px, transparent 100%);
-}
-
 .AttackModifierCard--MainIcon--AddTargetColor {
     background-color: rgba(169, 28, 34, 0.8);
 }
 
 .AttackModifierCard--AddTargetColor {
     background-image: radial-gradient(circle, transparent 40px, rgba(206, 45, 45 0.8) 50px, transparent 100%);
+}
+
+.AttackModifierCard--MainIcon--RefreshItemColor {
+    /*background-image: radial-gradient(circle, transparent 40px, rgba(169, 28, 34, 0.8) 50px, transparent 100%);*/
+    background-color: black;
+}
+
+.AttackModifierCard--RefreshItemColor {
+    background-image: radial-gradient(circle, transparent 40px, rgba(169, 28, 34, 0.8) 50px, transparent 100%);
 }
 
 .AttackModifierCard--HealColor {

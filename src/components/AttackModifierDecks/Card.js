@@ -96,7 +96,7 @@ function MainIcon({iconName}) {
         // bonuses
         case PIERCE: colorClassName = "AttackModifierCard--MainIcon--PierceColor"; break;
         case ADD_TARGET: colorClassName = "AttackModifierCard--MainIcon--AddTargetColor"; break;
-        case REFRESH_ITEM: colorClassName = "AttackModifierCard--RefreshItemColor"; break;
+        case REFRESH_ITEM: colorClassName = "AttackModifierCard--MainIcon--RefreshItemColor"; break;
 
         default: break;
     }
@@ -123,7 +123,7 @@ function CustomCard({className, card}) {
 
 function PlusThree({className, card}) {
     return (<div className="AttackModifierCard--CustomCard">
-        <img className={className} src={blankCardImage} alt={`${card.modifier} ${card.extra} ${card.endAction}`} />
+        <img className={className} src={blankCardImage} alt={`${card.modifier || ""} ${card.extra || ""} ${card.endAction || ""}`} />
         <div className={classNames("AttackModifierCard--MainIcon", "AttackModifierCard--PlusThree")}>
             <span className="AttackModifierCard--PlusThree--Plus">+</span>
             <span className="AttackModifierCard--PlusThree--Three">3</span>
