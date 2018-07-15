@@ -4276,7 +4276,7 @@ export const MONSTERS = {
             },
         ],
     },
-    "Savvas Lavaflow": {
+    "Savvas Icestorm": {
         tokenCount: 4,
         stats: [
             {
@@ -4410,42 +4410,42 @@ export const MONSTERS = {
         ],
         cards: [
             {
-                initiative: 22,
-                actions: [action(MOVE, "+1"), action(ATTACK, "-1", ["Target all adjacent enemies"]), { type: "element", use: elements.FIRE, action: action(RETALIATE, "3") }],
+                initiative: 14,
+                actions: [action(ATTACK, "+0"), { type: "element", use: elements.ICE, action: "+2 attack, immobiilize" }, action(RETALIATE, "2"), { type: "element", create: elements.AIR }],
             },
             {
-                initiative: 31,
-                actions: [action(HEAL, "4", [action(RANGE, "3")]), { type: "element", use: elements.EARTH, action: action(TARGET, "3") }],
+                initiative: 14,
+                actions: [action(SHIELD, "4"), action(HEAL, "2", [action(RANGE, "3")]), { type: "element", use: elements.ICE, action: "+3 heal" }, { type: "element", use: elements.AIR, action: action(ATTACK, "+0") }],
             },
             {
-                initiative: 41,
-                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [], aoeLine4WithBlack), { type: "element", use: elements.EARTH, action: "+2 attack, immobilize" }],
+                initiative: 19,
+                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [action(RANGE, "-1")]), action(SHIELD, "1, Affect Self and all allies within range 2"), { type: "element", create: elements.ICE }],
             },
             {
-                initiative: 51,
-                actions: ["All enemies suffer 2 damage", { type: "element", use: elements.FIRE, action: "Wound all enemies" }, { type: "element", use: elements.EARTH, action: "disarm all enemies" }],
-            },
-            {
-                initiative: 68,
-                actions: [action(MOVE, "-1"), action(ATTACK, "+1", [action(RANGE, "3"), "All allies and enemies adjacent to the target suffer 2 damage."]), { type: "element", create: elements.EARTH }],
+                initiative: 35,
+                actions: [action(MOVE, "-1"), action(ATTACK, "-1", [], aoeTriangle3WithCornerBlack), { type: "element", create: elements.ICE }],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
-                initiative: 68,
-                actions: [action(MOVE, "-1"), action(ATTACK, "-1", [action(RANGE, "3"), action(TARGET, "2")]), { type: "element", create: elements.FIRE }],
+                initiative: 47,
+                actions: [action(DISARM, null, ["Target all adjacent enemies"]), action(MOVE, "+0"), action(ATTACK, "-1"), { type: "element", create: elements.AIR }],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
-                initiative: 97,
-                actions: ["Summon normal Flame Demon", { type: "element", create: elements.FIRE }],
+                initiative: 70,
+                actions: [action(PUSH, "2", ["Target all adjacent enemies"]), { type: "element", use: elements.AIR, action: "push 4 instead" }, action(ATTACK, "+1", [action(RANGE, "+1")])],
             },
             {
-                initiative: 97,
-                actions: ["Summon normal Earth Demon", { type: "element", create: elements.EARTH }],
+                initiative: 98,
+                actions: ["Summon normal Wind Demon", { type: "element", create: elements.AIR }],
+            },
+            {
+                initiative: 98,
+                actions: ["Summon normal Frost Demon", { type: "element", create: elements.ICE }],
             },
         ],
     },
-    "Savvas Icestorm": {
+    "Savvas Lavaflow": {
         tokenCount: 4,
         stats: [
             {
@@ -4579,38 +4579,38 @@ export const MONSTERS = {
         ],
         cards: [
             {
-                initiative: 14,
-                actions: [action(ATTACK, "+0"), { type: "element", use: elements.ICE, action: "+2 attack, immobiilize" }, action(RETALIATE, "2"), { type: "element", create: elements.AIR }],
+                initiative: 22,
+                actions: [action(MOVE, "+1"), action(ATTACK, "-1", ["Target all adjacent enemies"]), { type: "element", use: elements.FIRE, action: action(RETALIATE, "3") }],
             },
             {
-                initiative: 14,
-                actions: [action(SHIELD, "4"), action(HEAL, "2", [action(RANGE, "3")]), { type: "element", use: elements.ICE, action: "+3 heal" }, { type: "element", use: elements.AIR, action: action(ATTACK, "+0") }],
+                initiative: 31,
+                actions: [action(HEAL, "4", [action(RANGE, "3")]), { type: "element", use: elements.EARTH, action: action(TARGET, "3") }],
             },
             {
-                initiative: 19,
-                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [action(RANGE, "-1")]), action(SHIELD, "1, Affect Self and all allies within range 2"), { type: "element", create: elements.ICE }],
+                initiative: 41,
+                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [], aoeLine4WithBlack), { type: "element", use: elements.EARTH, action: "+2 attack, immobilize" }],
             },
             {
-                initiative: 35,
-                actions: [action(MOVE, "-1"), action(ATTACK, "-1", [], aoeTriangle3WithCornerBlack), { type: "element", create: elements.ICE }],
+                initiative: 51,
+                actions: ["All enemies suffer 2 damage", { type: "element", use: elements.FIRE, action: "Wound all enemies" }, { type: "element", use: elements.EARTH, action: "disarm all enemies" }],
+            },
+            {
+                initiative: 68,
+                actions: [action(MOVE, "-1"), action(ATTACK, "+1", [action(RANGE, "3"), "All allies and enemies adjacent to the target suffer 2 damage."]), { type: "element", create: elements.EARTH }],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
-                initiative: 47,
-                actions: [action(DISARM, null, ["Target all adjacent enemies"]), action(MOVE, "+0"), action(ATTACK, "-1"), { type: "element", create: elements.AIR }],
+                initiative: 68,
+                actions: [action(MOVE, "-1"), action(ATTACK, "-1", [action(RANGE, "3"), action(TARGET, "2")]), { type: "element", create: elements.FIRE }],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
-                initiative: 70,
-                actions: [action(PUSH, "2", ["Target all adjacent enemies"]), { type: "element", use: elements.AIR, action: "push 4 instead" }, action(ATTACK, "+1", [action(RANGE, "+1")])],
+                initiative: 97,
+                actions: ["Summon normal Flame Demon", { type: "element", create: elements.FIRE }],
             },
             {
-                initiative: 98,
-                actions: ["Summon normal Wind Demon", { type: "element", create: elements.AIR }],
-            },
-            {
-                initiative: 98,
-                actions: ["Summon normal Frost Demon", { type: "element", create: elements.ICE }],
+                initiative: 97,
+                actions: ["Summon normal Earth Demon", { type: "element", create: elements.EARTH }],
             },
         ],
     },
