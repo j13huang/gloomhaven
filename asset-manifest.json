@@ -1,8 +1,8 @@
 {
   "main.css": "static/css/main.7f939e67.css",
   "main.css.map": "static/css/main.7f939e67.css.map",
-  "main.js": "static/js/main.95eae459.js",
-  "main.js.map": "static/js/main.95eae459.js.map",
+  "main.js": "static/js/main.554aa3ed.js",
+  "main.js.map": "static/js/main.554aa3ed.js.map",
   "static/media/+0.jpg": "static/media/+0.acd31880.jpg",
   "static/media/+1.jpg": "static/media/+1.051d3400.jpg",
   "static/media/+2.jpg": "static/media/+2.48910310.jpg",
@@ -38,6 +38,7 @@
   "static/media/earth.svg": "static/media/earth.443bd9ff.svg",
   "static/media/elderDrakeSpecial1Area.svg": "static/media/elderDrakeSpecial1Area.b81e97cb.svg",
   "static/media/fire.svg": "static/media/fire.673d53c2.svg",
+  "static/media/flying.svg": "static/media/flying.db12f0c3.svg",
   "static/media/heal.svg": "static/media/heal.c963fe2e.svg",
   "static/media/health.svg": "static/media/health.c963fe2e.svg",
   "static/media/ice.svg": "static/media/ice.06520bc7.svg",
