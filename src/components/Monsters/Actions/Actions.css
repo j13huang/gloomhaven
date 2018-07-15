@@ -2,11 +2,11 @@
     margin-bottom: 2px;
 }
 
-.CustomAction--Container {
+.ActionModifier--Container {
     display: flex;
 }
 
-.CustomAction--Icon {
+.ActionModifier--Icon {
     height: 16px;
     width: 16px;
     margin-left: 2px;
@@ -17,9 +17,13 @@
     font-size: 70%;
 }
 
-.CustomAction--SubAction--Icon {
+.ActionModifier--SubAction--Icon {
     height: 12px;
     width: 12px;
     margin-left: 2px;
     margin-right: 2px;
+}
+
+.ActionModifier--stats--elite {
+    color: gold;
 }

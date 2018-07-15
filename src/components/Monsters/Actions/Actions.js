@@ -7,24 +7,47 @@ import {TEXT} from "../../../lib/actions";
 
 import "./Actions.css";
 
-function CustomAction({action, subAction}) {
-    return (<div className="CustomAction--Container">
-        {action.type} {action.modifier && !action.modifier.match(/^(\+|-)/) && action.modifier}
-        <img className={classNames({"CustomAction--Icon": true, "CustomAction--SubAction--Icon": subAction})} src={getIcon(action.type)} alt={action.type} />
-        {action.modifier && action.modifier.match(/^(\+|-)/) && action.modifier}
+function ActionModifier({action, isSubAction, isBoss, stats}) {
+    let modifiedStats = null;
+    if (stats && action.modifier && action.modifier.match(/^(\+|-)\d+/)) {
+        modifiedStats = {
+            normal: isBoss ? stats : stats.normal,
+            elite: isBoss ? null : stats.elite,
+            modifier: parseInt(action.modifier, 10),
+        };
+    }
+
+    return (<div className="ActionModifier--Container">
+        {action.type}
+        <img className={classNames({"ActionModifier--Icon": true, "ActionModifier--SubAction--Icon": isSubAction})} src={getIcon(action.type)} alt={action.type} />
+        {modifiedStats ? 
+            <div>
+                {stats.normal[action.type.toLowerCase()] + modifiedStats.modifier}
+                {modifiedStats.elite &&
+                    <React.Fragment>
+                        {" / "}
+                        <span className="ActionModifier--stats--elite">
+                            {stats.elite[action.type.toLowerCase()] + modifiedStats.modifier}
+                        </span>
+                    </React.Fragment>}
+            </div> :
+            action.modifier
+        }
     </div>);
 }
 
-function Action({action, subAction}) {
-    return (<div className={classNames({"Card--Action": true, "Card--SubAction": subAction})}>
+function Action({action, isSubAction, isBoss, stats}) {
+    return (<div className={classNames({"Card--Action": true, "Card--SubAction": isSubAction})}>
         {typeof(action) === "string" && action}
         {action.type === TEXT && action.modifier}
-        {action.type && action.type !== TEXT && <CustomAction action={action} subAction={subAction} />}
+        {action.type && action.type !== TEXT &&
+            <ActionModifier action={action} isSubAction={isSubAction} isBoss={isBoss} stats={stats} />
+        }
         {action.image && <img className="Card--Image" src={action.image} alt="extra info for card"/>}
     </div>);
 }
 
-export function Actions({className, actions}) {
+export function Actions({className, actions, isBoss, stats}) {
     //console.log(actions);
     return (<div className={className}>
         {actions.map((a, i) => {
@@ -38,8 +61,8 @@ export function Actions({className, actions}) {
                         </div>}
                         {a.use && <div className="Card--Element--Separator">:</div>}
                         {a.action && <div>
-                            <Action action={a.action} />
-                            {a.action.subActions && a.action.subActions.map((sa, j) => <Action key={j} action={sa} subAction />)}
+                            <Action action={a.action} isBoss={isBoss} stats={stats} />
+                            {a.action.subActions && a.action.subActions.map((sa, j) => <Action key={j} action={sa} isSubAction />)}
                         </div>}
                         {a.image && <img className="Card--Image" src={a.image} alt="extra info for card"/>}
                         {a.create && <div className={"Card--Element"}>
@@ -49,8 +72,8 @@ export function Actions({className, actions}) {
                 );
             }
             return (<div className="Action--Section" key={i}>
-                <Action action={a} />
-                {a.subActions && a.subActions.map((sa, j) => <Action key={j} action={sa} subAction />)}
+                <Action action={a} isBoss={isBoss} stats={stats} />
+                {a.subActions && a.subActions.map((sa, j) => <Action key={j} action={sa} isSubAction isBoss={isBoss} stats={stats} />)}
             </div>);
         })}
     </div>);

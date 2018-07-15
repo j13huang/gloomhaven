@@ -28,6 +28,6 @@ export function Deck({name, level, card, active, stats}) {
                 Inactive
             </div>}
         </div>}
-        {card && <Card name={name} card={card} />}
+        {card && <Card name={name} card={card} stats={stats} />}
     </div>);
 }
