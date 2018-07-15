@@ -1,20 +1,14 @@
 .Action--Section {
-    margin-bottom: 2px;
-}
-
-.ActionModifier--Container {
-    display: flex;
+    margin-bottom: 4px;
 }
 
 .ActionModifier--Icon {
     height: 16px;
     width: 16px;
     margin-left: 2px;
-    margin-right: 4px;
-}
+    margin-right: 2px;
 
-.Card--SubAction {
-    font-size: 70%;
+    vertical-align: top;
 }
 
 .ActionModifier--SubAction--Icon {
@@ -26,4 +20,21 @@
 
 .ActionModifier--stats--elite {
     color: gold;
+}
+
+.Card--Action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: pre-wrap;
+}
+
+.Card--SubAction {
+    font-size: 70%;
+}
+
+.Card--Action--inline {
+    display: inline;
+    font-size: inherit;
 }

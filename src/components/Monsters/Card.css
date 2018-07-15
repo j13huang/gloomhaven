@@ -30,8 +30,8 @@
 .Monster--Card--Actions {
     position: absolute;
     top: 40px;
-    left: 30px;
-    width: 192px;
+    left: 18px;
+    width: 216px;
     height: 128px;
     display: flex;
     flex-direction: column;
@@ -49,22 +49,8 @@
     height: 1.5rem;
     width: 1.5rem;
     position: absolute;
-    top: 138px;
+    top: 140px;
     left: 220px;
-}
-
-.Card--Action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-left: 2px;
-    padding-right: 2px;
-}
-
-.Card--Action--Border {
-    border: 1px dashed white;
-    margin-top: 2px;
 }
 
 .Card--Image {
@@ -116,4 +102,6 @@
 .Card--Element--Separator {
     display: flex;
     align-items: center;
+    padding-left: 2px;
+    padding-right: 2px;
 }

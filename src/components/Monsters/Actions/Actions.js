@@ -3,44 +3,46 @@ import * as classNames from 'classnames';
 
 import {getIcon} from "../../../lib/icons";
 import * as elements from "../../../lib/elements";
-import {TEXT} from "../../../lib/actions";
+import {COMPOUND_TEXT} from "../../../lib/actions";
 
 import "./Actions.css";
 
 function ActionModifier({action, isSubAction, isBoss, stats}) {
-    let modifiedStats = null;
-    if (stats && action.modifier && action.modifier.match(/^(\+|-)\d+/)) {
-        modifiedStats = {
-            normal: isBoss ? stats : stats.normal,
-            elite: isBoss ? null : stats.elite,
-            modifier: parseInt(action.modifier, 10),
-        };
+    let statModifier = null;
+    if (!isBoss && stats && action.modifier && action.modifier.match(/^(\+|-)\d+/)) {
+        statModifier = parseInt(action.modifier, 10);
     }
 
-    return (<div className="ActionModifier--Container">
+    return (<React.Fragment>
         {action.type}
         <img className={classNames({"ActionModifier--Icon": true, "ActionModifier--SubAction--Icon": isSubAction})} src={getIcon(action.type)} alt={action.type} />
-        {modifiedStats ? 
-            <div>
-                {stats.normal[action.type.toLowerCase()] + modifiedStats.modifier}
-                {modifiedStats.elite &&
-                    <React.Fragment>
-                        {" / "}
-                        <span className="ActionModifier--stats--elite">
-                            {stats.elite[action.type.toLowerCase()] + modifiedStats.modifier}
-                        </span>
-                    </React.Fragment>}
-            </div> :
+        {statModifier != null ?
+            <React.Fragment>
+                {stats.normal[action.type.toLowerCase()] + statModifier}
+                {" / "}
+                <span className="ActionModifier--stats--elite">
+                    {stats.elite[action.type.toLowerCase()] + statModifier}
+                </span>
+            </React.Fragment> :
             action.modifier
         }
-    </div>);
+    </React.Fragment>);
 }
 
-function Action({action, isSubAction, isBoss, stats}) {
-    return (<div className={classNames({"Card--Action": true, "Card--SubAction": isSubAction})}>
+function Action({className, action, isSubAction, isBoss, stats}) {
+    return (<div className={classNames({"Card--Action": true, "Card--SubAction": isSubAction, [className]: className})}>
         {typeof(action) === "string" && action}
-        {action.type === TEXT && action.modifier}
-        {action.type && action.type !== TEXT &&
+        {action.type === COMPOUND_TEXT && <div>
+            {action.modifier.map((t, i) => {
+                let content = t;
+                if (t.type) {
+                    content = <Action key={i} className="Card--Action--inline" action={t} isSubAction={isSubAction} isBoss={isBoss} stats={stats} />;
+                }
+
+                return <React.Fragment key={i}>{content}</React.Fragment>;
+            })}
+        </div>}
+        {action.type && action.type !== COMPOUND_TEXT &&
             <ActionModifier action={action} isSubAction={isSubAction} isBoss={isBoss} stats={stats} />
         }
         {action.image && <img className="Card--Image" src={action.image} alt="extra info for card"/>}

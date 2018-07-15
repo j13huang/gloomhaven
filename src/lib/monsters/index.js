@@ -16,7 +16,7 @@ import sightlessEyeSpecial2Area from "./sightlessEyeSpecial2Area.svg";
 import { END_ACTIONS } from "../cards";
 import * as elements from "../elements";
 import {POISON, WOUND, IMMOBILIZE, MUDDLE, DISARM, STUN, INVISIBLE, PUSH, PULL, BLESS, CURSE, STRENGTHEN } from "../statusEffects"
-import { action, ATTACK, MOVE, RANGE, HEAL, TARGET, SHIELD, RETALIATE, PIERCE, TEXT } from "../actions";
+import { action, ATTACK, MOVE, RANGE, HEAL, TARGET, SHIELD, RETALIATE, PIERCE, LOOT, JUMP, COMPOUND_TEXT } from "../actions";
 
 const ARCHER_CARDS = [
     {
@@ -89,7 +89,14 @@ const GUARD_CARDS = [
 const IMP_CARDS = [
     {
         initiative: 24,
-        actions: [action(STRENGTHEN, null, ["Affect all allies within range 2"]), action(MUDDLE, null, ["Target all enemies within range 2"])],
+        actions: [
+            action(STRENGTHEN, null, [
+                action(COMPOUND_TEXT, ["Affect all allies within ", action(RANGE, "2")]),
+            ]),
+            action(MUDDLE, null, [
+                action(COMPOUND_TEXT, ["Target all enemies within ", action(RANGE, "2")]),
+            ]),
+        ],
     },
     {
         initiative: 43,
@@ -165,7 +172,7 @@ const SCOUT_CARDS = [
     },
     {
         initiative: 35,
-        actions: [action(MOVE, "+1", ["jump"]), "loot 1"],
+        actions: [action(MOVE, "+1", [action(JUMP)]), action(LOOT, "1")],
         endAction: END_ACTIONS.SHUFFLE,
     },
     {
@@ -1343,11 +1350,11 @@ export const MONSTERS = {
             },
             {
                 initiative: 10,
-                actions: [action(MOVE, "-1"), action(ATTACK, "-1"), action(TEXT, "On death:", [action(ATTACK, "+2", null, aoeCircleWithMiddleBlack)])],
+                actions: [action(MOVE, "-1"), action(ATTACK, "-1"), action(COMPOUND_TEXT, ["On death:"], [action(ATTACK, "+2", null, aoeCircleWithMiddleBlack)])],
             },
             {
                 initiative: 10,
-                actions: [action(MOVE, "-1"), action(ATTACK, "-1"), action(TEXT, "On death:", [action(ATTACK, "+2", null, aoeCircleWithMiddleBlack)])],
+                actions: [action(MOVE, "-1"), action(ATTACK, "-1"), action(COMPOUND_TEXT, ["On death:"], [action(ATTACK, "+2", null, aoeCircleWithMiddleBlack)])],
             },
             {
                 initiative: 31,
@@ -1538,7 +1545,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 54,
-                actions: ["wound and poison, Target all adjacent enemies", action(ATTACK, "+0", [action(RANGE, "4")])],
+                actions: [action(COMPOUND_TEXT, [action(WOUND), " and ", action(POISON)], ["Target all adjacent enemies"]), action(ATTACK, "+0", [action(RANGE, "4")])],
             },
         ],
     },
@@ -1681,7 +1688,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 79,
-                actions: [action(MOVE, "+1"), action(ATTACK, "+0"), { type: "element", use: elements.AIR, action: "-2 attack" }],
+                actions: [action(MOVE, "+1"), action(ATTACK, "+0"), { type: "element", use: elements.AIR, action: action(COMPOUND_TEXT, ["-2 ", action(ATTACK)]) }],
             },
             {
                 initiative: 40,
@@ -1845,6 +1852,11 @@ export const MONSTERS = {
         ],
         cards: [
             {
+                initiative: 30,
+                actions: [{ type: "element", use: elements.FIRE, action: "All adjacent enemies suffer 2 damage." }, action(MOVE, "+0"), action(ATTACK, "-2", [action(WOUND), action(TARGET, "2")])],
+                endAction: END_ACTIONS.SHUFFLE,
+            },
+            {
                 initiative: 8,
                 actions: [action(MOVE, "-1"), "Create a 4 damage trap in an adjacent empty hex closest to an enemy.", { type: "element", use: elements.ANY, create: elements.FIRE }],
             },
@@ -1863,11 +1875,6 @@ export const MONSTERS = {
             {
                 initiative: 24,
                 actions: [action(MOVE, "+0"), action(ATTACK, "+0"), { type: "element", create: elements.FIRE }],
-            },
-            {
-                initiative: 30,
-                actions: [{ type: "element", use: elements.FIRE, action: "All adjacent enemies suffer 2 damage." }, action(MOVE, "+0"), action(ATTACK, "-2", [action(WOUND), action(TARGET, "2")])],
-                endAction: END_ACTIONS.SHUFFLE,
             },
             {
                 initiative: 46,
@@ -2015,7 +2022,7 @@ export const MONSTERS = {
         cards: [
             {
                 initiative: 18,
-                actions: [action(IMMOBILIZE, null, ["Target all enemies within range 2"]), { type: "element", use: elements.ICE, action: action(HEAL, "3", ["Self"]) }],
+                actions: [action(IMMOBILIZE, null, [action(COMPOUND_TEXT, ["Target all enemies within ", action(RANGE, "2")])]), { type: "element", use: elements.ICE, action: action(HEAL, "3", ["Self"]) }],
             },
             {
                 initiative: 18,
@@ -2031,7 +2038,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 58,
-                actions: [action(MOVE, "-1"), action(ATTACK, "+0", [action(RANGE, "2")]), { type: "element", use: elements.ICE, action: "+2 attack, +1 range" }],
+                actions: [action(MOVE, "-1"), action(ATTACK, "+0", [action(RANGE, "2")]), { type: "element", use: elements.ICE, action: action(COMPOUND_TEXT, ["+2 ", action(ATTACK), ", +1 ", action(RANGE)]) }],
             },
             {
                 initiative: 58,
@@ -2322,20 +2329,20 @@ export const MONSTERS = {
             },
             {
                 initiative: 43,
-                actions: [action(MOVE, "-1", ["jump"]), action(ATTACK, "+0", [action(TARGET, "2")])],
+                actions: [action(MOVE, "-1", [action(JUMP)]), action(ATTACK, "+0", [action(TARGET, "2")])],
             },
             {
                 initiative: 43,
-                actions: [action(MOVE, "+1", ["jump"]), action(ATTACK, "-1", ["Target all adjacent enemies"])],
+                actions: [action(MOVE, "+1", [action(JUMP)]), action(ATTACK, "-1", ["Target all adjacent enemies"])],
             },
             {
                 initiative: 32,
-                actions: [action(MOVE, "+0"), action(ATTACK, "+0"), "Add +2 attack if the target is adjacent to any of the Giant Viper's allies."],
+                actions: [action(MOVE, "+0"), action(ATTACK, "+0"), action(COMPOUND_TEXT, ["Add +2 ", action(ATTACK), "if the target is adjacent to any of the Giant Viper's allies."])],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
                 initiative: 32,
-                actions: [action(MOVE, "+0"), action(ATTACK, "+0"), "Add +2 attack if the target is adjacent to any of the Giant Viper's allies."],
+                actions: [action(MOVE, "+0"), action(ATTACK, "+0"), action(COMPOUND_TEXT, ["Add +2 ", action(ATTACK), "if the target is adjacent to any of the Giant Viper's allies."])],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
@@ -2344,11 +2351,11 @@ export const MONSTERS = {
             },
             {
                 initiative: 58,
-                actions: [action(MOVE, "-1", ["jump"]), action(ATTACK, "+1")],
+                actions: [action(MOVE, "-1", [action(JUMP)]), action(ATTACK, "+1")],
             },
             {
                 initiative: 58,
-                actions: [action(MOVE, "+1", ["jump"]), action(ATTACK, "-1"), "All attacks targeting Giant Viper this round gain Disadvantage."],
+                actions: [action(MOVE, "+1", [action(JUMP)]), action(ATTACK, "-1"), "All attacks targeting Giant Viper this round gain Disadvantage."],
             },
         ],
     },
@@ -2509,7 +2516,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 30,
-                actions: [action(MOVE, "-1"), action(ATTACK, "+0", [], aoeLine4WithBlack), { type: "element", use: elements.DARK, action: 'Perform "heal 2 Self" for each target damaged' }],
+                actions: [action(MOVE, "-1"), action(ATTACK, "+0", [], aoeLine4WithBlack), { type: "element", use: elements.DARK, action: action(COMPOUND_TEXT, ['Perform "', action(HEAL, "2"), ' Self" for each target damaged']) }],
             },
             {
                 initiative: 38,
@@ -2517,7 +2524,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 38,
-                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [action(TARGET, "2")]), { type: "element", use: elements.DARK, action: "+2 attack, disarm" }],
+                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [action(TARGET, "2")]), { type: "element", use: elements.DARK, action: action(COMPOUND_TEXT, ["+2 ", action(ATTACK), ", ", action(DISARM)]) }],
             },
         ],
     },
@@ -2672,12 +2679,12 @@ export const MONSTERS = {
             },
             {
                 initiative: 19,
-                actions: [action(MOVE, "+0"), action(ATTACK, "+0"), "Add +2 attack if the target is adjacent to any of the Hound's allies."],
+                actions: [action(MOVE, "+0"), action(ATTACK, "+0"), action(COMPOUND_TEXT, ["Add +2 ", action(ATTACK), "if the target is adjacent to any of the Hound's allies."])],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
                 initiative: 19,
-                actions: [action(MOVE, "+0"), action(ATTACK, "+0"), "Add +2 attack if the target is adjacent to any of the Hound's allies."],
+                actions: [action(MOVE, "+0"), action(ATTACK, "+0"), action(COMPOUND_TEXT, ["Add +2 ", action(ATTACK), "if the target is adjacent to any of the Hound's allies."])],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
@@ -3395,6 +3402,10 @@ export const MONSTERS = {
         ],
         cards: [
             {
+                initiative: 21,
+                actions: [action(MOVE, "+1"), action(COMPOUND_TEXT, [action(MUDDLE), "and ", action(IMMOBILIZE)]), ["Target one adjacent enemy"]],
+            },
+            {
                 initiative: 66,
                 actions: [action(MOVE, "+0"), action(ATTACK, "+0")],
                 endAction: END_ACTIONS.SHUFFLE,
@@ -3407,10 +3418,6 @@ export const MONSTERS = {
             {
                 initiative: 47,
                 actions: [action(MOVE, "+1"), action(ATTACK, "-1")],
-            },
-            {
-                initiative: 21,
-                actions: [action(MOVE, "+1"), "muddle and immobilize, Target one adjacent enemy"],
             },
             {
                 initiative: 66,
@@ -3917,7 +3924,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 46,
-                actions: [action(MOVE, "-1"), action(ATTACK, "+1"), { type: "element", use: elements.DARK, action: "+2 attack" }],
+                actions: [action(MOVE, "-1"), action(ATTACK, "+1"), { type: "element", use: elements.DARK, action: action(COMPOUND_TEXT, ["+2 ", action(ATTACK)]) }],
                 endAction: END_ACTIONS.SHUFFLE,
             },
             {
@@ -4085,7 +4092,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 66,
-                actions: [action(MOVE, "-1"), "loot 1", action(HEAL, "2", ["Self"])],
+                actions: [action(MOVE, "-1"), action(LOOT, "1"), action(HEAL, "2", ["Self"])],
             },
             {
                 initiative: 66,
@@ -4093,7 +4100,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 85,
-                actions: ["push 1 and poison, Target all adjacent enemies", action(ATTACK, "+1", [action(RANGE, "-1")])],
+                actions: [action(COMPOUND_TEXT, [action(PUSH, "1"), " and ", action(POISON)], ["Target all adjacent enemies"]), action(ATTACK, "+1", [action(RANGE, "-1")])],
             },
             {
                 initiative: 94,
@@ -4411,15 +4418,15 @@ export const MONSTERS = {
         cards: [
             {
                 initiative: 14,
-                actions: [action(ATTACK, "+0"), { type: "element", use: elements.ICE, action: "+2 attack, immobiilize" }, action(RETALIATE, "2"), { type: "element", create: elements.AIR }],
+                actions: [action(ATTACK, "+0"), { type: "element", use: elements.ICE, action: action(COMPOUND_TEXT, ["+2 ", action(ATTACK), ", ", action(IMMOBILIZE)]) }, action(RETALIATE, "2"), { type: "element", create: elements.AIR }],
             },
             {
                 initiative: 14,
-                actions: [action(SHIELD, "4"), action(HEAL, "2", [action(RANGE, "3")]), { type: "element", use: elements.ICE, action: "+3 heal" }, { type: "element", use: elements.AIR, action: action(ATTACK, "+0") }],
+                actions: [action(SHIELD, "4"), action(HEAL, "2", [action(RANGE, "3")]), { type: "element", use: elements.ICE, action: action(COMPOUND_TEXT, ["+3 ", action(HEAL)]) }, { type: "element", use: elements.AIR, action: action(ATTACK, "+0") }],
             },
             {
                 initiative: 19,
-                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [action(RANGE, "-1")]), action(SHIELD, "1, Affect Self and all allies within range 2"), { type: "element", create: elements.ICE }],
+                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [action(RANGE, "-1")]), action(SHIELD, "1", [action(COMPOUND_TEXT, ["Affect Self and all allies within ", action(RANGE, "2")])]), { type: "element", create: elements.ICE }],
             },
             {
                 initiative: 35,
@@ -4433,7 +4440,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 70,
-                actions: [action(PUSH, "2", ["Target all adjacent enemies"]), { type: "element", use: elements.AIR, action: "push 4 instead" }, action(ATTACK, "+1", [action(RANGE, "+1")])],
+                actions: [action(PUSH, "2", ["Target all adjacent enemies"]), { type: "element", use: elements.AIR, action: action(PUSH, "4 instead") }, action(ATTACK, "+1", [action(RANGE, "+1")])],
             },
             {
                 initiative: 98,
@@ -4588,11 +4595,11 @@ export const MONSTERS = {
             },
             {
                 initiative: 41,
-                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [], aoeLine4WithBlack), { type: "element", use: elements.EARTH, action: "+2 attack, immobilize" }],
+                actions: [action(MOVE, "+0"), action(ATTACK, "-1", [], aoeLine4WithBlack), { type: "element", use: elements.EARTH, action: action(COMPOUND_TEXT, ["+2 ", action(ATTACK), ", ", action(IMMOBILIZE)]) }],
             },
             {
                 initiative: 51,
-                actions: ["All enemies suffer 2 damage", { type: "element", use: elements.FIRE, action: "Wound all enemies" }, { type: "element", use: elements.EARTH, action: "disarm all enemies" }],
+                actions: ["All enemies suffer 2 damage", { type: "element", use: elements.FIRE, action: action(COMPOUND_TEXT, [action(WOUND), "all enemies"]) }, { type: "element", use: elements.EARTH, action: action(COMPOUND_TEXT, [action(DISARM), "all enemies"]) }],
             },
             {
                 initiative: 68,
@@ -5524,7 +5531,7 @@ export const MONSTERS = {
         cards: [
             {
                 initiative: 37,
-                actions: [action(MOVE, "+0"), action(ATTACK, "+0", [], aoe4WithBlack), { type: "element", use: elements.AIR, action: "+1 attack", image: aoeCircleWithSideBlack }],
+                actions: [action(MOVE, "+0"), action(ATTACK, "+0", [], aoe4WithBlack), { type: "element", use: elements.AIR, action: action(COMPOUND_TEXT, ["+1 ", action(ATTACK)]), image: aoeCircleWithSideBlack }],
             },
             {
                 initiative: 9,
@@ -5550,7 +5557,7 @@ export const MONSTERS = {
             },
             {
                 initiative: 43,
-                actions: [action(PUSH, "1", ["Target all adjacent enemies"]), action(ATTACK, "+0"), { type: "element", use: elements.EARTH, action: "-2 range" }],
+                actions: [action(PUSH, "1", ["Target all adjacent enemies"]), action(ATTACK, "+0"), { type: "element", use: elements.EARTH, action: action(COMPOUND_TEXT, ["-2 ", action(RANGE)]) }],
             },
             {
                 initiative: 2,
@@ -5717,7 +5724,7 @@ export const BOSS_STATS = {
             attack: 3,
             range: 0,
             specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
-            specialTwo: ["All allies add +1 attack to all attacks this round"],
+            specialTwo: [action(COMPOUND_TEXT, ["All allies add +1 ", action(ATTACK), "to all attacks this round"])],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
         (numPlayers) => ({
@@ -5726,7 +5733,7 @@ export const BOSS_STATS = {
             attack: 3,
             range: 0,
             specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
-            specialTwo: ["All allies add +1 attack to all attacks this round"],
+            specialTwo: [action(COMPOUND_TEXT, ["All allies add +1 ", action(ATTACK), "to all attacks this round"])],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
         (numPlayers) => ({
@@ -5735,7 +5742,7 @@ export const BOSS_STATS = {
             attack: 4,
             range: 0,
             specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
-            specialTwo: ["All allies add +1 attack to all attacks this round"],
+            specialTwo: [action(COMPOUND_TEXT, ["All allies add +1 ", action(ATTACK), "to all attacks this round"])],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
         (numPlayers) => ({
@@ -5744,7 +5751,7 @@ export const BOSS_STATS = {
             attack: 4,
             range: 0,
             specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
-            specialTwo: ["All allies add +1 attack to all attacks this round"],
+            specialTwo: [action(COMPOUND_TEXT, ["All allies add +1 ", action(ATTACK), "to all attacks this round"])],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
         (numPlayers) => ({
@@ -5753,7 +5760,7 @@ export const BOSS_STATS = {
             attack: 5,
             range: 0,
             specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
-            specialTwo: ["All allies add +1 attack to all attacks this round"],
+            specialTwo: [action(COMPOUND_TEXT, ["All allies add +1 ", action(ATTACK), "to all attacks this round"])],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
         (numPlayers) => ({
@@ -5762,8 +5769,8 @@ export const BOSS_STATS = {
             attack: 5,
             range: 0,
             specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
-            specialTwo: ["All allies add +1 attack to all attacks this round"],
-            immunities: [DISARM, WOUND, MUDDLE, STUN],
+            specialTwo: [action(COMPOUND_TEXT, ["All allies add +1 ", action(ATTACK), "to all attacks this round"])],
+            immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
         (numPlayers) => ({
             maxHP: 21 * numPlayers,
@@ -5771,7 +5778,7 @@ export const BOSS_STATS = {
             attack: 6,
             range: 0,
             specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
-            specialTwo: ["All allies add +1 attack to all attacks this round"],
+            specialTwo: [action(COMPOUND_TEXT, ["All allies add +1 ", action(ATTACK), "to all attacks this round"])],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
         (numPlayers) => ({
@@ -5780,7 +5787,7 @@ export const BOSS_STATS = {
             attack: 6,
             range: 0,
             specialOne: [action(HEAL, "2", ["Affect Self and all allies"])],
-            specialTwo: ["All allies add +1 attack to all attacks this round"],
+            specialTwo: [action(COMPOUND_TEXT, ["All allies add +1 ", action(ATTACK), "to all attacks this round"])],
             immunities: [WOUND, DISARM, STUN, MUDDLE],
         }),
     ],
@@ -5864,8 +5871,8 @@ export const BOSS_STATS = {
             move: 2,
             attack: "3+X",
             range: 0,
-            specialOne: ["move +2, attack +0"],
-            specialTwo: ["move +0, Summon Imp, attack -1"],
+            specialOne: [action(MOVE, "+2"), action(ATTACK, "+0")],
+            specialTwo: [action(MOVE, "+0"), "Summon Imp", action(ATTACK, "-1")],
             extra: ["X = Hexes moved"],
             immunities: [POISON, IMMOBILIZE, DISARM, STUN],
         }),
@@ -5874,8 +5881,8 @@ export const BOSS_STATS = {
             move: 3,
             attack: "3+X",
             range: 0,
-            specialOne: ["move +2, attack +0"],
-            specialTwo: ["move +0, Summon Imp, attack -1"],
+            specialOne: [action(MOVE, "+2"), action(ATTACK, "+0")],
+            specialTwo: [action(MOVE, "+0"), "Summon Imp", action(ATTACK, "-1")],
             extra: ["X = Hexes moved"],
             immunities: [POISON, IMMOBILIZE, DISARM, STUN],
         }),
@@ -5884,8 +5891,8 @@ export const BOSS_STATS = {
             move: 3,
             attack: "3+X",
             range: 0,
-            specialOne: ["move +2, attack +0"],
-            specialTwo: ["move +0, Summon Imp, attack -1"],
+            specialOne: [action(MOVE, "+2"), action(ATTACK, "+0")],
+            specialTwo: [action(MOVE, "+0"), "Summon Imp", action(ATTACK, "-1")],
             extra: ["X = Hexes moved"],
             immunities: [POISON, IMMOBILIZE, DISARM, STUN],
         }),
@@ -5894,8 +5901,8 @@ export const BOSS_STATS = {
             move: 3,
             attack: "4+X",
             range: 0,
-            specialOne: ["move +2, attack +0"],
-            specialTwo: ["move +0, Summon Imp, attack -1"],
+            specialOne: [action(MOVE, "+2"), action(ATTACK, "+0")],
+            specialTwo: [action(MOVE, "+0"), "Summon Imp", action(ATTACK, "-1")],
             extra: ["X = Hexes moved"],
             immunities: [POISON, IMMOBILIZE, DISARM, STUN],
         }),
@@ -5904,8 +5911,8 @@ export const BOSS_STATS = {
             move: 3,
             attack: "4+X",
             range: 0,
-            specialOne: ["move +2, attack +0"],
-            specialTwo: ["move +0, Summon Imp, attack -1"],
+            specialOne: [action(MOVE, "+2"), action(ATTACK, "+0")],
+            specialTwo: [action(MOVE, "+0"), "Summon Imp", action(ATTACK, "-1")],
             extra: ["X = Hexes moved"],
             immunities: [POISON, IMMOBILIZE, DISARM, STUN],
         }),
@@ -5914,8 +5921,8 @@ export const BOSS_STATS = {
             move: 3,
             attack: "5+X",
             range: 0,
-            specialOne: ["move +2, attack +0"],
-            specialTwo: ["move +0, Summon Imp, attack -1"],
+            specialOne: [action(MOVE, "+2"), action(ATTACK, "+0")],
+            specialTwo: [action(MOVE, "+0"), "Summon Imp", action(ATTACK, "-1")],
             extra: ["X = Hexes moved"],
             immunities: [POISON, IMMOBILIZE, DISARM, STUN],
         }),
@@ -5924,8 +5931,8 @@ export const BOSS_STATS = {
             move: 4,
             attack: "5+X",
             range: 0,
-            specialOne: ["move +2, attack +0"],
-            specialTwo: ["move +0, Summon Imp, attack -1"],
+            specialOne: [action(MOVE, "+2"), action(ATTACK, "+0")],
+            specialTwo: [action(MOVE, "+0"), "Summon Imp", action(ATTACK, "-1")],
             extra: ["X = Hexes moved"],
             immunities: [POISON, IMMOBILIZE, DISARM, STUN],
         }),
@@ -5934,8 +5941,8 @@ export const BOSS_STATS = {
             move: 4,
             attack: "6+X",
             range: 0,
-            specialOne: ["move +2, attack +0"],
-            specialTwo: ["move +0, Summon Imp, attack -1"],
+            specialOne: [action(MOVE, "+2"), action(ATTACK, "+0")],
+            specialTwo: [action(MOVE, "+0"), "Summon Imp", action(ATTACK, "-1")],
             extra: ["X = Hexes moved"],
             immunities: [POISON, IMMOBILIZE, DISARM, STUN],
         }),
@@ -5943,6 +5950,7 @@ export const BOSS_STATS = {
     "Elder Drake": [
         (numPlayers) => ({
             maxHP: 11 * numPlayers,
+            move: 0,
             attack: 3,
             range: 0,
             specialOne: [action(ATTACK, "+0", [], elderDrakeSpecial1Area)],
@@ -5951,6 +5959,7 @@ export const BOSS_STATS = {
         }),
         (numPlayers) => ({
             maxHP: 12 * numPlayers,
+            move: 0,
             attack: 4,
             range: 0,
             specialOne: [action(ATTACK, "+0", [], elderDrakeSpecial1Area)],
@@ -5959,6 +5968,7 @@ export const BOSS_STATS = {
         }),
         (numPlayers) => ({
             maxHP: 15 * numPlayers,
+            move: 0,
             attack: 4,
             range: 0,
             specialOne: [action(ATTACK, "+0", [], elderDrakeSpecial1Area)],
@@ -5967,6 +5977,7 @@ export const BOSS_STATS = {
         }),
         (numPlayers) => ({
             maxHP: 16 * numPlayers,
+            move: 0,
             attack: 5,
             range: 0,
             specialOne: [action(ATTACK, "+0", [], elderDrakeSpecial1Area)],
@@ -5975,6 +5986,7 @@ export const BOSS_STATS = {
         }),
         (numPlayers) => ({
             maxHP: 20 * numPlayers,
+            move: 0,
             attack: 5,
             range: 0,
             specialOne: [action(ATTACK, "+0", [], elderDrakeSpecial1Area)],
@@ -5983,6 +5995,7 @@ export const BOSS_STATS = {
         }),
         (numPlayers) => ({
             maxHP: 22 * numPlayers,
+            move: 0,
             attack: 6,
             range: 0,
             specialOne: [action(ATTACK, "+0", [], elderDrakeSpecial1Area)],
@@ -5991,6 +6004,7 @@ export const BOSS_STATS = {
         }),
         (numPlayers) => ({
             maxHP: 27 * numPlayers,
+            move: 0,
             attack: 6,
             range: 0,
             specialOne: [action(ATTACK, "+0", [], elderDrakeSpecial1Area)],
@@ -5999,6 +6013,7 @@ export const BOSS_STATS = {
         }),
         (numPlayers) => ({
             maxHP: 29 * numPlayers,
+            move: 0,
             attack: 7,
             range: 0,
             specialOne: [action(ATTACK, "+0", [], elderDrakeSpecial1Area)],
