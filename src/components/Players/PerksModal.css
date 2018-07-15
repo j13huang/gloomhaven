@@ -12,9 +12,14 @@
 .PerksModal--Perk {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     border-bottom: 1px solid lightgray;
     margin-bottom: 4px;
     text-align: left;
+}
+
+.PerksModal--perk--checkbox {
+    font-size: 16px;
 }
 
 .PerksModal--CardIcon {

@@ -77,7 +77,7 @@ class PerksModalComponent extends React.Component {
                 {this.state.perkUsage.map((pu, i) => {
                     const description = perksForClass(this.props.class)[i].description;
                     return (<div key={i} className="PerksModal--Perk">
-                        {pu.map((u, j) => <input key={j} type="checkbox" checked={u} onChange={() => this.togglePerk(i, j)} />)}
+                        {pu.map((u, j) => <input key={j} className="PerksModal--perk--checkbox" type="checkbox" checked={u} onChange={() => this.togglePerk(i, j)} />)}
                         <label className="PerksModal--Perk--Name">{description}</label>
                     </div>);
                 })}
