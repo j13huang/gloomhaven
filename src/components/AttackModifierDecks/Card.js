@@ -6,7 +6,7 @@ import * as _ from "lodash";
 import {ELEMENTS, AIR, DARK, EARTH, FIRE, ICE, LIGHT, iconForElement} from '../../lib/elements';
 import {ALL_STATUS_EFFECTS, DISARM, IMMOBILIZE, INVISIBLE, MUDDLE, POISON, STRENGTHEN, STUN, WOUND, PUSH, PULL} from '../../lib/statusEffects';
 import {BASE_CARDS, CURSE, BLESS, END_ACTIONS, iconForEndAction, NUMBER_MODIFIERS} from "../../lib/cards";
-import {BONUSES, HEAL, SHIELD, PIERCE, ADD_TARGET} from "../../lib/bonuses";
+import {BONUSES, HEAL, SHIELD, PIERCE, ADD_TARGET, REFRESH_ITEM} from "../../lib/bonuses";
 import {getIcon} from "../../lib/icons";
 import {undoCardAction} from '../../store/attackModifierDecks';
 import minusOneCardImage from "./-1.jpg";
@@ -60,6 +60,7 @@ function ColorCover({iconName}) {
         //bonuses
         case PIERCE: colorClassName = "AttackModifierCard--PierceColor"; break;
         case ADD_TARGET: colorClassName = "AttackModifierCard--AddTargetColor"; break;
+        case REFRESH_ITEM: colorClassName = "AttackModifierCard--RefreshItemColor"; break;
 
         default: break;
     }
@@ -95,6 +96,7 @@ function MainIcon({iconName}) {
         // bonuses
         case PIERCE: colorClassName = "AttackModifierCard--MainIcon--PierceColor"; break;
         case ADD_TARGET: colorClassName = "AttackModifierCard--MainIcon--AddTargetColor"; break;
+        case REFRESH_ITEM: colorClassName = "AttackModifierCard--MainIcon--RefreshItemColor"; break;
 
         default: break;
     }
@@ -121,7 +123,7 @@ function CustomCard({className, card}) {
 
 function PlusThree({className, card}) {
     return (<div className="AttackModifierCard--CustomCard">
-        <img className={className} src={blankCardImage} alt={`${card.modifier} ${card.extra} ${card.endAction}`} />
+        <img className={className} src={blankCardImage} alt={`${card.modifier || ""} ${card.extra || ""} ${card.endAction || ""}`} />
         <div className={classNames("AttackModifierCard--MainIcon", "AttackModifierCard--PlusThree")}>
             <span className="AttackModifierCard--PlusThree--Plus">+</span>
             <span className="AttackModifierCard--PlusThree--Three">3</span>
