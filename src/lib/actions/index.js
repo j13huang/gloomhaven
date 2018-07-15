@@ -10,6 +10,7 @@ import lootIcon from "./loot.svg";
 import pushIcon from "./push.svg";
 import pullIcon from "./pull.svg";
 import jumpIcon from "./jump.svg";
+import flyingIcon from "./flying.svg";
 
 export const ATTACK = "Attack";
 export const HEAL = "Heal";
@@ -22,6 +23,7 @@ export const LOOT = "Loot";
 export const COMPOUND_TEXT = "COMPOUND_TEXT";
 
 export const JUMP = "Jump";
+export const FLYING = "Flying";
 
 export const PIERCE = "PIERCE";
 export const PUSH = "PUSH";
@@ -52,6 +54,7 @@ const icons = {
     [PUSH]: pushIcon,
     [PULL]: pullIcon,
     [JUMP]: jumpIcon,
+    [FLYING]: flyingIcon,
 }
 
 export function iconForAction(actionName) {
