@@ -8,7 +8,7 @@
     width: 227px;
 }
 
-.AddPlayer--element {
+.AddPlayer--section {
     margin-top: 12px;
 }
 
@@ -27,6 +27,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.AddPlayer--selector {
+    display: flex;
+    flex-direction: column;
 }
 
 .AddPlayer--button {

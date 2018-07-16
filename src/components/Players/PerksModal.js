@@ -71,9 +71,8 @@ class PerksModalComponent extends React.Component {
     render() {
         //return (<Modal isOpen contentLabel="Perks" className={{ base:"test", }}>
         return (<Modal isOpen contentLabel="Perks" style={this.customStyles}>
-            <h2 className="PerksModal--Title">{this.props.class}</h2>
+            <h2 className="PerksModal--Title">{this.props.class} Perks</h2>
             <div className="PerksModal--Perks">
-                <h3 className="PerksModal--Title">Perks</h3>
                 {this.state.perkUsage.map((pu, i) => {
                     const description = perksForClass(this.props.class)[i].description;
                     return (<div key={i} className="PerksModal--Perk">

@@ -62,29 +62,33 @@ class AddPlayerComponent extends React.Component {
             />
             {this.state.duplicateNameWarning &&
                 <div className="AddPlayer--duplicateNameWarning">A player with that name already exists</div>}
-            <div className={classNames("AddPlayer--element", "AddPlayer--selectors")}>
-                Class:
-                <select
-                    size="5"
-                    value={this.state.selectedClass}
-                    onChange={(event) => this.selectClass(event.target.value)}
-                >
-                    {this.props.selectableClasses.map((c) => <option value={c} key={c}>{c}</option>)}
-                </select>
-                Level:
-                <select
-                    size="5"
-                    value={this.state.level}
-                    onChange={(event) => this.selectLevel(event.target.value)}
-                >
-                    {new Array(9).fill().map((_, i) => {
-                        const level = i + 1;
-                        return (<option key={level} value={level}>Level {level}</option>);
-                    })}
-                </select>
+            <div className={classNames("AddPlayer--section", "AddPlayer--selectors")}>
+                <div className="AddPlayer--selector">
+                    Class:
+                    <select
+                        size="5"
+                        value={this.state.selectedClass}
+                        onChange={(event) => this.selectClass(event.target.value)}
+                    >
+                        {this.props.selectableClasses.map((c) => <option value={c} key={c}>{c}</option>)}
+                    </select>
+                </div>
+                <div className="AddPlayer--selector">
+                    Level:
+                    <select
+                        size="5"
+                        value={this.state.level}
+                        onChange={(event) => this.selectLevel(event.target.value)}
+                    >
+                        {new Array(9).fill().map((_, i) => {
+                            const level = i + 1;
+                            return (<option key={level} value={level}>{level}</option>);
+                        })}
+                    </select>
+                </div>
             </div>
             <button
-                className={classNames("AddPlayer--element", "AddPlayer--button", this.state.duplicateNameWarning && "AddPlayer--button--disabled")}
+                className={classNames("AddPlayer--section", "AddPlayer--button", this.state.duplicateNameWarning && "AddPlayer--button--disabled")}
                 disabled={this.state.duplicateNameWarning}
                 onClick={() => this.addPlayer(this.state.playerNameInput, this.state.selectedClass, this.state.level)}
             >Add Player</button>
