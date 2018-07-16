@@ -4,6 +4,7 @@ import rollingIcon from "./rolling.svg";
 const PLUS_ONE = "+1";
 const PLUS_TWO = "+2";
 const PLUS_THREE = "+3";
+const PLUS_FOUR = "+4";
 const PLUS_ZERO = "+0";
 const MINUS_ONE = "-1";
 const MINUS_TWO = "-2";
@@ -11,7 +12,7 @@ const NULL = "null";
 const TIMES_TWO = "x2";
 
 export const NUMBER_MODIFIERS = {
-    PLUS_ONE, PLUS_TWO, PLUS_THREE, PLUS_ZERO, MINUS_ONE, MINUS_TWO, NULL, TIMES_TWO,
+    PLUS_ONE, PLUS_TWO, PLUS_THREE, PLUS_FOUR, PLUS_ZERO, MINUS_ONE, MINUS_TWO, NULL, TIMES_TWO,
 };
 
 const SHUFFLE = "shuffle";

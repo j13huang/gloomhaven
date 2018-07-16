@@ -107,26 +107,41 @@ function MainIcon({iconName}) {
     />
 }
 
-function CustomCard({className, card}) {
-    const iconName = card.modifier.type ? card.modifier.type : card.modifier;
-    return (<div className="AttackModifierCard--CustomCard">
-        <img className={className} src={blankCardImage} alt={`${card.modifier} ${card.extra} ${card.endAction}`} />
-        <ColorCover iconName={iconName} />
-        <MainIcon iconName={iconName} />
-        {card.modifier.type &&
-            <div className={classNames(card.modifier.type === PIERCE ?
-                "AttackModifierCard--MainIcon--PierceValue" : "AttackModifierCard--MainIcon--Value")}>
-                {card.modifier.value}
-            </div>}
+function MainIconValue({modifierType, children}) {
+    let valueClassName = "AttackModifierCard--MainIcon--Value";
+    switch (modifierType) {
+        case HEAL: valueClassName = "AttackModifierCard--MainIcon--BlackValue"; break;
+        case SHIELD: valueClassName = "AttackModifierCard--MainIcon--BlackValue"; break;
+
+        case PIERCE: valueClassName = "AttackModifierCard--MainIcon--PierceValue"; break;
+
+        default: break;
+    }
+    return (<div className={valueClassName}>
+        {children}
     </div>);
 }
 
-function PlusThree({className, card}) {
+function CustomCard({className, card}) {
+    const iconName = card.modifier.type ? card.modifier.type : card.modifier;
+    return (<div className="AttackModifierCard--CustomCard">
+        <img className={className} src={blankCardImage} alt={`${card.modifier || ""} ${card.extra || ""} ${card.endAction || ""}`} />
+        <ColorCover iconName={iconName} />
+        <MainIcon iconName={iconName} />
+        {card.modifier.type &&
+            <MainIconValue modifierType={card.modifier.type} >
+                {card.modifier.value}
+            </MainIconValue>
+        }
+    </div>);
+}
+
+function PlusX({className, card, value}) {
     return (<div className="AttackModifierCard--CustomCard">
         <img className={className} src={blankCardImage} alt={`${card.modifier || ""} ${card.extra || ""} ${card.endAction || ""}`} />
         <div className={classNames("AttackModifierCard--MainIcon", "AttackModifierCard--PlusThree")}>
             <span className="AttackModifierCard--PlusThree--Plus">+</span>
-            <span className="AttackModifierCard--PlusThree--Three">3</span>
+            <span className="AttackModifierCard--PlusThree--Three">{value}</span>
         </div>
         <div className={classNames("AttackModifierCard--ColorCover", "AttackModifierCard--GreenColor")}></div>
     </div>);
@@ -152,7 +167,9 @@ function getCardImage(card, className) {
     } else if (_.isEqual(card, BLESS)) {
         return <img className={className} src={blessCardImage} alt="bless" />;
     } else if (card.modifier === NUMBER_MODIFIERS.PLUS_THREE) {
-        return <PlusThree className={className} card={card} />
+        return <PlusX className={className} card={card} value={3} />
+    } else if (card.modifier === NUMBER_MODIFIERS.PLUS_FOUR) {
+        return <PlusX className={className} card={card} value={4} />
     } else if ([...ELEMENTS, ...ALL_STATUS_EFFECTS, ...BONUSES].includes(card.modifier.type ? card.modifier.type : card.modifier)) {
         return <CustomCard className={className} card={card} />;
     }
