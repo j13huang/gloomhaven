@@ -2,8 +2,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    max-width: 150px;
-    margin-right: 20px;
 }
 
 .Monsters--List--LevelContainer {
