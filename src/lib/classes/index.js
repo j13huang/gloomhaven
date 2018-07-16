@@ -1659,7 +1659,7 @@ const CLASSES = {
             },
         ],
     },
-    "Two-minis": {
+    "Two-Minis": {
         stats: [
             {maxHP: 10},
             {maxHP: 12},
