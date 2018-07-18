@@ -24,6 +24,7 @@ h5 {
     padding: 0;
   }
 
+  /* wtf this doesn't work */
   button::-moz-focus-inner,
   input[type="button"]::-moz-focus-inner,
   input[type="submit"]::-moz-focus-inner,
@@ -31,8 +32,4 @@ h5 {
     padding: 0;
     border-style: none;
   }
-}
-
-button {
-  -moz-padding: 0;
 }
