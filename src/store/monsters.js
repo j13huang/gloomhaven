@@ -262,5 +262,5 @@ export const selectors = {
     // status effects across all monsters
     allStatusEffects: (state, name) => getAllStatusEffects(state.monsters.monsters[name].monsters),
     isActive: (state, name) => state.monsters.monsters[name].monsters.some((m) => m.alive),
-    hasMonstersInPlay: (state) => state.boss || Object.keys(state.monsters.monsters).length > 0,
+    hasMonstersInPlay: (state) => state.boss != null || Object.keys(state.monsters.monsters).length > 0,
 };

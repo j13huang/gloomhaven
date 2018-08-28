@@ -66,7 +66,6 @@ export class BossMonsterTrackerComponent extends React.Component {
 export const BossMonsterTracker = connect(
     (state) => {
         return {
-            boss: state.boss,
             numPlayers: playersSelectors.numPlayers(state),
             scenarioLevel: playersSelectors.scenarioLevel(state),
         };

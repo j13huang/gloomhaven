@@ -8,7 +8,8 @@ import "./MonsterTrackers.css";
 export function MonsterTrackersComponent({boss, monsterNames}) {
     return (
         <div className="Monsters">
-            {boss && <BossMonsterTracker />}
+            {boss && boss[0] && <BossMonsterTracker boss={boss[0]} />}
+            {boss && boss[1] && <BossMonsterTracker boss={boss[1]} />}
             {monsterNames.map((name) => <MonsterTracker key={name} name={name} />)}
         </div>
     );

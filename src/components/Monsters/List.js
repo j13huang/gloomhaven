@@ -41,7 +41,7 @@ class ListComponent extends React.Component {
                 Level: {this.props.baseScenarioLevel}
                 <select
                     className="Monsters--List--LevelSelect"
-                    disabled={this.props.boss || this.props.monstersInPlay.length > 0}
+                    disabled={this.props.hasBoss || this.props.monstersInPlay.length > 0}
                     value={this.props.levelAdjustment}
                     onChange={(event) => this.props.setLevelAdjustment(parseInt(event.target.value, 10))}
                 >
@@ -53,10 +53,10 @@ class ListComponent extends React.Component {
                 Allow individual monster levels
             </label>
             <div className="Monsters--List--BossSelectorContainer">
-                <select disabled={this.props.boss} value={this.state.selectedBoss} onChange={(event) => this.selectBoss(event.target.value)}>
+                <select disabled={this.props.hasBoss} value={this.state.selectedBoss} onChange={(event) => this.selectBoss(event.target.value)}>
                     {BOSS_LIST.map((b) => <option value={b} key={b}>{b}</option>)}
                 </select>
-                <button disabled={this.props.boss} onClick={() => this.props.addBoss(this.state.selectedBoss, this.props.scenarioLevel, this.props.numPlayers)}>Add Boss</button>
+                <button disabled={this.props.hasBoss} onClick={() => this.props.addBoss(this.state.selectedBoss, this.props.scenarioLevel, this.props.numPlayers)}>Add Boss</button>
             </div>
             <input
                 value={this.state.search}
@@ -85,7 +85,7 @@ export const List = connect(
             levelAdjustment: state.players.levelAdjustment,
             monstersInPlay: Object.keys(state.monsters.monsters),
             allowIndividualMonsterLevels: state.monsters.allowIndividualMonsterLevels,
-            boss: state.boss,
+            hasBoss: state.boss != null,
             baseScenarioLevel: playersSelectors.baseScenarioLevel(state),
             scenarioLevel: playersSelectors.scenarioLevel(state),
             numPlayers: playersSelectors.numPlayers(state),

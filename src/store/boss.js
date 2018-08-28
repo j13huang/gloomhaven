@@ -31,9 +31,15 @@ export const reducer = (state = defaultState, action) => {
         }
         case SET_BOSS:
         {
-            return {
-                ...newBoss(action.name, action.level, action.numPlayers),
-            };
+            if (action.name === "Inox Bodyguard") {
+                return [
+                    newBoss(action.name, action.level, action.numPlayers),
+                    newBoss(action.name, action.level, action.numPlayers),
+                ];
+            }
+            return [
+                newBoss(action.name, action.level, action.numPlayers),
+            ];
         }
         case REMOVE_BOSS:
         {

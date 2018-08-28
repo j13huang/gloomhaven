@@ -117,7 +117,7 @@ class MonsterDecksComponent extends React.Component {
                     }
                     let monsterStats;
                     if (name === "Boss") {
-                        monsterStats = BOSS_STATS[boss.name][scenarioLevel](numPlayers);
+                        monsterStats = BOSS_STATS[boss[0].name][scenarioLevel](numPlayers);
                     } else {
                         monsterStats = MONSTERS[name].stats[scenarioLevel];
                     }
