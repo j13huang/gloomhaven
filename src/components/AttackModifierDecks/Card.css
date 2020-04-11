@@ -234,6 +234,14 @@
     background-color: rgba(230, 80, 29, 0.6);
 }
 
+.AttackModifierCard--RegenerateColor {
+    background-image: radial-gradient(circle, transparent 40px, rgba(200, 59, 150, 0.6) 50px, transparent 100%);
+}
+
+.AttackModifierCard--MainIcon--RegenerateColor {
+    background-color: rgba(200, 59, 150, 0.6);
+}
+
 .AttackModifierCard--PierceColor {
     background-image: radial-gradient(circle, transparent 40px, rgba(199, 130, 62, 0.6) 50px, transparent 100%);
 }

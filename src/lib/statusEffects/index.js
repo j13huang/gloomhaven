@@ -8,6 +8,7 @@ import poisonIcon from "./poison.svg";
 import strengthenIcon from "./strengthen.svg";
 import stunIcon from "./stun.svg";
 import woundIcon from "./wound.svg";
+import regenerateIcon from "./regenerate.svg";
 
 import pushIcon from "./push.svg";
 import pullIcon from "./pull.svg";
@@ -22,6 +23,7 @@ export const POISON = "POISON";
 export const STRENGTHEN = "STRENGTHEN";
 export const STUN = "STUN";
 export const WOUND = "WOUND";
+export const REGENERATE = "REGENERATE";
 
 export const PUSH = "PUSH";
 export const PULL = "PULL";
@@ -35,6 +37,7 @@ const statusEffectIcons = {
     [MUDDLE]: muddleIcon,
     [INVISIBLE]: invisibleIcon,
     [STRENGTHEN]: strengthenIcon,
+    [REGENERATE]: regenerateIcon,
 };
 
 export const STATUS_EFFECTS = Object.keys(statusEffectIcons);
