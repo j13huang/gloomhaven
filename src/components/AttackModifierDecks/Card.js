@@ -196,7 +196,7 @@ function getExtraImage(card) {
                 />
                 <div className="AttackModifierCard--CustomExtra--Value">{card.extra.value}</div>
             </div>
-            <div className="AttackModifierCard--CustomExtra--SelfText">{card.extra.self ? "Self" : "Ally"}</div>}
+            <div className="AttackModifierCard--CustomExtra--TargetText">{card.extra.self ? "Self" : "Ally"}</div>}
         </div>)
     }
 
