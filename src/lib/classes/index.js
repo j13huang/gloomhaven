@@ -1737,6 +1737,133 @@ const CLASSES = {
             },
         ],
     },
+    "Diviner": {
+        stats: [
+            {maxHP: 6},
+            {maxHP: 7},
+            {maxHP: 8},
+            {maxHP: 9},
+            {maxHP: 10},
+            {maxHP: 11},
+            {maxHP: 12},
+            {maxHP: 13},
+            {maxHP: 14},
+        ],
+        perks: [
+            {
+                description: "Remove two -1 cards",
+                maxPerkCount: 2,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(2, BASE_CARDS.MINUS_ONE)
+                    .cards(),
+            },
+            {
+                description: "Remove one -2 card",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(2, BASE_CARDS.MINUS_TWO)
+                    .cards(),
+            },
+            {
+                description: "Replace two +1 cards with one +3 Shield 1, Self card",
+                maxPerkCount: 2,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(2, BASE_CARDS.PLUS_ONE)
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_THREE, extra: bonuses.shield("1")})
+                    .cards(),
+            },
+            {
+                description: "Replace one +0 card with one +1 Shield 1, Affect any ally card",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(1, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: bonuses.shield("1", false)})
+                    .cards(),
+            },
+            {
+                description: "Replace one +0 card with one +2 DARK card",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(1, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_TWO, extra: elements.DARK})
+                    .cards(),
+            },
+            {
+                description: "Replace one +0 card with one +2 LIGHT card",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(1, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_TWO, extra: elements.LIGHT})
+                    .cards(),
+            },
+            {
+                description: "Replace one +0 card with one +3 MUDDLE card",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(1, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_THREE, extra: statusEffects.MUDDLE})
+                    .cards(),
+            },
+            {
+                description: "Replace one +0 card with one +2 CURSE card",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(1, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_TWO, extra: statusEffects.CURSE})
+                    .cards(),
+            },
+            {
+                description: "Replace one +0 card with one +2 REGENERATE, Self card",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(1, BASE_CARDS.PLUS_ZERO)
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_TWO, extra: statusEffects.REGENERATE})
+                    .cards(),
+            },
+            {
+                description: "Replace one -1 card with one +1 Heal 2, Affect any ally card",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .removeCards(1, BASE_CARDS.MINUS_ONE)
+                    .addCards(1, {modifier: NUMBER_MODIFIERS.PLUS_ONE, extra: bonuses.heal("+2", false)})
+                    .cards(),
+            },
+            {
+                description: "Add two ROLLING Heal 1, Self cards",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(2, {modifier: bonuses.heal("+1"), endAction: END_ACTIONS.ROLLING})
+                    .cards(),
+            },
+            {
+                description: "Add two ROLLING CURSE cards",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(2, {modifier: statusEffects.CURSE, endAction: END_ACTIONS.ROLLING})
+                    .cards(),
+            },
+            {
+                description: "Ignore negative scenario effects and add two +1 cards",
+                maxPerkCount: 1,
+                modifyCards: (cards) =>
+                    new CardsModifier(cards)
+                    .addCards(2, {modifier: NUMBER_MODIFIERS.PLUS_ONE})
+                    .cards(),
+            },
+        ],
+    },
 };
 
 export function newPerksUsage(characterClass) {

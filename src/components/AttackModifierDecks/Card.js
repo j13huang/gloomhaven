@@ -4,7 +4,7 @@ import * as classNames from 'classnames';
 import * as _ from "lodash";
 
 import {ELEMENTS, AIR, DARK, EARTH, FIRE, ICE, LIGHT, iconForElement} from '../../lib/elements';
-import {ALL_STATUS_EFFECTS, DISARM, IMMOBILIZE, INVISIBLE, MUDDLE, POISON, STRENGTHEN, STUN, WOUND, PUSH, PULL} from '../../lib/statusEffects';
+import {ALL_STATUS_EFFECTS, DISARM, IMMOBILIZE, INVISIBLE, MUDDLE, POISON, STRENGTHEN, STUN, WOUND, REGENERATE, PUSH, PULL} from '../../lib/statusEffects';
 import {BASE_CARDS, CURSE, BLESS, END_ACTIONS, iconForEndAction, NUMBER_MODIFIERS} from "../../lib/cards";
 import {BONUSES, HEAL, SHIELD, PIERCE, ADD_TARGET, REFRESH_ITEM} from "../../lib/bonuses";
 import {getIcon} from "../../lib/icons";
@@ -53,6 +53,7 @@ function ColorCover({iconName}) {
         case STRENGTHEN: colorClassName = "AttackModifierCard--StrengthenColor"; break;
         case STUN: colorClassName = "AttackModifierCard--StunColor"; break;
         case WOUND: colorClassName = "AttackModifierCard--WoundColor"; break;
+        case REGENERATE: colorClassName = "AttackModifierCard--RegenerateColor"; break;
 
         case PUSH: colorClassName = "AttackModifierCard--PushColor"; break;
         case PULL: colorClassName = "AttackModifierCard--PullColor"; break;
@@ -89,6 +90,7 @@ function MainIcon({iconName}) {
         case STRENGTHEN: colorClassName = "AttackModifierCard--MainIcon--StrengthenColor"; break;
         case STUN: colorClassName = "AttackModifierCard--MainIcon--StunColor"; break;
         case WOUND: colorClassName = "AttackModifierCard--MainIcon--WoundColor"; break;
+        case REGENERATE: colorClassName = "AttackModifierCard--MainIcon--RegenerateColor"; break;
 
         case PUSH: colorClassName = "AttackModifierCard--MainIcon--PushColor"; break;
         case PULL: colorClassName = "AttackModifierCard--MainIcon--PullColor"; break;
@@ -190,11 +192,11 @@ function getExtraImage(card) {
                 <img
                     className="AttackModifierCard--CustomExtra--Icon"
                     src={getIcon(iconName)}
-                    alt={`${card.extra.type} ${card.extra.value} ${card.extra.self ? "self" : ""}`}
+                    alt={`${card.extra.type} ${card.extra.value} ${card.extra.self ? "self" : "ally"}`}
                 />
                 <div className="AttackModifierCard--CustomExtra--Value">{card.extra.value}</div>
             </div>
-            {card.extra.self && <div className="AttackModifierCard--CustomExtra--SelfText">Self</div>}
+            <div className="AttackModifierCard--CustomExtra--SelfText">{card.extra.self ? "Self" : "Ally"}</div>}
         </div>)
     }
 
